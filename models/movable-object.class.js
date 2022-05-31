@@ -4,8 +4,10 @@ class MovableObject {
     img;
     height = 250;
     width = 150;
+    imageCache = {};
+
     /**loadImage('img/test.png')
-     * The function is loading images from the img folder 
+     * The function loads images from the img folder 
      * @param path the relative path of the img
      * img is only defined in JS not in HTML*/
 
@@ -13,6 +15,15 @@ class MovableObject {
         this.img = new Image(); // this.img = document.getElementById('image') <img id="image" src>
         this.img.src = path;
     }
+
+    loadImages(arr) {
+        arr.forEach((path) => {
+            let img = new Image();
+            img.src = path;
+            this.imageCache[path] = path;
+        });
+    }
+
 
     moveRight() {
         console.log('Moving right');
