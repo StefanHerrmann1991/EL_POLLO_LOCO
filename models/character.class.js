@@ -1,6 +1,6 @@
 class Character extends MovableObject {
 
-
+    y= 80;
     speed = 15;
     /* constructor führt sobald der Charakter geladen wird, die Funktionen innerhalb des Constructors aus. */
     IMAGES_WALKING = [
@@ -12,12 +12,12 @@ class Character extends MovableObject {
         'img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-26.png'
     ];
     world;
-    currentImage = 0;
     walking_sound = new Audio('audio/walking.mp3');
 
     constructor() {
         super().loadImage('img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-21.png');
         this.loadImages(this.IMAGES_WALKING);
+        this.applyGravity();
         this.moveAnimate();
     }
 
