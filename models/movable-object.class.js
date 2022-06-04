@@ -5,6 +5,8 @@ class MovableObject {
     height = 250;
     width = 150;
     imageCache = {};
+    speed = 0.15;
+    otherDirection = false;
 
     /**loadImage('img/test.png')
      * The function loads images from the img folder 
@@ -20,7 +22,7 @@ class MovableObject {
         arr.forEach((path) => {
             let img = new Image();
             img.src = path;
-            this.imageCache[path] = path;
+            this.imageCache[path] = img;
         });
     }
 
@@ -30,7 +32,19 @@ class MovableObject {
     }
 
     moveLeft() {
-
+        setInterval(() => {
+            this.x -= this.speed;
+        }, 1000/60);
     }
 
+
+    playAnimation(images) {
+        let i = this.currentImage % images.length;
+        // let i = 0 % (Modu) 6; => 1, Rest 0 (Modu ist mathematischer Rest)
+        // 0 / 6 = 0 Rest 0; 1 / 6 = 0 Rest 1 (Rest, was übrig bleibt von der Zahl) 7 / 6 = 1 Rest 1 Modu hebt immer nur den Rest auf. Deswegen fängt er hier wieder bei 1 an
+        // Modu zählt 0 ,1 ,2 ,3 ,4 ,5 ,0 ....
+        let path = images[i];
+        this.img = this.imageCache[path];
+        this.currentImage++;
+    }
 }

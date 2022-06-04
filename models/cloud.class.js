@@ -6,18 +6,18 @@ class Cloud extends MovableObject {
         this.y = 25 + Math.random() * 50; // Zahl zwischen 0 und 500 Math ramdom generiert eine zufällige Zahl zwischen 0 und 1
         this.height = 350;
         this.width = 600;
+       
         this.animateClouds();
 
     }
     animateClouds() {
+      this.moveLeft();
+    }
+    moveLeft() {
         setInterval(() => {
-            this.x -= 0.5;
+            this.x -= this.speed;
         }, 1000/60);
     }
-
-
-
-
 }
 
 
