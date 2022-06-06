@@ -17,7 +17,6 @@ document.onkeydown = function (e) {
         case 'ArrowLeft':
         case 'a':
             keyboard.LEFT = true;
-            console.log(keyboard);
             // left arrow
             break;
         case 'ArrowRight':

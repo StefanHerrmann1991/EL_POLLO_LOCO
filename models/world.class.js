@@ -42,16 +42,23 @@ class World {
     }
     /* adds one object to the map*/
 
-    addToMap(newMovableObject) {
-        if (newMovableObject.otherDirection) {
+    addToMap(movableObject) {
+        if (movableObject.otherDirection) {
             this.ctx.save();
-            this.ctx.translate(newMovableObject.width, 0);
+            this.ctx.translate(movableObject.width, 0);
             this.ctx.scale(-1, 1);
-            newMovableObject.x = newMovableObject.x * -1;
+            movableObject.x = movableObject.x * -1;
         }
-        this.ctx.drawImage(newMovableObject.img, newMovableObject.x, newMovableObject.y, newMovableObject.width, newMovableObject.height)
-        if (newMovableObject.otherDirection) {
-            newMovableObject.x = newMovableObject.x * -1;
+        this.ctx.drawImage(movableObject.img, movableObject.x, movableObject.y, movableObject.width, movableObject.height)
+        this.ctx.beginPath();
+        this.ctx.lineWidth = '5';
+        this.ctx.strokeStyle  = 'blue';
+        this.ctx.rect(movableObject.x, movableObject.y, movableObject.width, movableObject.height)
+        this.ctx.stroke();
+
+
+        if (movableObject.otherDirection) {
+            movableObject.x = movableObject.x * -1;
             this.ctx.restore();
         }
     }

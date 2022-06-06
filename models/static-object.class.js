@@ -4,16 +4,6 @@ class StaticObject extends MovableObject {
   width = 720;
   img;
 
-  BACKGROUND_CHANGING = [[
-    'img/5.Fondo/Capas/5.cielo_1920-1080px.png',
-    'img/5.Fondo/Capas/3.Fondo3/1.png',
-    'img/5.Fondo/Capas/2.Fondo2/1.png',
-    'img/5.Fondo/Capas/1.suelo-fondo1/1.png'],
-  [
-    'img/5.Fondo/Capas/5.cielo_1920-1080px.png',
-    'img/5.Fondo/Capas/3.Fondo3/2.png',
-    'img/5.Fondo/Capas/2.Fondo2/2.png',
-    'img/5.Fondo/Capas/1.suelo-fondo1/2.png']];
 
 
   /* Die Parameter hinter dem Constructor sind die Parameter, die man in das neue Objekt übergeben kann */
@@ -24,13 +14,7 @@ class StaticObject extends MovableObject {
     this.y = 480 - this.height;
   }
 
-  animateBackground() {
-    for (let i = 0; i < this.BACKGROUND_CHANGING.length; i++) {
-      const imagePath = this.BACKGROUND_CHANGING[i]; //muss alle 4 Bilder laden und dann die nächsten 4 jetzt wird immer eins geladen und dann verschoben.
-      const x = i * 719;
-      return imagePath, x;
-    }
-  }
+  
 }
 
 
