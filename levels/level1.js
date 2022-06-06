@@ -11,7 +11,7 @@ let BACKGROUND_CHANGING = [[
     'img/5.Fondo/Capas/1.suelo-fondo1/2.png']];
 
 
-generateBackground()
+generateBackground(7)
 const level1 = new Level(
     [new Chicken(),
     new Chicken(),
@@ -24,20 +24,20 @@ const level1 = new Level(
     BACKGROUND
 );
 
-/* this function is used to generate a background with a certain lenght depending on the worldLength value */
+/* this function is used to generate a background with a certain lenght depending on the i value */
 
-function generateBackground() {
+function generateBackground(worldLength) {
 
-    for (let worldLength = -1; worldLength < 8; worldLength++) {
-        if (isOdd(worldLength) == true) {
+    for (let i = -1; i < worldLength; i++) {
+        if (isOdd(i) == true) {
             for (let k = 0; k < BACKGROUND_CHANGING[0].length; k++) {
-                x = worldLength * 719
+                x = i * 719
                 BACKGROUND.push(new StaticObject(`${BACKGROUND_CHANGING[0][k]}`, x))
             }
         }
-        else if (isOdd(worldLength) == false) {
+        else if (isOdd(i) == false) {
             for (let m = 0; m < BACKGROUND_CHANGING[1].length; m++) {
-                x = worldLength * 719
+                x = i * 719
                 BACKGROUND.push(new StaticObject(`${BACKGROUND_CHANGING[1][m]}`, x))
             }
         }
