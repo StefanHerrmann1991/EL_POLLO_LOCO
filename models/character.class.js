@@ -3,6 +3,7 @@ class Character extends MovableObject {
     y = 80;
     speed = 15;
     jump = false;
+    energy = 100;
     /* constructor führt sobald der Charakter geladen wird, die Funktionen innerhalb des Constructors aus. */
     IMAGES_WALKING = [
         'img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-21.png',
@@ -25,6 +26,18 @@ class Character extends MovableObject {
         'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-40.png'
     ];
 
+    IMAGES_DYING = [
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-51.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-52.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-53.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-54.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-55.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-56.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-57.png']
+    IMAGES_HURTING = [
+        'img/2.Secuencias_Personaje-Pepe-corrección/4.Herido/H-41.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/4.Herido/H-42.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/4.Herido/H-43.png']
     world;
     walking_sound = new Audio('audio/walking.mp3');
 
@@ -32,15 +45,23 @@ class Character extends MovableObject {
         super().loadImage('img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-21.png');
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_JUMPING);
+        this.loadImages(this.IMAGES_HURTING);
+        this.loadImages(this.IMAGES_DYING);
         this.applyGravity();
         this.moveAnimate();
-
     }
 
     moveAnimate() {
 
         setInterval(() => {
             this.walking_sound.pause();
+
+            if (this.isDead()) {
+                this.playAnimation(this.IMAGES_DYING);
+            }
+            else if (this.isHurt()) {
+                this.playAnimation(this.IMAGES_HURTING);
+            }
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.walking_sound.play();
@@ -49,7 +70,7 @@ class Character extends MovableObject {
             if (this.world.keyboard.LEFT && this.x > 0) {
                 this.moveLeft();
                 this.walking_sound.play();
-                this.otherDirection = true; 
+                this.otherDirection = true;
             }
             if (this.world.keyboard.SPACE && (!this.isAboveGround())) {
                 this.speedY = 30;
@@ -65,12 +86,9 @@ class Character extends MovableObject {
             } else {
                 if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                     this.playAnimation(this.IMAGES_WALKING);
-                    
                 }
             }
         }, 50);
     }
 
-
-    
 }

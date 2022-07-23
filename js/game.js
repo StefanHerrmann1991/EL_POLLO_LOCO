@@ -5,8 +5,8 @@ let keyboard = new Keyboard();
 function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
-    console.log('My Character is', world.character);
-}
+    lifebar = new Statusbar();
+  }
 
 
 document.onkeydown = function (e) {
@@ -22,6 +22,10 @@ document.onkeydown = function (e) {
         case 'ArrowRight':
         case 'd':
             keyboard.RIGHT = true;
+        case 'w':
+        case 'ArrowUp':
+            keyboard.THROW = true;
+
 
         // right arrow
     }
@@ -40,6 +44,10 @@ document.onkeyup = function (e) {
         case 'ArrowRight':
         case 'd':
             keyboard.RIGHT = false;
+        case 'w':
+        case 'ArrowUp':
+            keyboard.THROW = false;
+
         // right arrow
     }
 };

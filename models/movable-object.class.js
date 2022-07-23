@@ -1,16 +1,12 @@
-class MovableObject {
-    x = 120;
-    y = 190;
-    img;
-    height = 250;
-    width = 150;
-    imageCache = {};
+class MovableObject extends DrawableObject {
+
     speed = 0.15;
     otherDirection = false;
     currentImage = 0;
     speedY = 0;
     acceleration = 2.5;
-    jump = false;
+    energy;
+    lastHit = 0;
 
     applyGravity() {
         setInterval(() => {
@@ -28,19 +24,6 @@ class MovableObject {
      * @param path the relative path of the img
      * img is only defined in JS not in HTML*/
 
-    loadImage(path) {
-        this.img = new Image(); // this.img = document.getElementById('image') <img id="image" src>
-        this.img.src = path;
-    }
-
-    loadImages(arr) {
-        arr.forEach((path) => {
-            let img = new Image();
-            img.src = path;
-            this.imageCache[path] = img;
-        });
-    }
-
 
     moveRight() {
         this.x += this.speed;
@@ -54,7 +37,7 @@ class MovableObject {
 
 
     playAnimation(images) {
-        let i = this.currentImage % this.IMAGES_WALKING.length;
+        let i = this.currentImage % images.length;
         // let i = 0 % (Modu) 6; => 1, Rest 0 (Modu ist mathematischer Rest)
         // 0 / 6 = 0 Rest 0; 1 / 6 = 0 Rest 1 (Rest, was übrig bleibt von der Zahl) 7 / 6 = 1 Rest 1 Modu hebt immer nur den Rest auf. Deswegen fängt er hier wieder bei 1 an
         // Modu zählt 0 ,1 ,2 ,3 ,4 ,5 ,0 ....
@@ -67,26 +50,50 @@ class MovableObject {
         this.speedY = 30;
     }
 
-    draw(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-    }
 
-    drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Chicken) {
+
+    drawFrameCollision(ctx) {
+        if (this instanceof Character) {
             ctx.beginPath();
             ctx.lineWidth = '5';
-            ctx.strokeStyle = 'blue';
-            ctx.rect(this.x, this.y, this.width, this.height)
+            ctx.strokeStyle = 'red';
+            ctx.rect(this.x , this.y, this.width, this.height)
             ctx.stroke();
         }
     }
 
     // character.isColliding(chicken)
-    isColliding(movableObject) {
-        return this.x + this.width > movableObject.x &&
-            this.y + this.height > movableObject.y &&
-            this.x < movableObject.x && this.y < movableObject.y + movableObject.height
+    //character entspricht dann this. 
+   
+
+    isColliding(movableObject, corX, corY, corWidth, corHeight) {
+        return this.x + corX + this.width - corWidth> 
+        movableObject.x && this.y + corY + this.height - corHeight> 
+        movableObject.y && this.x + corX <
+        movableObject.x && this.y + corY <
+        movableObject.y + movableObject.height
     }
 
+ /*    (this.x + 20, this.y + 90, this.width - 55, this.height - 100) */
+
+  
+
+    hit() {
+        this.energy -= 5;
+        if (this.energy <= 0) { this.energy = 0 }
+        else {
+            this.lastHit = new Date().getTime(); // measures time since 1970 in ms
+        }
+    }
+
+    isHurt() {
+        let timePassed = new Date().getTime() - this.lastHit; // difference in ms
+        timePassed = timePassed / 1000; // difference in s
+        return timePassed < 0.5;
+    }
+
+    isDead() {
+        return this.energy == 0;
+    }
 
 }

@@ -9,19 +9,29 @@ let BACKGROUND_CHANGING = [[
     'img/5.Fondo/Capas/3.Fondo3/2.png',
     'img/5.Fondo/Capas/2.Fondo2/2.png',
     'img/5.Fondo/Capas/1.suelo-fondo1/2.png']];
+let THROWABLE_OBJECT = [
+    new ThrowableObject(),
+    new ThrowableObject(),
+    new ThrowableObject(),
+    new ThrowableObject(),
+    new ThrowableObject(),
+    new ThrowableObject()]
 
-
-generateBackground(7)
+generateBackground(7);
+/* hier ist der constructor für das neue Level. Bottles ist ein Parameter, enemies usw. sind Parameter dieses Constructors. new Chicken ==> enemies */
 const level1 = new Level(
-    [new Chicken(),
-    new Chicken(),
-    new Chicken(),
-    new Endboss()
+    [
+        new Chicken(),
+        new Chicken(),
+        new Chicken(),
+        new Endboss()
     ],
     [
         new Cloud()
     ],
-    BACKGROUND
+    BACKGROUND,
+    THROWABLE_OBJECT
+    
 );
 
 /* this function is used to generate a background with a certain lenght depending on the i value */
