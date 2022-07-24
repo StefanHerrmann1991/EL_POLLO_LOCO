@@ -1,7 +1,6 @@
 class World {
     character = new Character();
     statusbar = new Statusbar();
-    bottles = new ThrowableObject();
     level = level1;
     canvas;
     ctx;
@@ -68,7 +67,6 @@ class World {
             this.flipImage(movableObject)
         }
         movableObject.draw(this.ctx);
-        movableObject.drawFrame(this.ctx);
         movableObject.drawFrame(this.ctx);
         if (movableObject.otherDirection) {
             this.flipImageBack(movableObject);

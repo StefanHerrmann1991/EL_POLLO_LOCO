@@ -14,16 +14,13 @@ class Character extends MovableObject {
         'img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-26.png'
     ];
     IMAGES_JUMPING = [
-        'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-31.png',
-        'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-32.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-33.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-34.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-35.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-36.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-37.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-38.png',
-        'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-39.png',
-        'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-40.png'
+        'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-39.png'
     ];
 
     IMAGES_DYING = [
@@ -88,7 +85,7 @@ class Character extends MovableObject {
                     this.playAnimation(this.IMAGES_WALKING);
                 }
             }
-        }, 50);
+        }, 100    );
     }
 
 }

@@ -9,13 +9,6 @@ let BACKGROUND_CHANGING = [[
     'img/5.Fondo/Capas/3.Fondo3/2.png',
     'img/5.Fondo/Capas/2.Fondo2/2.png',
     'img/5.Fondo/Capas/1.suelo-fondo1/2.png']];
-let THROWABLE_OBJECT = [
-    new ThrowableObject(),
-    new ThrowableObject(),
-    new ThrowableObject(),
-    new ThrowableObject(),
-    new ThrowableObject(),
-    new ThrowableObject()]
 
 generateBackground(7);
 /* hier ist der constructor für das neue Level. Bottles ist ein Parameter, enemies usw. sind Parameter dieses Constructors. new Chicken ==> enemies */
@@ -30,8 +23,18 @@ const level1 = new Level(
         new Cloud()
     ],
     BACKGROUND,
-    THROWABLE_OBJECT
-    
+    [
+    new ThrowableObject(),
+    new ThrowableObject(),
+    new ThrowableObject(),
+    new ThrowableObject(),
+    new ThrowableObject(),
+    new ThrowableObject(),
+    new ThrowableObject(),
+    new ThrowableObject(),
+    new ThrowableObject(),
+    new ThrowableObject()
+]
 );
 
 /* this function is used to generate a background with a certain lenght depending on the i value */
@@ -55,3 +58,12 @@ function generateBackground(worldLength) {
 }
 
 function isOdd(num) { return Math.abs(num % 2) }
+/* 
+function numberOfObjects(number, newObject) {
+    let array = [];
+    for (let i = 0; i < number; i++) {
+        const element = new newObject;
+
+    }
+
+} */

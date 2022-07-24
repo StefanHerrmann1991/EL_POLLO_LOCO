@@ -8,13 +8,18 @@ class MovableObject extends DrawableObject {
     energy;
     lastHit = 0;
 
+/**
+ * @property speedY
+ * @property speedY
+ */
+
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
             }
-        }, 1000 / 25);
+        }, 1000 / 35);
     }
 
     isAboveGround() { return this.y < 180; }
@@ -27,8 +32,6 @@ class MovableObject extends DrawableObject {
 
     moveRight() {
         this.x += this.speed;
-
-
     }
 
     moveLeft() {
@@ -50,33 +53,43 @@ class MovableObject extends DrawableObject {
         this.speedY = 30;
     }
 
-
+    drawFrame(ctx) {
+        if (this instanceof Character || this instanceof Chicken || this instanceof ThrowableObject) {
+            ctx.beginPath();
+            ctx.lineWidth = '5';
+            ctx.strokeStyle = 'yellow';
+            ctx.rect(this.x, this.y, this.width, this.height)
+            ctx.stroke();
+        }
+    }
 
     drawFrameCollision(ctx) {
         if (this instanceof Character) {
             ctx.beginPath();
             ctx.lineWidth = '5';
             ctx.strokeStyle = 'red';
-            ctx.rect(this.x , this.y, this.width, this.height)
+            ctx.rect(this.x, this.y, this.width, this.height)
+            console.log(this.y);
             ctx.stroke();
         }
     }
-
-    // character.isColliding(chicken)
-    //character entspricht dann this. 
-   
+    
+    /**
+     * The function checks, if the Object is colliding with another object.
+     * @param {*} movableObject 
+     * @param {*} corX 
+     * @param {*} corY 
+     * @param {*} corWidth 
+     * @param {*} corHeight 
+     * @returns 
+     */
 
     isColliding(movableObject, corX, corY, corWidth, corHeight) {
-        return this.x + corX + this.width - corWidth> 
-        movableObject.x && this.y + corY + this.height - corHeight> 
-        movableObject.y && this.x + corX <
-        movableObject.x && this.y + corY <
-        movableObject.y + movableObject.height
+        return this.x + corX + this.width - corWidth > movableObject.x 
+            && this.y + corY + this.height - corHeight > movableObject.y 
+            && this.x + corX < movableObject.x + movableObject.width
+            && this.y + corY < movableObject.y + movableObject.height
     }
-
- /*    (this.x + 20, this.y + 90, this.width - 55, this.height - 100) */
-
-  
 
     hit() {
         this.energy -= 5;
