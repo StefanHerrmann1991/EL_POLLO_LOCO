@@ -37,7 +37,7 @@ class ThrowableObject extends MovableObject {
     } */
 
     animateThrowableObject() {
-
+        console.log("cmon and work");
     }
 
 
