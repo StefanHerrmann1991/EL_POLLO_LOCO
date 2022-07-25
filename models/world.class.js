@@ -28,14 +28,15 @@ class World {
                     this.character.hit();
                     this.statusbar.setPercentage(this.character.energy)
                 }
-                this.level.bottles.forEach((bottle) => {
-                    if (this.character.isColliding(bottle, 10, 20, 55, 100)) {
-                        this.level.bottles.splice(this.bottle, 1)
-                        this.bottleCount++;
-                        console.log(this.bottleCount);
-                    }
-                })
-            })
+
+            });
+            this.level.bottles.forEach((bottle, i) => {
+                if (this.character.isColliding(bottle, 20, 90, 55, 100)) {
+                    this.level.bottles.splice(i, 1)
+                    this.bottleCount++;
+                    console.log(this.bottleCount);
+                }
+            });
         }, 200);
     }
 

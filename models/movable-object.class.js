@@ -8,10 +8,10 @@ class MovableObject extends DrawableObject {
     energy;
     lastHit = 0;
 
-/**
- * @property speedY
- * @property speedY
- */
+    /**
+     * @property speedY
+     * @property speedY
+     */
 
     applyGravity() {
         setInterval(() => {
@@ -73,7 +73,7 @@ class MovableObject extends DrawableObject {
             ctx.stroke();
         }
     }
-    
+
     /**
      * The function checks, if the Object is colliding with another object.
      * @param {*} movableObject 
@@ -85,11 +85,11 @@ class MovableObject extends DrawableObject {
      */
 
     isColliding(movableObject, corX, corY, corWidth, corHeight) {
-        return this.x + corX + this.width - corWidth > movableObject.x 
-            && this.y + corY + this.height - corHeight > movableObject.y 
+        return this.x + corX + this.width - corWidth > movableObject.x
+            && this.y + corY + this.height - corHeight > movableObject.y
             && this.x + corX < movableObject.x + movableObject.width
             && this.y + corY < movableObject.y + movableObject.height
-    }
+    } 
 
     hit() {
         this.energy -= 5;
