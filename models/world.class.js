@@ -14,36 +14,43 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        this.checkCollisions();
+        this.checkWorld();
+        this.checkThrowObjects();
     }
 
     setWorld() {
         this.character.world = this;
     }
     /*  this.x + 20, this.y + 90, this.width - 55, this.height - 100 */
-    checkCollisions() {
-        setInterval(() => {
-            this.level.enemies.forEach((enemy) => {
-                if (this.character.isColliding(enemy, 20, 90, 55, 100)) {
-                    this.character.hit();
-                    this.statusbar.setPercentage(this.character.energy)
-                }
 
-            });
-            this.level.bottles.forEach((bottle, i) => {
-                if (this.character.isColliding(bottle, 20, 90, 55, 100)) {
-                    this.level.bottles.splice(i, 1)
-                    this.bottleCount++;
-                    console.log(this.bottleCount);
-                }
-            });
+    checkWorld() {
+        setInterval(() => {
+            this.checkCollisions();
         }, 200);
     }
 
-    checkThrowObjects() {
-        if (this.keyboard.THROW && this.bottleCount > 0) {
-           
+
+    checkCollisions() {
+
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isColliding(enemy, 20, 90, 55, 100)) {
+                this.character.hit();
+                this.statusbar.setPercentage(this.character.energy)
+            }
+        });
+        this.level.bottles.forEach((bottle, i) => {
+            if (this.character.isColliding(bottle, 20, 90, 55, 100)) {
+                this.level.bottles.splice(i, 1)
+                this.bottleCount++;
+                console.log(this.bottleCount);
+            }
+        });
     }
+
+    checkThrowObjects() {
+        if (this.keyboard.THROW && this.bottleCount > 0) {                     
+            this.bottleCount--; 
+        }
     }
 
 

@@ -24,17 +24,14 @@ const level1 = new Level(
     ],
     BACKGROUND,
     [
-    new ThrowableObject(),
-    new ThrowableObject(),
-    new ThrowableObject(),
-    new ThrowableObject(),
-    new ThrowableObject(),
-    new ThrowableObject(),
-    new ThrowableObject(),
-    new ThrowableObject(),
-    new ThrowableObject(),
-    new ThrowableObject()
-]
+        new LootableObject(),
+        new LootableObject(),
+        new LootableObject(),
+        new LootableObject(),
+        new LootableObject(),
+        new LootableObject(),
+        new LootableObject()
+    ]
 );
 
 /* this function is used to generate a background with a certain lenght depending on the i value */
