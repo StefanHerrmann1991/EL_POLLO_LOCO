@@ -10,7 +10,7 @@ class Level {
         this.clouds = clouds;
         this.backgrounds = backgrounds;
         this.bottles = bottles;
-        }
+          }
 }
 
 

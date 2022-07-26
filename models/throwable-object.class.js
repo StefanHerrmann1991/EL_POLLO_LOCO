@@ -21,10 +21,10 @@ class ThrowableObject extends MovableObject {
         super().loadImage('img/6.botella/Rotación/Mesa de trabajo 1 copia 3.png');
         this.loadImages(this.IMAGES_BOTTLE_THROWING);
         this.loadImages(this.IMAGES_BOTTLE_EXPLODING);
-        this.x = x;
-        this.y = y;
         this.height = 100;
         this.width = 100;
+        this.x = x;
+        this.y = y;
         this.throw();
     }
 

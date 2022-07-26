@@ -32,6 +32,7 @@ const level1 = new Level(
         new LootableObject(),
         new LootableObject()
     ]
+    
 );
 
 /* this function is used to generate a background with a certain lenght depending on the i value */
