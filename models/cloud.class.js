@@ -1,5 +1,6 @@
 class Cloud extends MovableObject {
 
+    
     constructor() {
         super().loadImage('img/5.Fondo/Capas/4.nubes/1.png');
         this.x = 150 + Math.random() * 50 // Zahl zwischen 0 und 500 Math ramdom generiert eine zufällige Zahl zwischen 0 und 1

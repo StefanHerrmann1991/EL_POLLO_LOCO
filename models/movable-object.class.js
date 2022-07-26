@@ -22,7 +22,12 @@ class MovableObject extends DrawableObject {
         }, 1000 / 35);
     }
 
-    isAboveGround() { return this.y < 180; }
+    isAboveGround() {
+        if (this instanceof ThrowableObject) {
+            return true;
+        }
+        else { return this.y < 180; }
+    }
 
     /**loadImage('img/test.png')
      * The function loads images from the img folder 
@@ -50,7 +55,7 @@ class MovableObject extends DrawableObject {
     }
 
     jump() {
-        this.speedY = 30;
+        this.speedY = 10;
     }
 
     drawFrame(ctx) {
@@ -77,19 +82,19 @@ class MovableObject extends DrawableObject {
     /**
      * The function checks, if the Object is colliding with another object.
      * @param {*} movableObject 
-     * @param {*} corX 
-     * @param {*} corY 
+     * @param {*} characterCorX 
+     * @param {*} characterCorY 
      * @param {*} corWidth 
      * @param {*} corHeight 
      * @returns 
      */
 
-    isColliding(movableObject, corX, corY, corWidth, corHeight) {
-        return this.x + corX + this.width - corWidth > movableObject.x
-            && this.y + corY + this.height - corHeight > movableObject.y
-            && this.x + corX < movableObject.x + movableObject.width
-            && this.y + corY < movableObject.y + movableObject.height
-    } 
+    isColliding(movableObject, characterCorX, characterCorY, corWidth, corHeight) {
+        return this.x + characterCorX + this.width - corWidth > movableObject.x
+            && this.y + characterCorY + this.height - corHeight > movableObject.y
+            && this.x + characterCorX < movableObject.x + movableObject.width
+            && this.y + characterCorY < movableObject.y + movableObject.height
+    }
 
     hit() {
         this.energy -= 5;

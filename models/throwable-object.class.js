@@ -17,28 +17,38 @@ class ThrowableObject extends MovableObject {
     IMAGES_BOTTLE_STANDING = [
         'img/6.botella/2.Botella_enterrada1.png',
         'img/6.botella/2.Botella_enterrada2.png'];
+    world;
 
-    constructor() {
+    constructor(x, y) {
 
         super().loadImage('img/6.botella/2.Botella_enterrada1.png');
         this.loadImages(this.IMAGES_BOTTLE_STANDING);
         this.loadImages(this.IMAGES_BOTTLE_THROWING);
         this.loadImages(this.IMAGES_BOTTLE_EXPLODING);
-     /*    this.applyGravity(); */
-        this.y = 330;
+        /*    this.applyGravity(); */
+        this.y = 330 + Math.random() * 300;
         this.x = 200 + Math.random() * 2000;
         this.height = 100;
         this.width = 100;
+        this.throw();
     }
 
 
- /*    takeBottle() {
-        if(ThrowableObject.isColliding()){}
+throw(x, y) {
+    this.x = x;
+    this.y = y;
+    this.speedY = 30;
+    this.applyGravity();
+    this.playAnimation(this.IMAGES_BOTTLE_THROWING)
+    setInterval(() => {this.x += 10}, 25);
+} 
+
+ /*    throwAnimate() {
+
+        setInterval(() => {
+           if (this.world.keyboard.THROW) 
+            {this.character.playAnimation(this.IMAGES_BOTTLE_THROWING); }
+        }, 1000 / 60);
     } */
-
-    animateThrowableObject() {
-        console.log("cmon and work");
-    }
-
-
 }
+

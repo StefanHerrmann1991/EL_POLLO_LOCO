@@ -22,9 +22,11 @@ document.onkeydown = function (e) {
         case 'ArrowRight':
         case 'd':
             keyboard.RIGHT = true;
+            break;
         case 'w':
         case 'ArrowUp':
             keyboard.THROW = true;
+            break;
 
 
         // right arrow
@@ -44,9 +46,11 @@ document.onkeyup = function (e) {
         case 'ArrowRight':
         case 'd':
             keyboard.RIGHT = false;
+            break;
         case 'w':
         case 'ArrowUp':
             keyboard.THROW = false;
+            break;
 
         // right arrow
     }
