@@ -6,8 +6,10 @@ class LootableObject extends MovableObject {
 
         constructor() { 
             super().loadImage('img/6.botella/2.Botella_enterrada1.png');
-            this.y = 330 + Math.random() * 300;
-            this.x = 200 + Math.random() * 2000;
+            this.y = 400 - Math.random() * 220;
+            this.x = 200 + Math.random() * 2600;
+            this.height = 100;
+            this.width = 100;
         }
        }
 

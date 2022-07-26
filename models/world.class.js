@@ -7,6 +7,7 @@ class World {
     keyboard;
     camera_x = 0;
     bottleCount = 0;
+    throwableObject = [];
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -15,7 +16,7 @@ class World {
         this.draw();
         this.setWorld();
         this.checkWorld();
-        this.checkThrowObjects();
+
     }
 
     setWorld() {
@@ -26,6 +27,7 @@ class World {
     checkWorld() {
         setInterval(() => {
             this.checkCollisions();
+            this.throwObject();
         }, 200);
     }
 
@@ -47,9 +49,12 @@ class World {
         });
     }
 
-    checkThrowObjects() {
-        if (this.keyboard.THROW && this.bottleCount > 0) {                     
-            this.bottleCount--; 
+    throwObject() {
+        if (this.keyboard.THROW && this.bottleCount > 0) {
+            this.bottleCount--;
+            let thrownBottle = new ThrowableObject(this.character.x, this.character.y);
+            this.throwableObject.push(thrownBottle);
+            console.log(this.bottleCount);
         }
     }
 

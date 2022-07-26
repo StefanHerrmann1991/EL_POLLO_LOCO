@@ -32,6 +32,7 @@ class ThrowableObject extends MovableObject {
         this.speedY = 30;
         this.applyGravity();
         this.playAnimation(this.IMAGES_BOTTLE_THROWING);
+       /*  this.playAnimation(this.IMAGES_BOTTLE_THROWING); */
         setInterval(() => { this.x += 10 }, 25);
     }
 }
