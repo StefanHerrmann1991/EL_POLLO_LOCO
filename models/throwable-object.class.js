@@ -1,6 +1,6 @@
 class ThrowableObject extends MovableObject {
-    speedX = 20;
-    speedY = 30;
+ 
+    speedY = 50;
 
     IMAGES_BOTTLE_THROWING = [
         'img/6.botella/Rotación/Mesa de trabajo 1 copia 3.png',
@@ -29,11 +29,12 @@ class ThrowableObject extends MovableObject {
     }
 
     throw() {
-        this.speedY = 30;
+        this.speedY = 35;
         this.applyGravity();
-        this.playAnimation(this.IMAGES_BOTTLE_THROWING);
-       /*  this.playAnimation(this.IMAGES_BOTTLE_THROWING); */
-        setInterval(() => { this.x += 10 }, 25);
+        setInterval(() => {
+            this.x += 60
+            this.playAnimation(this.IMAGES_BOTTLE_THROWING);
+        }, 55);
     }
 }
 
