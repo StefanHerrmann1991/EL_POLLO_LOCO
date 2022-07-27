@@ -56,12 +56,14 @@ function generateBackground(worldLength) {
 }
 
 function isOdd(num) { return Math.abs(num % 2) }
-/* 
-function numberOfObjects(number, newObject) {
-    let array = [];
-    for (let i = 0; i < number; i++) {
-        const element = new newObject;
 
-    }
 
-} */
+function generateLoot() {
+    
+}
+function generateEnemies() {
+
+}
+function generateLoot() {
+
+}

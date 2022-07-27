@@ -58,27 +58,7 @@ class MovableObject extends DrawableObject {
         this.speedY = 10;
     }
 
-    drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Chicken || this instanceof ThrowableObject) {
-            ctx.beginPath();
-            ctx.lineWidth = '5';
-            ctx.strokeStyle = 'yellow';
-            ctx.rect(this.x, this.y, this.width, this.height)
-            ctx.stroke();
-        }
-    }
-
-    drawFrameCollision(ctx) {
-        if (this instanceof Character) {
-            ctx.beginPath();
-            ctx.lineWidth = '5';
-            ctx.strokeStyle = 'red';
-            ctx.rect(this.x, this.y, this.width, this.height)
-            console.log(this.y);
-            ctx.stroke();
-        }
-    }
-
+  
     /**
      * The function checks, if the Object is colliding with another object.
      * @param {*} movableObject 
