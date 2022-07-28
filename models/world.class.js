@@ -28,7 +28,7 @@ class World {
             this.checkCollisions();
             this.throwObject();
             this.checkBottleCount();
-        }, 60);
+        }, 30);
     }
 
 
@@ -40,14 +40,15 @@ class World {
 
     checkCollisions() {
 
-        this.level.enemies.forEach((enemy) => {
+        this.level.enemies.forEach((enemy, i) => {
             if (this.character.isColliding(enemy, 20, 90, 55, 100) && !this.character.isAboveGround()) {
                 this.character.hit();
                 this.statusbar.setPercentage(this.character.energy);
             }
-            if (this.character.isColliding(enemy, 20, 90, 55, 100) && this.character.isAboveGround()) {
-                this.playAnimation(this.level.enemy.IMAGES_DYING);
-                this.level.enemy.splice(i, 1);
+            if (this.character.isAboveGround() && this.character.isColliding(enemy, 20, 90, 55, 100)  ) {
+                this.level.enemy.energy == 0;
+                this.level.enemies.splice(i, 1);  
+                  
             }
         });
         this.level.bottles.forEach((bottle, i) => {
