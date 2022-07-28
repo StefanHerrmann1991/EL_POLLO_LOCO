@@ -45,12 +45,13 @@ class World {
                 this.character.hit();
                 this.statusbar.setPercentage(this.character.energy);
             }
-            if (this.character.isAboveGround() && this.character.isColliding(enemy, 20, 90, 55, 100)  ) {
-                this.level.enemy.energy == 0;
-                this.level.enemies.splice(i, 1);  
-                  
-            }
+            if (this.character.isAboveGround() && this.character.isColliding(enemy, 20, 90, 55, 100)) {
+              
+         
         });
+                     
+            
+        
         this.level.bottles.forEach((bottle, i) => {
             if (this.character.isColliding(bottle, 20, 90, 55, 100)) {
                 this.level.bottles.splice(i, 1)
