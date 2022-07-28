@@ -21,21 +21,33 @@ class World {
     setWorld() {
         this.character.world = this;
     }
-    /*  this.x + 20, this.y + 90, this.width - 55, this.height - 100 */
+
 
     checkWorld() {
         setInterval(() => {
             this.checkCollisions();
             this.throwObject();
+            this.checkBottleCount();
         }, 60);
+    }
+
+
+    checkBottleCount() {
+        document.getElementById('bottleCounter').innerHTML = `
+        <img class="bottle-stat" src="img/0.Own_Pictures/bottleThrowing/bottle_throwing6.png"> 
+        <div>= ${this.bottleCount}<div>`
     }
 
     checkCollisions() {
 
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy, 20, 90, 55, 100)) {
+            if (this.character.isColliding(enemy, 20, 90, 55, 100) && !this.character.isAboveGround()) {
                 this.character.hit();
-                this.statusbar.setPercentage(this.character.energy)
+                this.statusbar.setPercentage(this.character.energy);
+            }
+            if (this.character.isColliding(enemy, 20, 90, 55, 100) && this.character.isAboveGround()) {
+                this.playAnimation(this.level.enemy.IMAGES_DYING);
+                this.level.enemy.splice(i, 1);
             }
         });
         this.level.bottles.forEach((bottle, i) => {
@@ -55,7 +67,7 @@ class World {
             console.log(this.bottleCount);
         }
     }
- 
+
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);

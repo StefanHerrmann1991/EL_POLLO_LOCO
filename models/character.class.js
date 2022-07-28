@@ -53,7 +53,7 @@ class Character extends MovableObject {
         setInterval(() => {
             this.walking_sound.pause();
 
-            if (this.isDead()) {
+            if (this.objectIsDead()) {
                 this.playAnimation(this.IMAGES_DYING);
             }
             else if (this.isHurt()) {

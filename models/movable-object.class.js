@@ -90,8 +90,10 @@ class MovableObject extends DrawableObject {
         return timePassed < 0.5;
     }
 
-    isDead() {
+    objectIsDead() {
         return this.energy == 0;
     }
+
+    chickenIsDead() {}
 
 }
