@@ -26,7 +26,6 @@ class Statusbar extends DrawableObject {
         this.img = this.imageCache[path];
     }
 
-
     whichStatus() {
         if (this.percentage == 100) { return 5; }
         else if (this.percentage > 80) { return 4; }
@@ -35,7 +34,6 @@ class Statusbar extends DrawableObject {
         else if (this.percentage > 20) { return 1; }
         else { return 0; }
     }
-
 }
 
 

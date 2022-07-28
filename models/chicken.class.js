@@ -36,11 +36,3 @@ class Chicken extends MovableObject {
            }, 4000) */
     }
 }
-
-/*   moreChicken() {
-       let L = 15; //curves maximum value
-       let k = 0.5; //logistic growth rate
-       let x0 = 1; //midpoint of the function
-       let x = 4;
-       let f = L/(1 + Math.exp(-k(x*x0)))
-   } */

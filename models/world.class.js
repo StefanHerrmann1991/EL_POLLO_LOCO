@@ -16,7 +16,6 @@ class World {
         this.draw();
         this.setWorld();
         this.checkWorld();
-
     }
 
     setWorld() {
@@ -28,9 +27,8 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.throwObject();
-        }, 200);
+        }, 60);
     }
-
 
     checkCollisions() {
 
@@ -57,8 +55,7 @@ class World {
             console.log(this.bottleCount);
         }
     }
-
-
+ 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);

@@ -29,6 +29,7 @@ class DrawableObject {
             ctx.stroke();
         }
     }
+    
     drawFrame(ctx) {
         if (this instanceof Chicken || this instanceof ThrowableObject) {
             ctx.beginPath();
@@ -48,5 +49,4 @@ class DrawableObject {
             ctx.stroke();
         }
     }
-
 }
