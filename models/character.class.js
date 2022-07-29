@@ -100,8 +100,9 @@ class Character extends MovableObject {
 
         setInterval(() => {
             // walk animation      
-            if (this.characterIsDead()) {
+            if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DYING);
+               
             }
             else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURTING);

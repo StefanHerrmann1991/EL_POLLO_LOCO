@@ -37,22 +37,19 @@ class Chicken extends MovableObject {
         setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
         }, 200);
-        /*    setInterval(() => {
-               this.chicken_sound.play();
-           }, 4000) */
-        /*       setInterval(() => {
-                  if (this.level.character.isColliding(this.chicken)){this.chicken.splice) }
-              }, 200)
-       */
-/*         setInterval(() => {
-            if (this.objectIsDead(object)) {
-                this.playAnimation(this.IMAGES_DYING)
-                this.splice(i, 1);
-            }
-        }, 1000 / 60); */
 
         setInterval(() => {
-            this.playAnimation(this.IMAGES_WALKING);
+            if(this.isDead()) {
+                this.playAnimation(this.IMAGES_DYING);}
         }, 200);
+
+        
+
+
+         /*    setInterval(() => {
+               this.chicken_sound.play();
+           }, 4000) */
+
+     
     }
 }

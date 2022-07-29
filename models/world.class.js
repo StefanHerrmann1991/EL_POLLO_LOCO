@@ -22,6 +22,7 @@ class World {
         this.character.world = this;
     }
 
+
     checkWorld() {
         setInterval(() => {
             this.checkCollisions();
@@ -45,11 +46,15 @@ class World {
                 this.statusbar.setPercentage(this.character.energy);
             }
             if (this.character.isAboveGround() && this.character.isColliding(enemy, 20, 90, 55, 100)) {
-                this.objectIsDead();
-                this.level.enemies[i].playAnimation(world.level.enemies[i].IMAGES_DYING);
+                console.log(enemy);
+                loadImage(enemy.IMAGES_DYING);
                 setTimeout(() => {
-                
-                }, 200)
+                    this.level.enemies.splice(i, 1);
+                }, 150);
+               
+             
+                /*     this.level.enemies.splice(i, 1); */
+               
 
             }
         });
