@@ -50,3 +50,13 @@ h1 {
     height: 6vh;
     width: 6vh;
 }
+
+.start-btn {
+    cursor: pointer;
+    font-size: 43px;
+    border: none;
+    -webkit-text-stroke: 1px black;
+    font-family: 'Rye', cursive;
+    color: rgb(211, 172, 45);
+    width: 20px;
+}

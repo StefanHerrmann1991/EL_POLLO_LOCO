@@ -22,7 +22,6 @@ class World {
         this.character.world = this;
     }
 
-
     checkWorld() {
         setInterval(() => {
             this.checkCollisions();
@@ -46,17 +45,18 @@ class World {
                 this.statusbar.setPercentage(this.character.energy);
             }
             if (this.character.isAboveGround() && this.character.isColliding(enemy, 20, 90, 55, 100)) {
-              
-         
+                this.objectIsDead();
+                this.level.enemies[i].playAnimation(world.level.enemies[i].IMAGES_DYING);
+                setTimeout(() => {
+                
+                }, 200)
+
+            }
         });
-                     
-            
-        
         this.level.bottles.forEach((bottle, i) => {
             if (this.character.isColliding(bottle, 20, 90, 55, 100)) {
                 this.level.bottles.splice(i, 1)
                 this.bottleCount++;
-                console.log(this.bottleCount);
             }
         });
     }
@@ -66,7 +66,6 @@ class World {
             this.bottleCount--;
             let thrownBottle = new ThrowableObject(this.character.x, this.character.y);
             this.throwableObject.push(thrownBottle);
-            console.log(this.bottleCount);
         }
     }
 

@@ -44,11 +44,12 @@ class Chicken extends MovableObject {
                   if (this.level.character.isColliding(this.chicken)){this.chicken.splice) }
               }, 200)
        */
-        setInterval(() => {
-            if (this.objectIsDead()) {
+/*         setInterval(() => {
+            if (this.objectIsDead(object)) {
                 this.playAnimation(this.IMAGES_DYING)
+                this.splice(i, 1);
             }
-        }, 1000 / 60);
+        }, 1000 / 60); */
 
         setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
