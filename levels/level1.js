@@ -1,6 +1,7 @@
 
 let level1;
 function initLevel1() {
+    levelInitiated = true;
     let BACKGROUND = [];
     let BACKGROUND_CHANGING = [[
         'img/5.Fondo/Capas/5.cielo_1920-1080px.png',

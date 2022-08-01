@@ -61,7 +61,7 @@ class Character extends MovableObject {
         'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-20.png'
     ]
     IMAGES_START = ['img/9.Intro _ Outro Image/Start Screen/Opción 1.png']
-    IMAGES_GAME_OVER = ['img/9.Intro _ Outro Image/_Game over_ screen/1.you lost.png']
+
 
 
     world;
@@ -75,7 +75,6 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_HURTING);
         this.loadImages(this.IMAGES_DYING);
-        this.loadImages(this.IMAGES_GAME_OVER);
         this.applyGravity();
         this.moveAnimate();
     }
@@ -107,8 +106,8 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_DYING);
                 setTimeout(() => {
                     this.loadImage('img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-58.png');
-                }, 600);
-           
+                              }, 400);
+              
             }
             else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURTING);
