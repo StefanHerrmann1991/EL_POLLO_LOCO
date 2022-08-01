@@ -60,6 +60,8 @@ class Character extends MovableObject {
         'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-19.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-20.png'
     ]
+    IMAGES_START = ['img/9.Intro _ Outro Image/Start Screen/Opción 1.png']
+    IMAGES_GAME_OVER = ['img/9.Intro _ Outro Image/_Game over_ screen/1.you lost.png']
 
 
     world;
@@ -73,6 +75,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_HURTING);
         this.loadImages(this.IMAGES_DYING);
+        this.loadImages(this.IMAGES_GAME_OVER);
         this.applyGravity();
         this.moveAnimate();
     }
@@ -82,17 +85,17 @@ class Character extends MovableObject {
         setInterval(() => {
             this.walking_sound.pause();
 
-            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+            if (!this.isDead() && this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.walking_sound.play();
                 this.otherDirection = false;
             }
-            if (this.world.keyboard.LEFT && this.x > 0) {
+            if (!this.isDead() && this.world.keyboard.LEFT && this.x > 0) {
                 this.moveLeft();
                 this.walking_sound.play();
                 this.otherDirection = true;
             }
-            if (this.world.keyboard.SPACE && (!this.isAboveGround())) {
+            if (!this.isDead() && this.world.keyboard.SPACE && (!this.isAboveGround())) {
                 this.speedY = 30;
             }
             this.world.camera_x = -this.x + 100;
@@ -102,7 +105,12 @@ class Character extends MovableObject {
             // walk animation      
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DYING);
-               
+                setTimeout(() => {
+                    this.loadImage('img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-58.png');
+                }, 600);
+                setTimeout(() => {
+                    
+                }, 2000);
             }
             else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURTING);
@@ -110,10 +118,10 @@ class Character extends MovableObject {
             if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
             } else {
-                if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+                if (!this.isDead() && this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                     this.playAnimation(this.IMAGES_WALKING);
                 }
             }
         }, 100);
-     }
+    }
 }
