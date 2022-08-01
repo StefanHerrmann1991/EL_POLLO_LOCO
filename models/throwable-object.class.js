@@ -28,7 +28,7 @@ class ThrowableObject extends MovableObject {
         this.loadImages(this.IMAGES_BOTTLE_EXPLODING);
         this.height = 80;
         this.width = 80;
-        this.x = x + 100 ;
+        this.x = x + 100;
         this.y = y + 20;
         this.throw();
     }

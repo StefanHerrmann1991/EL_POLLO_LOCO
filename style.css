@@ -60,3 +60,5 @@ h1 {
     color: rgb(211, 172, 45);
     width: 20px;
 }
+
+.d-none {display: none;}

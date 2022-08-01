@@ -61,9 +61,6 @@ class Character extends MovableObject {
         'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-20.png'
     ]
     IMAGES_START = ['img/9.Intro _ Outro Image/Start Screen/Opción 1.png']
-
-
-
     world;
     walking_sound = new Audio('audio/walking.mp3');
 

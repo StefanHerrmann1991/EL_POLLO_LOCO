@@ -9,7 +9,6 @@ class Cloud extends MovableObject {
         this.height = 350;
         this.width = 600;
         this.animateClouds();
-
     }
     animateClouds() {
         this.moveLeft();
