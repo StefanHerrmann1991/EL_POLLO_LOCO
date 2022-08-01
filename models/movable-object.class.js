@@ -76,8 +76,8 @@ class MovableObject extends DrawableObject {
             && this.y + characterCorY < movableObject.y + movableObject.height
     }
 
-    hit() {
-        this.energy -= 5;
+    hit(energyLost) {
+        this.energy -= energyLost;
         if (this.energy <= 0) { this.energy = 0 }
         else {
             this.lastHit = new Date().getTime(); // measures time since 1970 in ms

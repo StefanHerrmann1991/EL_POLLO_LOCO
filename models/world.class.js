@@ -32,6 +32,14 @@ class World {
     }
 
 
+    checkDead() {
+        if (this.world.character.isDead()) {
+            this.world.loadImage('img/9.Intro _ Outro Image/_Game over_ screen/1.you lost.png');
+        }
+
+    }
+
+
     checkBottleCount() {
         document.getElementById('bottleCounter').innerHTML = `
         <img class="bottle-stat" src="img/0.Own_Pictures/bottleThrowing/bottle_throwing6.png"> 
@@ -42,20 +50,14 @@ class World {
 
         this.level.enemies.forEach((enemy, i) => {
             if (this.character.isColliding(enemy, 20, 90, 55, 100) && !this.character.isAboveGround()) {
-                this.character.hit();
+                this.character.hit(5);
                 this.statusbar.setPercentage(this.character.energy);
             }
             if (this.character.isAboveGround() && this.character.isColliding(enemy, 20, 90, 55, 100)) {
-                console.log(enemy);
-                loadImage(enemy.IMAGES_DYING);
+                enemy.hit(100);
                 setTimeout(() => {
                     this.level.enemies.splice(i, 1);
                 }, 150);
-               
-             
-                /*     this.level.enemies.splice(i, 1); */
-               
-
             }
         });
         this.level.bottles.forEach((bottle, i) => {

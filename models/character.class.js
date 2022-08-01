@@ -108,9 +108,7 @@ class Character extends MovableObject {
                 setTimeout(() => {
                     this.loadImage('img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-58.png');
                 }, 600);
-                setTimeout(() => {
-                    
-                }, 2000);
+           
             }
             else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURTING);
