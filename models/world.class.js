@@ -8,6 +8,7 @@ class World {
     keyboard;
     camera_x = 0;
     bottleCount = 0;
+ 
     throwableObject = [];
     IMAGES_GAME_OVER = ['img/9.Intro _ Outro Image/_Game over_ screen/1.you lost.png'];
 
@@ -24,8 +25,6 @@ class World {
         this.character.world = this;
     }
 
-
-
     checkWorld() {
         setInterval(() => {
             this.checkCollisions();
@@ -41,7 +40,7 @@ class World {
                 let end = new Endscreen(this.character.x, this.character.y);
                 this.endscreen.push(end);
                 document.getElementById('bottleCounter').classList.add('d-none');
-             }, 1500);
+            }, 1500);
         }
     }
 
@@ -54,15 +53,15 @@ class World {
     checkCollisions() {
 
         this.level.enemies.forEach((enemy, i) => {
-            if (this.character.isColliding(enemy, 20, 90, 55, 100) && !this.character.isAboveGround() && !enemy.isDead()) {
-                this.character.hit(5);
+            if (this.character.isColliding(enemy, 20, 90, 55, 100) && !this.character.isAboveGround() && !enemy.dead) {
+                this.character.hit(1);
                 this.statusbar.setPercentage(this.character.energy);
             }
-            if (this.character.isAboveGround() && this.character.isColliding(enemy, 20, 90, 55, 100) && !enemy.isDead()) {
-                enemy.hit(100);
+            if (this.character.isAboveGround() && this.character.isColliding(enemy, 20, 90, 55, 100) && !enemy.dead) {
+                enemy.dead = true;
                 setTimeout(() => {
-                    if (enemy.isDead()) { this.level.enemies.splice(i, 1); }
-                }, 200);
+                    this.level.enemies.splice(i, 1);
+                }, 2000);
             }
 
         });
@@ -95,9 +94,7 @@ class World {
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.endscreen);
-
         this.ctx.translate(-this.camera_x, 0);
-
         /* draw wird immer wieder aufgerufen */
         let self = this;
         requestAnimationFrame(function () { self.draw() });

@@ -1,5 +1,6 @@
 class Chicken extends MovableObject {
     energy = 100;
+    dead = false;
     y = 375;
     height = 60;
     width = 60;
@@ -24,7 +25,7 @@ class Chicken extends MovableObject {
     animate() {
         /* Hühner bewegen sich nach links */
         setInterval(() => {
-            if (this.isDead()) {
+            if (this.dead) {
                 this.playAnimation(this.IMAGES_DYING);
             }
             else { this.moveLeft(); }
@@ -32,7 +33,7 @@ class Chicken extends MovableObject {
 
         /* Hühner laufen (nur Animation und Ton) */
         setInterval(() => {
-            if (!this.isDead()) {
+            if (!this.dead) {
                 this.playAnimation(this.IMAGES_WALKING)
             };
         }, 200);

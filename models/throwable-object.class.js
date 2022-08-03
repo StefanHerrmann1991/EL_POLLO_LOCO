@@ -1,6 +1,7 @@
 class ThrowableObject extends MovableObject {
 
     speedY = 50;
+    lastThrow = 0;
 
     IMAGES_BOTTLE_THROWING = [
         'img/0.Own_Pictures/bottleThrowing/bottle_throwing1.png',
