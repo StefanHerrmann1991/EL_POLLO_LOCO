@@ -4,14 +4,14 @@ class ThrowableObject extends MovableObject {
     lastThrow = 0;
 
     IMAGES_BOTTLE_THROWING = [
-        'img/0.Own_Pictures/bottleThrowing/bottle_throwing1.png',
-        'img/0.Own_Pictures/bottleThrowing/bottle_throwing2.png',
-        'img/0.Own_Pictures/bottleThrowing/bottle_throwing3.png',
-        'img/0.Own_Pictures/bottleThrowing/bottle_throwing4.png',
-        'img/0.Own_Pictures/bottleThrowing/bottle_throwing5.png',
-        'img/0.Own_Pictures/bottleThrowing/bottle_throwing6.png',
-        'img/0.Own_Pictures/bottleThrowing/bottle_throwing7.png',
-        'img/0.Own_Pictures/bottleThrowing/bottle_throwing8.png'     
+        'img/6.botella/Rotación/Mesa de trabajo 1.png',
+        'img/6.botella/Rotación/Mesa de trabajo 2.png',
+        'img/6.botella/Rotación/Mesa de trabajo 3.png',
+        'img/6.botella/Rotación/Mesa de trabajo 4.png',
+        'img/6.botella/Rotación/Mesa de trabajo 5.png',
+        'img/6.botella/Rotación/Mesa de trabajo 6.png',
+        'img/6.botella/Rotación/Mesa de trabajo 7.png',
+        'img/6.botella/Rotación/Mesa de trabajo 8.png'
       ];
     IMAGES_BOTTLE_EXPLODING = [
         'img/6.botella/Rotación/Splash de salsa/Mesa de trabajo 1 copia 7.png',
@@ -24,25 +24,25 @@ class ThrowableObject extends MovableObject {
 
     constructor(x, y) {
 
-        super().loadImage('img/6.botella/Rotación/Mesa de trabajo 1 copia 3.png');
+        super().loadImage('img/6.botella/Rotación/Mesa de trabajo 1.png');
         this.loadImages(this.IMAGES_BOTTLE_THROWING);
         this.loadImages(this.IMAGES_BOTTLE_EXPLODING);
         this.height = 80;
         this.width = 80;
         this.x = x + 100;
-        this.y = y + 20;
+        this.y = y + 30;
         this.throw();
     }
 
     throw() {
-        this.speedY = 30;
+        this.speedY = 20;
         this.applyGravity();
         setInterval(() => {
-            this.x += 60
-        }, 40);
+            this.x += 80
+        }, 60);
         setInterval(() => {
             this.playAnimation(this.IMAGES_BOTTLE_THROWING);
-        }, 20);
+        }, 60);
     }
 }
 

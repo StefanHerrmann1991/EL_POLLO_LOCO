@@ -2,6 +2,9 @@
 let level1;
 function initLevel1() {
     let BACKGROUND = [];
+    let LEVEL_END = [];
+    let LOOT = [];
+    let ENEMIES = [];
     let BACKGROUND_CHANGING = [[
         'img/5.Fondo/Capas/5.cielo_1920-1080px.png',
         'img/5.Fondo/Capas/3.Fondo3/1.png',
@@ -34,11 +37,16 @@ function initLevel1() {
             new LootableObject(),
             new LootableObject(),
             new LootableObject()
-        ]
+        ],
+        LEVEL_END
+        
     );
     
     /* this function is used to generate a background with a certain lenght depending on the i value */
     
+
+    function generateLevel(level) {}
+
     function generateBackground(worldLength) {
     
         for (let i = -1; i < worldLength; i++) {
@@ -54,21 +62,24 @@ function initLevel1() {
                     BACKGROUND.push(new StaticObject(`${BACKGROUND_CHANGING[1][m]}`, x))
                 }
             }
-        };
+        }
+        LEVEL_END = worldLength * 719 - 630;
     }
 
     function isOdd(num) { return Math.abs(num % 2) }
 }
-  /*   
+ 
+
     
     
-    function generateLoot() {
-        
+    function generateLoot(worldLength) {
+        LOOT.push(new LootableObject());
     }
-    function generateEnemies() {
+    function generateEnemies(worldLength, enemy) {
     
     }
-    function generateLoot() {
+    function generateLoot(worldLength) {
     
-    } */
+    } 
+    
 

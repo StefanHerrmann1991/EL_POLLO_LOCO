@@ -1,6 +1,7 @@
 class World {
     character = new Character();
     statusbar = new Statusbar();
+    characterDead = false;
     endscreen = [];
     level = level1;
     canvas;
@@ -8,7 +9,6 @@ class World {
     keyboard;
     camera_x = 0;
     bottleCount = 0;
- 
     throwableObject = [];
     IMAGES_GAME_OVER = ['img/9.Intro _ Outro Image/_Game over_ screen/1.you lost.png'];
 
@@ -39,15 +39,19 @@ class World {
             setTimeout(() => {
                 let end = new Endscreen(this.character.x, this.character.y);
                 this.endscreen.push(end);
-                document.getElementById('bottleCounter').classList.add('d-none');
+                this.characterDead = true;
             }, 1500);
         }
     }
 
     checkBottleCount() {
-        document.getElementById('bottleCounter').innerHTML = `
-        <img class="bottle-stat" src="img/0.Own_Pictures/bottleThrowing/bottle_throwing6.png"> 
-        <div>= ${this.bottleCount}<div>`
+
+        if (!this.characterDead) {
+            document.getElementById('bottleCounter').innerHTML = `
+            <img class="bottle-stat" src="img/0.Own_Pictures/bottleThrowing/bottle_throwing6.png"> 
+            <div>= ${this.bottleCount}<div>`
+        } else { document.getElementById('bottleCounter').innerHTML = ""; }
+
     }
 
     checkCollisions() {

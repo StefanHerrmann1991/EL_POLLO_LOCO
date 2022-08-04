@@ -1,12 +1,15 @@
 let canvas;
 let world;
-let keyboard = new Keyboard();
+let keyboard;
 
 
 
 function init() {
+    
+    world = undefined;
+    console.log(world);
     canvas = document.getElementById('canvas');
-    world = "";
+    keyboard = new Keyboard();
     world = new World(canvas, keyboard);
     lifebar = new Statusbar();
 }
