@@ -6,6 +6,7 @@ let keyboard = new Keyboard();
 
 function init() {
     canvas = document.getElementById('canvas');
+    world = "";
     world = new World(canvas, keyboard);
     lifebar = new Statusbar();
 }
