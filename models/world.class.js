@@ -40,17 +40,19 @@ class World {
                 let end = new Endscreen(this.character.x, this.character.y);
                 this.endscreen.push(end);
                 this.characterDead = true;
-            }, 1500);
+            }, 2000);
         }
     }
 
     checkBottleCount() {
 
-        if (!this.characterDead) {
+        if (!this.character.isDead()) {
+
             document.getElementById('bottleCounter').innerHTML = `
-            <img class="bottle-stat" src="img/0.Own_Pictures/bottleThrowing/bottle_throwing6.png"> 
-            <div>= ${this.bottleCount}<div>`
-        } else { document.getElementById('bottleCounter').innerHTML = ""; }
+                <img class="bottle-stat" src="img/0.Own_Pictures/bottleThrowing/bottle_throwing6.png"> 
+                <div>= ${this.bottleCount}<div>`
+
+        } else { setTimeout(() => { document.getElementById('bottleCounter').innerHTML = ""; }, 2000); }
 
     }
 

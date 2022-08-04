@@ -6,8 +6,6 @@ let keyboard;
 
 function init() {
     
-    world = undefined;
-    console.log(world);
     canvas = document.getElementById('canvas');
     keyboard = new Keyboard();
     world = new World(canvas, keyboard);
