@@ -12,7 +12,7 @@ class ThrowableObject extends MovableObject {
         'img/6.botella/Rotación/Mesa de trabajo 6.png',
         'img/6.botella/Rotación/Mesa de trabajo 7.png',
         'img/6.botella/Rotación/Mesa de trabajo 8.png'
-      ];
+    ];
     IMAGES_BOTTLE_EXPLODING = [
         'img/6.botella/Rotación/Splash de salsa/Mesa de trabajo 1 copia 7.png',
         'img/6.botella/Rotación/Splash de salsa/Mesa de trabajo 1 copia 8.png',
@@ -41,8 +41,11 @@ class ThrowableObject extends MovableObject {
             this.x += 80
         }, 60);
         setInterval(() => {
-            this.playAnimation(this.IMAGES_BOTTLE_THROWING);
+            if (this.isColliding()) {this.playAnimation(this.IMAGES_BOTTLE_EXPLODING);}
+            else { this.playAnimation(this.IMAGES_BOTTLE_THROWING); }
         }, 60);
+
+
     }
 }
 

@@ -1,9 +1,10 @@
 class World {
+
     character = new Character();
     statusbar = new Statusbar();
-    characterDead = false;
     endscreen = [];
     level = level1;
+    endboss = this.level.enemies.endboss;
     canvas;
     ctx;
     keyboard;
@@ -39,7 +40,6 @@ class World {
             setTimeout(() => {
                 let end = new Endscreen(this.character.x, this.character.y);
                 this.endscreen.push(end);
-                this.characterDead = true;
             }, 2000);
         }
     }
@@ -59,16 +59,21 @@ class World {
     checkCollisions() {
 
         this.level.enemies.forEach((enemy, i) => {
-            if (this.character.isColliding(enemy, 20, 90, 55, 100) && !this.character.isAboveGround() && !enemy.dead) {
+            if (this.character.isColliding(enemy, 20, 90, 55, 100) && !this.character.isAboveGround() && !enemy.isDead()) {
                 this.character.hit(1);
                 this.statusbar.setPercentage(this.character.energy);
             }
-            if (this.character.isAboveGround() && this.character.isColliding(enemy, 20, 90, 55, 100) && !enemy.dead) {
-                enemy.dead = true;
+            if (this.character.isAboveGround() && this.character.isColliding(enemy, 20, 90, 55, 100) && !enemy.isDead()) {
+                enemy.energy = 0;
                 setTimeout(() => {
                     this.level.enemies.splice(i, 1);
                 }, 2000);
             }
+        /*     if (!enemy.isDead()) {
+                enemy.energy -= 100;
+                console.log("enemy was hit");
+            } */
+
 
         });
         this.level.bottles.forEach((bottle, i) => {
@@ -83,6 +88,7 @@ class World {
         if (this.keyboard.THROW && this.bottleCount > 0) {
             this.bottleCount--;
             let thrownBottle = new ThrowableObject(this.character.x, this.character.y);
+            console.log(thrownBottle);
             this.throwableObject.push(thrownBottle);
         }
     }

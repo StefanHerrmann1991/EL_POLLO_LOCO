@@ -1,5 +1,5 @@
 
-let level1;
+let level1
 function initLevel1() {
     let BACKGROUND = [];
     let LEVEL_END = [];
@@ -46,7 +46,7 @@ function initLevel1() {
     /* this function is used to generate a background with a certain lenght depending on the i value */
 
 
-    function generateLevel(level) { }
+/*     function generateLevel(level) { } */
 
     function generateBackground(worldLength) {
 
@@ -72,7 +72,7 @@ function initLevel1() {
 
 
 
-
+/* 
 function generateLoot(worldLength) {
     LOOT.push(new LootableObject());
 }
@@ -81,6 +81,6 @@ function generateEnemies(worldLength, enemy) {
 }
 function generateLoot(worldLength) {
 
-}
+} */
 
 

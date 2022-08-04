@@ -4,9 +4,11 @@ let keyboard;
 
 
 
+
+
 function init() {
-    
     canvas = document.getElementById('canvas');
+    initLevel1();
     keyboard = new Keyboard();
     world = new World(canvas, keyboard);
     lifebar = new Statusbar();
