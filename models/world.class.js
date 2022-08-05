@@ -26,6 +26,8 @@ class World {
         this.character.world = this;
     }
 
+
+
     checkWorld() {
         setInterval(() => {
             this.checkCollisions();
@@ -59,37 +61,43 @@ class World {
     checkCollisions() {
 
         this.level.enemies.forEach((enemy, i) => {
-            if (this.character.isColliding(enemy, 20, 90, 55, 100) && !this.character.isAboveGround() && !enemy.isDead()) {
-                this.character.hit(1);
+            if (this.charGotHitBy(enemy)) {
+                this.character.hit(5);
                 this.statusbar.setPercentage(this.character.energy);
             }
-            if (this.character.isAboveGround() && this.character.isColliding(enemy, 20, 90, 55, 100) && !enemy.isDead()) {
+            if (this.jumpKill(enemy)) {
                 enemy.energy = 0;
                 setTimeout(() => {
                     this.level.enemies.splice(i, 1);
                 }, 2000);
             }
-        /*     if (!enemy.isDead()) {
+            if (this.bottleHit(enemy)) {
                 enemy.energy -= 100;
-                console.log("enemy was hit");
-            } */
-
-
+            }
         });
         this.level.bottles.forEach((bottle, i) => {
-            if (this.character.isColliding(bottle, 20, 90, 55, 100)) {
+            if (this.take(bottle)) {
                 this.level.bottles.splice(i, 1);
                 this.bottleCount++;
             }
         });
     }
 
+    take(bottle) { return this.character.isColliding(bottle) }
+    charGotHitBy(enemy) { return this.character.isColliding(enemy) && !this.character.isAboveGround() && !enemy.isDead() && !this.character.isHurt(); }
+    jumpKill(enemy) { return this.character.isAboveGround() && this.character.isColliding(enemy) && !enemy.isDead() }
+    bottleHit(enemy) { return this.throwableObject.length > 0 && this.throwableObject[0].objectIsColliding(enemy) && !enemy.isDead() }
+
+
     throwObject() {
         if (this.keyboard.THROW && this.bottleCount > 0) {
-            this.bottleCount--;
-            let thrownBottle = new ThrowableObject(this.character.x, this.character.y);
-            console.log(thrownBottle);
-            this.throwableObject.push(thrownBottle);
+            this.throwableObject[0].throwTime();
+
+            if (this.throwableObject[0].isThrown()) {
+                let thrownBottle = new ThrowableObject(this.character.x, this.character.y);
+                this.bottleCount--;
+                this.throwableObject.push(thrownBottle);
+            }
         }
     }
 

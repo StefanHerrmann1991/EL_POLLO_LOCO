@@ -62,3 +62,18 @@ h1 {
     color: rgb(211, 172, 45);
 
 }
+
+
+.start-screen {
+    width: 720px;
+    height: 480px;
+    position: absolute;
+    z-index: 2;
+    top: 0px;
+    left: 0px;
+}
+
+.d-none {
+    display: none;
+}
+

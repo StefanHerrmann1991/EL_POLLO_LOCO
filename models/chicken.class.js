@@ -9,7 +9,9 @@ class Chicken extends MovableObject {
         'img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/3.Ga_paso izquierdo.png'
     ];
     IMAGES_DYING = [
-           'img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/4.G_muerte.png'];
+        
+           'img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/4.G_muerte.png'
+        ];
     chicken_sound = new Audio('audio/chicken.mp3');
 
     constructor() {

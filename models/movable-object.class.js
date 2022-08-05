@@ -7,6 +7,7 @@ class MovableObject extends DrawableObject {
     acceleration = 2.0;
     energy;
     lastHit = 0;
+  
 
     /**
      * @property speedY
@@ -58,7 +59,7 @@ class MovableObject extends DrawableObject {
         this.speedY = 10;
     }
 
-  
+
     /**
      * The function checks, if the Object is colliding with another object.
      * @param {*} movableObject 
@@ -69,12 +70,20 @@ class MovableObject extends DrawableObject {
      * @returns 
      */
 
-    isColliding(movableObject, characterCorX, characterCorY, corWidth, corHeight) {
-        return this.x + characterCorX + this.width - corWidth > movableObject.x
-            && this.y + characterCorY + this.height - corHeight > movableObject.y
-            && this.x + characterCorX < movableObject.x + movableObject.width
-            && this.y + characterCorY < movableObject.y + movableObject.height
+    isColliding(movableObject) {
+        return this.x + 20 + this.width - 55 > movableObject.x
+            && this.y + 90 + this.height - 100 > movableObject.y
+            && this.x + 20 < movableObject.x + movableObject.width
+            && this.y + 90 < movableObject.y + movableObject.height
     }
+
+    objectIsColliding(movableObject) {
+        return this.x + this.width > movableObject.x
+            && this.y + this.height > movableObject.y
+            && this.x < movableObject.x + movableObject.width
+            && this.y < movableObject.y + movableObject.height
+    }
+
 
     hit(energyLost) {
         this.energy -= energyLost;
@@ -87,13 +96,13 @@ class MovableObject extends DrawableObject {
     isHurt() {
         let timePassed = new Date().getTime() - this.lastHit; // difference in ms
         timePassed = timePassed / 1000; // difference in s
-        return timePassed < 0.8;
+        return timePassed < 1.5;
     }
 
     isDead() {
         return this.energy == 0;
     }
 
-  
+
 
 }

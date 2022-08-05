@@ -4,9 +4,13 @@ let keyboard;
 
 
 
+function startScreen() {
+    document.getElementById('startScreen').classList.add('d-none');
 
+}
 
 function init() {
+    startScreen();
     canvas = document.getElementById('canvas');
     initLevel1();
     keyboard = new Keyboard();

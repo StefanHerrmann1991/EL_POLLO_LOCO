@@ -34,6 +34,16 @@ class ThrowableObject extends MovableObject {
         this.throw();
     }
 
+
+ 
+    throwTime() { this.lastThrow = new Date().getTime(); }
+
+    isThrown() {
+        let timePassed = new Date().getTime() - this.lastThrow; // difference in ms
+        timePassed = timePassed / 1000; // difference in s
+        return timePassed < 0.8;
+    }
+
     throw() {
         this.speedY = 20;
         this.applyGravity();
@@ -41,10 +51,14 @@ class ThrowableObject extends MovableObject {
             this.x += 80
         }, 60);
         setInterval(() => {
-            if (this.isColliding()) {this.playAnimation(this.IMAGES_BOTTLE_EXPLODING);}
+            if (this.isColliding(this instanceof Chicken)) {
+                
+                this.playAnimation(this.IMAGES_BOTTLE_EXPLODING);
+         
+            }
             else { this.playAnimation(this.IMAGES_BOTTLE_THROWING); }
-        }, 60);
 
+        }, 60);
 
     }
 }
