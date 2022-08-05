@@ -73,8 +73,14 @@ class World {
                 }, 2000);
             }
             if (this.bottleHit(enemy)) {
-                enemy.energy -= 100;
-                world.level.throwableObject[0].playAnimation(this.IMAGES_BOTTLE_EXPLODING);
+                
+                this.throwableObject.forEach((thrownBottle, i) => {
+                    enemy.energy -= 100;
+                    console.log(thrownBottle);
+                    world.throwableObject[i].playAnimation(thrownBottle.IMAGES_BOTTLE_EXPLODING);
+                   /*  this.world.throwableObject.splice(i, 1); */
+                })
+
             }
         });
         this.level.bottles.forEach((bottle, i) => {
@@ -104,7 +110,7 @@ class World {
         }
     }
 
-  
+
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
