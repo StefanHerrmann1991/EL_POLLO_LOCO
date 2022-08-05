@@ -74,6 +74,7 @@ class World {
             }
             if (this.bottleHit(enemy)) {
                 enemy.energy -= 100;
+                world.level.throwableObject[0].playAnimation(this.IMAGES_BOTTLE_EXPLODING);
             }
         });
         this.level.bottles.forEach((bottle, i) => {
@@ -103,14 +104,7 @@ class World {
         }
     }
 
-
-    isThrown() {
-        let timePassed = new Date().getTime() - this.lastThrow; // difference in ms
-        timePassed = timePassed / 1000; // difference in s
-        return timePassed < 0.8;
-    }
-
-
+  
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);

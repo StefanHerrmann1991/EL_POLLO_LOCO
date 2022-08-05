@@ -54,11 +54,9 @@ class ThrowableObject extends MovableObject {
             this.x += 80
         }, 60);
         setInterval(() => {
-            if (this.isColliding(this instanceof Chicken)) {
-                
+            if (this.isColliding(this instanceof Chicken)) {               
                 this.playAnimation(this.IMAGES_BOTTLE_EXPLODING);
-         
-            }
+                     }
             else { this.playAnimation(this.IMAGES_BOTTLE_THROWING); }
 
         }, 60);
