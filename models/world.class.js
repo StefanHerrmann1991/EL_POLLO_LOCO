@@ -73,12 +73,9 @@ class World {
                 }, 2000);
             }
             if (this.bottleHit(enemy)) {
-                
-                this.throwableObject.forEach((thrownBottle, i) => {
-                    enemy.energy -= 100;
-                    console.log(thrownBottle);
-                    world.throwableObject[i].playAnimation(thrownBottle.IMAGES_BOTTLE_EXPLODING);
-                   /*  this.world.throwableObject.splice(i, 1); */
+                    this.throwableObject.forEach((thrownBottle) => {
+                    thrownBottle.collision = true;
+                    enemy.energy -= 100;                                          
                 })
 
             }

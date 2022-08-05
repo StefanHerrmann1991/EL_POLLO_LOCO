@@ -2,7 +2,7 @@ class ThrowableObject extends MovableObject {
 
     speedY = 50;
     lastThrow = 0;
-
+    
     IMAGES_BOTTLE_THROWING = [
         'img/6.botella/Rotación/Mesa de trabajo 1.png',
         'img/6.botella/Rotación/Mesa de trabajo 2.png',
@@ -48,19 +48,18 @@ class ThrowableObject extends MovableObject {
     } */
 
     throw() {
+       
         this.speedY = 20;
         this.applyGravity();
         setInterval(() => {
-            this.x += 80
+            this.x += 60
         }, 60);
         setInterval(() => {
-            if (this.isColliding(this instanceof Chicken)) {               
+            if (this.collision = true) {               
                 this.playAnimation(this.IMAGES_BOTTLE_EXPLODING);
                      }
             else { this.playAnimation(this.IMAGES_BOTTLE_THROWING); }
-
         }, 60);
-
     }
 }
 
