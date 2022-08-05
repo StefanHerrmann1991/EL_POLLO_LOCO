@@ -11,6 +11,7 @@ class World {
     camera_x = 0;
     bottleCount = 0;
     throwableObject = [];
+    lastThrow = 0;
     IMAGES_GAME_OVER = ['img/9.Intro _ Outro Image/_Game over_ screen/1.you lost.png'];
 
     constructor(canvas, keyboard) {
@@ -91,15 +92,24 @@ class World {
 
     throwObject() {
         if (this.keyboard.THROW && this.bottleCount > 0) {
-            this.throwableObject[0].throwTime();
-
-            if (this.throwableObject[0].isThrown()) {
+            let timePassed = new Date().getTime() - this.lastThrow;
+            if (timePassed > 500) {
                 let thrownBottle = new ThrowableObject(this.character.x, this.character.y);
-                this.bottleCount--;
                 this.throwableObject.push(thrownBottle);
+                this.bottleCount--;
+                this.lastThrow = new Date().getTime();
+                console.log(this.lastThrow);
             }
         }
     }
+
+
+    isThrown() {
+        let timePassed = new Date().getTime() - this.lastThrow; // difference in ms
+        timePassed = timePassed / 1000; // difference in s
+        return timePassed < 0.8;
+    }
+
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);

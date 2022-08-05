@@ -32,17 +32,20 @@ class ThrowableObject extends MovableObject {
         this.x = x + 100;
         this.y = y + 30;
         this.throw();
+        /* this.throwTime();
+        this.isThrown(); */
+
     }
 
 
  
-    throwTime() { this.lastThrow = new Date().getTime(); }
+/*     throwTime() { this.lastThrow = new Date().getTime(); }
 
     isThrown() {
         let timePassed = new Date().getTime() - this.lastThrow; // difference in ms
         timePassed = timePassed / 1000; // difference in s
         return timePassed < 0.8;
-    }
+    } */
 
     throw() {
         this.speedY = 20;
