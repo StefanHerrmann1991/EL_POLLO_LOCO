@@ -72,13 +72,16 @@ class World {
                     this.level.enemies.splice(i, 1);
                 }, 2000);
             }
-            if (this.bottleHit(enemy)) {
-                    this.throwableObject.forEach((thrownBottle) => {
-                    thrownBottle.collision = true;
-                    enemy.energy -= 100;                                          
-                })
 
-            }
+            this.throwableObject.forEach((thrownObject, k) => {
+                if (this.throwableObject[k].objectIsColliding(enemy)) {
+                    thrownObject.collision = true;
+                    enemy.energy = 0;
+                    setTimeout(() => {
+                        this.level.enemies.splice(i, 1);
+                    }, 2000);
+                }
+            })
         });
         this.level.bottles.forEach((bottle, i) => {
             if (this.take(bottle)) {
@@ -91,7 +94,6 @@ class World {
     take(bottle) { return this.character.isColliding(bottle) }
     charGotHitBy(enemy) { return this.character.isColliding(enemy) && !this.character.isAboveGround() && !enemy.isDead() && !this.character.isHurt(); }
     jumpKill(enemy) { return this.character.isAboveGround() && this.character.isColliding(enemy) && !enemy.isDead() }
-    bottleHit(enemy) { return this.throwableObject.length > 0 && this.throwableObject[0].objectIsColliding(enemy) && !enemy.isDead() }
 
 
     throwObject() {
@@ -99,10 +101,9 @@ class World {
             let timePassed = new Date().getTime() - this.lastThrow;
             if (timePassed > 500) {
                 let thrownBottle = new ThrowableObject(this.character.x, this.character.y);
-                this.throwableObject.push(thrownBottle);
                 this.bottleCount--;
+                this.throwableObject.push(thrownBottle);
                 this.lastThrow = new Date().getTime();
-                console.log(this.lastThrow);
             }
         }
     }

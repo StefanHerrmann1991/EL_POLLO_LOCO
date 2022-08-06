@@ -2,7 +2,7 @@ class ThrowableObject extends MovableObject {
 
     speedY = 50;
     lastThrow = 0;
-    
+    collision = false;
     IMAGES_BOTTLE_THROWING = [
         'img/6.botella/Rotación/Mesa de trabajo 1.png',
         'img/6.botella/Rotación/Mesa de trabajo 2.png',
@@ -32,10 +32,7 @@ class ThrowableObject extends MovableObject {
         this.x = x + 100;
         this.y = y + 30;
         this.throw();
-        /* this.throwTime();
-        this.isThrown(); */
-
-    }
+     }
 
 
  
@@ -55,10 +52,11 @@ class ThrowableObject extends MovableObject {
             this.x += 60
         }, 60);
         setInterval(() => {
-            if (this.collision = true) {               
-                this.playAnimation(this.IMAGES_BOTTLE_EXPLODING);
+            if (!this.collision ) {  
+                this.playAnimation(this.IMAGES_BOTTLE_THROWING);             
+                
                      }
-            else { this.playAnimation(this.IMAGES_BOTTLE_THROWING); }
+            else { this.playAnimation(this.IMAGES_BOTTLE_EXPLODING); }
         }, 60);
     }
 }

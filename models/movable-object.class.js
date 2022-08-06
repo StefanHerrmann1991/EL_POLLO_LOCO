@@ -84,6 +84,13 @@ class MovableObject extends DrawableObject {
             && this.y < movableObject.y + movableObject.height
     }
 
+    objectIsColliding2(movableObject , movableObject2) {
+        return movableObject.x + movableObject.width > movableObject2.x
+            && movableObject.y + movableObject.height > movableObject2.y
+            && movableObject.x < movableObject2.x + movableObject2.width
+            && movableObject.y < movableObject2.y + movableObject2.height
+    }
+
 
     hit(energyLost) {
         this.energy -= energyLost;

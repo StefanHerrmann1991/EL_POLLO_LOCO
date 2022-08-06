@@ -1,7 +1,7 @@
 let canvas;
 let world;
 let keyboard;
-
+let allIntervals = [];
 
 
 function startScreen() {
