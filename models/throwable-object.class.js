@@ -48,7 +48,7 @@ class ThrowableObject extends MovableObject {
        
         this.speedY = 20;
         this.applyGravity();
-        setInterval(() => {
+        let throwInterval = setInterval(() => {
             this.x += 60
         }, 60);
         setInterval(() => {
@@ -58,6 +58,8 @@ class ThrowableObject extends MovableObject {
                      }
             else { this.playAnimation(this.IMAGES_BOTTLE_EXPLODING); }
         }, 60);
+        
+        allIntervals.push(throwInterval);
     }
 }
 
