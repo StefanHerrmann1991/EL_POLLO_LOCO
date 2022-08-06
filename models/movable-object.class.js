@@ -21,6 +21,7 @@ class MovableObject extends DrawableObject {
                 this.speedY -= this.acceleration;
             }
         }, 1000 / 60);
+        
         allIntervals.push(gravityInterval);
     }
 

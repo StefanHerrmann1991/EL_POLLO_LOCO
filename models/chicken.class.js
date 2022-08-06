@@ -25,20 +25,28 @@ class Chicken extends MovableObject {
 
     animate() {
         /* Hühner bewegen sich nach links */
-        setInterval(() => {
+      
+      let dyingInterval = setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DYING);
             }
             else { this.moveLeft(); }
         }, 1000 / 60);
-
+       
+      allIntervals.push(dyingInterval);  
         /* Hühner laufen (nur Animation und Ton) */
-        setInterval(() => {
+        
+        
+      let chickenWalkInterval  =  setInterval(() => {
             if (!this.isDead()) {
                 this.playAnimation(this.IMAGES_WALKING)
             };
         }, 200);
-/*    setInterval(() => {
+        
+     allIntervals.push(chickenWalkInterval);  
+
+
+        /*    setInterval(() => {
               this.chicken_sound.play();
           }, 4000) */
               }

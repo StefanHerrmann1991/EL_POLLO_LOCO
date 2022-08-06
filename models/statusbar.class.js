@@ -40,7 +40,7 @@ class Statusbar extends DrawableObject {
 
 /* 
     lifebar() {
-        switch (percentage) {
+        switch (this.percentage) {
             case 0:
                 return 5;
             case 20:

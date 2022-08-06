@@ -3,6 +3,7 @@ let level1
 function initLevel1() {
     let BACKGROUND = [];
     let LEVEL_END = [];
+    let CLOUDS = [];
     let LOOT = [];
     let ENEMIES = [];
     let BACKGROUND_CHANGING = [[
@@ -16,7 +17,7 @@ function initLevel1() {
         'img/5.Fondo/Capas/2.Fondo2/2.png',
         'img/5.Fondo/Capas/1.suelo-fondo1/2.png']];
 
-    generateBackground(7);
+    generateBackground(15);
     /* hier ist der constructor für das neue Level. Bottles ist ein Parameter, enemies usw. sind Parameter dieses Constructors. new Chicken ==> enemies */
     
     level1 = new Level(
@@ -46,7 +47,12 @@ function initLevel1() {
     /* this function is used to generate a background with a certain lenght depending on the i value */
 
 
-/*     function generateLevel(level) { } */
+   function generateLevel(worldLength) { 
+    generateBackground(worldLength);
+    generateClouds(worldLength);
+    generateEnemies(worldLength);
+    generateLoot(worldLength);
+   } 
 
     function generateBackground(worldLength) {
 
@@ -68,19 +74,24 @@ function initLevel1() {
     }
 
     function isOdd(num) { return Math.abs(num % 2) }
+
+    function generateLoot(worldLength) {
+        for (let i = 0; i < worldLength; i+=3) {
+        LOOT.push(new LootableObject());}
+    }
+    function generateEnemies(worldLength) {
+        for (let i = 0; i < worldLength; i+= 5) {
+           ENEMIES.push(new Chicken());}
+
+           
+
+    }
+
 }
 
 
 
-/* 
-function generateLoot(worldLength) {
-    LOOT.push(new LootableObject());
-}
-function generateEnemies(worldLength, enemy) {
 
-}
-function generateLoot(worldLength) {
 
-} */
 
 

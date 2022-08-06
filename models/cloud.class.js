@@ -14,9 +14,11 @@ class Cloud extends MovableObject {
         this.moveLeft();
     }
     moveLeft() {
-        setInterval(() => {
+       let cloudInterval = setInterval(() => {
             this.x -= this.speed;
         }, 1000 / 60);
+        
+        allIntervals.push(cloudInterval);
     }
 }
 
