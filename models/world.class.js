@@ -30,12 +30,13 @@ class World {
 
 
     checkWorld() {
-        setInterval(() => {
+        let worldInterval = setInterval(() => {
             this.checkCollisions();
-            this.throwObject();
             this.checkBottleCount();
+            this.throwObject();
             this.checkDeath();
         }, 1000 / 60);
+        allIntervals.push(worldInterval);
     }
 
     checkDeath() {
@@ -73,13 +74,19 @@ class World {
                 }, 2000);
             }
 
-            this.throwableObject.forEach((thrownObject, k) => {
-                if (this.throwableObject[k].objectIsColliding(enemy)) {
+            this.throwableObject.forEach((thrownObject, bottle) => {
+                if (this.bottleHit(enemy, bottle)) {
                     thrownObject.collision = true;
-                    enemy.energy = 0;
                     setTimeout(() => {
-                        this.level.enemies.splice(i, 1);
-                    }, 2000);
+                        this.throwableObject.splice(bottle, 1);
+                    }, 25);
+                    enemy.hit(100);
+                    if (enemy.isDead()) {
+                        setTimeout(() => {
+                            this.level.enemies.splice(i, 1);
+                        }, 2000);
+                    }
+                    console.log(enemy.energy)
                 }
             })
         });
@@ -91,6 +98,8 @@ class World {
         });
     }
 
+
+    bottleHit(enemy, bottle) {return this.throwableObject[bottle].objectIsColliding(enemy) && !enemy.isHurt() && !enemy.isDead() && !this.character.isHurt()}
     take(bottle) { return this.character.isColliding(bottle) }
     charGotHitBy(enemy) { return this.character.isColliding(enemy) && !this.character.isAboveGround() && !enemy.isDead() && !this.character.isHurt(); }
     jumpKill(enemy) { return this.character.isAboveGround() && this.character.isColliding(enemy) && !enemy.isDead() }
@@ -100,8 +109,8 @@ class World {
         if (this.keyboard.THROW && this.bottleCount > 0) {
             let timePassed = new Date().getTime() - this.lastThrow;
             if (timePassed > 500) {
-                let thrownBottle = new ThrowableObject(this.character.x, this.character.y);
                 this.bottleCount--;
+                let thrownBottle = new ThrowableObject(this.character.x, this.character.y);
                 this.throwableObject.push(thrownBottle);
                 this.lastThrow = new Date().getTime();
             }

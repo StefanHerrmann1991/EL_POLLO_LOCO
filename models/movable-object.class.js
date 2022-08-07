@@ -7,7 +7,7 @@ class MovableObject extends DrawableObject {
     acceleration = 2.0;
     energy;
     lastHit = 0;
-  
+
 
     /**
      * @property speedY
@@ -15,13 +15,13 @@ class MovableObject extends DrawableObject {
      */
 
     applyGravity() {
-        let gravityInterval =  setInterval(() => {
+        let gravityInterval = setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
             }
         }, 1000 / 60);
-        
+
         allIntervals.push(gravityInterval);
     }
 
@@ -86,11 +86,18 @@ class MovableObject extends DrawableObject {
             && this.y < movableObject.y + movableObject.height
     }
 
-    objectIsColliding2(movableObject , movableObject2) {
+    objectIsColliding2(movableObject, movableObject2) {
         return movableObject.x + movableObject.width > movableObject2.x
             && movableObject.y + movableObject.height > movableObject2.y
             && movableObject.x < movableObject2.x + movableObject2.width
             && movableObject.y < movableObject2.y + movableObject2.height
+    }
+
+    checkArea(movableObject) {
+        return this.x + this.width > movableObject.x
+        && this.y + this.height > movableObject.y
+        && this.x < movableObject.x + movableObject.width + 500
+        && this.y < movableObject.y + movableObject.height
     }
 
 

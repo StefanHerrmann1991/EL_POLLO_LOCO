@@ -46,11 +46,12 @@ class ThrowableObject extends MovableObject {
 
     throw() {
        
-        this.speedY = 20;
+        this.speedY = 25;
         this.applyGravity();
         let throwInterval = setInterval(() => {
-            this.x += 60
+            this.x += 40
         }, 60);
+
         setInterval(() => {
             if (!this.collision ) {  
                 this.playAnimation(this.IMAGES_BOTTLE_THROWING);             
