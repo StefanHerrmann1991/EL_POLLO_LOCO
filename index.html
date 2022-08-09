@@ -30,7 +30,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Rye&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body onload="loadPage()">
     <h1>El Pollo Loco</h1>
     <div class="main-container">
         <canvas id="canvas" width="720px" height="480px">
@@ -39,8 +39,16 @@
         <div class="bottle-counter" id="bottleCounter"></div>
         <div class="coin-counter" id="coinCounter"></div>
         <div class="start-btn" onclick="init()">Start </div>
+        <div class = "responsive-control" id="responsiveControll">
+            <div class="cross-container" id="crossPosition"></div>
+            <div class="control-btn-container">
+                <button class="control-btn mgn-t" id="jumpButton">B</button>
+                <button class="control-btn mgn-b mgn-l mgn-r" id="throwButton">A</button>
+            </div>
+        </div>
+
     </div>
-   </body>
+</body>
 
 
 

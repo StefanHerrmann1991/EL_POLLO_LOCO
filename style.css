@@ -78,3 +78,41 @@ h1 {
     display: none;
 }
 
+.responsive-control {
+    display: flex;
+    justify-content: space-between;
+}
+
+.control-btn {
+    background-color: black;
+    font-family: 'Rye', cursive;
+    color: rgb(211, 172, 45);
+    font-size: 33px;
+    height: 66px;
+    width: 66px;
+    border-radius: 10vh;
+}
+
+.control-btn-container {
+    display: flex;
+    flex-direction: row;
+    }
+
+.mgn-t {
+    margin-top: 40px;
+}
+
+.mgn-l {
+    margin-left: 50px;
+}
+
+.mgn-b {
+    margin-bottom: 40px;
+}
+.mgn-r {
+    margin-right: 50px;
+}
+
+@media (min-width: 720px) {
+    .responsive-control {display: none !important;}
+}
