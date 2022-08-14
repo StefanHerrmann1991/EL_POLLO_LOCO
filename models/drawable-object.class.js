@@ -6,10 +6,20 @@ class DrawableObject {
     width = 150;
     imageCache = {};
 
+/**
+ * The function loads a picture depending on its path.
+ * @param {string} path Folder where the image is located.
+ */
+
     loadImage(path) {
         this.img = new Image(); // this.img = document.getElementById('image') <img id="image" src>
         this.img.src = path;
     }
+
+    /**
+ * The function loads images depending on its path.
+ * @param {array} arr Array with the relative path of images.
+ */
 
     loadImages(arr) {
         arr.forEach((path) => {
@@ -18,6 +28,11 @@ class DrawableObject {
             this.imageCache[path] = img;
         });
     }
+
+/**
+ * The function draws a rectangle around the character at a  certain position and moves with the character.
+ * @param {*} ctx 
+ */
 
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);

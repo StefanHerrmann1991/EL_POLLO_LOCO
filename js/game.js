@@ -4,10 +4,20 @@ let keyboard;
 let allIntervals = [];
 
 
+
+/** 
+ * The function removes the start screen when the game is started 
+*/
+
 function startScreen() {
     document.getElementById('startScreen').classList.add('d-none');
 
 }
+
+/** 
+ * The function initiates the canvas and for the game relevant functions.
+ * 
+*/
 
 function init() {
 
@@ -20,6 +30,11 @@ function init() {
 }
 
 
+/**
+ * The function enables the usage of the keyboard.
+ * @param {event} e when clicking the corresponing key
+ */
+
 document.onkeydown = function (e) {
     switch (e.key) {
         case ' ':
@@ -28,7 +43,6 @@ document.onkeydown = function (e) {
         case 'ArrowLeft':
         case 'a':
             keyboard.LEFT = true;
-            // left arrow
             break;
         case 'ArrowRight':
         case 'd':
@@ -38,11 +52,14 @@ document.onkeydown = function (e) {
         case 'ArrowUp':
             keyboard.THROW = true;
             break;
-
-
-        // right arrow
+        
     }
 };
+
+/**
+ * The function enables the usage of the keyboard.
+ * @param {event} e when  the corresponing key isn't clicked anymore
+ */
 
 document.onkeyup = function (e) {
     switch (e.key) {
@@ -52,7 +69,7 @@ document.onkeyup = function (e) {
         case 'ArrowLeft':
         case 'a':
             keyboard.LEFT = false;
-            // left arrow
+        
             break;
         case 'ArrowRight':
         case 'd':
@@ -63,12 +80,17 @@ document.onkeyup = function (e) {
             keyboard.THROW = false;
             break;
 
-        // right arrow
+        
     }
 };
 
+/**
+ * The function renders the elements for the responsive view of the game.
+ * 
+ */
 
-function loadPage() {
+
+function loadControlPanel() {
   /*   if (window.innerWidth <= 700) */ {
     insertCross();
 };
@@ -113,6 +135,11 @@ function loadPage() {
   }
   
 
-function insertButtons() {
+/**
+ * 
+ * @param {string} intervalName The name of the interval which needs to be cleared while restarting the game.
+ */
 
+function pushInterval(intervalName) {
+    allIntervals.push(intervalName)
 }

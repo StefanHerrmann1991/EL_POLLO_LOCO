@@ -8,11 +8,10 @@ class MovableObject extends DrawableObject {
     energy;
     lastHit = 0;
 
-
-    /**
-     * @property speedY
-     * @property speedY
-     */
+/**
+ * The function enables the falling of obejects on the map like the character when it jumps or thrown bottles.
+ * 
+ */
 
     applyGravity() {
         let gravityInterval = setInterval(() => {
@@ -25,6 +24,10 @@ class MovableObject extends DrawableObject {
         allIntervals.push(gravityInterval);
     }
 
+    /**
+     * The function checks if an object is in the air.
+     * @returns 
+     */
     isAboveGround() {
         if (this instanceof ThrowableObject) {
             return true;
@@ -38,6 +41,8 @@ class MovableObject extends DrawableObject {
      * img is only defined in JS not in HTML*/
 
 
+
+
     moveRight() {
         this.x += this.speed;
     }
@@ -46,6 +51,7 @@ class MovableObject extends DrawableObject {
         this.x -= this.speed;
     }
 
+/**The function increments through images. When the last image in an array is loaded it starts from the beginning. */
 
     playAnimation(images) {
         let i = this.currentImage % images.length;
@@ -57,8 +63,12 @@ class MovableObject extends DrawableObject {
         this.currentImage++;
     }
 
+    /**
+     * @param {number} this.speedY represents the jumping height.
+     */
+
     jump() {
-        this.speedY = 10;
+        this.speedY = 1000;
     }
 
 

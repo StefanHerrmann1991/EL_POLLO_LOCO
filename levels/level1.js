@@ -18,7 +18,10 @@ function initLevel1() {
         'img/5.Fondo/Capas/1.suelo-fondo1/2.png']];
 
     generateBackground(15);
-    /* hier ist der constructor für das neue Level. Bottles ist ein Parameter, enemies usw. sind Parameter dieses Constructors. new Chicken ==> enemies */
+   
+    /**
+     * These are the elements which presents the majority of the map.
+     */
     
     level1 = new Level(
         [
@@ -44,7 +47,10 @@ function initLevel1() {
 
     );
 
-    /* this function is used to generate a background with a certain lenght depending on the i value */
+    /**
+     * The function generates the whole Level depending on the worlds length. 
+     * @param {number} worldLength The variable represents the map size. As higher the number as bigger the size of the map.
+     */
 
 
    function generateLevel(worldLength) { 
@@ -53,6 +59,8 @@ function initLevel1() {
     generateEnemies(worldLength);
     generateLoot(worldLength);
    } 
+
+
 
     function generateBackground(worldLength) {
 
@@ -72,6 +80,12 @@ function initLevel1() {
         }
         LEVEL_END = worldLength * 719 - 630;
     }
+
+/**
+ * 
+ * @param {number} num The parameter tests if a number is odd.
+ * @returns true when the number isOdd
+ */
 
     function isOdd(num) { return Math.abs(num % 2) }
 

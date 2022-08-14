@@ -73,10 +73,15 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_HURTING);
         this.loadImages(this.IMAGES_DYING);
         this.applyGravity();
-        this.moveAnimate();
+        this.characterAnimate();
     }
 
-    moveAnimate() {
+/**
+ * Depending on the key entered the walking animation of the character is enabled.
+ * It also tests and shows character status like jump die or hurt.
+ */
+
+    characterAnimate() {
 
         let walkingInterval =  setInterval(() => {
             this.walking_sound.pause();
@@ -120,6 +125,8 @@ class Character extends MovableObject {
             }
         }, 100);
         
+        
+
         allIntervals.push(animationInterval);
     }
 }

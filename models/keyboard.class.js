@@ -1,3 +1,7 @@
+/**
+ * The parameters for controlling the character.
+ */
+
 class Keyboard {
 
     LEFT = false;

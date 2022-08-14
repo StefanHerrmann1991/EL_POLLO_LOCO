@@ -45,6 +45,10 @@ class Endboss extends MovableObject {
         this.animate();
     }
 
+/**
+ * The function plays the animations for the enboss chicken. 
+ */
+
     animate() {
 
         setInterval(() => {
