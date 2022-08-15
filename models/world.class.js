@@ -67,7 +67,7 @@ class World {
                 this.character.hit(5);
                 this.statusbar.setPercentage(this.character.energy);
             }
-            if (this.jumpKill(enemy)) {
+            if (!(enemy instanceof Endboss) && this.jumpKill(enemy) ) {
                 enemy.energy = 0;
                 setTimeout(() => {
                     this.level.enemies.splice(i, 1);

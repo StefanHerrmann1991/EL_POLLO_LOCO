@@ -96,7 +96,7 @@ h1 {
 .control-btn-container {
     display: flex;
     flex-direction: row;
-    }
+}
 
 .mgn-t {
     margin-top: 40px;
@@ -109,10 +109,40 @@ h1 {
 .mgn-b {
     margin-bottom: 40px;
 }
+
 .mgn-r {
     margin-right: 50px;
 }
 
 @media (min-width: 720px) {
-    .responsive-control {display: none !important;}
+
+    .responsive-control {
+        display: none !important;
+    }
+
+}
+
+@media (max-width: 720px) {
+    html {
+        transform: rotate(-90deg);
+        transform-origin: left top;
+        width: 100vw;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        overflow: none;
+    }
+
+    .responsive {
+        display: flex;
+        justify-content: center;
+
+    }
+
+    h1 {
+        font-size: 5vh;
+    }
+    .cross-container {
+        transform: rotate(-90deg);
+    }
 }
