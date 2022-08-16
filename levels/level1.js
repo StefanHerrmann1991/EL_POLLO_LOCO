@@ -96,9 +96,6 @@ function initLevel1() {
     function generateEnemies(worldLength) {
         for (let i = 0; i < worldLength; i+= 5) {
            ENEMIES.push(new Chicken());}
-
-           
-
     }
 
 }

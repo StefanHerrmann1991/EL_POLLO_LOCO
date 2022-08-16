@@ -2,11 +2,6 @@ let canvas;
 let world;
 let keyboard;
 let allIntervals = [];
-let start = false;
-let startscreen;
-
-
-
 /** 
  * The function removes the start screen when the game is started 
 */
@@ -22,9 +17,7 @@ let startscreen;
  * 
 */
 
-function startGame() {
-    start = true;
-}
+
 
 function init() {
     canvas = document.getElementById('canvas');
@@ -32,9 +25,6 @@ function init() {
     keyboard = new Keyboard();
     world = new World(canvas, keyboard);  
 }
-
-
-
 
 
 /**
