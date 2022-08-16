@@ -5,25 +5,23 @@ let allIntervals = [];
 /** 
  * The function removes the start screen when the game is started 
 */
-
 /* function startScreen() {
-   let canvasStartScreen =  document.getElementById('start');
-   canvasStartScreen.innerHTML =  `<img src="img/9.Intro _ Outro Image/Start Screen/Opción2.png">` 
+    document.getElementById('startScreen').classList.add('d-none');
+}
+ */
 
-} */
 
 /** 
  * The function initiates the canvas and for the game relevant functions.
  * 
 */
-
-
-
 function init() {
+/*     startScreen(); */
     canvas = document.getElementById('canvas');
     initLevel1();
     keyboard = new Keyboard();
-    world = new World(canvas, keyboard);  
+    world = new World(canvas, keyboard);
+    lifebar = new Statusbar();
 }
 
 

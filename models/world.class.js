@@ -2,7 +2,6 @@ class World {
 
     character = new Character();
     statusbar = new Statusbar();
-    startscreen = new Startscreen(0, 0);
     endscreen = [];   
     level = level1;
     endboss = this.level.enemies.endboss;
@@ -130,7 +129,7 @@ class World {
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.endscreen);
-        this.addToMap(this.startscreen);
+     
         this.ctx.translate(-this.camera_x, 0);
         /* draw wird immer wieder aufgerufen */
         let self = this;

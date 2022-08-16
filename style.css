@@ -13,7 +13,14 @@ body {
 }
 
 canvas {
-    background-color: black;
+    background-image: url('img/9.Intro _ Outro Image/Start Screen/Opción 1.png');
+    background-position: center;
+    background-size: cover;
+    z-index: 1;
+    display: block;
+}
+
+span {
     z-index: 1;
     display: block;
 }
@@ -65,14 +72,14 @@ h1 {
 
 }
 
-
 .start-screen {
- 
-    position: absolute;
+    width: 720px;
+    height: 480px;
+    margin-top: -480px;
     z-index: 2;
-    top: 0px;
-    left: 0px;
-}
+    }
+
+
 
 .d-none {
     display: none;
@@ -120,10 +127,21 @@ h1 {
     canvas {
         width: 100%;
     }
+
+    .img-wrap {
+        width: 100%;
+    }
+
 }
 
 @media only screen and (max-height: 480px) {
+
     canvas {
         height: 100vh;
     }
+
+    .img-wrap {
+        height: 100vh;
+    }
+
 }
