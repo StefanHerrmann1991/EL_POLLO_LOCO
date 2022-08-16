@@ -7,11 +7,12 @@ class MovableObject extends DrawableObject {
     acceleration = 2.0;
     energy;
     lastHit = 0;
+    lastMove = 0;
 
-/**
- * The function enables the falling of obejects on the map like the character when it jumps or thrown bottles.
- * 
- */
+    /**
+     * The function enables the falling of obejects on the map like the character when it jumps or thrown bottles.
+     * 
+     */
 
     applyGravity() {
         let gravityInterval = setInterval(() => {
@@ -51,7 +52,7 @@ class MovableObject extends DrawableObject {
         this.x -= this.speed;
     }
 
-/**The function increments through images. When the last image in an array is loaded it starts from the beginning. */
+    /**The function increments through images. When the last image in an array is loaded it starts from the beginning. */
 
     playAnimation(images) {
         let i = this.currentImage % images.length;
@@ -105,9 +106,9 @@ class MovableObject extends DrawableObject {
 
     checkArea(movableObject) {
         return this.x + this.width > movableObject.x
-        && this.y + this.height > movableObject.y
-        && this.x < movableObject.x + movableObject.width + 500
-        && this.y < movableObject.y + movableObject.height
+            && this.y + this.height > movableObject.y
+            && this.x < movableObject.x + movableObject.width + 500
+            && this.y < movableObject.y + movableObject.height
     }
 
 
@@ -124,6 +125,8 @@ class MovableObject extends DrawableObject {
         timePassed = timePassed / 1000; // difference in s
         return timePassed < 0.8;
     }
+
+    isWaiting() {}
 
     isDead() {
         return this.energy == 0;

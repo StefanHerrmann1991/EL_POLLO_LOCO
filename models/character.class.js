@@ -37,7 +37,8 @@ class Character extends MovableObject {
         'img/2.Secuencias_Personaje-Pepe-corrección/4.Herido/H-42.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/4.Herido/H-43.png']
 
-    IMAGES_IDLE = ['img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-1.png',
+    IMAGES_IDLE = [
+        'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-1.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-2.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-3.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-4.png',
@@ -76,14 +77,14 @@ class Character extends MovableObject {
         this.characterAnimate();
     }
 
-/**
- * Depending on the key entered the walking animation of the character is enabled.
- * It also tests and shows character status like jump die or hurt.
- */
+    /**
+     * Depending on the key entered the walking animation of the character is enabled.
+     * It also tests and shows character status like jump die or hurt.
+     */
 
     characterAnimate() {
 
-        let walkingInterval =  setInterval(() => {
+        let walkingInterval = setInterval(() => {
             this.walking_sound.pause();
 
             if (!this.isDead() && this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
@@ -104,14 +105,13 @@ class Character extends MovableObject {
 
         allIntervals.push(walkingInterval);
 
-       let animationInterval = setInterval(() => {
+        let animationInterval = setInterval(() => {
             // walk animation      
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DYING);
                 setTimeout(() => {
                     this.loadImage('img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-58.png');
-                              }, 400);
-              
+                }, 400);
             }
             else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURTING);
@@ -124,8 +124,8 @@ class Character extends MovableObject {
                 }
             }
         }, 100);
-        
-        
+
+
 
         allIntervals.push(animationInterval);
     }

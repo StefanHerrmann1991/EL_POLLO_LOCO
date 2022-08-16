@@ -8,6 +8,7 @@
     <title>El Pollo Loco</title>
     <link rel="stylesheet" href="style.css">
     <script src="models/drawable-object.class.js"></script>
+    <script src="models/startscreen.class.js"></script>
     <script src="models/movable-object.class.js"></script>
     <script src="models/endscreen.class.js"></script>
     <script src="models/character.class.js"></script>
@@ -30,16 +31,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Rye&display=swap" rel="stylesheet">
 </head>
 
-<body onload="loadControlPanel()">
+<body onload="init()">
     <div class="responsive">
     <h1>El Pollo Loco</h1>
     <div class="main-container">
         <canvas id="canvas" width="720px" height="480px">
         </canvas>
-        <img src="img/9.Intro _ Outro Image/Start Screen/Opción 1.png" id="startScreen" class="start-screen">
         <div class="bottle-counter" id="bottleCounter"></div>
         <div class="coin-counter" id="coinCounter"></div>
-        <div class="start-btn" onclick="init()">Start </div>
+        <div class="start-btn" onclick="startGame()">Start </div>
         <div class = "responsive-control" id="responsiveControll">
             <div class="cross-container" id="crossPosition"></div>
             <div class="control-btn-container">

@@ -2,6 +2,8 @@ let canvas;
 let world;
 let keyboard;
 let allIntervals = [];
+let start = false;
+let startscreen;
 
 
 
@@ -9,25 +11,30 @@ let allIntervals = [];
  * The function removes the start screen when the game is started 
 */
 
-function startScreen() {
-    document.getElementById('startScreen').classList.add('d-none');
+/* function startScreen() {
+   let canvasStartScreen =  document.getElementById('start');
+   canvasStartScreen.innerHTML =  `<img src="img/9.Intro _ Outro Image/Start Screen/Opción2.png">` 
 
-}
+} */
 
 /** 
  * The function initiates the canvas and for the game relevant functions.
  * 
 */
 
-function init() {
+function startGame() {
+    start = true;
+}
 
-    startScreen();
+function init() {
     canvas = document.getElementById('canvas');
     initLevel1();
     keyboard = new Keyboard();
-    world = new World(canvas, keyboard);
-    lifebar = new Statusbar();
+    world = new World(canvas, keyboard);  
 }
+
+
+
 
 
 /**
@@ -52,9 +59,9 @@ document.onkeydown = function (e) {
         case 'ArrowUp':
             keyboard.THROW = true;
             break;
-
     }
 };
+
 
 /**
  * The function enables the usage of the keyboard.
@@ -69,7 +76,6 @@ document.onkeyup = function (e) {
         case 'ArrowLeft':
         case 'a':
             keyboard.LEFT = false;
-
             break;
         case 'ArrowRight':
         case 'd':
@@ -79,8 +85,6 @@ document.onkeyup = function (e) {
         case 'ArrowUp':
             keyboard.THROW = false;
             break;
-
-
     }
 };
 
@@ -91,7 +95,6 @@ document.onkeyup = function (e) {
 
 
 function loadControlPanel() {
-
     insertCross();
 
 }
@@ -103,8 +106,7 @@ function loadControlPanel() {
 function insertCross() {
     let crossPosition = document.getElementById('crossPosition');
     let text = generateCross(150);
-    crossPosition.insertAdjacentHTML('afterbegin', text)
-        ;
+    crossPosition.insertAdjacentHTML('afterbegin', text);
 }
 
 /**
@@ -119,10 +121,10 @@ function generateCross(sideLength) {
     cross = `
            <img class='cross-map' id="crossMap" src='img/0.Own_Pictures/cross.png' usemap='#image-map' height="${sideLength}px" width="${sideLength}px">
              <map name='image-map'>
-                 <area target="" alt="up"    title="up"     id="up"     ontouchstart="touchCross('up')"   ontouchend="toachCrossEnd()" coords="${coord1},0,${coord2},${coord1}" shape="rect">
-                 <area target="" alt="left"  title="left"   id="left"   ontouchstart="touchCross('left')" ontouchend="toachCrossEnd()" coords="0,${coord1},${coord1},${coord2}" shape="rect">
-                 <area target="" alt="down"  title="down"   id="down"   ontouchstart="touchCross('down')" ontouchend="toachCrossEnd()" coords="${coord2},${coord2},${coord1},${sideLength}" shape="rect">
-                 <area target="" alt="right" title="right"  id="right"  ontouchstart="touchCross('right)" ontouchend="toachCrossEnd()" coords="${sideLength},${coord1},${coord2},${coord2}" shape="rect">   
+                 <area target="" alt="up"    title="up"     id="up"     ontouchstart="touchCross('up')"   ontouchend="touchCrossEnd()" coords="${coord1},0,${coord2},${coord1}" shape="rect">
+                 <area target="" alt="left"  title="left"   id="left"   ontouchstart="touchCross('left')" ontouchend="touchCrossEnd()" coords="0,${coord1},${coord1},${coord2}" shape="rect">
+                 <area target="" alt="down"  title="down"   id="down"   ontouchstart="touchCross('down')" ontouchend="touchCrossEnd()" coords="${coord2},${coord2},${coord1},${sideLength}" shape="rect">
+                 <area target="" alt="right" title="right"  id="right"  ontouchstart="touchCross('right)" ontouchend="touchCrossEnd()" coords="${sideLength},${coord1},${coord2},${coord2}" shape="rect">   
              </map> `;
     return cross;
 }
@@ -132,11 +134,9 @@ function generateCross(sideLength) {
  */
 function touchCross(position) {
     document.getElementById('crossMap').src = `img/0.Own_Pictures/${position}.png`;
-  
 }
 
-
-function toachCrossEnd() {
+function touchCrossEnd() {
     document.getElementById('crossMap').src = "img/0.Own_Pictures/cross.png";
 }
 
@@ -147,4 +147,13 @@ function toachCrossEnd() {
 
 function pushInterval(intervalName) {
     allIntervals.push(intervalName)
+}
+
+function setStoppableInterval(fn, time) {
+    let id = setInterval(fn, time);
+    allIntervals.push(id);
+}
+
+function stopGame() {
+    allIntervals.forEach(clearInterval);
 }

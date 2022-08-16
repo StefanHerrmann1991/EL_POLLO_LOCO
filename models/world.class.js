@@ -2,7 +2,8 @@ class World {
 
     character = new Character();
     statusbar = new Statusbar();
-    endscreen = [];
+    startscreen = [new Startscreen(0, 0)];
+    endscreen = [];   
     level = level1;
     endboss = this.level.enemies.endboss;
     canvas;
@@ -12,8 +13,7 @@ class World {
     bottleCount = 0;
     throwableObject = [];
     lastThrow = 0;
-    IMAGES_GAME_OVER = ['img/9.Intro _ Outro Image/_Game over_ screen/1.you lost.png'];
-
+   
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -27,8 +27,6 @@ class World {
         this.character.world = this;
     }
 
-
-
     checkWorld() {
         let worldInterval = setInterval(() => {
             this.checkCollisions();
@@ -38,6 +36,7 @@ class World {
         }, 1000 / 60);
         allIntervals.push(worldInterval);
     }
+
 
     checkDeath() {
         if (this.character.isDead()) {
@@ -86,8 +85,7 @@ class World {
                             this.level.enemies.splice(i, 1);
                         }, 2000);
                     }
-                    console.log(enemy.energy)
-                }
+                 }
             })
         });
         this.level.bottles.forEach((bottle, i) => {
@@ -121,6 +119,7 @@ class World {
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
+        this.addObjectsToMap(this.startscreen);
         this.addObjectsToMap(this.level.backgrounds);
         this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.throwableObject);
