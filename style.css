@@ -132,6 +132,8 @@ h1 {
         width: 100%;
     }
 
+    h1 {display: none;}
+
 }
 
 @media only screen and (max-height: 480px) {
@@ -143,5 +145,7 @@ h1 {
     .img-wrap {
         height: 100vh;
     }
+
+    h1 {display: none;}
 
 }
