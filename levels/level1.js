@@ -1,6 +1,8 @@
 
 let level1
 function initLevel1() {
+    let generatedCoinCluster = 0; 
+    let coins = 200;
     let BACKGROUND = [];
     let LEVEL_END;
     let LEVEL_START = 100;
@@ -19,7 +21,7 @@ function initLevel1() {
         'img/5.Fondo/Capas/1.suelo-fondo1/2.png']];
 
     generateBackground(15);
-    generateLoot(15, 30);
+    generateLoot(15);
 
     /**
      * These are the elements which presents the majority of the map.
@@ -35,7 +37,7 @@ function initLevel1() {
         [
             new Cloud()
         ],
-        BACKGROUND
+        BACKGROUND,
         [
             new LootableObject(),
             new LootableObject(),
@@ -45,9 +47,7 @@ function initLevel1() {
             new LootableObject(),
             new LootableObject()
         ],
-        [
-            LOOT
-        ],
+        LOOT,
         LEVEL_END
 
     );
@@ -103,50 +103,62 @@ function initLevel1() {
      * @param {number} coinNumber The total number of coins in the world.
      */
 
-    function generateLoot(worldLength, coinNumber) {
-        let randomXPosition = [];
 
-        for (let i = 1; i < worldLength; i++) {
-            let min = 100;
-            let levelPart = LEVEL_END / i;
-            let xPosition = getRandomArbitrary(min, levelPart);
-            randomXPosition.push(xPosition);
-            coinCluster(randomXPosition, coinNumber);
+    /**
+     * 
+     * @param {number} worldLength The parameter reflects the length of the world. 
+     * @param {number} coinNumber The total number of coins in the world.
+     */
+
+    function generateLoot(worldLength) {
+        let minX = 100;
+        while (coins > 0) {
+            generatedCoinCluster++;
+            let levelPart = (worldLength - generatedCoinCluster) *  719 ;
+            let xPosition = getRandomArbitrary(minX, levelPart).toFixed(0);
+            minX = Number(xPosition);
+            randomXPosition = minX;
+            coinCluster(randomXPosition, 3, 7);
+            console.log(LOOT)
         }
-        console.log(randomXPosition);
     }
 
 
+    /**
+     * 
+     * @param {number} randomXPosition Position where a cluster of coins will be generated.
+     * @param {number} numberOfCoins Number of coins in the whole world.
+     * @param {number} clusterMin Minimum number of coins in a cluster.
+     * @param {number} clusterMax Maximum number of coins in a cluster.
+     */
 
-    function generateXYCluster(coinNumber) {
-        for (let i = 0; i < coinNumber; i++) {
+    function coinCluster(randomXPosition, clusterMin, clusterMax) {
+
+        let clusterNumber = Number(getRandomArbitrary(clusterMin, clusterMax).toFixed(0));
+        if (clusterNumber >= coins) {
+            clusterNumber = coins;
+            coins = coins - clusterNumber;
+            generateCoinParabel(clusterNumber, randomXPosition);
 
         }
-
-
-    }
-
-    function coinCluster(randomXPosition, coins) {
-        let coinCluster = [];
-        for (let i = 0; i < coins; i++) {
-            let x = randomXPosition + i * 50;
-            let y = 100 - i * 50;
-            let coin = new Coin(x, y);
-            coinCluster.push(coin);
+        else {
+            generateCoinParabel(clusterNumber, randomXPosition);
+            coins = coins - clusterNumber;
         }
-        LOOT.push(coinCluster)
     }
 
-    function randomInteger(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
+    function generateCoinParabel(clusterNumber, randomXPosition) {
+        console.log(clusterNumber);
+        for (let j = (-clusterNumber + 1) / 2; j < clusterNumber / 2; j++) {
+            let x = randomXPosition + j * 50;
+            let y = Number((((x - randomXPosition) ** 2) / 100).toFixed(0));
+            LOOT.push(new Coin(x, y));
+        }
     }
-
 
     function getRandomArbitrary(min, max) {
         return Math.random() * (max - min) + min;
     }
-
-
 
     function generateEnemies(worldLength) {
         for (let i = 0; i < worldLength; i += 5) {
