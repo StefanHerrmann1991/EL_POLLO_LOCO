@@ -1,13 +1,8 @@
 class LootableObject extends MovableObject { 
 
-    IMAGES_BOTTLE_STANDING = [
-        'img/6.botella/2.Botella_enterrada1.png',
-        'img/6.botella/2.Botella_enterrada2.png'];
-
 /**
  * The constructor for lootable objects in the map like coins and bottles.
  */
-
         constructor() { 
             super().loadImage('img/6.botella/2.Botella_enterrada1.png');
             this.y = 400 - Math.random() * 220;

@@ -2,7 +2,8 @@
 let level1
 function initLevel1() {
     let BACKGROUND = [];
-    let LEVEL_END = [];
+    let LEVEL_END;
+    let LEVEL_START = 100;
     let CLOUDS = [];
     let LOOT = [];
     let ENEMIES = [];
@@ -18,11 +19,12 @@ function initLevel1() {
         'img/5.Fondo/Capas/1.suelo-fondo1/2.png']];
 
     generateBackground(15);
-   
+    generateLoot(15, 30);
+
     /**
      * These are the elements which presents the majority of the map.
      */
-    
+
     level1 = new Level(
         [
             new Chicken(),
@@ -33,7 +35,7 @@ function initLevel1() {
         [
             new Cloud()
         ],
-        BACKGROUND,
+        BACKGROUND
         [
             new LootableObject(),
             new LootableObject(),
@@ -42,6 +44,9 @@ function initLevel1() {
             new LootableObject(),
             new LootableObject(),
             new LootableObject()
+        ],
+        [
+            LOOT
         ],
         LEVEL_END
 
@@ -53,12 +58,12 @@ function initLevel1() {
      */
 
 
-   function generateLevel(worldLength) { 
-    generateBackground(worldLength);
-    generateClouds(worldLength);
-    generateEnemies(worldLength);
-    generateLoot(worldLength);
-   } 
+    function generateLevel(worldLength) {
+        generateBackground(worldLength);
+        generateClouds(worldLength);
+        generateEnemies(worldLength);
+        generateLoot(worldLength);
+    }
 
 
 
@@ -81,22 +86,75 @@ function initLevel1() {
         LEVEL_END = worldLength * 719 - 630;
     }
 
-/**
- * 
- * @param {number} num The parameter tests if a number is odd.
- * @returns true when the number isOdd
- */
+    /**
+     * 
+     * @param {number} num The parameter tests if a number is odd.
+     * @returns true when the number isOdd
+     */
 
     function isOdd(num) { return Math.abs(num % 2) }
 
-    function generateLoot(worldLength) {
-        for (let i = 0; i < worldLength; i+=3) {
-        LOOT.push(new LootableObject());}
+    /* TODO: not doubled xPosition
+    in interval to prevent coins from being to near to each other*/
+
+    /**
+     * 
+     * @param {number} worldLength The parameter reflects the length of the world. 
+     * @param {number} coinNumber The total number of coins in the world.
+     */
+
+    function generateLoot(worldLength, coinNumber) {
+        let randomXPosition = [];
+
+        for (let i = 1; i < worldLength; i++) {
+            let min = 100;
+            let levelPart = LEVEL_END / i;
+            let xPosition = getRandomArbitrary(min, levelPart);
+            randomXPosition.push(xPosition);
+            coinCluster(randomXPosition, coinNumber);
+        }
+        console.log(randomXPosition);
     }
+
+
+
+    function generateXYCluster(coinNumber) {
+        for (let i = 0; i < coinNumber; i++) {
+
+        }
+
+
+    }
+
+    function coinCluster(randomXPosition, coins) {
+        let coinCluster = [];
+        for (let i = 0; i < coins; i++) {
+            let x = randomXPosition + i * 50;
+            let y = 100 - i * 50;
+            let coin = new Coin(x, y);
+            coinCluster.push(coin);
+        }
+        LOOT.push(coinCluster)
+    }
+
+    function randomInteger(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+
+    function getRandomArbitrary(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
+
+
     function generateEnemies(worldLength) {
-        for (let i = 0; i < worldLength; i+= 5) {
-           ENEMIES.push(new Chicken());}
+        for (let i = 0; i < worldLength; i += 5) {
+            ENEMIES.push(new Chicken());
+        }
     }
+
+
 
 }
 

@@ -1,6 +1,7 @@
 class MovableObject extends DrawableObject {
 
     speed = 0.15;
+    sprintSpeed = 1.5;
     otherDirection = false;
     currentImage = 0;
     speedY = 0;
@@ -51,6 +52,16 @@ class MovableObject extends DrawableObject {
     moveLeft() {
         this.x -= this.speed;
     }
+
+    sprintLeft() {
+        this.x -= this.speed * this.sprintSpeed;
+    }
+
+    sprintRight() {
+        this.x += this.speed * this.sprintSpeed;
+    }
+
+
 
     /**The function increments through images. When the last image in an array is loaded it starts from the beginning. */
 

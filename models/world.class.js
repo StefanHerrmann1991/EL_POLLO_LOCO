@@ -10,6 +10,7 @@ class World {
     keyboard;
     camera_x = 0;
     bottleCount = 0;
+    coinCount  = 0;
     throwableObject = [];
     lastThrow = 0;
    
@@ -29,9 +30,10 @@ class World {
     checkWorld() {
         let worldInterval = setInterval(() => {
             this.checkCollisions();
-            this.checkBottleCount();
             this.throwObject();
             this.checkDeath();
+            this.checkBottleCount();
+            this.checkCoinCount();
         }, 1000 / 60);
         allIntervals.push(worldInterval);
     }
@@ -47,14 +49,22 @@ class World {
     }
 
     checkBottleCount() {
-
         if (!this.character.isDead()) {
-
             document.getElementById('bottleCounter').innerHTML = `
                 <img class="bottle-stat" src="img/0.Own_Pictures/bottleThrowing/bottle_throwing6.png"> 
                 <div>= ${this.bottleCount}<div>`
 
         } else { setTimeout(() => { document.getElementById('bottleCounter').innerHTML = ""; }, 2000); }
+
+    }
+
+    checkCoinCount() {
+        if (!this.character.isDead()) {
+            document.getElementById('coinCounter').innerHTML = `
+                <img class="bottle-stat" src="img/8.Coin/Moneda2.png"> 
+                <div>= ${this.coinCount}<div>`
+
+        } else { setTimeout(() => { document.getElementById('coinCounter').innerHTML = ""; }, 2000); }
 
     }
 
@@ -91,13 +101,20 @@ class World {
             if (this.take(bottle)) {
                 this.level.bottles.splice(i, 1);
                 this.bottleCount++;
+                
+            }
+        });
+        this.level.coins.forEach((coin, i) => {
+            if (this.take(coin)) {
+                this.level.coins.splice(i, 1);
+                this.coinCount++;
             }
         });
     }
 
 
     bottleHit(enemy, bottle) {return this.throwableObject[bottle].objectIsColliding(enemy) && !enemy.isHurt() && !enemy.isDead() && !this.character.isHurt()}
-    take(bottle) { return this.character.isColliding(bottle) }
+    take(loot) { return this.character.isColliding(loot) }
     charGotHitBy(enemy) { return this.character.isColliding(enemy) && !this.character.isAboveGround() && !enemy.isDead() && !this.character.isHurt(); }
     jumpKill(enemy) { return this.character.isAboveGround() && this.character.isColliding(enemy) && !enemy.isDead() }
 
@@ -118,9 +135,9 @@ class World {
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
-       
         this.addObjectsToMap(this.level.backgrounds);
         this.addObjectsToMap(this.level.bottles);
+        this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.throwableObject);
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusbar);
@@ -129,7 +146,6 @@ class World {
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.endscreen);
-     
         this.ctx.translate(-this.camera_x, 0);
         /* draw wird immer wieder aufgerufen */
         let self = this;

@@ -21,6 +21,7 @@
     <script src="models/keyboard.class.js"></script>
     <script src="models/throwable-object.class.js"></script>
     <script src="models/lootable-object.class.js"></script>
+    <script src="models/coins.class.js"></script>
     <script src="models/level.class.js"></script>
     <script src="levels/level1.js"></script>
     <script src="js/game.js"></script>
@@ -41,21 +42,33 @@
 
 <body onload="loadControlPanel()">
     <div class="responsive">
-    <h1>El Pollo Loco</h1>
-    <div class="main-container">
-        <canvas id="canvas" width="720px" height="480px">
-        </canvas>
-        <div class="bottle-counter" id="bottleCounter"></div>
-        <div class="coin-counter" id="coinCounter"></div>
-        <div class="start-btn" onclick="init()">Start </div>
-        <div class = "responsive-control" id="responsiveControll">
-            <div class="cross-container" id="crossPosition"></div>
-            <div class="control-btn-container">
-                <button class="control-btn mgn-t" id="jumpButton">B</button>
-                <button class="control-btn mgn-b mgn-l mgn-r" id="throwButton">A</button>
+        <h1>El Pollo Loco</h1>
+        <div class="main-container">
+            <canvas id="canvas" width="720px" height="480px">
+            </canvas>
+            <div class="bottle-counter" id="bottleCounter"></div>
+            <div class="coin-counter" id="coinCounter"></div>
+            <div class="start-btn" onclick="init()">Start </div>
+            <div class="responsive-control" id="responsiveControll">
+                <div class="cross-container" id="crossPosition"></div>
+                <div class="control-btn-container">
+                    <button class="pushable-btn mgn-r  mgn-t">
+                        <span class="shadow-child"></span>
+                        <span class="edge"></span>
+                        <span class="front">
+                            A
+                        </span>
+                    </button> 
+                    <button class="pushable-btn">
+                        <span class="shadow-child"></span>
+                        <span class="edge"></span>
+                        <span class="front">
+                            B
+                        </span>
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
     </div>
 </body>
 

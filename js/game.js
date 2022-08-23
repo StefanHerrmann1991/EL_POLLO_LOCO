@@ -77,8 +77,7 @@ document.onkeyup = function (e) {
 
 
 function loadControlPanel() {
-    if (window.innerWidth < 720)
-        insertCross();
+          insertCross();
 }
 
 /**

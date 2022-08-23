@@ -3,6 +3,7 @@ class Level {
   clouds;
   backgrounds;
   bottles;
+  coins;
   level_end_x;
 
 /**
@@ -14,11 +15,12 @@ class Level {
  * @param {number} level_end_x The endpoint of the game.
  */
 
-  constructor(enemies, clouds, backgrounds, bottles, level_end_x) {
+  constructor(enemies, clouds, backgrounds, bottles, coins, level_end_x) {
     this.enemies = enemies;
     this.clouds = clouds;
     this.backgrounds = backgrounds;
     this.bottles = bottles;
+    this.coins = coins; 
     this.level_end_x = level_end_x;
     }
 }
