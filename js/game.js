@@ -77,7 +77,8 @@ document.onkeyup = function (e) {
 
 
 function loadControlPanel() {
-          insertCross();
+    insertCross();
+    insertButtons();
 }
 
 /**
@@ -117,13 +118,13 @@ function touchCross(position) {
     document.getElementById('crossMap').src = `img/0.Own_Pictures/${position}.png`;
     switch (position) {
         case 'left': keyboard.LEFT = true;
-        break;
+            break;
         case 'up': keyboard.SPACE = true;
-        break;
+            break;
         case 'down': keyboard.THROW = true;
-        break;
+            break;
         case 'right': keyboard.RIGHT = true;
-        break;
+            break;
     }
 
 
@@ -134,13 +135,13 @@ function touchCrossEnd(position) {
     document.getElementById('crossMap').src = "img/0.Own_Pictures/cross.png";
     switch (position) {
         case 'left': keyboard.LEFT = false;
-        break;
+            break;
         case 'up': keyboard.SPACE = false;
-        break;
+            break;
         case 'down': keyboard.THROW = false;
-        break;
+            break;
         case 'right': keyboard.RIGHT = false;
-        break;
+            break;
     }
 }
 
@@ -161,3 +162,32 @@ function setStoppableInterval(fn, time) {
 function stopGame() {
     allIntervals.forEach(clearInterval);
 }
+
+
+
+function insertButtons() {
+    let aPosition = document.getElementById('A-Button');
+    let bPosition = document.getElementById('B-Button');
+    let aButton = generateButton('aButton', 250);
+    let bButton = generateButton('bButton', 250);
+    aPosition.insertAdjacentHTML('afterbegin', aButton);
+    bPosition.insertAdjacentHTML('afterbegin', bButton);
+}
+
+
+function generateButton(id, sideLength) {
+    let coord1 = sideLength /2;
+    let coord2 = sideLength / 2.17;
+    button = `
+           <img class="control-button" id="${id}" src='img/0.Own_Pictures/aButton.png' usemap='#a-button' height="${sideLength}px" width="${sideLength}px">
+             <map name="a-button">
+             <area target="" alt="" title="" href="" coords="${coord1},${coord1},${coord2}" shape="circle">
+             </map> `;
+    return button;
+}
+
+{/* <img src="Bild1.png" usemap="#image-map">
+
+<map name="image-map">
+    <area target="_blank" alt="" title="" href="" coords="250,250,230" shape="circle">
+</map> */}
