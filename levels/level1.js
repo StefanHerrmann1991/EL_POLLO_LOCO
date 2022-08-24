@@ -2,7 +2,7 @@
 let level1
 function initLevel1() {
     let generatedCoinCluster = 0; 
-    let coins = 200;
+    let coins;
     let BACKGROUND = [];
     let LEVEL_END;
     let LEVEL_START = 100;
@@ -104,17 +104,12 @@ function initLevel1() {
      */
 
 
-    /**
-     * 
-     * @param {number} worldLength The parameter reflects the length of the world. 
-     * @param {number} coinNumber The total number of coins in the world.
-     */
-
     function generateLoot(worldLength) {
         let minX = 100;
+        coins = 4 * worldLength;   
         while (coins > 0) {
             generatedCoinCluster++;
-            let levelPart = (worldLength - generatedCoinCluster) *  719 ;
+            let levelPart = worldLength * 719 * generatedCoinCluster * 0.08;
             let xPosition = getRandomArbitrary(minX, levelPart).toFixed(0);
             minX = Number(xPosition);
             randomXPosition = minX;
@@ -161,11 +156,14 @@ function initLevel1() {
     }
 
     function generateEnemies(worldLength) {
-        for (let i = 0; i < worldLength; i += 5) {
-            ENEMIES.push(new Chicken());
-        }
+       
+
+            ENEMIES.push(new Chicken(x));
+        
     }
 
+
+  
 
 
 }
