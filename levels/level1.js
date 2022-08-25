@@ -114,7 +114,6 @@ function initLevel1() {
             minX = Number(xPosition);
             randomXPosition = minX;
             coinCluster(randomXPosition, 3, 7);
-            console.log(LOOT)
         }
     }
 
@@ -143,10 +142,12 @@ function initLevel1() {
     }
 
     function generateCoinParabel(clusterNumber, randomXPosition) {
-        console.log(clusterNumber);
+        
+        let randomYPosition = Number(getRandomArbitrary(5, 150).toFixed(0))
         for (let j = (-clusterNumber + 1) / 2; j < clusterNumber / 2; j++) {
             let x = randomXPosition + j * 50;
-            let y = Number((((x - randomXPosition) ** 2) / 100).toFixed(0));
+            let y = Number((((x - randomXPosition) ** 2) / 100).toFixed(0)) + randomYPosition;
+            console.log(y)
             LOOT.push(new Coin(x, y));
         }
     }
