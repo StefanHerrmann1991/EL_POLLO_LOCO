@@ -9,9 +9,9 @@ class Chicken extends MovableObject {
         'img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/3.Ga_paso izquierdo.png'
     ];
     IMAGES_DYING = [
-        
-           'img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/4.G_muerte.png'
-        ];
+
+        'img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/4.G_muerte.png'
+    ];
     chicken_sound = new Audio('audio/chicken.mp3');
 
     constructor(x) {
@@ -25,29 +25,28 @@ class Chicken extends MovableObject {
 
     animate() {
         /* Hühner bewegen sich nach links */
-      
-      let dyingInterval = setInterval(() => {
+
+        setStoppableInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DYING);
             }
             else { this.moveLeft(); }
         }, 1000 / 60);
-       
-      allIntervals.push(dyingInterval);  
+
         /* Hühner laufen (nur Animation und Ton) */
-        
-        
-      let chickenWalkInterval  =  setInterval(() => {
+
+
+        setStoppableInterval(() => {
             if (!this.isDead()) {
                 this.playAnimation(this.IMAGES_WALKING)
             };
         }, 200);
-        
-     allIntervals.push(chickenWalkInterval);  
+
+
 
 
         /*    setInterval(() => {
               this.chicken_sound.play();
           }, 4000) */
-              }
+    }
 }

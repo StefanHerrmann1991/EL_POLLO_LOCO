@@ -1,7 +1,7 @@
 
 let level1
 function initLevel1() {
-    let generatedCoinCluster = 0; 
+    let generatedCoinCluster = 0;
     let coins;
     let BACKGROUND = [];
     let LEVEL_END;
@@ -106,7 +106,7 @@ function initLevel1() {
 
     function generateLoot(worldLength) {
         let minX = 100;
-        coins = 4 * worldLength;   
+        coins = 4 * worldLength;
         while (coins > 0) {
             generatedCoinCluster++;
             let levelPart = worldLength * 719 * generatedCoinCluster * 0.08;
@@ -142,7 +142,7 @@ function initLevel1() {
     }
 
     function generateCoinParabel(clusterNumber, randomXPosition) {
-        
+
         let randomYPosition = Number(getRandomArbitrary(5, 150).toFixed(0))
         for (let j = (-clusterNumber + 1) / 2; j < clusterNumber / 2; j++) {
             let x = randomXPosition + j * 50;
@@ -157,16 +157,14 @@ function initLevel1() {
     }
 
     function generateEnemies(worldLength) {
-       
-
+        let endbossPosition = LEVEL_END - 600;
+        ENEMIES.push(new Endboss(endbossPosition))
+        for (let i = 0; i < array.length; i++) {
+            enemyAmount = worldLength * i;
+            x = worldLength * i * 719
             ENEMIES.push(new Chicken(x));
-        
+        }     
     }
-
-
-  
-
-
 }
 
 

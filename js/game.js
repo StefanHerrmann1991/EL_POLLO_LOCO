@@ -151,9 +151,7 @@ function buttonPush(button, command) {
  * @param {string} intervalName The name of the interval which needs to be cleared while restarting the game.
  */
 
-function pushInterval(intervalName) {
-    allIntervals.push(intervalName)
-}
+
 
 function setStoppableInterval(fn, time) {
     let id = setInterval(fn, time);

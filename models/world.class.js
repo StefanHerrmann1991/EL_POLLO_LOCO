@@ -28,15 +28,14 @@ class World {
     }
 
     checkWorld() {
-        let worldInterval = setInterval(() => {
+       setStoppableInterval(() => {
             this.checkCollisions();
             this.throwObject();
             this.checkDeath();
             this.checkBottleCount();
             this.checkCoinCount();
         }, 1000 / 60);
-        allIntervals.push(worldInterval);
-    }
+      }
 
 
     checkDeath() {

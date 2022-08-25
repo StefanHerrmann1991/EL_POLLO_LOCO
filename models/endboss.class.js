@@ -35,13 +35,13 @@ class Endboss extends MovableObject {
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/4.Muerte/G25.png',
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/4.Muerte/G26.png'];
 
-    constructor() {
+    constructor(x) {
         super().loadImage(this.IMAGES_PERCEIVING[0]);
         this.loadImages(this.IMAGES_PERCEIVING);
         this.loadImages(this.IMAGES_ATTACKING);
         this.loadImages(this.IMAGES_HURTING);
         this.loadImages(this.IMAGES_DYING);
-        this.x = 700;
+        this.x = x;
         this.animate();
     }
 
@@ -51,12 +51,12 @@ class Endboss extends MovableObject {
 
     animate() {
 
-        setInterval(() => {
+        setStoppableInterval(() => {
             this.playAnimation(this.IMAGES_PERCEIVING);
         }, 200);
 
       
-        setInterval(() => {
+        setStoppableInterval(() => {
              if (this.isDead()) {
                  this.playAnimation(this.IMAGES_DYING);                   
              }
@@ -70,7 +70,5 @@ class Endboss extends MovableObject {
 
 
 
-
-        /*  allIntervals.push(chickenAnimationInterval); */
     }
 }
