@@ -2,7 +2,7 @@ class World {
 
     character = new Character();
     statusbar = new Statusbar();
-    endscreen = [];   
+    endscreen = [];
     level = level1;
     endboss = this.level.enemies.endboss;
     canvas;
@@ -10,10 +10,10 @@ class World {
     keyboard;
     camera_x = 0;
     bottleCount = 0;
-    coinCount  = 0;
+    coinCount = 0;
     throwableObject = [];
     lastThrow = 0;
-   
+
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -75,8 +75,9 @@ class World {
                 this.character.hit(5);
                 this.statusbar.setPercentage(this.character.energy);
             }
-            if (!(enemy instanceof Endboss) && this.jumpKill(enemy) ) {
+            if (!(enemy instanceof Endboss) && this.jumpKill(enemy)) {
                 enemy.energy = 0;
+
                 setTimeout(() => {
                     this.level.enemies.splice(i, 1);
                 }, 2000);
@@ -85,6 +86,7 @@ class World {
             this.throwableObject.forEach((thrownObject, bottle) => {
                 if (this.bottleHit(enemy, bottle)) {
                     thrownObject.collision = true;
+                    enemy.x = enemy.x + 30;
                     setTimeout(() => {
                         this.throwableObject.splice(bottle, 1);
                     }, 25);
@@ -94,14 +96,14 @@ class World {
                             this.level.enemies.splice(i, 1);
                         }, 2000);
                     }
-                 }
+                }
             })
         });
         this.level.bottles.forEach((bottle, i) => {
             if (this.take(bottle)) {
                 this.level.bottles.splice(i, 1);
                 this.bottleCount++;
-                
+
             }
         });
         this.level.coins.forEach((coin, i) => {
@@ -113,7 +115,7 @@ class World {
     }
 
 
-    bottleHit(enemy, bottle) {return this.throwableObject[bottle].objectIsColliding(enemy) && !enemy.isHurt() && !enemy.isDead() && !this.character.isHurt()}
+    bottleHit(enemy, bottle) { return this.throwableObject[bottle].objectIsColliding(enemy) && !enemy.isHurt() && !enemy.isDead() && !this.character.isHurt() }
     take(loot) { return this.character.isColliding(loot) }
     charGotHitBy(enemy) { return this.character.isColliding(enemy) && !this.character.isAboveGround() && !enemy.isDead() && !this.character.isHurt(); }
     jumpKill(enemy) { return this.character.isAboveGround() && this.character.isColliding(enemy) && !enemy.isDead() }

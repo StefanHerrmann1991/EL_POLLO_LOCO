@@ -78,7 +78,6 @@ document.onkeyup = function (e) {
 
 function loadControlPanel() {
     insertCross();
-    insertButtons();
 }
 
 /**
@@ -126,9 +125,6 @@ function touchCross(position) {
         case 'right': keyboard.RIGHT = true;
             break;
     }
-
-
-
 }
 
 function touchCrossEnd(position) {
@@ -144,6 +140,11 @@ function touchCrossEnd(position) {
             break;
     }
 }
+
+function buttonPush(button, command) {
+
+}
+
 
 /**
  * 
@@ -164,40 +165,3 @@ function stopGame() {
 }
 
 
-/* 
-function insertButtons() {
-    let aPosition = document.getElementById('A-Button');
-    let bPosition = document.getElementById('B-Button');
-    let aButton = generateButton('aButton', 90);
-    let bButton = generateButton('bButton', 90);
-    aPosition.insertAdjacentHTML('afterbegin', aButton);
-    bPosition.insertAdjacentHTML('afterbegin', bButton);
-}
-
-
-function generateButton(id, sideLength) {
-    let coord1 = sideLength /2;
-    let coord2 = sideLength / 2.17;
-    button = `
-           <img class="control-button" id="${id}" src='img/0.Own_Pictures/${id}.png' usemap='#a-button' height="${sideLength}px" width="${sideLength}px">
-             <map name="a-button">
-             <area target="" alt="" title="" href="" coords="${coord1},${coord1},${coord2}" shape="circle">
-             </map> `;
-    return button;
-}
-
-{ <img src="Bild1.png" usemap="#image-map">
-
-<map name="image-map">
-    <area target="_blank" alt="" title="" href="" coords="250,250,230" shape="circle">
-</map> }
-
-
-function touchButton(buttonPress) {
-    document.getElementById(`${id}`).src = `img/0.Own_Pictures/${buttonPress}.png`;
-    switch (buttonPress) {
-        case 'A': keyboard.SPACE = true;
-            break;
-        case 'B': keyboard.THROW = true;
-            break;
-      }} */
