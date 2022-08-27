@@ -170,7 +170,7 @@ class World {
             this.flipImageBack(movableObject);
         }
     }
-
+    
     flipImage(movableObject) {
         this.ctx.save();
         this.ctx.translate(movableObject.width, 0);
@@ -181,5 +181,6 @@ class World {
         movableObject.x = movableObject.x * -1;
         this.ctx.restore();
     }
+
 
 }

@@ -8,7 +8,7 @@ let allIntervals = [];
  * 
 */
 function init() {
-
+    stopGame();
     canvas = document.getElementById('canvas');
     initLevel1();
     keyboard = new Keyboard();

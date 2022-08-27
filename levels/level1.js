@@ -28,12 +28,7 @@ function initLevel1() {
      */
 
     level1 = new Level(
-        [
-            new Chicken(),
-            new Chicken(),
-            new Chicken(),
-            new Endboss()
-        ],
+        ENEMIES,
         [
             new Cloud()
         ],
@@ -152,19 +147,30 @@ function initLevel1() {
         }
     }
 
+    function generateEnemies(worldLength) {
+        let endbossPosition = LEVEL_END - 600;
+        ENEMIES.push(new Endboss(endbossPosition));
+        for (let i = 0; i < worldLength.length; i++) {
+            levelQuarter = worldLength / i;
+            if (levelQuarter < 0.25 && levelQuarter > 0) {  }
+            else if (levelQuarter < 0.5 && levelQuarter > 0.25) { }
+            else if (levelQuarter < 0.75 && levelQuarter > 0.5) { }
+            else if (levelQuarter < 1.0 && levelQuarter > 0.75) { }
+            ENEMIES.push(new Chicken(x));
+        }
+    }
+
+    function generateEnemiesAmount(enemyAmount, enemy) {
+        for (let i = 1; i < enemyAmount; i++) {
+            currentEnemy = new enemy(x);
+            ENEMIES.push(currentEnemy);
+        }
+    }
+
     function getRandomArbitrary(min, max) {
         return Math.random() * (max - min) + min;
     }
 
-    function generateEnemies(worldLength) {
-        let endbossPosition = LEVEL_END - 600;
-        ENEMIES.push(new Endboss(endbossPosition))
-        for (let i = 0; i < array.length; i++) {
-            enemyAmount = worldLength * i;
-            x = worldLength * i * 719
-            ENEMIES.push(new Chicken(x));
-        }     
-    }
 }
 
 

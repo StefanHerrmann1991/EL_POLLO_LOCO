@@ -1,18 +1,32 @@
-class Coin extends LootableObject { 
+class Coin extends LootableObject {
 
-/**
- * The constructor for lootable objects in the map like coins and bottles.
- */
+    IMAGES_COIN = [
+        'img/8.Coin/Moneda1.png',
+        'img/8.Coin/Moneda2.png']
 
-        constructor(x, y) { 
-            super().loadImage('img/8.Coin/Moneda1.png');
-            this.y = y;
-            this.x = x;
-            this.height = 100;
-            this.width = 100;
-        }
+
 
         
+    /**
+     * The constructor for lootable objects in the map like coins and bottles.
+     */
+
+    constructor(x, y) {
+        super().loadImage('img/8.Coin/Moneda1.png');
+        this.loadImages(this.IMAGES_COIN);
+        this.y = y;
+        this.x = x;
+        this.height = 100;
+        this.width = 100;
+        this.coinAnimate();
+   }
 
 
-       }
+
+    coinAnimate() {
+        setStoppableInterval(() => {
+            this.playAnimation(this.IMAGES_COIN);
+        }, 160);
+    }
+
+}
