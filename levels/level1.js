@@ -2,6 +2,7 @@
 let level1
 function initLevel1() {
     let generatedCoinCluster = 0;
+    let generatedEnemies = 0;
     let coins;
     let BACKGROUND = [];
     let LEVEL_END;
@@ -20,8 +21,9 @@ function initLevel1() {
         'img/5.Fondo/Capas/2.Fondo2/2.png',
         'img/5.Fondo/Capas/1.suelo-fondo1/2.png']];
 
-    generateBackground(15);
-    generateLoot(15);
+    generateBackground(16);
+    generateLoot(16);
+    generateEnemies(16);
 
     /**
      * These are the elements which presents the majority of the map.
@@ -104,8 +106,8 @@ function initLevel1() {
         coins = 4 * worldLength;
         while (coins > 0) {
             generatedCoinCluster++;
-            let levelPart = worldLength * 719 * generatedCoinCluster * 0.08;
-            let xPosition = getRandomArbitrary(minX, levelPart).toFixed(0);
+            let levelPart = 719 * generatedCoinCluster;
+            let xPosition = getRandomArbitrary(minX + 225, levelPart).toFixed(0);
             minX = Number(xPosition);
             randomXPosition = minX;
             coinCluster(randomXPosition, 3, 7);
@@ -123,12 +125,11 @@ function initLevel1() {
 
     function coinCluster(randomXPosition, clusterMin, clusterMax) {
 
-        let clusterNumber = Number(getRandomArbitrary(clusterMin, clusterMax).toFixed(0));
+        clusterNumber = Number(getRandomArbitrary(clusterMin, clusterMax).toFixed(0));
         if (clusterNumber >= coins) {
             clusterNumber = coins;
             coins = coins - clusterNumber;
             generateCoinParabel(clusterNumber, randomXPosition);
-
         }
         else {
             generateCoinParabel(clusterNumber, randomXPosition);
@@ -142,27 +143,40 @@ function initLevel1() {
         for (let j = (-clusterNumber + 1) / 2; j < clusterNumber / 2; j++) {
             let x = randomXPosition + j * 50;
             let y = Number((((x - randomXPosition) ** 2) / 100).toFixed(0)) + randomYPosition;
-            console.log(y)
             LOOT.push(new Coin(x, y));
         }
     }
 
+
+
     function generateEnemies(worldLength) {
-        let endbossPosition = LEVEL_END - 600;
-        ENEMIES.push(new Endboss(endbossPosition));
-        for (let i = 0; i < worldLength.length; i++) {
-            levelQuarter = worldLength / i;
-            if (levelQuarter < 0.25 && levelQuarter > 0) {  }
-            else if (levelQuarter < 0.5 && levelQuarter > 0.25) { }
-            else if (levelQuarter < 0.75 && levelQuarter > 0.5) { }
-            else if (levelQuarter < 1.0 && levelQuarter > 0.75) { }
-            ENEMIES.push(new Chicken(x));
+
+        for (let i = 0; i < worldLength - 1; i++) {
+            minX = 100;
+            let enemyAmount = i / 2;
+            let levelPart = 719 * i;
+            if (enemyAmount < 7) {
+                generateEnemiesAtX(minX, levelPart, Chicken, enemyAmount);
+                console.log(levelPart)
+            }
+            else {
+                enemyAmount >= 7;
+                generateEnemiesAtX(minX, levelPart, Chicken, enemyAmount);
+            }
+            console.log(ENEMIES)
+
         }
     }
 
-    function generateEnemiesAmount(enemyAmount, enemy) {
+
+    function generateEnemiesAtX(minX, levelPart, enemy, enemyAmount) {
+
         for (let i = 1; i < enemyAmount; i++) {
-            currentEnemy = new enemy(x);
+            let xPosition = Number(getRandomArbitrary(minX, levelPart).toFixed(0));
+            currentEnemy = new enemy(xPosition);
+            minX = xPosition;
+            console.log(minX);
+            console.log(currentEnemy);
             ENEMIES.push(currentEnemy);
         }
     }
@@ -172,6 +186,34 @@ function initLevel1() {
     }
 
 }
+
+
+
+
+/*
+ 
+            let levelPart2 = worldLength * 719 * 2 / 4;
+let levelPart3 = worldLength * 719 * 3 / 4;
+let levelPart4 = worldLength * 719 * 4 / 4;
+if (levelQuarter < 0.25 && levelQuarter > 0) {
+        calcEnemyAmount(worldLength, enemyAmount, 0.25);
+        let levelPart = levelXQuarter * 0.25;
+        generateEnemiesAtRanX(minX, enemyAmount, Chicken, levelPart);
+    }
+    else if (levelQuarter < 0.5 && levelQuarter > 0.25) {
+        calcEnemyAmount(worldLength, enemyAmount, 0.5)
+    }
+    else if (levelQuarter < 0.75 && levelQuarter > 0.5) { calcEnemyAmount(worldLength, enemyAmount, 0.75) }
+    else if (levelQuarter < 1.0 && levelQuarter > 0.75) { calcEnemyAmount(worldLength, enemyAmount, 1.0) }     function calcEnemyAmount(worldLength, enemyAmount) {
+let numberOfEnemies = levelPercent * worldLength;
+enemyAmount = enemyAmount - numberOfEnemies;
+}*/
+
+
+
+
+
+
 
 
 

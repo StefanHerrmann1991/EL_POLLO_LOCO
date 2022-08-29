@@ -64,6 +64,8 @@ class Endboss extends MovableObject {
              else if (this.isHurt()) {
                  this.playAnimation(this.IMAGES_HURTING);
              }  
+
+
          }, 100); 
 
 

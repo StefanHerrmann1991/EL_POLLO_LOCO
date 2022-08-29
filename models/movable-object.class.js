@@ -135,7 +135,7 @@ class MovableObject extends DrawableObject {
         return timePassed < 0.8;
     }
 
-    isWaiting() {}
+  
 
     isDead() {
         return this.energy == 0;

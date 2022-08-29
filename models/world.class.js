@@ -85,7 +85,8 @@ class World {
             this.throwableObject.forEach((thrownObject, bottle) => {
                 if (this.bottleHit(enemy, bottle)) {
                     thrownObject.collision = true;
-                    enemy.x = enemy.x + 30;
+                    enemy.x = enemy.x + 10;
+                    enemy.y = enemy.y + 10;
                     setTimeout(() => {
                         this.throwableObject.splice(bottle, 1);
                     }, 25);
@@ -93,7 +94,7 @@ class World {
                     if (enemy.isDead()) {
                         setTimeout(() => {
                             this.level.enemies.splice(i, 1);
-                        }, 2000);
+                        }, 1000);
                     }
                 }
             })

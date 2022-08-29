@@ -90,6 +90,8 @@ class Character extends MovableObject {
         setStoppableInterval(() => {
             this.walking_sound.pause();
 
+
+
             if (!this.isDead() && this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.walking_sound.play();
@@ -109,6 +111,10 @@ class Character extends MovableObject {
 
         setStoppableInterval(() => {
             // walk animation      
+            if (!this.isDead() && !this.isHurt() && !this.isAboveGround()) {
+                this.playAnimation(this.IMAGES_IDLE);
+            }
+
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DYING);
                 setTimeout(() => {
