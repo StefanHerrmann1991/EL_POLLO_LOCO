@@ -168,7 +168,8 @@ function initLevel1() {
 
 
     function generateEnemiesAtX(minX, levelPart, enemy, enemyAmount) {
-
+        endbossPosition = LEVEL_END - 4000;
+        ENEMIES.push(new Endboss(endbossPosition))
         for (let i = 1; i < enemyAmount; i++) {
             let xPosition = Number(getRandomArbitrary(minX, levelPart).toFixed(0));
             currentEnemy = new enemy(xPosition);

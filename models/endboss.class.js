@@ -53,7 +53,7 @@ class Endboss extends MovableObject {
 
         setStoppableInterval(() => {
             this.playAnimation(this.IMAGES_PERCEIVING);
-        }, 200);
+        }, 100);
 
       
         setStoppableInterval(() => {
@@ -66,7 +66,7 @@ class Endboss extends MovableObject {
              }  
 
 
-         }, 100); 
+         }, 150); 
 
 
 

@@ -76,7 +76,6 @@ class World {
             }
             if (!(enemy instanceof Endboss) && this.jumpKill(enemy)) {
                 enemy.energy = 0;
-
                 setTimeout(() => {
                     let index = this.level.enemies.indexOf(enemy)
                     this.level.enemies.splice(index, 1);
@@ -86,16 +85,26 @@ class World {
             this.throwableObject.forEach((thrownObject, bottle) => {
                 if (this.bottleHit(enemy, bottle)) {
                     thrownObject.collision = true;
-                    thrownObject.x = enemy.x - 40;
-                    thrownObject.y = enemy.y;
-                    enemy.x = enemy.x + 10;
-                    enemy.y = enemy.y + 10;
-                    thrownObject.speedY = 0;
-                    thrownObject.acceleration = 0;
-                              
+                    if (!(enemy instanceof Endboss)) {
+                        thrownObject.x = enemy.x;
+                        thrownObject.y = enemy.y;
+                        thrownObject.speedX = 0;
+                        thrownObject.speedY = 0;
+                        thrownObject.acceleration = 0;
+                    }
+
+                    else {
+                        thrownObject.speedX = 0;
+                        thrownObject.speedY = 0;
+                        thrownObject.acceleration = 0;
+                    }
+
+
+
+
                     setTimeout(() => {
                         this.throwableObject.splice(bottle, 1);
-                    }, 120);
+                    }, 100);
                     enemy.hit(100);
                     if (enemy.isDead()) {
                         setTimeout(() => {
