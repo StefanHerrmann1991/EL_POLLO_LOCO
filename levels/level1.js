@@ -157,15 +157,13 @@ function initLevel1() {
             let levelPart = 719 * i;
             if (enemyAmount < 7) {
                 generateEnemiesAtX(minX, levelPart, Chicken, enemyAmount);
-                console.log(levelPart)
+                
             }
             else {
                 enemyAmount >= 7;
                 generateEnemiesAtX(minX, levelPart, Chicken, enemyAmount);
             }
-            console.log(ENEMIES)
-
-        }
+                   }
     }
 
 
@@ -175,8 +173,6 @@ function initLevel1() {
             let xPosition = Number(getRandomArbitrary(minX, levelPart).toFixed(0));
             currentEnemy = new enemy(xPosition);
             minX = xPosition;
-            console.log(minX);
-            console.log(currentEnemy);
             ENEMIES.push(currentEnemy);
         }
     }

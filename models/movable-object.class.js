@@ -5,7 +5,7 @@ class MovableObject extends DrawableObject {
     otherDirection = false;
     currentImage = 0;
     speedY = 0;
-    acceleration = 2.0;
+    acceleration = 2.5;
     energy;
     lastHit = 0;
     lastMove = 0;
@@ -29,7 +29,7 @@ class MovableObject extends DrawableObject {
      * @returns 
      */
     isAboveGround() {
-        if (this instanceof ThrowableObject) {
+        if (this instanceof ThrowableObject) {       
             return true;
         }
         else { return this.y < 180; }

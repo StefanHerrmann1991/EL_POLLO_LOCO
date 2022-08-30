@@ -19,7 +19,7 @@ class Chicken extends MovableObject {
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_DYING);
         this.x = x; // Zahl zwischen 0 und 500 Math ramdom generiert eine zufällige Zahl zwischen 0 und 1
-        this.speed = 0.15 + Math.random() * 0.7;
+        this.speed = 0.25 + Math.random() * 0.7;
         this.animate();
     }
 

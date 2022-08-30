@@ -32,32 +32,32 @@ class ThrowableObject extends MovableObject {
         this.x = x + 100;
         this.y = y + 30;
         this.throw();
-     }
+    }
 
 
- 
-/*     throwTime() { this.lastThrow = new Date().getTime(); }
 
-    isThrown() {
-        let timePassed = new Date().getTime() - this.lastThrow; // difference in ms
-        timePassed = timePassed / 1000; // difference in s
-        return timePassed < 0.8;
-    } */
+    /*     throwTime() { this.lastThrow = new Date().getTime(); }
+    
+        isThrown() {
+            let timePassed = new Date().getTime() - this.lastThrow; // difference in ms
+            timePassed = timePassed / 1000; // difference in s
+            return timePassed < 0.8;
+        } */
 
     throw() {
-       
-        this.speedY = 20;
-        this.applyGravity();
+      
+            this.speedY = 20;
+            this.applyGravity();
+            let throwInterval = setInterval(() => {this.x += 40;}, 60);
+            allIntervals.push(throwInterval);
+        
+      
         setStoppableInterval(() => {
-            this.x += 25
-        }, 25);
-
-        setStoppableInterval(() => {
-            if (!this.collision ) {  
-                this.playAnimation(this.IMAGES_BOTTLE_THROWING);             
-                                     }
+            if (!this.collision) {
+                this.playAnimation(this.IMAGES_BOTTLE_THROWING);
+            }
             else { this.playAnimation(this.IMAGES_BOTTLE_EXPLODING); }
-        }, 60);
+        }, 20);
     }
 }
 
