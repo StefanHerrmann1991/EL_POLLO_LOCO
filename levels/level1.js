@@ -20,10 +20,15 @@ function initLevel1() {
         'img/5.Fondo/Capas/3.Fondo3/2.png',
         'img/5.Fondo/Capas/2.Fondo2/2.png',
         'img/5.Fondo/Capas/1.suelo-fondo1/2.png']];
+    let CLOUDS_CHANGING = [
+        'img/5.Fondo/Capas/4.nubes/1.png',
+        'img/5.Fondo/Capas/4.nubes/2.png'];
+
 
     generateBackground(16);
     generateLoot(16);
     generateEnemies(16);
+    generateClouds(16);
 
     /**
      * These are the elements which presents the majority of the map.
@@ -31,9 +36,7 @@ function initLevel1() {
 
     level1 = new Level(
         ENEMIES,
-        [
-            new Cloud()
-        ],
+        CLOUDS,
         BACKGROUND,
         [
             new LootableObject(),
@@ -77,26 +80,40 @@ function initLevel1() {
             if (isOdd(i) == true) {
                 for (let k = 0; k < BACKGROUND_CHANGING[0].length; k++) {
                     x = i * 719
-                    BACKGROUND.push(new StaticObject(`${BACKGROUND_CHANGING[0][k]}`, x))
+                    BACKGROUND.push(new StaticObject(BACKGROUND_CHANGING[0][k], x))
                 }
             }
             else if (isOdd(i) == false) {
                 for (let m = 0; m < BACKGROUND_CHANGING[1].length; m++) {
                     x = i * 719
-                    BACKGROUND.push(new StaticObject(`${BACKGROUND_CHANGING[1][m]}`, x))
+                    BACKGROUND.push(new StaticObject(BACKGROUND_CHANGING[1][m], x))
                 }
             }
         }
         LEVEL_END = worldLength * 719 - 630;
     }
 
-    /**
-     * 
-     * @param {number} num The parameter tests if a number is odd.
-     * @returns true when the number isOdd
-     */
+    function generateClouds(worldLength) {
+        for (let i = -1; i < worldLength; i++) {
+            if (isOdd(i) == true) {
+                for (let k = 0; k < CLOUDS_CHANGING.length; k++) {
+                    x = i * 719
+                    CLOUDS.push(new Cloud(CLOUDS_CHANGING[0], x));
+                }
+            }
+            else if (isOdd(i) == false) {
+                for (let m = 0; m < CLOUDS_CHANGING.length; m++) {
+                    x = i * 719
+                    CLOUDS.push(new Cloud(CLOUDS_CHANGING[1], x))
+                }
+            }
+        }
+    }
 
-    function isOdd(num) { return Math.abs(num % 2) }
+
+
+
+
 
     /* TODO: not doubled xPosition
     in interval to prevent coins from being to near to each other*/
@@ -164,18 +181,17 @@ function initLevel1() {
             let levelPart = 719 * i;
             if (enemyAmount < 7) {
                 generateEnemiesAtX(minX, levelPart, Chicken, enemyAmount);
-                
             }
             else {
                 enemyAmount >= 7;
                 generateEnemiesAtX(minX, levelPart, Chicken, enemyAmount);
             }
-                   }
+        }
     }
 
 
     function generateEnemiesAtX(minX, levelPart, enemy, enemyAmount) {
-        endbossPosition = LEVEL_END - 4000;
+        endbossPosition = LEVEL_END - 800;
         ENEMIES.push(new Endboss(endbossPosition))
         for (let i = 1; i < enemyAmount; i++) {
             let xPosition = Number(getRandomArbitrary(minX, levelPart).toFixed(0));
@@ -192,32 +208,15 @@ function initLevel1() {
 }
 
 
-
-
-/*
- 
-            let levelPart2 = worldLength * 719 * 2 / 4;
-let levelPart3 = worldLength * 719 * 3 / 4;
-let levelPart4 = worldLength * 719 * 4 / 4;
-if (levelQuarter < 0.25 && levelQuarter > 0) {
-        calcEnemyAmount(worldLength, enemyAmount, 0.25);
-        let levelPart = levelXQuarter * 0.25;
-        generateEnemiesAtRanX(minX, enemyAmount, Chicken, levelPart);
-    }
-    else if (levelQuarter < 0.5 && levelQuarter > 0.25) {
-        calcEnemyAmount(worldLength, enemyAmount, 0.5)
-    }
-    else if (levelQuarter < 0.75 && levelQuarter > 0.5) { calcEnemyAmount(worldLength, enemyAmount, 0.75) }
-    else if (levelQuarter < 1.0 && levelQuarter > 0.75) { calcEnemyAmount(worldLength, enemyAmount, 1.0) }     function calcEnemyAmount(worldLength, enemyAmount) {
-let numberOfEnemies = levelPercent * worldLength;
-enemyAmount = enemyAmount - numberOfEnemies;
-}*/
+/**
+    * 
+    * @param {number} num The parameter tests if a number is odd.
+    * @returns true when the number isOdd
+    */
 
 
 
-
-
-
+function isOdd(num) { return Math.abs(num % 2) }
 
 
 

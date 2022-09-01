@@ -55,9 +55,7 @@ class Endboss extends MovableObject {
 
     animate() {
 
-
         let chickenInterval = setInterval(() => {
-
             if (!this.isDead() && !this.isHurt()) {
                 this.playAnimation(this.IMAGES_PERCEIVING);
             }
@@ -69,9 +67,6 @@ class Endboss extends MovableObject {
                 setTimeout(() => {
                     this.loadImage('img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/4.Muerte/G27.png');
                     clearInterval(chickenInterval);
-                    this.height = 100;
-                    this.width = 100;
-                    this.y = 330;
                 }, 1500);
             }
         }, 100);

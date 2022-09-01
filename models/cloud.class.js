@@ -1,23 +1,29 @@
 class Cloud extends MovableObject {
-    CLOUD_IMAGES = ["img/5.Fondo/Capas/4.nubes/1.png",
-                    "img/5.Fondo/Capas/4.nubes/2.png"]
+    y = 20;
 
-                    /* TODO*/
-    constructor(x, y) {
-        super().loadImage('img/5.Fondo/Capas/4.nubes/1.png');
-        this.x = x // Zahl zwischen 0 und 500 Math ramdom generiert eine zufällige Zahl zwischen 0 und 1
-        this.y = y // Zahl zwischen 0 und 500 Math ramdom generiert eine zufällige Zahl zwischen 0 und 1
+    constructor(imagePath, x) {
+        super().loadImage(imagePath);
+        this.x = x;
         this.height = 350;
         this.width = 600;
         this.animateClouds();
+
     }
     animateClouds() {
         this.moveLeft();
     }
+
+
     moveLeft() {
         setStoppableInterval(() => {
             this.x -= this.speed;
+            if (this.x < 0) {
+
+            }
         }, 1000 / 60);
     }
 }
+
+
+
 

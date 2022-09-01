@@ -58,7 +58,7 @@ class World {
     checkBottleCount() {
         if (!this.character.isDead()) {
             document.getElementById('bottleCounter').innerHTML = `
-                <img class="bottle-stat" src="img/0.Own_Pictures/bottleThrowing/bottle_throwing6.png"> 
+                <img class="bottle-stat" src="img/7.Marcadores/Icono/Botella.png"> 
                 <div>= ${this.bottleCount}<div>`
 
         } else { setTimeout(() => { document.getElementById('bottleCounter').innerHTML = ""; }, 2000); }
@@ -68,11 +68,17 @@ class World {
     checkCoinCount() {
         if (!this.character.isDead()) {
             document.getElementById('coinCounter').innerHTML = `
-                <img class="bottle-stat" src="img/8.Coin/Moneda2.png"> 
+                <img class="bottle-stat" src="img/7.Marcadores/Icono/Monedas.png"> 
                 <div>= ${this.coinCount}<div>`
 
         } else { setTimeout(() => { document.getElementById('coinCounter').innerHTML = ""; }, 2000); }
 
+    }
+
+    checkCharEntering() {
+        
+
+        console.log("enboss sees character");
     }
 
     checkCollisions() {
