@@ -98,13 +98,13 @@ function initLevel1() {
             if (isOdd(i) == true) {
                 for (let k = 0; k < CLOUDS_CHANGING.length; k++) {
                     x = i * 719
-                    CLOUDS.push(new Cloud(CLOUDS_CHANGING[0], x));
+                    CLOUDS.push(new Cloud(CLOUDS_CHANGING[0], x, LEVEL_END));
                 }
             }
             else if (isOdd(i) == false) {
                 for (let m = 0; m < CLOUDS_CHANGING.length; m++) {
                     x = i * 719
-                    CLOUDS.push(new Cloud(CLOUDS_CHANGING[1], x))
+                    CLOUDS.push(new Cloud(CLOUDS_CHANGING[1], x, LEVEL_END))
                 }
             }
         }
