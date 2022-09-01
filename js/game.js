@@ -141,9 +141,6 @@ function touchCrossEnd(position) {
     }
 }
 
-function buttonPush(button, command) {
-
-}
 
 
 /**
@@ -153,8 +150,8 @@ function buttonPush(button, command) {
 
 
 
-function setStoppableInterval(fn, time) {
-    let id = setInterval(fn, time);
+function setStoppableInterval(fn, frame) {
+    let id = setInterval(fn, frame);
     allIntervals.push(id);
 }
 
@@ -163,3 +160,11 @@ function stopGame() {
 }
 
 
+
+
+function setTimeableInterval(fn, frame, timeout) {
+    let id = setInterval(fn, frame);
+    setTimeout(() => {
+        clearInterval(id);
+     }, timeout);
+}

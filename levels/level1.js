@@ -42,6 +42,13 @@ function initLevel1() {
             new LootableObject(),
             new LootableObject(),
             new LootableObject(),
+            new LootableObject(),
+            new LootableObject(),
+            new LootableObject(),
+            new LootableObject(),
+            new LootableObject(),
+            new LootableObject(),
+            new LootableObject(),
             new LootableObject()
         ],
         LOOT,

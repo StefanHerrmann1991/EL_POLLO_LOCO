@@ -46,6 +46,14 @@ class World {
             }, 2000);
         }
     }
+    checkEndbossDeath() {
+        if (this.endboss.isDead()) {
+            setTimeout(() => {
+                let end = new Endscreen(this.character.x, this.character.y);
+                this.endscreen.push(end);
+            }, 2000);
+        }
+    }
 
     checkBottleCount() {
         if (!this.character.isDead()) {
@@ -69,7 +77,7 @@ class World {
 
     checkCollisions() {
 
-        this.level.enemies.forEach((enemy, i) => {
+        this.level.enemies.forEach((enemy) => {
             if (this.charGotHitBy(enemy)) {
                 this.character.hit(5);
                 this.statusbar.setPercentage(this.character.energy);
@@ -92,21 +100,16 @@ class World {
                         thrownObject.speedY = 0;
                         thrownObject.acceleration = 0;
                     }
-
                     else {
                         thrownObject.speedX = 0;
                         thrownObject.speedY = 0;
                         thrownObject.acceleration = 0;
                     }
-
-
-
-
                     setTimeout(() => {
                         this.throwableObject.splice(bottle, 1);
                     }, 100);
                     enemy.hit(100);
-                    if (enemy.isDead()) {
+                    if (!(enemy instanceof Endboss) && enemy.isDead()) {
                         setTimeout(() => {
                             let index = this.level.enemies.indexOf(enemy)
                             this.level.enemies.splice(index, 1);

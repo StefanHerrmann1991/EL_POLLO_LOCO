@@ -1,7 +1,7 @@
 class ThrowableObject extends MovableObject {
 
-    speedY = 50;
-    speedX = 40;
+    speedY = 30;
+    speedX = 50;
     lastThrow = 0;
     collision = false;
     IMAGES_BOTTLE_THROWING = [
@@ -47,7 +47,7 @@ class ThrowableObject extends MovableObject {
 
     throw() {
 
-        this.speedY = 20;
+        this.speedY = 30;
         this.applyGravity();
         setStoppableInterval(() => { this.x += this.speedX; }, 60);
         setStoppableInterval(() => {

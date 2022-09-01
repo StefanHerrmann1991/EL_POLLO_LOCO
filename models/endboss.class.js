@@ -33,7 +33,11 @@ class Endboss extends MovableObject {
     IMAGES_DYING = [
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/4.Muerte/G24.png',
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/4.Muerte/G25.png',
-        'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/4.Muerte/G26.png'];
+        'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/4.Muerte/G26.png'
+    ];
+
+
+
 
     constructor(x) {
         super().loadImage(this.IMAGES_PERCEIVING[0]);
@@ -45,32 +49,31 @@ class Endboss extends MovableObject {
         this.animate();
     }
 
-/**
- * The function plays the animations for the enboss chicken. 
- */
+    /**
+     * The function plays the animations for the enboss chicken. 
+     */
 
     animate() {
 
-        setStoppableInterval(() => {
-            this.playAnimation(this.IMAGES_PERCEIVING);
+
+        let chickenInterval = setInterval(() => {
+
+            if (!this.isDead() && !this.isHurt()) {
+                this.playAnimation(this.IMAGES_PERCEIVING);
+            }
+            else if (this.isHurt() && !this.isDead()) {
+                this.playAnimation(this.IMAGES_HURTING);
+            }
+            if (this.isDead()) {
+                this.playAnimation(this.IMAGES_DYING);
+                setTimeout(() => {
+                    this.loadImage('img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/4.Muerte/G27.png');
+                    clearInterval(chickenInterval);
+                    this.height = 100;
+                    this.width = 100;
+                    this.y = 330;
+                }, 1500);
+            }
         }, 100);
-
-      
-        setStoppableInterval(() => {
-             if (this.isDead()) {
-                 this.playAnimation(this.IMAGES_DYING);                   
-             }
-     
-             else if (this.isHurt()) {
-                 this.playAnimation(this.IMAGES_HURTING);
-             }  
-
-
-         }, 150); 
-
-
-
-
-
     }
 }
