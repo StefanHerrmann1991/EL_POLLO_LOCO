@@ -69,6 +69,6 @@ class Endboss extends MovableObject {
                     clearInterval(chickenInterval);
                 }, 1500);
             }
-        }, 100);
+        }, 90);
     }
 }

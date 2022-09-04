@@ -1,12 +1,14 @@
 
 let level1
 function initLevel1() {
+    let start = false;
     let generatedCoinCluster = 0;
-    let generatedEnemies = 0;
     let coins;
     let BACKGROUND = [];
     let LEVEL_END;
+    let level1_ENDBOSS_AREA;
     let LEVEL_START = 100;
+    let BOTTLE = [];
     let CLOUDS = [];
     let LOOT = [];
     let ENEMIES = [];
@@ -14,21 +16,19 @@ function initLevel1() {
         'img/5.Fondo/Capas/5.cielo_1920-1080px.png',
         'img/5.Fondo/Capas/3.Fondo3/1.png',
         'img/5.Fondo/Capas/2.Fondo2/1.png',
-        'img/5.Fondo/Capas/1.suelo-fondo1/1.png'],
-    [
-        'img/5.Fondo/Capas/5.cielo_1920-1080px.png',
+        'img/5.Fondo/Capas/1.suelo-fondo1/1.png'
+    ],
+    ['img/5.Fondo/Capas/5.cielo_1920-1080px.png',
         'img/5.Fondo/Capas/3.Fondo3/2.png',
         'img/5.Fondo/Capas/2.Fondo2/2.png',
-        'img/5.Fondo/Capas/1.suelo-fondo1/2.png']];
+        'img/5.Fondo/Capas/1.suelo-fondo1/2.png'
+    ]];
     let CLOUDS_CHANGING = [
         'img/5.Fondo/Capas/4.nubes/1.png',
         'img/5.Fondo/Capas/4.nubes/2.png'];
 
 
-    generateBackground(16);
-    generateLoot(16);
-    generateEnemies(16);
-    generateClouds(16);
+    generateLevel(16);
 
     /**
      * These are the elements which presents the majority of the map.
@@ -38,22 +38,7 @@ function initLevel1() {
         ENEMIES,
         CLOUDS,
         BACKGROUND,
-        [
-            new LootableObject(),
-            new LootableObject(),
-            new LootableObject(),
-            new LootableObject(),
-            new LootableObject(),
-            new LootableObject(),
-            new LootableObject(),
-            new LootableObject(),
-            new LootableObject(),
-            new LootableObject(),
-            new LootableObject(),
-            new LootableObject(),
-            new LootableObject(),
-            new LootableObject()
-        ],
+        BOTTLE,
         LOOT,
         LEVEL_END
 
@@ -67,9 +52,11 @@ function initLevel1() {
 
     function generateLevel(worldLength) {
         generateBackground(worldLength);
-        generateClouds(worldLength);
-        generateEnemies(worldLength);
         generateLoot(worldLength);
+        generateEnemies(worldLength);
+        generateClouds(worldLength);
+        generateBottles(worldLength);
+
     }
 
 
@@ -110,7 +97,13 @@ function initLevel1() {
         }
     }
 
-
+    function generateBottles(worldLength) {
+        for (let i = 0; i < worldLength; i++) {
+            let xPosition = Number(getRandomArbitrary(LEVEL_START, LEVEL_END - 1200).toFixed(0));
+            let yPostion = Number(getRandomArbitrary(100, 300).toFixed(0));
+            BOTTLE.push(new LootableObject(xPosition, yPostion));
+        }
+    }
 
 
 

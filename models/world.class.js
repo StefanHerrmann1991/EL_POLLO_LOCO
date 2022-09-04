@@ -76,9 +76,7 @@ class World {
     }
 
     checkCharEntering() {
-        
-
-        console.log("enboss sees character");
+                console.log("enboss sees character");
     }
 
     checkCollisions() {
@@ -207,6 +205,4 @@ class World {
         movableObject.x = movableObject.x * -1;
         this.ctx.restore();
     }
-
-
 }
