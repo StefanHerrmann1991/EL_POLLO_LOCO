@@ -89,7 +89,7 @@ class Character extends MovableObject {
 
         setStoppableInterval(() => {
             this.walking_sound.pause();
-
+   
             if (!this.isDead() && this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.walking_sound.play();
@@ -97,9 +97,9 @@ class Character extends MovableObject {
             }
             if (!this.isDead() && this.world.keyboard.LEFT && this.x > 0) {
                 this.moveLeft();
-                console.log(this.x);
                 this.walking_sound.play();
                 this.otherDirection = true;
+            
             }
             if (!this.isDead() && this.world.keyboard.SPACE && (!this.isAboveGround())) {
                 this.speedY = 30;

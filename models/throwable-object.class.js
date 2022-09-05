@@ -23,16 +23,22 @@ class ThrowableObject extends MovableObject {
         'img/6.botella/Rotación/Splash de salsa/Mesa de trabajo 1 copia 12.png'];
     world;
 
-    constructor(x, y) {
+    constructor(x, y, otherDirection) {
 
         super().loadImage('img/6.botella/Rotación/Mesa de trabajo 1.png');
         this.loadImages(this.IMAGES_BOTTLE_THROWING);
         this.loadImages(this.IMAGES_BOTTLE_EXPLODING);
         this.height = 80;
         this.width = 80;
-        this.x = x + 100;
-        this.y = y + 30;
-        this.throw();
+        if (!otherDirection) {
+            this.x = x + 100;
+            this.y = y + 30;
+        }
+        else {
+            this.x = x;
+            this.y = y + 30;
+        }
+        this.throw(otherDirection);
     }
 
 
@@ -45,11 +51,21 @@ class ThrowableObject extends MovableObject {
             return timePassed < 0.8;
         } */
 
-    throw() {
+    throw(otherDirection) {
 
         this.speedY = 30;
         this.applyGravity();
-        setStoppableInterval(() => { this.x += this.speedX; }, 60);
+
+        setStoppableInterval(() => {
+            if (!otherDirection) { this.x += this.speedX; }
+            else {
+
+                this.x -= this.speedX;
+            }
+        }, 60);
+
+
+
         setStoppableInterval(() => {
             if (!this.collision) {
                 this.playAnimation(this.IMAGES_BOTTLE_THROWING);

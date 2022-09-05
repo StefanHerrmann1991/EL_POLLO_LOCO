@@ -85,6 +85,7 @@ class World {
             if (this.charGotHitBy(enemy)) {
                 this.character.hit(5);
                 this.statusbar.setPercentage(this.character.energy);
+                console.log(this.character);
             }
             if (!(enemy instanceof Endboss) && this.jumpKill(enemy)) {
                 enemy.energy = 0;
@@ -149,7 +150,7 @@ class World {
             let timePassed = new Date().getTime() - this.lastThrow;
             if (timePassed > 500) {
                 this.bottleCount--;
-                let thrownBottle = new ThrowableObject(this.character.x, this.character.y);
+                let thrownBottle = new ThrowableObject(this.character.x, this.character.y, this.character.otherDirection);
                 this.throwableObject.push(thrownBottle);
                 this.lastThrow = new Date().getTime();
             }
