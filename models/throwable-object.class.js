@@ -59,7 +59,6 @@ class ThrowableObject extends MovableObject {
         setStoppableInterval(() => {
             if (!otherDirection) { this.x += this.speedX; }
             else {
-
                 this.x -= this.speedX;
             }
         }, 60);

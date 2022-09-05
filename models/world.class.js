@@ -76,7 +76,7 @@ class World {
     }
 
     checkCharEntering() {
-                console.log("enboss sees character");
+        console.log("enboss sees character");
     }
 
     checkCollisions() {
@@ -98,18 +98,10 @@ class World {
             this.throwableObject.forEach((thrownObject, bottle) => {
                 if (this.bottleHit(enemy, bottle)) {
                     thrownObject.collision = true;
-                    if (!(enemy instanceof Endboss)) {
-                        thrownObject.x = enemy.x;
-                        thrownObject.y = enemy.y;
-                        thrownObject.speedX = 0;
-                        thrownObject.speedY = 0;
-                        thrownObject.acceleration = 0;
-                    }
-                    else {
-                        thrownObject.speedX = 0;
-                        thrownObject.speedY = 0;
-                        thrownObject.acceleration = 0;
-                    }
+                    thrownObject.speedX = 0;
+                    thrownObject.speedY = 0;
+                    thrownObject.acceleration = 0;
+
                     setTimeout(() => {
                         this.throwableObject.splice(bottle, 1);
                     }, 100);

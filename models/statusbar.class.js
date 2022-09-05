@@ -8,12 +8,12 @@ class Statusbar extends DrawableObject {
         'img/7.Marcadores/Barra/Marcador vida/azul/100_.png']
 
     IMAGES_LIFEBAR_ENDBOSS = [
-        'img/7.Marcadores/live_endboss/chickenLifeBar0.png',
-        'img/7.Marcadores/live_endboss/chickenLifeBar1.png',
-        'img/7.Marcadores/live_endboss/chickenLifeBar2.png',
-        'img/7.Marcadores/live_endboss/chickenLifeBar3.png',
-        'img/7.Marcadores/live_endboss/chickenLifeBar4.png',
-        'img/7.Marcadores/live_endboss/chickenLifeBar5.png']
+        'img/7.Marcadores/live_endboss/0_.png  ',
+        'img/7.Marcadores/live_endboss/20_.png ',
+        'img/7.Marcadores/live_endboss/40_.png ',
+        'img/7.Marcadores/live_endboss/60_.png ',
+        'img/7.Marcadores/live_endboss/80_.png ',
+        'img/7.Marcadores/live_endboss/100_.png']
 
 
     percentage = 100;
@@ -35,12 +35,12 @@ class Statusbar extends DrawableObject {
         this.img = this.imageCache[path];
     }
 
-/*     setPercentageEndboss(percentage) {
-        this.percentage = percentage;
-        let path = this.IMAGES_LIFEBAR_ENDBOSS[this.whichStatus()];
-        this.img = this.imageCache[path];
-    }
- */
+    /*     setPercentageEndboss(percentage) {
+            this.percentage = percentage;
+            let path = this.IMAGES_LIFEBAR_ENDBOSS[this.whichStatus()];
+            this.img = this.imageCache[path];
+        }
+     */
 
     whichStatus() {
         if (this.percentage == 100) { return 5; }

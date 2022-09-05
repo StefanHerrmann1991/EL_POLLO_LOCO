@@ -1,7 +1,7 @@
 
 let level1
 function initLevel1() {
-    let start = false;
+
     let generatedCoinCluster = 0;
     let coins;
     let BACKGROUND = [];

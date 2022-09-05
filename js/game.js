@@ -2,7 +2,7 @@ let canvas;
 let world;
 let keyboard;
 let allIntervals = [];
-
+let start = false;
 /** 
  * The function initiates the canvas and for the game relevant functions.
  * 
@@ -13,7 +13,7 @@ function init() {
     initLevel1();
     keyboard = new Keyboard();
     world = new World(canvas, keyboard);
-    lifebar = new Statusbar();
+
 }
 
 
