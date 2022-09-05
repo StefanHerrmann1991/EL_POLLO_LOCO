@@ -12,6 +12,7 @@ function initLevel1() {
     let CLOUDS = [];
     let LOOT = [];
     let ENEMIES = [];
+    let ENDBOSS = [];
     let BACKGROUND_CHANGING = [[
         'img/5.Fondo/Capas/5.cielo_1920-1080px.png',
         'img/5.Fondo/Capas/3.Fondo3/1.png',

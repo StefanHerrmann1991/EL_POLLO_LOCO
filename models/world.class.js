@@ -2,6 +2,7 @@ class World {
 
     character = new Character();
     statusbar = new Statusbar();
+    statusbarEndboss = new StatusbarEndboss();
     endscreen = [];
     level = level1;
     endboss = this.level.enemies.endboss;
@@ -85,7 +86,6 @@ class World {
             if (this.charGotHitBy(enemy)) {
                 this.character.hit(5);
                 this.statusbar.setPercentage(this.character.energy);
-                console.log(this.character);
             }
             if (!(enemy instanceof Endboss) && this.jumpKill(enemy)) {
                 enemy.energy = 0;
@@ -105,12 +105,16 @@ class World {
                         this.throwableObject.splice(bottle, 1);
                     }, 100);
                     enemy.hit(100);
+                    if (enemy instanceof Endboss) {
+                       (console.log(enemy.energy))
+                        this.statusbarEndboss.setPercentage(enemy.energy);
+                    }
                     if (!(enemy instanceof Endboss) && enemy.isDead()) {
                         setTimeout(() => {
                             let index = this.level.enemies.indexOf(enemy)
                             this.level.enemies.splice(index, 1);
                         }, 1000);
-                         
+
                     }
                 }
             })
@@ -159,6 +163,7 @@ class World {
         this.addObjectsToMap(this.throwableObject);
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusbar);
+        this.addToMap(this.statusbarEndboss);
         this.ctx.translate(this.camera_x, 0);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.clouds);
