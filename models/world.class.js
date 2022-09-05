@@ -101,7 +101,6 @@ class World {
                     thrownObject.speedX = 0;
                     thrownObject.speedY = 0;
                     thrownObject.acceleration = 0;
-
                     setTimeout(() => {
                         this.throwableObject.splice(bottle, 1);
                     }, 100);
@@ -111,6 +110,7 @@ class World {
                             let index = this.level.enemies.indexOf(enemy)
                             this.level.enemies.splice(index, 1);
                         }, 1000);
+                         
                     }
                 }
             })
