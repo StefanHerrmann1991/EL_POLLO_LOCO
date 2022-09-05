@@ -5,7 +5,6 @@ class World {
     statusbarEndboss = new StatusbarEndboss();
     endscreen = [];
     level = level1;
-    endboss = this.level.enemies.endboss;
     canvas;
     ctx;
     keyboard;

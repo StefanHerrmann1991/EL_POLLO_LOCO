@@ -1,5 +1,5 @@
 
-let level1
+let level1;
 function initLevel1() {
 
     let generatedCoinCluster = 0;
@@ -42,7 +42,6 @@ function initLevel1() {
         BOTTLE,
         LOOT,
         LEVEL_END
-
     );
 
     /**
@@ -79,7 +78,7 @@ function initLevel1() {
             }
         }
         LEVEL_END = worldLength * 719 - 630;
-    }
+       }
 
     function generateClouds(worldLength) {
         for (let i = -1; i < worldLength; i++) {
