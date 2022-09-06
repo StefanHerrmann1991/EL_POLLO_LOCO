@@ -60,9 +60,7 @@ class World {
             document.getElementById('bottleCounter').innerHTML = `
                 <img class="bottle-stat" src="img/7.Marcadores/Icono/Botella.png"> 
                 <div>= ${this.bottleCount}<div>`
-
         } else { setTimeout(() => { document.getElementById('bottleCounter').innerHTML = ""; }, 2000); }
-
     }
 
     checkCoinCount() {
@@ -76,7 +74,7 @@ class World {
     }
 
     checkCharEntering() {
-        console.log("enboss sees character");
+        if (this.chracter.x > this.level.LEVEL_END) { }
     }
 
     checkCollisions() {
@@ -94,6 +92,12 @@ class World {
                 }, 1000);
             }
 
+
+            if(enemy instanceof Endboss && this.character.isInArea(enemy)) 
+            { enemy.attack = true;
+
+            }
+
             this.throwableObject.forEach((thrownObject, bottle) => {
                 if (this.bottleHit(enemy, bottle)) {
                     thrownObject.collision = true;
@@ -105,7 +109,6 @@ class World {
                     }, 100);
                     enemy.hit(100);
                     if (enemy instanceof Endboss) {
-                       (console.log(enemy.energy))
                         this.statusbarEndboss.setPercentage(enemy.energy);
                     }
                     if (!(enemy instanceof Endboss) && enemy.isDead()) {
@@ -113,7 +116,6 @@ class World {
                             let index = this.level.enemies.indexOf(enemy)
                             this.level.enemies.splice(index, 1);
                         }, 1000);
-
                     }
                 }
             })

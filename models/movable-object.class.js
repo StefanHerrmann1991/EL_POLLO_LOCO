@@ -106,20 +106,21 @@ class MovableObject extends DrawableObject {
             && this.y < movableObject.y + movableObject.height
     }
 
-    objectIsColliding(movableObject) {
-        return this.x + this.width > movableObject.x
+    isInArea(movableObject) {
+      
+        return this.x + this.width > movableObject.x - 400
             && this.y + this.height > movableObject.y
-            && this.x < movableObject.x + movableObject.width
-            && this.y < movableObject.y + movableObject.height
+            && this.x < movableObject.x - 400 + movableObject.width + 400
+            && this.y < movableObject.y - 400 + movableObject.height
     }
 
 
-    checkArea(movableObject, movableObject2) {
+/*  isInArea(movableObject, movableObject2) {
         return movableObject.x + movableObject.width > movableObject2.x
         && movableObject.y + movableObject.height > movableObject2.y
         && movableObject.x < movableObject2.x + movableObject2.width
         && movableObject.y < movableObject2.y + movableObject2.height
-    }
+    } */
 
 
     hit(energyLost) {
@@ -135,8 +136,6 @@ class MovableObject extends DrawableObject {
         timePassed = timePassed / 1000; // difference in s
         return timePassed < 0.8;
     }
-
-  
 
     isDead() {
         return this.energy == 0;

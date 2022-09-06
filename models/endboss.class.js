@@ -4,6 +4,7 @@ class Endboss extends MovableObject {
     height = 500;
     width = 400;
     y = -30;
+    attack = false;
 
     IMAGES_PERCEIVING = [
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/1.Alerta/G5.png',
@@ -58,6 +59,9 @@ class Endboss extends MovableObject {
         let chickenInterval = setInterval(() => {
             if (!this.isDead() && !this.isHurt()) {
                 this.playAnimation(this.IMAGES_PERCEIVING);
+            }
+            if (this.attack && !this.isDead() && !this.isHurt()) {
+                this.playAnimation(this.IMAGES_ATTACKING);
             }
             else if (this.isHurt() && !this.isDead()) {
                 this.playAnimation(this.IMAGES_HURTING);
