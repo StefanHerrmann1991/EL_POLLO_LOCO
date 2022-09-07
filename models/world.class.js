@@ -92,10 +92,9 @@ class World {
                 }, 1000);
             }
 
-
             if(enemy instanceof Endboss && this.character.isInArea(enemy)) 
             { enemy.attack = true;
-
+                console.log('attack');
             }
 
             this.throwableObject.forEach((thrownObject, bottle) => {

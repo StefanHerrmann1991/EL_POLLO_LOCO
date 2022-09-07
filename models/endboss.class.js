@@ -56,14 +56,19 @@ class Endboss extends MovableObject {
 
     animate() {
 
+
+
+
+
         let chickenInterval = setInterval(() => {
-            if (!this.isDead() && !this.isHurt()) {
+            if (!this.isDead() && !this.isHurt() && !this.attack) {
                 this.playAnimation(this.IMAGES_PERCEIVING);
             }
             if (this.attack && !this.isDead() && !this.isHurt()) {
                 this.playAnimation(this.IMAGES_ATTACKING);
+                this.moveLeft(); 
             }
-            else if (this.isHurt() && !this.isDead()) {
+            else if (this.isHurt() && !this.isDead() && !this.attack) {
                 this.playAnimation(this.IMAGES_HURTING);
             }
             if (this.isDead()) {
