@@ -4,6 +4,7 @@ class Endboss extends MovableObject {
     height = 500;
     width = 400;
     y = -30;
+    speed = 60;
     attack = false;
 
     IMAGES_PERCEIVING = [
@@ -55,10 +56,6 @@ class Endboss extends MovableObject {
      */
 
     animate() {
-
-
-
-
 
         let chickenInterval = setInterval(() => {
             if (!this.isDead() && !this.isHurt() && !this.attack) {

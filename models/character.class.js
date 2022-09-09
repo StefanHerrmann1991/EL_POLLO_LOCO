@@ -4,6 +4,7 @@ class Character extends MovableObject {
     speed = 15;
     jump = false;
     energy = 100;
+    death = false;
     /* constructor führt sobald der Charakter geladen wird, die Funktionen innerhalb des Constructors aus. */
     IMAGES_WALKING = [
         'img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-21.png',
@@ -23,7 +24,10 @@ class Character extends MovableObject {
         'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-39.png'
     ];
 
-    IMAGES_DODGING = ['img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-38.png']
+    IMAGES_DODGING = [
+        'img/2.Secuencias_Personaje-Pepe-corrección/6.Dodging/dodge0.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/6.Dodging/dodge1.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/6.Dodging/dodge2.png']
 
     IMAGES_DYING = [
         'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-51.png',
@@ -76,6 +80,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_HURTING);
         this.loadImages(this.IMAGES_DYING);
+        this.loadImages(this.IMAGES_DODGING);
         this.applyGravity();
         this.characterAnimate();
     }
@@ -89,7 +94,7 @@ class Character extends MovableObject {
 
         setStoppableInterval(() => {
             this.walking_sound.pause();
-   
+
             if (!this.isDead() && this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.walking_sound.play();
@@ -99,10 +104,14 @@ class Character extends MovableObject {
                 this.moveLeft();
                 this.walking_sound.play();
                 this.otherDirection = true;
-            
             }
-            if (!this.isDead() && this.world.keyboard.SPACE && (!this.isAboveGround())) {
-                this.speedY = 30;
+
+            if (!this.isDead() && this.world.keyboard.DODGE && !this.isAboveGround()) {
+                this.dodge();
+            }
+
+            if (!this.isDead() && this.world.keyboard.SPACE && !this.isAboveGround()) {
+                this.speedY = 35;
             }
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
@@ -113,9 +122,9 @@ class Character extends MovableObject {
             if (!this.isDead() && !this.isHurt() && !this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_IDLE);
             }
-
-            if (this.isDead()) {
+            if (this.isDead() && !this.death) {
                 this.playAnimation(this.IMAGES_DYING);
+                this.death = true;
                 setTimeout(() => {
                     this.loadImage('img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-58.png');
                 }, 400);
@@ -123,6 +132,9 @@ class Character extends MovableObject {
             else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURTING);
             }
+
+            else if (this.world.keyboard.DODGE) { this.playAnimation(this.IMAGES_DODGING); }
+
             if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
             } else {
@@ -130,6 +142,6 @@ class Character extends MovableObject {
                     this.playAnimation(this.IMAGES_WALKING);
                 }
             }
-        }, 100);
+        }, 120);
     }
 }

@@ -8,4 +8,5 @@ class Keyboard {
     RIGHT = false;
     SPACE = false; //space = jump
     THROW = false; //throw a bottle
+    DODGE = false; //dodge the enemy attacks
 }

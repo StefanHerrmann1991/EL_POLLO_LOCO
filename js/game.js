@@ -13,7 +13,6 @@ function init() {
     initLevel1();
     keyboard = new Keyboard();
     world = new World(canvas, keyboard);
-
 }
 
 
@@ -41,6 +40,9 @@ document.onkeydown = function (e) {
         case 'ArrowUp':
             keyboard.THROW = true;
             break;
+        case 's':
+        case 'ArrowDown':
+            keyboard.DODGE = true;
     }
 };
 
@@ -67,6 +69,11 @@ document.onkeyup = function (e) {
         case 'ArrowUp':
             keyboard.THROW = false;
             break;
+
+        case 's':
+        case 'ArrowDown':
+            keyboard.DODGE = false
+
     }
 };
 
@@ -157,6 +164,7 @@ function setStoppableInterval(fn, frame) {
 
 function stopGame() {
     allIntervals.forEach(clearInterval);
+    allIntervals = [];
 }
 
 
@@ -166,5 +174,5 @@ function setTimeableInterval(fn, frame, timeout) {
     let id = setInterval(fn, frame);
     setTimeout(() => {
         clearInterval(id);
-     }, timeout);
+    }, timeout);
 }

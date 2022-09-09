@@ -43,14 +43,16 @@ class World {
             setTimeout(() => {
                 let end = new Endscreen(this.character.x, this.character.y);
                 this.endscreen.push(end);
+                stopGame();
             }, 2000);
         }
     }
     checkEndbossDeath() {
         if (this.endboss.isDead()) {
+         
             setTimeout(() => {
                 let end = new Endscreen(this.character.x, this.character.y);
-                this.endscreen.push(end);
+                this.endscreen.push(end);            
             }, 2000);
         }
     }
@@ -93,8 +95,10 @@ class World {
             }
 
             if(enemy instanceof Endboss && this.character.isInArea(enemy)) 
-            { enemy.attack = true;
-                console.log('attack');
+            {   enemy.attack = true;
+            if (this.character.isColliding(enemy instanceof Endboss)) {
+
+            }
             }
 
             this.throwableObject.forEach((thrownObject, bottle) => {

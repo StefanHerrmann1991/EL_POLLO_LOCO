@@ -29,7 +29,7 @@ class MovableObject extends DrawableObject {
      * @returns 
      */
     isAboveGround() {
-        if (this instanceof ThrowableObject) {       
+        if (this instanceof ThrowableObject) {
             return true;
         }
         else { return this.y < 180; }
@@ -60,6 +60,11 @@ class MovableObject extends DrawableObject {
     }
 
 
+    moveToPosition(movableObject) {
+        if (this.x > movableObject.x) { this.moveLeft() }
+        else { this.moveRight() }
+    }
+
 
     /**The function increments through images. When the last image in an array is loaded it starts from the beginning. */
 
@@ -78,9 +83,14 @@ class MovableObject extends DrawableObject {
      */
 
     jump() {
-        this.speedY = 1000;
+        this.speedY = 30;
     }
 
+
+    dodge(y, height) {
+        x = -180;
+        y = this.height - 180;
+    }
 
     /**
      * The function checks, if the Object is colliding with another object.
@@ -107,7 +117,7 @@ class MovableObject extends DrawableObject {
     }
 
     isInArea(movableObject) {
-      
+
         return this.x + this.width > movableObject.x - 400
             && this.y + this.height > movableObject.y
             && this.x < movableObject.x - 400 + movableObject.width + 400
@@ -115,12 +125,12 @@ class MovableObject extends DrawableObject {
     }
 
 
-/*  isInArea(movableObject, movableObject2) {
-        return movableObject.x + movableObject.width > movableObject2.x
-        && movableObject.y + movableObject.height > movableObject2.y
-        && movableObject.x < movableObject2.x + movableObject2.width
-        && movableObject.y < movableObject2.y + movableObject2.height
-    } */
+    /*  isInArea(movableObject, movableObject2) {
+            return movableObject.x + movableObject.width > movableObject2.x
+            && movableObject.y + movableObject.height > movableObject2.y
+            && movableObject.x < movableObject2.x + movableObject2.width
+            && movableObject.y < movableObject2.y + movableObject2.height
+        } */
 
 
     hit(energyLost) {
