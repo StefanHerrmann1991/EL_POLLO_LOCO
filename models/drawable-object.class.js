@@ -45,9 +45,7 @@ class DrawableObject {
         }
     }
 
-    /* y = 180 
-    height = -190
-    */
+
 
     drawFrame(ctx) {
         if (this instanceof Chicken || this instanceof ThrowableObject) {
@@ -64,7 +62,7 @@ class DrawableObject {
             ctx.beginPath();
             ctx.lineWidth = '5';
             ctx.strokeStyle = 'green';
-            ctx.rect(this.x - 400, this.y, this.width + 400, this.height)
+            ctx.rect(this.x - 400, this.y, this.width + 800, this.height + 20)
             ctx.stroke();
         }
     }}

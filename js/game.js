@@ -69,7 +69,6 @@ document.onkeyup = function (e) {
         case 'ArrowUp':
             keyboard.THROW = false;
             break;
-
         case 's':
         case 'ArrowDown':
             keyboard.DODGE = false
@@ -83,8 +82,18 @@ document.onkeyup = function (e) {
  */
 
 
+
+
+
 function loadControlPanel() {
-    insertCross();
+   
+ if (window.matchMedia("(orientation: portrait)").matches) {
+    // you're in PORTRAIT mode
+ }
+ 
+ if (window.matchMedia("(orientation: landscape)").matches) {
+    // you're in LANDSCAPE mode
+ }
 }
 
 /**
@@ -103,11 +112,11 @@ function insertCross() {
 * @param {number} sideLength The side length of the cross element.
 * @returns {string} Returns the cross properties.
 */
-function generateCross(sideLength) {
+function generateCross(sideLength, img) {
     let coord1 = sideLength * 3 / 8;
     let coord2 = sideLength * 5 / 8;
     cross = `
-           <img class='cross-map' id="crossMap" src='img/0.Own_Pictures/cross.png' usemap='#image-map' height="${sideLength}px" width="${sideLength}px">
+           <img class='cross-map' id="crossMap" src="${img}" usemap='#image-map' height="${sideLength}px" width="${sideLength}px">
              <map name='image-map'>
                  <area target="" alt="up"    title="up"     id="up"     ontouchstart="touchCross('up')"   ontouchend="touchCrossEnd('up')" coords="${coord1},0,${coord2},${coord1}" shape="rect">
                  <area target="" alt="left"  title="left"   id="left"   ontouchstart="touchCross('left')" ontouchend="touchCrossEnd('left')" coords="0,${coord1},${coord1},${coord2}" shape="rect">

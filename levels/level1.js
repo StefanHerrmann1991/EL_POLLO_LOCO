@@ -6,13 +6,11 @@ function initLevel1() {
     let coins;
     let BACKGROUND = [];
     let LEVEL_END;
-    let level1_ENDBOSS_AREA;
     let LEVEL_START = 100;
     let BOTTLE = [];
     let CLOUDS = [];
     let LOOT = [];
     let ENEMIES = [];
-    let ENDBOSS = [];
     let BACKGROUND_CHANGING = [[
         'img/5.Fondo/Capas/5.cielo_1920-1080px.png',
         'img/5.Fondo/Capas/3.Fondo3/1.png',
@@ -167,7 +165,8 @@ function initLevel1() {
 
 
     function generateEnemies(worldLength) {
-
+        endbossPosition = LEVEL_END - 800;
+        ENEMIES.push(new Endboss(endbossPosition));
         for (let i = 0; i < worldLength - 1; i++) {
             minX = 100;
             let enemyAmount = i / 2;
@@ -184,8 +183,7 @@ function initLevel1() {
 
 
     function generateEnemiesAtX(minX, levelPart, enemy, enemyAmount) {
-        endbossPosition = LEVEL_END - 800;
-        ENEMIES.push(new Endboss(endbossPosition));
+
         for (let i = 1; i < enemyAmount; i++) {
             let xPosition = Number(getRandomArbitrary(minX, levelPart).toFixed(0));
             currentEnemy = new enemy(xPosition);

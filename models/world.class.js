@@ -4,6 +4,7 @@ class World {
     statusbar = new Statusbar();
     statusbarEndboss = new StatusbarEndboss();
     endscreen = [];
+    endscreenOn = false;
     level = level1;
     canvas;
     ctx;
@@ -13,6 +14,7 @@ class World {
     coinCount = 0;
     throwableObject = [];
     lastThrow = 0;
+
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -39,21 +41,23 @@ class World {
 
 
     checkDeath() {
-        if (this.character.isDead()) {
-            setTimeout(() => {
+        if (this.character.isDead() && !this.endscreenOn) {
+            this.endscreenOn = true;
+             setTimeout(() => {
                 let end = new Endscreen(this.character.x, this.character.y);
                 this.endscreen.push(end);
-                stopGame();
-            }, 2000);
+                stopGame();                
+            },3000);
         }
     }
     checkEndbossDeath() {
-        if (this.endboss.isDead()) {
-         
+        if (this.endboss.isDead() && endscreenOn) {
+            this.endscreenOn = true;
             setTimeout(() => {
                 let end = new Endscreen(this.character.x, this.character.y);
-                this.endscreen.push(end);            
-            }, 2000);
+                this.endscreen.push(end);    
+                stopGame();        
+            }, 3000);
         }
     }
 
@@ -94,8 +98,9 @@ class World {
                 }, 1000);
             }
 
-            if(enemy instanceof Endboss && this.character.isInArea(enemy)) 
-            {   enemy.attack = true;
+            if(!enemy.isDead() && enemy instanceof Endboss && this.character.isInArea(enemy)) 
+            {   enemy.attack = true;    
+                enemy.moveToPosition(this.character)
             if (this.character.isColliding(enemy instanceof Endboss)) {
 
             }

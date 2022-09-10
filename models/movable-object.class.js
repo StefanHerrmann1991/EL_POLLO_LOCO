@@ -9,6 +9,7 @@ class MovableObject extends DrawableObject {
     energy;
     lastHit = 0;
     lastMove = 0;
+    death = false;
 
     /**
      * The function enables the falling of obejects on the map like the character when it jumps or thrown bottles.
@@ -60,9 +61,11 @@ class MovableObject extends DrawableObject {
     }
 
 
+
     moveToPosition(movableObject) {
-        if (this.x > movableObject.x) { this.moveLeft() }
-        else { this.moveRight() }
+
+        if (this.x >= movableObject.x) { this.moveLeft() }
+        else if (this.x < movableObject.x) { this.moveRight() }
     }
 
 
@@ -87,9 +90,9 @@ class MovableObject extends DrawableObject {
     }
 
 
-    dodge(y, height) {
-        x = -180;
-        y = this.height - 180;
+    dodge() {
+        this.y = 180
+        this.height = -190
     }
 
     /**
@@ -118,10 +121,11 @@ class MovableObject extends DrawableObject {
 
     isInArea(movableObject) {
 
+
         return this.x + this.width > movableObject.x - 400
             && this.y + this.height > movableObject.y
-            && this.x < movableObject.x - 400 + movableObject.width + 400
-            && this.y < movableObject.y - 400 + movableObject.height
+            && this.x < movableObject.x - 400 + movableObject.width + 800
+            && this.y < movableObject.y - 400 + movableObject.height + 200
     }
 
 

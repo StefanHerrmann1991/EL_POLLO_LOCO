@@ -4,8 +4,15 @@ class Endboss extends MovableObject {
     height = 500;
     width = 400;
     y = -30;
-    speed = 60;
+    speed = 5;
     attack = false;
+
+
+    IMAGES_WALKING = [
+        'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/1.Caminata/G1.png',
+        'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/1.Caminata/G2.png',
+        'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/1.Caminata/G3.png',
+        'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/1.Caminata/G4.png']
 
     IMAGES_PERCEIVING = [
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/1.Alerta/G5.png',
@@ -57,22 +64,21 @@ class Endboss extends MovableObject {
 
     animate() {
 
-        let chickenInterval = setInterval(() => {
+        setStoppableInterval(() => {
             if (!this.isDead() && !this.isHurt() && !this.attack) {
                 this.playAnimation(this.IMAGES_PERCEIVING);
             }
-            if (this.attack && !this.isDead() && !this.isHurt()) {
+            if (!this.isDead() && this.attack && !this.isHurt()) {
                 this.playAnimation(this.IMAGES_ATTACKING);
-                this.moveLeft(); 
             }
             else if (this.isHurt() && !this.isDead() && !this.attack) {
                 this.playAnimation(this.IMAGES_HURTING);
             }
-            if (this.isDead()) {
+            if (this.isDead() && !this.death) {
                 this.playAnimation(this.IMAGES_DYING);
+                this.death = true;
                 setTimeout(() => {
                     this.loadImage('img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/4.Muerte/G27.png');
-                    clearInterval(chickenInterval);
                 }, 1500);
             }
         }, 90);

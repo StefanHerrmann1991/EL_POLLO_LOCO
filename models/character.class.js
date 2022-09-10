@@ -4,7 +4,7 @@ class Character extends MovableObject {
     speed = 15;
     jump = false;
     energy = 100;
-    death = false;
+
     /* constructor führt sobald der Charakter geladen wird, die Funktionen innerhalb des Constructors aus. */
     IMAGES_WALKING = [
         'img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-21.png',
@@ -118,10 +118,7 @@ class Character extends MovableObject {
 
 
         setStoppableInterval(() => {
-            // walk animation      
-            if (!this.isDead() && !this.isHurt() && !this.isAboveGround()) {
-                this.playAnimation(this.IMAGES_IDLE);
-            }
+            // walk animation  
             if (this.isDead() && !this.death) {
                 this.playAnimation(this.IMAGES_DYING);
                 this.death = true;
@@ -129,18 +126,26 @@ class Character extends MovableObject {
                     this.loadImage('img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-58.png');
                 }, 400);
             }
+
+            else if (!this.isDead() && !this.isHurt() && !this.isAboveGround()) {
+                this.playAnimation(this.IMAGES_IDLE);
+            }
+
             else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURTING);
             }
 
-            else if (this.world.keyboard.DODGE) { this.playAnimation(this.IMAGES_DODGING); }
+            else if (this.world.keyboard.DODGE) { 
+                this.playAnimation(this.IMAGES_DODGING);
+            
+            }
+
+
 
             if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
-            } else {
-                if (!this.isDead() && this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                    this.playAnimation(this.IMAGES_WALKING);
-                }
+            } else if (!this.isDead() && this.world.keyboard.RIGHT || !this.isDead() && this.world.keyboard.LEFT) {
+                this.playAnimation(this.IMAGES_WALKING);
             }
         }, 120);
     }
