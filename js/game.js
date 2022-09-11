@@ -43,6 +43,7 @@ document.onkeydown = function (e) {
         case 's':
         case 'ArrowDown':
             keyboard.DODGE = true;
+            console.log('dodge');
     }
 };
 

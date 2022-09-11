@@ -4,6 +4,7 @@ class MovableObject extends DrawableObject {
     sprintSpeed = 1.5;
     otherDirection = false;
     currentImage = 0;
+    currentImage2 = 0;
     speedY = 0;
     acceleration = 2.5;
     energy;
@@ -81,19 +82,25 @@ class MovableObject extends DrawableObject {
         this.currentImage++;
     }
 
+
+/*     playAnimationOnce(images) {
+        if (this.currentImage2 < images.length) {
+            let path = images[this.currentImage2];
+            this.img = this.imageCache[path];
+            this.currentImage2++;
+        }
+        else {this.loadImage(images[images.length - 1]);}
+    }
+ */
     /**
-     * @param {number} this.speedY represents the jumping height.
-     */
+   * @param {number} this.speedY represents the jumping height.
+   */
 
     jump() {
         this.speedY = 30;
     }
 
 
-    dodge() {
-        this.y = 180
-        this.height = -190
-    }
 
     /**
      * The function checks, if the Object is colliding with another object.

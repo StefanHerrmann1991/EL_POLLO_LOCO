@@ -151,7 +151,7 @@ class World {
 
 
     throwObject() {
-        if (this.keyboard.THROW && this.bottleCount > 0) {
+        if (!this.character.isDead() && this.keyboard.THROW && this.bottleCount > 0 ) {
             let timePassed = new Date().getTime() - this.lastThrow;
             if (timePassed > 500) {
                 this.bottleCount--;
