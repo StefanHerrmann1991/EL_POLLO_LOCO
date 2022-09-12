@@ -40,6 +40,7 @@ class Character extends MovableObject {
         'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-56.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-57.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-58.png']
+   
     IMAGES_HURTING = [
         'img/2.Secuencias_Personaje-Pepe-corrección/4.Herido/H-41.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/4.Herido/H-42.png',
@@ -97,12 +98,12 @@ class Character extends MovableObject {
 
         setStoppableInterval(() => {
             this.walking_sound.pause();
-            if (!this.isDead() && this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+            if (!this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.walking_sound.play();
                 this.otherDirection = false;
             }
-            if (!this.isDead() && this.world.keyboard.LEFT && this.x > 0) {
+            if (!this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.LEFT && this.x > 0) {
                 this.moveLeft();
                 this.walking_sound.play();
                 this.otherDirection = true;
@@ -122,22 +123,23 @@ class Character extends MovableObject {
                     this.loadImage('img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-58.png');
                 }, 400);
             }
+
             if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURTING);
             }
+
             if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
             }
-            if (this.canWalk()) {
+
+            if (!this.world.keyboard.DODGE && this.canWalk() ) {
                 this.playAnimation(this.IMAGES_WALKING);
             }
+            
             else if (!this.isDead() && !this.isHurt() && !this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_IDLE);
             }
-        }, 120);
-
-        setStoppableInterval(() => {
-
+            
             if (this.world.keyboard.DODGE && !this.isDead() && !this.isHurt() && !this.isAboveGround()) {
                 if (this.dodgeAnimation < 1) {
                     this.playAnimation(this.IMAGES_DODGING);
@@ -145,10 +147,14 @@ class Character extends MovableObject {
                 else { this.loadImage(this.IMAGES_DODGING[2]); }
                 this.dodgeAnimation++;
             }
+
             if (!this.world.keyboard.DODGE) 
             { this.dodgeAnimation = 0; }
+
         }, 120);
+
     }
     standIdle() { return !this.isDead() && !this.isHurt() && !this.isAboveGround() }
     canWalk() { return !this.isDead() && this.world.keyboard.RIGHT && this.world.keyboard.LEFT }
+
 }
