@@ -43,11 +43,11 @@ class World {
     checkDeath() {
         if (this.character.isDead() && !this.endscreenOn) {
             this.endscreenOn = true;
-             setTimeout(() => {
+            setTimeout(() => {
                 let end = new Endscreen(this.character.x, this.character.y);
                 this.endscreen.push(end);
-                stopGame();                
-            },3000);
+                stopGame();
+            }, 3000);
         }
     }
     checkEndbossDeath() {
@@ -55,8 +55,8 @@ class World {
             this.endscreenOn = true;
             setTimeout(() => {
                 let end = new Endscreen(this.character.x, this.character.y);
-                this.endscreen.push(end);    
-                stopGame();        
+                this.endscreen.push(end);
+                stopGame();
             }, 3000);
         }
     }
@@ -98,12 +98,22 @@ class World {
                 }, 1000);
             }
 
-            if(!enemy.isDead() && enemy instanceof Endboss && this.character.isInArea(enemy)) 
-            {   enemy.attack = true;    
-                enemy.moveToPosition(this.character)
-            if (this.character.isColliding(enemy instanceof Endboss)) {
+            if (!enemy.isDead() && enemy instanceof Endboss) {
+                if (!this.character.isClose(enemy)  && this.character.isInArea(enemy) ) {
+                    enemy.walking = true;
+                    enemy.attack = false;
+                    enemy.moveToPosition(this.character);
+                }
+                if (this.character.isClose(enemy)) {
+                    enemy.walking = false;
+                    enemy.attack = true;
+                    enemy.moveToPosition(this.character);
+                }
 
-            }
+                if (this.character.isColliding(enemy instanceof Endboss)) {
+                    this.character.hit(20);
+                }
+
             }
 
             this.throwableObject.forEach((thrownObject, bottle) => {
@@ -151,7 +161,7 @@ class World {
 
 
     throwObject() {
-        if (!this.character.isDead() && this.keyboard.THROW && this.bottleCount > 0 ) {
+        if (!this.character.isDead() && this.keyboard.THROW && this.bottleCount > 0) {
             let timePassed = new Date().getTime() - this.lastThrow;
             if (timePassed > 500) {
                 this.bottleCount--;

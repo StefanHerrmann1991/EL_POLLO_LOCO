@@ -61,12 +61,30 @@ class MovableObject extends DrawableObject {
         this.x += this.speed * this.sprintSpeed;
     }
 
+    endbossMoveLeft(movableObject) {
+
+        xPosition = movableObject.x - 200;
+        xPosition -= this.speed;
+        this.x = xPosition;
+    }
+    endbossMoveRight(movableObject) {
+
+        xPosition = movableObject.x + 200;
+        xPosition += this.speed;
+        this.x = xPosition;
+    }
 
 
     moveToPosition(movableObject) {
 
-        if (this.x >= movableObject.x) { this.moveLeft() }
-        else if (this.x < movableObject.x) { this.moveRight() }
+        if (this.x >= movableObject.x) {
+            this.endbossMoveLeft(movableObject)
+            this.otherDirection = false;
+        }
+        else if (this.x < movableObject.x) {
+            this.endbossMoveRight(movableObject)
+            this.otherDirection = true;
+        }
     }
 
 
@@ -83,15 +101,15 @@ class MovableObject extends DrawableObject {
     }
 
 
-/*     playAnimationOnce(images) {
-        if (this.currentImage2 < images.length) {
-            let path = images[this.currentImage2];
-            this.img = this.imageCache[path];
-            this.currentImage2++;
+    /*     playAnimationOnce(images) {
+            if (this.currentImage2 < images.length) {
+                let path = images[this.currentImage2];
+                this.img = this.imageCache[path];
+                this.currentImage2++;
+            }
+            else {this.loadImage(images[images.length - 1]);}
         }
-        else {this.loadImage(images[images.length - 1]);}
-    }
- */
+     */
     /**
    * @param {number} this.speedY represents the jumping height.
    */
@@ -126,23 +144,29 @@ class MovableObject extends DrawableObject {
             && this.y < movableObject.y + movableObject.height
     }
 
+
+
+    drawCollisionBox(ctx) {
+        ctx.beginPath();
+        ctx.lineWidth = '5';
+        ctx.strokeStyle = 'red';
+        ctx.rect(this.x - 400, this.y, this.width + 800, this.height + 20)
+        ctx.stroke();
+    }
+
     isInArea(movableObject) {
-
-
         return this.x + this.width > movableObject.x - 400
             && this.y + this.height > movableObject.y
             && this.x < movableObject.x - 400 + movableObject.width + 800
             && this.y < movableObject.y - 400 + movableObject.height + 200
     }
 
-
-    /*  isInArea(movableObject, movableObject2) {
-            return movableObject.x + movableObject.width > movableObject2.x
-            && movableObject.y + movableObject.height > movableObject2.y
-            && movableObject.x < movableObject2.x + movableObject2.width
-            && movableObject.y < movableObject2.y + movableObject2.height
-        } */
-
+    isClose(movableObject) {
+        return this.x + this.width > movableObject.x - 200
+            && this.y + this.height > movableObject.y
+            && this.x < movableObject.x - 200 + movableObject.width + 400
+            && this.y < movableObject.y - 200 + movableObject.height + 200
+    }
 
     hit(energyLost) {
         this.energy -= energyLost;

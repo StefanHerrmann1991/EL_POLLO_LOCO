@@ -1,5 +1,9 @@
 class Endscreen extends DrawableObject {
 
+
+    
+
+
     /**
      * The function loads the endscreen depending on the characters position.
      * @param {number} x The postion on the x-axes where the Character is located with a correcture factor.
