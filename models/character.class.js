@@ -155,6 +155,6 @@ class Character extends MovableObject {
 
     }
     standIdle() { return !this.isDead() && !this.isHurt() && !this.isAboveGround() }
-    canWalk() { return !this.isDead() && this.world.keyboard.RIGHT && this.world.keyboard.LEFT }
+    canWalk() { return   !this.isDead() && this.world.keyboard.RIGHT || !this.isDead()  && this.world.keyboard.LEFT }
 
 }
