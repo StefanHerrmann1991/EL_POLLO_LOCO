@@ -15,6 +15,7 @@ class World {
     throwableObject = [];
     lastThrow = 0;
 
+
  
 
 
@@ -102,8 +103,8 @@ class World {
                 if (!this.character.isClose(enemy)  && this.character.isInArea(enemy) ) {
                     enemy.walking = true;
                     enemy.attack = false;
-                    enemy.moveToPosition(this.character);
-                                    }
+                    enemy.moveToPosition(this.character);}
+
                 if (this.character.isClose(enemy)) {
                     enemy.walking = false;
                     enemy.attack = true;

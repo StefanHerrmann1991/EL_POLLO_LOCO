@@ -11,6 +11,7 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
     lastMove = 0;
     death = false;
+    returnToPosition = false;
 
 
     /**
@@ -66,16 +67,21 @@ class MovableObject extends DrawableObject {
 
     moveToPosition(movableObject) {
 
-        if (this.x >= movableObject.x) {
-            this.moveLeft()
+        if (this.x >= movableObject.x - 800 && !this.returnToPosition) {
+            this.moveLeft();
+            console.log('left: ' + movableObject.x, this.x)
             this.otherDirection = false;
-        }
-        if (this.x < movableObject.x) {
-            this.moveRight()
-            this.otherDirection = true;
-        }
+            if (this.x <= movableObject.x - 700) {
+                this.returnToPosition = true;             
+            }
+         }         
+         if (this.returnToPosition && this.x <= movableObject.x + 600) { 
+            this.moveRight();
+            this.otherDirection = true; 
+            if (this.x >= movableObject.x + 500) {
+                this.returnToPosition = false;               
+            }}
     }
-
 
     /**The function increments through images. When the last image in an array is loaded it starts from the beginning. */
 
@@ -153,7 +159,7 @@ class MovableObject extends DrawableObject {
     isClose(movableObject) {
         return this.x + this.width > movableObject.x - 100
             && this.y + this.height > movableObject.y
-            && this.x < movableObject.x - 100 + movableObject.width + 200
+            && this.x < movableObject.x - 100 + movableObject.width + 50
             && this.y < movableObject.y - 100 + movableObject.height + 100
     }
 

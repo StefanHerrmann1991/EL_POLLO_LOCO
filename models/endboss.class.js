@@ -7,7 +7,8 @@ class Endboss extends MovableObject {
     speed = 8;
     attack = false;
     walking = false;
-    speedY = 20;
+    isClose = false;
+    speedY = 10;
 
     IMAGES_WALKING = [
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/1.Caminata/G1.png',

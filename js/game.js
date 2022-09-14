@@ -139,18 +139,19 @@ function touchCross(path, position) {
         case 'down': keyboard.THROW = true;
             break;
         case 'right': keyboard.RIGHT = true;
-            break;        
+            break;
     }
 }
 
 function touchCrossEnd(img, position) {
     document.getElementById('crossMap').src = `img/0.Own_Pictures/${img}/${position}.png`;
     switch (position) {
-        case 'cross': 
-        keyboard.LEFT = false;  
-        keyboard.SPACE = false;           
-        keyboard.THROW = false;           
-        keyboard.RIGHT = false;
+        case 'cross':
+            keyboard.LEFT = false;
+            keyboard.SPACE = false;
+            keyboard.THROW = false;
+            keyboard.RIGHT = false;
+            break;
     }
 }
 

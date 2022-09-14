@@ -28,15 +28,24 @@ svg {
     width: 48;
     fill: rgb(211, 172, 45);
     stroke: black;
+    
 }
 
 canvas {
-    background-image: url('img/9.Intro _ Outro Image/Start Screen/Opción 1.png');
+  
     background-position: center;
     background-size: cover;
     z-index: 1;
     display: block;
 }
+
+.background-img-1 {
+    background-image: url('img/9.Intro _ Outro Image/Start Screen/Opción 1.png');
+}
+.background-img-2 {
+    background-image: url('img/0.Own_Pictures/storyBackground.jpg');
+}
+
 
 svg:hover {
     fill: rgb(0, 0, 0);
