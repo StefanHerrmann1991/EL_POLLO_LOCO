@@ -119,13 +119,6 @@ svg:hover {
     width: 6vh;
 }
 
-
-
-
-
-
-
-
 .start-screen {
     width: 720px;
     height: 480px;
@@ -133,17 +126,32 @@ svg:hover {
     z-index: 2;
 }
 
-
-
 .d-none {
     display: none;
 }
 
 .responsive-control {
+
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
+
+.responsive-control-landscape {
+
+    position: absolute;
+    top: 42vh;
+    left: 1vw;
+    right: 1vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+
+}
+
+
 
 .control-btn {
     background-color: black;

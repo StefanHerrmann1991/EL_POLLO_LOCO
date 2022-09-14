@@ -40,8 +40,8 @@ document.onkeydown = function (e) {
         case 's':
         case 'ArrowDown':
             keyboard.DODGE = true;
-        case 'F11':        
-        changeToFullscreen();
+        case 'F11':
+            changeToFullscreen();
     }
 };
 
@@ -88,20 +88,21 @@ function loadControlPanel() {
     let crossPosition = document.getElementById('crossPosition');
     crossPosition.innerHTML = '';
     if (window.matchMedia("(orientation: portrait)").matches) {
-        insertCross('controlCross1');
+        insertCross(150, 'controlCross1');
     }
     if (window.matchMedia("(orientation: landscape)").matches) {
-        insertCross('controlCross2');
+        insertCross(100, 'controlCross2');
     }
+
 }
 
 /**
  * The function enables the responsivness of the map cross element.
  * 
  */
-function insertCross(path) {
+function insertCross(sideLength, path) {
     let crossPosition = document.getElementById('crossPosition');
-    let text = generateCross(150, path);
+    let text = generateCross(sideLength, path);
     crossPosition.insertAdjacentHTML('afterbegin', text);
 }
 
@@ -117,10 +118,10 @@ function generateCross(sideLength, path) {
     cross = `
            <img class='cross-map' id="crossMap" src="img/0.Own_Pictures/${path}/cross.png" usemap='#image-map' height="${sideLength}px" width="${sideLength}px">
              <map name='image-map'>
-                 <area target="" alt="up"    title="up"     id="up"     ontouchstart="touchCross('${path}','up')"   ontouchend="touchCrossEnd('${path}','up')" coords="${coord1},0,${coord2},${coord1}" shape="rect">
-                 <area target="" alt="left"  title="left"   id="left"   ontouchstart="touchCross('${path}','left')" ontouchend="touchCrossEnd('${path}','left')" coords="0,${coord1},${coord1},${coord2}" shape="rect">
-                 <area target="" alt="down"  title="down"   id="down"   ontouchstart="touchCross('${path}','down')" ontouchend="touchCrossEnd('${path}','down')" coords="${coord2},${coord2},${coord1},${sideLength}" shape="rect">
-                 <area target="" alt="right" title="right"  id="right"  ontouchstart="touchCross('${path}','right')" ontouchend="touchCrossEnd('${path}','right')" coords="${sideLength},${coord1},${coord2},${coord2}" shape="rect">   
+                 <area target="" alt="up"    title="up"     id="up"     ontouchstart="touchCross('${path}','up')"   ontouchend="touchCrossEnd('${path}','cross')" coords="${coord1},0,${coord2},${coord1}" shape="rect">
+                 <area target="" alt="left"  title="left"   id="left"   ontouchstart="touchCross('${path}','left')" ontouchend="touchCrossEnd('${path}','cross')" coords="0,${coord1},${coord1},${coord2}" shape="rect">
+                 <area target="" alt="down"  title="down"   id="down"   ontouchstart="touchCross('${path}','down')" ontouchend="touchCrossEnd('${path}','cross')" coords="${coord2},${coord2},${coord1},${sideLength}" shape="rect">
+                 <area target="" alt="right" title="right"  id="right"  ontouchstart="touchCross('${path}','right')" ontouchend="touchCrossEnd('${path}','cross')" coords="${sideLength},${coord1},${coord2},${coord2}" shape="rect">   
              </map> `;
     return cross;
 }
@@ -138,22 +139,18 @@ function touchCross(path, position) {
         case 'down': keyboard.THROW = true;
             break;
         case 'right': keyboard.RIGHT = true;
-            break;
+            break;        
     }
 }
 
 function touchCrossEnd(img, position) {
     document.getElementById('crossMap').src = `img/0.Own_Pictures/${img}/${position}.png`;
     switch (position) {
-        case 'left': keyboard.LEFT = false;
-            break;
-        case 'up': keyboard.SPACE = false;
-            break;
-        case 'down': keyboard.THROW = false;
-            break;
-        case 'right': keyboard.RIGHT = false;
-            break;
-
+        case 'cross': 
+        keyboard.LEFT = false;  
+        keyboard.SPACE = false;           
+        keyboard.THROW = false;           
+        keyboard.RIGHT = false;
     }
 }
 
