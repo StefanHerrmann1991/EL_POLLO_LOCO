@@ -40,7 +40,8 @@ document.onkeydown = function (e) {
         case 's':
         case 'ArrowDown':
             keyboard.DODGE = true;
-            console.log('dodge');
+        case 'F11':        
+        changeToFullscreen();
     }
 };
 
@@ -69,8 +70,7 @@ document.onkeyup = function (e) {
             break;
         case 's':
         case 'ArrowDown':
-            keyboard.DODGE = false
-
+            keyboard.DODGE = false;
     }
 };
 
@@ -153,6 +153,7 @@ function touchCrossEnd(img, position) {
             break;
         case 'right': keyboard.RIGHT = false;
             break;
+
     }
 }
 
@@ -175,3 +176,27 @@ function stopGame() {
     allIntervals = [];
 }
 
+function changeToFullscreen() {
+    let fullscreen = document.getElementById('canvas');
+    enterFullscreen(fullscreen);
+}
+
+
+function enterFullscreen(element) {
+    if (element.requestFullscreen) {
+        element.requestFullscreen();
+    } else if (element.msRequestFullscreen) {      // for IE11 (remove June 15, 2022)
+        element.msRequestFullscreen();
+    } else if (element.webkitRequestFullscreen) {  // iOS Safari
+        element.webkitRequestFullscreen();
+    }
+}
+
+
+function exitFullscreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+    }
+}

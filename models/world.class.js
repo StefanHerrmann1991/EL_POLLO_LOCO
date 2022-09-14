@@ -15,6 +15,8 @@ class World {
     throwableObject = [];
     lastThrow = 0;
 
+ 
+
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -43,6 +45,7 @@ class World {
     checkDeath() {
         if (this.character.isDead() && !this.endscreenOn) {
             this.endscreenOn = true;
+           
             setTimeout(() => {
                 let end = new Endscreen(this.character.x, this.character.y);
                 this.endscreen.push(end);
@@ -79,9 +82,6 @@ class World {
 
     }
 
-    checkCharEntering() {
-        if (this.chracter.x > this.level.LEVEL_END) { }
-    }
 
     checkCollisions() {
 
@@ -103,7 +103,7 @@ class World {
                     enemy.walking = true;
                     enemy.attack = false;
                     enemy.moveToPosition(this.character);
-                }
+                                    }
                 if (this.character.isClose(enemy)) {
                     enemy.walking = false;
                     enemy.attack = true;

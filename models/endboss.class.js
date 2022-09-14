@@ -72,10 +72,11 @@ class Endboss extends MovableObject {
             }
             if (!this.isDead() && this.attack && !this.isHurt()) {
                 this.playAnimation(this.IMAGES_ATTACKING);
-                this.speed = 20;              
+                this.speed = 5;
                 this.jump();
             }
-            if (!this.isDead() && this.walking && !this.isHurt()) { this.playAnimation(this.IMAGES_WALKING) }
+            if (!this.isDead() && this.walking && !this.isHurt()) 
+            { this.playAnimation(this.IMAGES_WALKING) }
 
             else if (this.isHurt() && !this.isDead() && !this.attack) {
                 this.playAnimation(this.IMAGES_HURTING);

@@ -12,6 +12,7 @@ class MovableObject extends DrawableObject {
     lastMove = 0;
     death = false;
 
+
     /**
      * The function enables the falling of obejects on the map like the character when it jumps or thrown bottles.
      * 
@@ -61,28 +62,16 @@ class MovableObject extends DrawableObject {
         this.x += this.speed * this.sprintSpeed;
     }
 
-    endbossMoveLeft(movableObject) {
-
-        xPosition = movableObject.x - 200;
-        xPosition -= this.speed;
-        this.x = xPosition;
-    }
-    endbossMoveRight(movableObject) {
-
-        xPosition = movableObject.x + 200;
-        xPosition += this.speed;
-        this.x = xPosition;
-    }
 
 
     moveToPosition(movableObject) {
 
         if (this.x >= movableObject.x) {
-            this.endbossMoveLeft(movableObject)
+            this.moveLeft()
             this.otherDirection = false;
         }
-        else if (this.x < movableObject.x) {
-            this.endbossMoveRight(movableObject)
+        if (this.x < movableObject.x) {
+            this.moveRight()
             this.otherDirection = true;
         }
     }
@@ -162,10 +151,10 @@ class MovableObject extends DrawableObject {
     }
 
     isClose(movableObject) {
-        return this.x + this.width > movableObject.x - 200
+        return this.x + this.width > movableObject.x - 100
             && this.y + this.height > movableObject.y
-            && this.x < movableObject.x - 200 + movableObject.width + 400
-            && this.y < movableObject.y - 200 + movableObject.height + 200
+            && this.x < movableObject.x - 100 + movableObject.width + 200
+            && this.y < movableObject.y - 100 + movableObject.height + 100
     }
 
     hit(energyLost) {
