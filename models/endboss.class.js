@@ -8,7 +8,7 @@ class Endboss extends MovableObject {
     attack = false;
     walking = false;
     isClose = false;
-    speedY = 10;
+
 
     IMAGES_WALKING = [
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/1.Caminata/G1.png',
@@ -59,6 +59,7 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_DYING);
         this.x = x;
         this.animate();
+        this.applyGravity(0);
     }
 
     /**
@@ -68,20 +69,7 @@ class Endboss extends MovableObject {
     animate() {
 
         setStoppableInterval(() => {
-            if (!this.isDead() && !this.isHurt() && !this.attack) {
-                this.playAnimation(this.IMAGES_PERCEIVING);
-            }
-            if (!this.isDead() && this.attack && !this.isHurt()) {
-                this.playAnimation(this.IMAGES_ATTACKING);
-                this.speed = 5;
-                this.jump();
-            }
-            if (!this.isDead() && this.walking && !this.isHurt()) 
-            { this.playAnimation(this.IMAGES_WALKING) }
 
-            else if (this.isHurt() && !this.isDead() && !this.attack) {
-                this.playAnimation(this.IMAGES_HURTING);
-            }
             if (this.isDead() && !this.death) {
                 this.playAnimation(this.IMAGES_DYING);
                 this.death = true;
@@ -89,6 +77,25 @@ class Endboss extends MovableObject {
                     this.loadImage('img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/4.Muerte/G27.png');
                 }, 1500);
             }
+
+            if (!this.isDead() && !this.isHurt() && !this.attack) {
+                this.playAnimation(this.IMAGES_PERCEIVING);
+            }
+            if (!this.isDead() && this.attack && !this.isHurt()) {
+                this.playAnimation(this.IMAGES_ATTACKING);
+                if (!this.isDead() && !this.isAboveGround()) {
+                    this.speedY = 35;        
+                }
+            }
+
+            else if (this.isHurt() && !this.isDead() && !this.attack) {
+                this.playAnimation(this.IMAGES_HURTING);
+            }
+            else if (!this.isDead() && this.walking && !this.isHurt()) { this.playAnimation(this.IMAGES_WALKING) }
+            
+
         }, 90);
     }
+
+
 }
