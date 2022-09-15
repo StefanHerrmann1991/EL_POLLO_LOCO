@@ -32,11 +32,17 @@ svg {
 }
 
 canvas {
-  
+    width: 100%;
+    height: 100%;
     background-position: center;
     background-size: cover;
     z-index: 1;
     display: block;
+}
+
+.control-container {
+    width: 100%;
+    height: 100%;
 }
 
 .background-img-1 {
@@ -150,14 +156,14 @@ svg:hover {
 .responsive-control-landscape {
 
     position: absolute;
-    top: 42vh;
-    left: 1vw;
-    right: 1vw;
+    bottom: 0%;
+    left: 2%;
+    right: 2%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
     width: 90%;
-
+    height: 100%;
 }
 
 

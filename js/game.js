@@ -87,22 +87,24 @@ function loadControlPanel() {
 
     let crossPosition = document.getElementById('crossPosition');
     crossPosition.innerHTML = '';
-    if (window.matchMedia("(orientation: portrait)").matches) {
+    insertCross('controlCross2');
+}
+
+
+
+/*     if (window.matchMedia("(orientation: portrait)").matches) {
         insertCross(150, 'controlCross1');
     }
     if (window.matchMedia("(orientation: landscape)").matches) {
-        insertCross(100, 'controlCross2');
-    }
-
-}
-
+       
+    } */
 /**
  * The function enables the responsivness of the map cross element.
  * 
  */
-function insertCross(sideLength, path) {
+function insertCross(path) {
     let crossPosition = document.getElementById('crossPosition');
-    let text = generateCross(sideLength, path);
+    let text = generateCross(path);
     crossPosition.insertAdjacentHTML('afterbegin', text);
 }
 
@@ -112,11 +114,13 @@ function insertCross(sideLength, path) {
 * @param {number} sideLength The side length of the cross element.
 * @returns {string} Returns the cross properties.
 */
-function generateCross(sideLength, path) {
+function generateCross(path) {
+    let sideLength = getElementById('crossPosition').classList.
     let coord1 = sideLength * 3 / 8;
     let coord2 = sideLength * 5 / 8;
+
     cross = `
-           <img class='cross-map' id="crossMap" src="img/0.Own_Pictures/${path}/cross.png" usemap='#image-map' height="${sideLength}px" width="${sideLength}px">
+           <img class='cross-map' id="crossMap" src="img/0.Own_Pictures/${path}/cross.png" usemap='#image-map' height="${sideLength}%" width="${sideLength}%">
              <map name='image-map'>
                  <area target="" alt="up"    title="up"     id="up"     ontouchstart="touchCross('${path}','up')"   ontouchend="touchCrossEnd('${path}','cross')" coords="${coord1},0,${coord2},${coord1}" shape="rect">
                  <area target="" alt="left"  title="left"   id="left"   ontouchstart="touchCross('${path}','left')" ontouchend="touchCrossEnd('${path}','cross')" coords="0,${coord1},${coord1},${coord2}" shape="rect">
@@ -175,7 +179,7 @@ function stopGame() {
 }
 
 function changeToFullscreen() {
-    let fullscreen = document.getElementById('canvas');
+    let fullscreen = document.getElementById('mainContainer');
     enterFullscreen(fullscreen);
 }
 

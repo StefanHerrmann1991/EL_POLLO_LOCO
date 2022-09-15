@@ -7,7 +7,7 @@ class Endboss extends MovableObject {
     speed = 8;
     attack = false;
     walking = false;
-    isClose = false;
+    hadFirstContact = false;
 
 
     IMAGES_WALKING = [
@@ -59,7 +59,7 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_DYING);
         this.x = x;
         this.animate();
-        this.applyGravity(0);
+        this.applyGravity(30);
     }
 
     /**
@@ -69,7 +69,7 @@ class Endboss extends MovableObject {
     animate() {
 
         setStoppableInterval(() => {
-
+            let i = 0;
             if (this.isDead() && !this.death) {
                 this.playAnimation(this.IMAGES_DYING);
                 this.death = true;
@@ -78,13 +78,17 @@ class Endboss extends MovableObject {
                 }, 1500);
             }
 
-            if (!this.isDead() && !this.isHurt() && !this.attack) {
-                this.playAnimation(this.IMAGES_PERCEIVING);
+            if (this.hadFirstContact && !this.isDead() && !this.isHurt() && !this.attack) {
+                if (i < 10) {
+                    this.playAnimation(this.IMAGES_PERCEIVING);
+                    i++;
+                }              
             }
+            
             if (!this.isDead() && this.attack && !this.isHurt()) {
                 this.playAnimation(this.IMAGES_ATTACKING);
                 if (!this.isDead() && !this.isAboveGround()) {
-                    this.speedY = 35;        
+                    this.speedY = 35;
                 }
             }
 
@@ -92,7 +96,7 @@ class Endboss extends MovableObject {
                 this.playAnimation(this.IMAGES_HURTING);
             }
             else if (!this.isDead() && this.walking && !this.isHurt()) { this.playAnimation(this.IMAGES_WALKING) }
-            
+
 
         }, 90);
     }
