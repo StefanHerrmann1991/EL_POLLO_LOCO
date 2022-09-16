@@ -24,11 +24,17 @@ h1 {
 
 
 svg {
-    height: 48;
-    width: 48;
     fill: rgb(211, 172, 45);
     stroke: black;
-    
+      
+}
+
+
+
+svg:hover {
+    fill: rgb(0, 0, 0);
+    stroke: rgb(211, 172, 45);
+    cursor: pointer;
 }
 
 canvas {
@@ -52,28 +58,32 @@ canvas {
     background-image: url('img/0.Own_Pictures/storyBackground.jpg');
 }
 
-
-svg:hover {
-    fill: rgb(0, 0, 0);
-    stroke: rgb(211, 172, 45);
-    cursor: pointer;
+.control-btn {
+    display: flex;
+    align-items: center;
 }
 
 
 .option-buttons {
     position: absolute;
     top: 0px;
-    left: 0px;
+    left: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
+    width: 97%;
+}
+
+.AB-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 
 .start-btn {
     cursor: pointer;
-    font-size: 43px;
+    font-size: 35px;
     border: none;
     -webkit-text-stroke: 1px black;
     font-family: 'Rye', cursive;
@@ -91,6 +101,8 @@ svg:hover {
 .options {
     background-color: transparent;
     border: none;
+    height: 100%;
+    width: 100%;
 }
 
 .main-container {
@@ -102,9 +114,10 @@ svg:hover {
     align-items: center;
     height: 150px;
     color: white;
+    text-align: right;
     z-index: 100 !important;
     position: absolute;
-    top: 0px;
+    top: 20px;
     left: 0px;
     text-decoration: none;
     font-size: 30px;
@@ -115,12 +128,13 @@ svg:hover {
 
 .coin-counter {
     display: flex;
+    text-align: right;
     align-items: center;
     height: 250px;
     color: white;
     z-index: 100 !important;
     position: absolute;
-    top: 0px;
+    top: 20px;
     left: 0px;
     text-decoration: none;
     font-size: 30px;
@@ -162,8 +176,6 @@ svg:hover {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    width: 90%;
-    height: 100%;
 }
 
 
@@ -172,9 +184,9 @@ svg:hover {
     background-color: black;
     font-family: 'Rye', cursive;
     color: rgb(211, 172, 45);
-    font-size: 33px;
-    height: 66px;
-    width: 66px;
+    font-size: 20%;
+    height: 60%;
+    width: 60%;
     border-radius: 10vh;
 }
 
@@ -199,11 +211,15 @@ svg:hover {
     margin-right: 50px;
 }
 
-
+.cross {
+    width: 25%;
+    height: 25%;
+}
 
 
 .pushable-btn {
-    height: 40%;
+    height: 50%;
+    width: 50%;
     position: relative;
     border: none;
     background: transparent;
@@ -227,13 +243,16 @@ svg:hover {
         transform 600ms cubic-bezier(.3, .7, .4, 1);
 }
 
+
+
+
 .shadow-child {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 200%;
     height: 95%;
-    border-radius: 40px;
+    border-radius: 50%;
     background:
         linear-gradient(to right, black 58%, white 150%);
     ;
@@ -242,11 +261,11 @@ svg:hover {
 .front {
     display: block;
     position: relative;
-    padding-top: 10px;
-    padding-left: 20px;
-    padding-bottom: 10px;
-    padding-right: 20px;
-    border-radius: 40px;
+    padding-top: 15%;
+    padding-left: 50%;
+    padding-bottom: 15%;
+    padding-right: 150%;
+    border-radius: 50%;
     font-size: 2.5rem;
     -webkit-text-stroke: 1px black;
     font-family: 'Rye', cursive;
@@ -316,5 +335,103 @@ svg:hover {
     h1 {
         display: none;
     }
+
+}
+
+@media all and (display-mode: fullscreen)
+{.cross {
+    width: 40%;
+    height: 40%;
+}
+
+.pushable-btn {
+    height: 50%;
+    width: 50%;
+    position: relative;
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    outline-offset: 4px;
+    transition: filter 250ms;
+}
+
+.shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 40px;
+    background: rgb(0, 0, 0);
+    will-change: transform;
+    transform: translateY(2px);
+    transition:
+        transform 600ms cubic-bezier(.3, .7, .4, 1);
+}
+
+
+
+
+.shadow-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 95%;
+    border-radius: 50%;
+    background:
+        linear-gradient(to right, black 58%, white 150%);
+    ;
+}
+
+.front {
+    display: block;
+    position: relative;
+    padding-top: 15%;
+    padding-left: 50%;
+    padding-bottom: 15%;
+    padding-right: 150%;
+    border-radius: 50%;
+    font-size: 2.5rem;
+    -webkit-text-stroke: 1px black;
+    font-family: 'Rye', cursive;
+    color: rgb(211, 172, 45);
+    background: radial-gradient(circle at 30%, rgb(0, 0, 0), rgb(0, 0, 0) 62%, #EFE 140%);
+    will-change: transform;
+    transform: translateY(-4px);
+    transition:
+        transform 600ms cubic-bezier(.3, .7, .4, 1);
+}
+
+.pushable-btn:hover {
+    filter: brightness(110%);
+}
+
+.pushable-btn:hover .front {
+    transform: translateY(-6px);
+    transition:
+        transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+}
+
+.pushable-btn:active .front {
+    transform: translateY(-2px);
+    transition: transform 34ms;
+}
+
+.pushable:hover .shadow {
+    transform: translateY(4px);
+    transition:
+        transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+}
+
+.pushable-btn:active .shadow {
+    transform: translateY(1px);
+    transition: transform 34ms;
+}
+
+.pushable-btn:focus:not(:focus-visible) {
+    outline: none;
+}
 
 }

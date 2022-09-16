@@ -84,27 +84,23 @@ document.onkeyup = function (e) {
 
 
 function loadControlPanel() {
-
     let crossPosition = document.getElementById('crossPosition');
     crossPosition.innerHTML = '';
-    insertCross('controlCross2');
-}
-
-
-
-/*     if (window.matchMedia("(orientation: portrait)").matches) {
-        insertCross(150, 'controlCross1');
+    if (window.matchMedia("(orientation: portrait)").matches) {
+        insertCross(150, 'controlCross2');
     }
     if (window.matchMedia("(orientation: landscape)").matches) {
-       
-    } */
+        insertCross(150, 'controlCross1');
+    }
+
+}
 /**
  * The function enables the responsivness of the map cross element.
  * 
  */
-function insertCross(path) {
+function insertCross(sideLength, path) {
     let crossPosition = document.getElementById('crossPosition');
-    let text = generateCross(path);
+    let text = generateCross(sideLength, path);
     crossPosition.insertAdjacentHTML('afterbegin', text);
 }
 
@@ -114,13 +110,11 @@ function insertCross(path) {
 * @param {number} sideLength The side length of the cross element.
 * @returns {string} Returns the cross properties.
 */
-function generateCross(path) {
-    let sideLength = getElementById('crossPosition').classList.
+function generateCross(sideLength, path) {
     let coord1 = sideLength * 3 / 8;
     let coord2 = sideLength * 5 / 8;
-
     cross = `
-           <img class='cross-map' id="crossMap" src="img/0.Own_Pictures/${path}/cross.png" usemap='#image-map' height="${sideLength}%" width="${sideLength}%">
+           <img class='cross-map' id="crossMap" src="img/0.Own_Pictures/${path}/cross.png" usemap='#image-map' height="${sideLength}px" width="${sideLength}px">
              <map name='image-map'>
                  <area target="" alt="up"    title="up"     id="up"     ontouchstart="touchCross('${path}','up')"   ontouchend="touchCrossEnd('${path}','cross')" coords="${coord1},0,${coord2},${coord1}" shape="rect">
                  <area target="" alt="left"  title="left"   id="left"   ontouchstart="touchCross('${path}','left')" ontouchend="touchCrossEnd('${path}','cross')" coords="0,${coord1},${coord1},${coord2}" shape="rect">
