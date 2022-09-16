@@ -3,6 +3,7 @@ let world;
 let keyboard;
 let allIntervals = [];
 let start = false;
+let isInFullscreen = false;
 /** 
  * The function initiates the canvas and for the game relevant functions.
  * 
@@ -40,6 +41,7 @@ document.onkeydown = function (e) {
         case 's':
         case 'ArrowDown':
             keyboard.DODGE = true;
+            break;
         case 'F11':
             changeToFullscreen();
     }
@@ -71,6 +73,7 @@ document.onkeyup = function (e) {
         case 's':
         case 'ArrowDown':
             keyboard.DODGE = false;
+            break;
     }
 };
 
@@ -87,10 +90,10 @@ function loadControlPanel() {
     let crossPosition = document.getElementById('crossPosition');
     crossPosition.innerHTML = '';
     if (window.matchMedia("(orientation: portrait)").matches) {
-        insertCross(150, 'controlCross2');
+        insertCross(50, 'controlCross2');
     }
     if (window.matchMedia("(orientation: landscape)").matches) {
-        insertCross(150, 'controlCross1');
+        insertCross(50, 'controlCross1');
     }
 
 }
@@ -114,7 +117,7 @@ function generateCross(sideLength, path) {
     let coord1 = sideLength * 3 / 8;
     let coord2 = sideLength * 5 / 8;
     cross = `
-           <img class='cross-map' id="crossMap" src="img/0.Own_Pictures/${path}/cross.png" usemap='#image-map' height="${sideLength}px" width="${sideLength}px">
+           <img class='cross-map' id="crossMap" src="img/0.Own_Pictures/${path}/cross.png" usemap='#image-map' height="${sideLength}%" width="${sideLength}%">
              <map name='image-map'>
                  <area target="" alt="up"    title="up"     id="up"     ontouchstart="touchCross('${path}','up')"   ontouchend="touchCrossEnd('${path}','cross')" coords="${coord1},0,${coord2},${coord1}" shape="rect">
                  <area target="" alt="left"  title="left"   id="left"   ontouchstart="touchCross('${path}','left')" ontouchend="touchCrossEnd('${path}','cross')" coords="0,${coord1},${coord1},${coord2}" shape="rect">
@@ -134,7 +137,7 @@ function touchCross(path, position) {
             break;
         case 'up': keyboard.SPACE = true;
             break;
-        case 'down': keyboard.THROW = true;
+        case 'down': keyboard.DODGE = true;
             break;
         case 'right': keyboard.RIGHT = true;
             break;
@@ -147,7 +150,7 @@ function touchCrossEnd(img, position) {
         case 'cross':
             keyboard.LEFT = false;
             keyboard.SPACE = false;
-            keyboard.THROW = false;
+            keyboard.DODGE = false;
             keyboard.RIGHT = false;
             break;
     }
@@ -174,7 +177,15 @@ function stopGame() {
 
 function changeToFullscreen() {
     let fullscreen = document.getElementById('mainContainer');
-    enterFullscreen(fullscreen);
+    if (!isInFullscreen) {
+        enterFullscreen(fullscreen);
+        isInFullscreen = true;
+    }
+
+    else {
+        exitFullscreen();
+        isInFullscreen = false;
+    }
 }
 
 
