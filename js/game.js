@@ -9,6 +9,8 @@ let isInFullscreen = false;
  * 
 */
 function init() {
+    start = true;
+    loadControlPanel();
     stopGame();
     canvas = document.getElementById('canvas');
     initLevel1();
@@ -44,6 +46,7 @@ document.onkeydown = function (e) {
             break;
         case 'F11':
             changeToFullscreen();
+            break;
     }
 };
 
@@ -83,25 +86,31 @@ document.onkeyup = function (e) {
  */
 
 
-
-
-
 function loadControlPanel() {
     if (start) {
         let crossPosition = document.getElementById('crossPosition');
         crossPosition.innerHTML = '';
         if (window.matchMedia("(orientation: portrait)").matches) {
-            insertCross(120, 'controlCross1');
+            if (onSmallScreen()) { insertCross(80, 'controlCross1'); }
+            if (onMiddleScreen()) { insertCross(120, 'controlCross1'); }
+            if (onBigScreen()) { insertCross(200, 'controlCross1'); }
         }
+
         if (window.matchMedia("(orientation: landscape)").matches) {
-            insertCross(120, 'controlCross2');
-            changeToFullscreen();
-            document.getElementById('fullscreenButton').classList.add('d-none');
+
+            if (onSmallScreen()) { insertCross(80, 'controlCross2'); }
+            if (onMiddleScreen()) { insertCross(120, 'controlCross2'); }
+            if (onBigScreen()) { insertCross(200, 'controlCross2'); }
         }
     }
-
-
 }
+
+
+function onSmallScreen() { return window.innerWidth >= 320 && window.innerWidth <= 640 }
+function onMiddleScreen() { return window.innerWidth >= 641 && window.innerWidth <= 1007 }
+function onBigScreen() { return window.innerWidth > 1008 }
+
+
 /**
  * The function enables the responsivness of the map cross element.
  * 
