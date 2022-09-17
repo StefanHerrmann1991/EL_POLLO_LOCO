@@ -74,7 +74,6 @@ class MovableObject extends DrawableObject {
 
         if (this.x >= movableObject.x - 800 && !this.returnToPosition) {
             this.moveLeft();
-            console.log('left: ' + movableObject.x, this.x)
             this.otherDirection = false;
             if (this.x <= movableObject.x - 700) {
                 this.returnToPosition = true;

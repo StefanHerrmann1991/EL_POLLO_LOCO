@@ -14,6 +14,7 @@ class World {
     coinCount = 0;
     throwableObject = [];
     lastThrow = 0;
+    endbossActive = false;
 
 
 
@@ -101,22 +102,27 @@ class World {
 
             if (!enemy.isDead() && enemy instanceof Endboss) {
 
-                if (this.character.isInArea(enemy)) {
+
+
+                if (this.character.isInArea(enemy) && !this.endbossActive) {
                     enemy.hadFirstContact = true;
+                    this.endbossActive = true;
                 }
 
-                enemy.walking = true;
-                enemy.attack = false;
-                enemy.moveToPosition(this.character);
-
-                if (this.character.isClose(enemy)) {
-                    enemy.walking = false;
-                    enemy.attack = true;
+                if (!enemy.hadFirstContact && this.endbossActive) {
+                    enemy.walking = true;
+                    enemy.attack = false;
                     enemy.moveToPosition(this.character);
-                }
 
-                if (this.character.isColliding(enemy instanceof Endboss)) {
-                    this.character.hit(20);
+                    if (this.character.isClose(enemy)) {
+                        enemy.walking = false;
+                        enemy.attack = true;
+                        enemy.moveToPosition(this.character);
+                    }
+
+                    if (this.character.isColliding(enemy instanceof Endboss)) {
+                        this.character.hit(20);
+                    }
                 }
             }
 

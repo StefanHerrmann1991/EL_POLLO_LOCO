@@ -69,8 +69,17 @@ class Endboss extends MovableObject {
     animate() {
 
         setStoppableInterval(() => {
-       
-            if (this.isDead() && !this.death) {
+
+
+
+            if (this.hadFirstContact && this.i < 10) {
+                this.playAnimation(this.IMAGES_PERCEIVING);
+                this.i++;
+                if (this.i >= 9) { this.hadFirstContact = false;
+                console.log(this.i, this.hadFirstContact) }
+            }
+
+            if (this.isDead() && !this.death && !this.hadFirstContact) {
                 this.playAnimation(this.IMAGES_DYING);
                 this.death = true;
                 setTimeout(() => {
@@ -78,27 +87,18 @@ class Endboss extends MovableObject {
                 }, 1500);
             }
 
-            if (this.hadFirstContact) {                
-                if (this.i < 10) {
-                    this.playAnimation(this.IMAGES_PERCEIVING);
-                    this.i++;
-               }
-               if (this.i == 10) {
-                
-               }              
-            }
-            
-            if (!this.isDead() && this.attack && !this.isHurt()) {
+            if (!this.isDead() && this.attack && !this.isHurt() && !this.hadFirstContact) {
                 this.playAnimation(this.IMAGES_ATTACKING);
                 if (!this.isDead() && !this.isAboveGround()) {
                     this.speedY = 35;
                 }
             }
 
-            else if (this.isHurt() && !this.isDead() && !this.attack) {
+            else if (this.isHurt() && !this.isDead() && !this.attack && !this.hadFirstContact) {
                 this.playAnimation(this.IMAGES_HURTING);
             }
             else if (!this.isDead() && this.walking && !this.isHurt()) { this.playAnimation(this.IMAGES_WALKING) }
+
         }, 90);
     }
 
