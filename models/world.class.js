@@ -16,7 +16,7 @@ class World {
     lastThrow = 0;
 
 
- 
+
 
 
     constructor(canvas, keyboard) {
@@ -46,7 +46,7 @@ class World {
     checkDeath() {
         if (this.character.isDead() && !this.endscreenOn) {
             this.endscreenOn = true;
-           
+
             setTimeout(() => {
                 let end = new Endscreen(this.character.x, this.character.y);
                 this.endscreen.push(end);
@@ -100,15 +100,14 @@ class World {
             }
 
             if (!enemy.isDead() && enemy instanceof Endboss) {
-                
+
                 if (this.character.isInArea(enemy)) {
                     enemy.hadFirstContact = true;
                 }
-                                
-                if (this.character.isInArea(enemy) ) {
-                    enemy.walking = true;
-                    enemy.attack = false;
-                    enemy.moveToPosition(this.character);}
+
+                enemy.walking = true;
+                enemy.attack = false;
+                enemy.moveToPosition(this.character);
 
                 if (this.character.isClose(enemy)) {
                     enemy.walking = false;

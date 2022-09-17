@@ -132,7 +132,7 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_JUMPING);
             }
 
-            if (!this.world.keyboard.DODGE && this.canWalk() ) {
+            if (this.canWalk() ) {
                 this.playAnimation(this.IMAGES_WALKING);
             }
             
@@ -155,6 +155,6 @@ class Character extends MovableObject {
 
     }
     standIdle() { return !this.isDead() && !this.isHurt() && !this.isAboveGround() }
-    canWalk() { return   !this.isDead() && this.world.keyboard.RIGHT || !this.isDead()  && this.world.keyboard.LEFT }
+    canWalk() { return !this.world.keyboard.SPACE && !this.world.keyboard.DODGE && !this.isDead() && (this.world.keyboard.RIGHT ||  this.world.keyboard.LEFT) }
 
 }

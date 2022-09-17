@@ -8,7 +8,7 @@ class Endboss extends MovableObject {
     attack = false;
     walking = false;
     hadFirstContact = false;
-
+    i = 0;
 
     IMAGES_WALKING = [
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/1.Caminata/G1.png',
@@ -69,7 +69,7 @@ class Endboss extends MovableObject {
     animate() {
 
         setStoppableInterval(() => {
-            let i = 0;
+       
             if (this.isDead() && !this.death) {
                 this.playAnimation(this.IMAGES_DYING);
                 this.death = true;
@@ -78,11 +78,14 @@ class Endboss extends MovableObject {
                 }, 1500);
             }
 
-            if (this.hadFirstContact && !this.isDead() && !this.isHurt() && !this.attack) {
-                if (i < 10) {
+            if (this.hadFirstContact) {                
+                if (this.i < 10) {
                     this.playAnimation(this.IMAGES_PERCEIVING);
-                    i++;
-                }              
+                    this.i++;
+               }
+               if (this.i == 10) {
+                
+               }              
             }
             
             if (!this.isDead() && this.attack && !this.isHurt()) {
@@ -96,8 +99,6 @@ class Endboss extends MovableObject {
                 this.playAnimation(this.IMAGES_HURTING);
             }
             else if (!this.isDead() && this.walking && !this.isHurt()) { this.playAnimation(this.IMAGES_WALKING) }
-
-
         }, 90);
     }
 

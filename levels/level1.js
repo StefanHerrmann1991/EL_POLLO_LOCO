@@ -168,7 +168,7 @@ function initLevel1() {
         endbossPosition = LEVEL_END - 800;
         ENEMIES.push(new Endboss(endbossPosition));
         for (let i = 0; i < worldLength - 1; i++) {
-            minX = 100;
+            minX = 500;
             let enemyAmount = i / 2;
             let levelPart = 719 * i;
             if (enemyAmount < 7) {
