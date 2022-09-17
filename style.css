@@ -216,6 +216,7 @@ canvas {
 }
 
 .cross {
+    position: relative;
     width: 40%;
     height: 40%;
 }
@@ -337,6 +338,11 @@ canvas {
     }
 
 }
+
+@media all and (display-mode: portrait)
+
+{}
+
 
 @media all and (display-mode: fullscreen)
 {.cross {

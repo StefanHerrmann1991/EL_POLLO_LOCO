@@ -87,14 +87,19 @@ document.onkeyup = function (e) {
 
 
 function loadControlPanel() {
-    let crossPosition = document.getElementById('crossPosition');
-    crossPosition.innerHTML = '';
-    if (window.matchMedia("(orientation: portrait)").matches) {
-        insertCross(50, 'controlCross1');
+    if (start) {
+        let crossPosition = document.getElementById('crossPosition');
+        crossPosition.innerHTML = '';
+        if (window.matchMedia("(orientation: portrait)").matches) {
+            insertCross(120, 'controlCross1');
+        }
+        if (window.matchMedia("(orientation: landscape)").matches) {
+            insertCross(120, 'controlCross2');
+            changeToFullscreen();
+            document.getElementById('fullscreenButton').classList.add('d-none');
+        }
     }
-    if (window.matchMedia("(orientation: landscape)").matches) {
-        insertCross(50, 'controlCross2');
-    }
+
 
 }
 /**
@@ -117,7 +122,7 @@ function generateCross(sideLength, path) {
     let coord1 = sideLength * 3 / 8;
     let coord2 = sideLength * 5 / 8;
     cross = `
-           <img class='cross-map' id="crossMap" src="img/0.Own_Pictures/${path}/cross.png" usemap='#image-map' height="40%" width="${sideLength}%">
+           <img class='cross-map' id="crossMap" src="img/0.Own_Pictures/${path}/cross.png" usemap='#image-map' height="${sideLength}px" width="${sideLength}px">
              <map name='image-map'>
                  <area target="" alt="up"    title="up"     id="up"     ontouchstart="touchCross('${path}','up')"   ontouchend="touchCrossEnd('${path}','cross')" coords="${coord1},0,${coord2},${coord1}" shape="rect">
                  <area target="" alt="left"  title="left"   id="left"   ontouchstart="touchCross('${path}','left')" ontouchend="touchCrossEnd('${path}','cross')" coords="0,${coord1},${coord1},${coord2}" shape="rect">
@@ -133,9 +138,9 @@ function generateCross(sideLength, path) {
 function touchCross(path, position) {
     document.getElementById('crossMap').src = `img/0.Own_Pictures/${path}/${position}.png`;
     switch (position) {
-        case 'left': keyboard.LEFT = true;
-            break;
         case 'up': keyboard.THROW = true;
+            break;
+        case 'left': keyboard.LEFT = true;
             break;
         case 'down': keyboard.DODGE = true;
             break;
