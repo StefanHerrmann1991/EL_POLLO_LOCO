@@ -53,9 +53,6 @@ canvas {
     top: 0px;
     left: 0px;
     width: 97%;
-}
-
-.option-child {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -89,7 +86,8 @@ canvas {
 
 .options {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
+    align-items: center;
     background-color: transparent;
     border-color: black;
     height: 5%;

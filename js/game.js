@@ -132,7 +132,7 @@ function insertCross(sideLength, path) {
 function generateCross(sideLength, path) {
     let coord1 = sideLength * 3 / 8;
     let coord2 = sideLength * 5 / 8;
-    cross = `
+    let cross = `
            <img class='cross-map' id="crossMap" src="img/0.Own_Pictures/${path}/cross.png" usemap='#image-map' height="${sideLength}px" width="${sideLength}px">
              <map name='image-map'>
                  <area target="" alt="up"    title="up"     id="up"     ontouchstart="touchCross('${path}','up')"   ontouchend="touchCrossEnd('${path}','cross')" coords="${coord1},0,${coord2},${coord1}" shape="rect">
@@ -144,9 +144,17 @@ function generateCross(sideLength, path) {
 }
 
 
+function insertButtons() {
+    let buttonPosition = document.getElementById('buttonAB');
+    let text = generateCross(sideLength, path);
+    buttonPosition.insertAdjacentHTML('afterbegin', text);
+}
+
 function generateButtons() {
 
 }
+
+
 
 
 /**
