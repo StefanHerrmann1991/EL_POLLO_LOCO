@@ -116,7 +116,7 @@ class World {
                         enemy.moveToPosition(this.character);
                     }
 
-                    if (this.character.isColliding(enemy instanceof Endboss)) {
+                    if (this.character.isCollidingEndboss(enemy instanceof Endboss)) {
                         this.character.hit(20);
                     }
                 }

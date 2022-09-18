@@ -90,7 +90,7 @@ class Endboss extends MovableObject {
             if (!this.isDead() && this.attack && !this.isHurt() && !this.hadFirstContact) {
                 this.playAnimation(this.IMAGES_ATTACKING);
                 if (!this.isDead() && !this.isAboveGround()) {
-                    this.speedY = 35;
+                    this.speedY = 45;                
                 }
             }
 

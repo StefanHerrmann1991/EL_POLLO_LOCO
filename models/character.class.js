@@ -143,6 +143,7 @@ class Character extends MovableObject {
             if (this.world.keyboard.DODGE && !this.isDead() && !this.isHurt() && !this.isAboveGround()) {
                 if (this.dodgeAnimation < 1) {
                     this.playAnimation(this.IMAGES_DODGING);
+               
                 }
                 else { this.loadImage(this.IMAGES_DODGING[2]); }
                 this.dodgeAnimation++;

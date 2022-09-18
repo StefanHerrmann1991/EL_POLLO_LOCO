@@ -36,8 +36,7 @@ class MovableObject extends DrawableObject {
         if (this instanceof ThrowableObject) {
             return true;
         }
-        if(this instanceof Endboss) {
-       
+        if (this instanceof Endboss) {
             return this.y < -30;
         }
 
@@ -122,10 +121,21 @@ class MovableObject extends DrawableObject {
      */
 
     isColliding(movableObject) {
-        return this.x + 20 + this.width - 55 > movableObject.x
-            && this.y + 90 + this.height - 100 > movableObject.y
-            && this.x + 20 < movableObject.x + movableObject.width
-            && this.y + 90 < movableObject.y + movableObject.height
+
+
+        if (this.world.keyboard.DODGE) {
+            return this.x + 20 + this.width - 55 > movableObject.x
+                && this.y + 190 + this.height - 200 > movableObject.y
+                && this.x + 20 < movableObject.x + movableObject.width
+                && this.y + 190 < movableObject.y + movableObject.height
+        }
+        else {
+            return this.x + 20 + this.width - 55 > movableObject.x
+                && this.y + 90 + this.height - 100 > movableObject.y
+                && this.x + 20 < movableObject.x + movableObject.width
+                && this.y + 90 < movableObject.y + movableObject.height
+        }
+
     }
 
     objectIsColliding(movableObject) {
@@ -136,14 +146,23 @@ class MovableObject extends DrawableObject {
     }
 
 
+    isCollidingEndboss(movableObject) {
 
-    drawCollisionBox(ctx) {
-        ctx.beginPath();
-        ctx.lineWidth = '5';
-        ctx.strokeStyle = 'red';
-        ctx.rect(this.x - 400, this.y, this.width + 800, this.height + 20)
-        ctx.stroke();
+        if (this.world.keyboard.DODGE) {
+            return this.x + 20 + this.width - 55 > movableObject.x + 20
+                && this.y + 190 + this.height - 200 > movableObject.y + 100
+                && this.x + 20 < movableObject.x + 20 + movableObject.width
+                && this.y + 190 < movableObject.y + 110 + movableObject.height - 180
+        }
+        else {
+            return this.x + 20 + this.width - 55 > movableObject.x + 40
+                && this.y + 90 + this.height - 100 > movableObject.y + 110
+                && this.x + 20 < movableObject.x + 40 + movableObject.width - 40
+                && this.y + 90 < movableObject.y + 110 + movableObject.height - 180
+        }
     }
+
+
 
     isInArea(movableObject) {
         return this.x + this.width > movableObject.x - 400
@@ -153,7 +172,7 @@ class MovableObject extends DrawableObject {
     }
 
     isClose(movableObject) {
-        return this.x + this.width > movableObject.x
+        return this.x + this.width + 50> movableObject.x
             && this.y + this.height > movableObject.y
             && this.x < movableObject.x + movableObject.width
             && this.y < movableObject.y + movableObject.height

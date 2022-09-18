@@ -146,11 +146,29 @@ function generateCross(sideLength, path) {
 
 function insertButtons() {
     let buttonPosition = document.getElementById('buttonAB');
-    let text = generateCross(sideLength, path);
+    let text = generateButtons();
     buttonPosition.insertAdjacentHTML('afterbegin', text);
 }
 
 function generateButtons() {
+    let newButtons = `  
+    <div class="control-btn-container">
+    <button class="pushable-btn mgn-r mgn-t" id="buttonA">
+        <span class="shadow-child"></span>
+        <span class="edge"></span>
+        <span class="front">
+            A
+        </span>
+    </button>
+    <button class="pushable-btn" id="buttonB">
+        <span class="shadow-child"></span>
+        <span class="edge"></span>
+        <span class="front">
+            B
+        </span>
+    </button>
+    </div>`;
+    return newButtons;
 
 }
 
