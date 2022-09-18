@@ -58,6 +58,11 @@ canvas {
     justify-content: space-between;
 }
 
+.option-child {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
 
 .menu-btn {
 
@@ -70,7 +75,7 @@ canvas {
 
 .start-btn {
     cursor: pointer;
-    font-size: 5vw;
+    font-size: 40px;
     border: none;
     -webkit-text-stroke: 1px black;
     font-family: 'Rye', cursive;
@@ -86,12 +91,12 @@ canvas {
 
 .options {
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
     align-items: center;
     background-color: transparent;
     border-color: black;
-    height: 5%;
-    width: 5%;
+    height: 40px;
+    width: 40px;
     margin-left: 2%;
     cursor: pointer;
 }
@@ -154,17 +159,7 @@ canvas {
     display: none;
 }
 
-.responsive-control {
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-
-
 .responsive-control-landscape {
-
     position: absolute;
     bottom: 0;
     left: 0;
