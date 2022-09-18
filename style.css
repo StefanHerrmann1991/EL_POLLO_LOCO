@@ -52,7 +52,7 @@ canvas {
     position: absolute;
     top: 0px;
     left: 0px;
-    width: 97%;
+    width: 98%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -75,6 +75,7 @@ canvas {
 
 .start-btn {
     cursor: pointer;
+    margin-left: 1%;
     font-size: 40px;
     border: none;
     -webkit-text-stroke: 1px black;
