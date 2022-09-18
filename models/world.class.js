@@ -97,25 +97,19 @@ class World {
             }
 
             if (!enemy.isDead() && enemy instanceof Endboss) {
-
-
-
                 if (this.character.isInArea(enemy) && !this.endbossActive) {
                     enemy.hadFirstContact = true;
                     this.endbossActive = true;
                 }
-
                 if (!enemy.hadFirstContact && this.endbossActive) {
                     enemy.walking = true;
                     enemy.attack = false;
                     enemy.moveToPosition(this.character);
-
                     if (this.character.isClose(enemy)) {
                         enemy.walking = false;
                         enemy.attack = true;
                         enemy.moveToPosition(this.character);
                     }
-
                     if (this.character.isCollidingEndboss(enemy instanceof Endboss)) {
                         this.character.hit(20);
                     }
@@ -147,29 +141,23 @@ class World {
             })
         });
         this.level.bottles.forEach((bottle, i) => {
-            if (this.take(bottle)) {
+            if (this.canTake(bottle)) {
                 this.level.bottles.splice(i, 1);
                 this.bottleCount++;
-
             }
         });
         this.level.coins.forEach((coin, i) => {
-            if (this.take(coin)) {
+            if (this.canTake(coin)) {
                 this.level.coins.splice(i, 1);
+                this.statusbar.percentage += 1;
+                this.character.energy += 1;
                 this.coinCount++;
             }
         });
     }
 
-
-    bottleHit(enemy, bottle) { return this.throwableObject[bottle].objectIsColliding(enemy) && !enemy.isHurt() && !enemy.isDead() && !this.character.isHurt() }
-    take(loot) { return this.character.isColliding(loot) }
-    charGotHitBy(enemy) { return this.character.isColliding(enemy) && !this.character.isAboveGround() && !enemy.isDead() && !this.character.isHurt(); }
-    jumpKill(enemy) { return this.character.isAboveGround() && this.character.isColliding(enemy) && !enemy.isDead() }
-
-
     throwObject() {
-        if (!this.character.isDead() && this.keyboard.THROW && this.bottleCount > 0) {
+        if (this.canThrow()) {
             let timePassed = new Date().getTime() - this.lastThrow;
             if (timePassed > 500) {
                 this.bottleCount--;
@@ -179,6 +167,16 @@ class World {
             }
         }
     }
+
+
+    canThrow() { return this.keyboard.THROW && !this.character.isDead() &&  this.bottleCount > 0}
+    bottleHit(enemy, bottle) { return this.throwableObject[bottle].objectIsColliding(enemy) && !enemy.isHurt() && !enemy.isDead() && !this.character.isHurt() }
+    canTake(loot) { return this.character.isColliding(loot) }
+    charGotHitBy(enemy) { return this.character.isColliding(enemy) && !this.character.isAboveGround() && !enemy.isDead() && !this.character.isHurt(); }
+    jumpKill(enemy) { return this.character.isAboveGround() && this.character.isColliding(enemy) && !enemy.isDead() }
+
+
+
 
 
     draw() {
@@ -201,11 +199,10 @@ class World {
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.endscreen);
         this.ctx.translate(-this.camera_x, 0);
-        /* draw wird immer wieder aufgerufen */
         let self = this;
         requestAnimationFrame(function () { self.draw() });
-
     }
+
     /* adds more than one object to the map*/
 
     addObjectsToMap(objects) {

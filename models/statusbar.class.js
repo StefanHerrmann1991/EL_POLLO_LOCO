@@ -17,7 +17,7 @@ class Statusbar extends DrawableObject {
         this.y = 35;
         this.height = 50;
         this.width = 150;
-        this.setPercentage(100);
+        this.setPercentage(this.percentage);
     }
 
     setPercentage(percentage) {
@@ -26,15 +26,8 @@ class Statusbar extends DrawableObject {
         this.img = this.imageCache[path];
     }
 
-    /*     setPercentageEndboss(percentage) {
-            this.percentage = percentage;
-            let path = this.IMAGES_LIFEBAR_ENDBOSS[this.whichStatus()];
-            this.img = this.imageCache[path];
-        }
-     */
-
     whichStatus() {
-        if (this.percentage == 100) { return 5; }
+        if (this.percentage >= 100) { return 5; }
         else if (this.percentage > 80) { return 4; }
         else if (this.percentage > 60) { return 3; }
         else if (this.percentage > 40) { return 2; }
