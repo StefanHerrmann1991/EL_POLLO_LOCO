@@ -93,14 +93,14 @@ function loadControlPanel() {
         if (window.matchMedia("(orientation: portrait)").matches) {
             if (onSmallScreen()) { insertCross(80, 'controlCross1'); }
             if (onMiddleScreen()) { insertCross(120, 'controlCross1'); }
-            if (onBigScreen()) { insertCross(200, 'controlCross1'); }
+            if (onBigScreen()) { insertCross(140, 'controlCross1'); }
         }
 
         if (window.matchMedia("(orientation: landscape)").matches) {
 
             if (onSmallScreen()) { insertCross(80, 'controlCross2'); }
             if (onMiddleScreen()) { insertCross(120, 'controlCross2'); }
-            if (onBigScreen()) { insertCross(200, 'controlCross2'); }
+            if (onBigScreen()) { insertCross(140, 'controlCross2'); }
         }
     }
 }
@@ -140,6 +140,13 @@ function generateCross(sideLength, path) {
              </map> `;
     return cross;
 }
+
+
+function generateButtons() {
+    
+}
+
+
 /**
  * The function simulates pressing the control pad.
  * @param {string} position The parameter resembles the 
