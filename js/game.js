@@ -86,6 +86,8 @@ document.onkeyup = function (e) {
  */
 
 
+
+
 function loadControlPanel() {
     if (start) {
         let crossPosition = document.getElementById('crossPosition');
@@ -143,7 +145,7 @@ function generateCross(sideLength, path) {
 
 
 function generateButtons() {
-    
+
 }
 
 
