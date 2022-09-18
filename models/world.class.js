@@ -41,9 +41,8 @@ class World {
 
 
     checkDeath() {
-        if (this.character.isDead() && !this.endscreenOn) {
+        if (this.gameWasLost()) {
             this.endscreenOn = true;
-
             setTimeout(() => {
                 let end = new Endscreen(this.character.x, this.character.y);
                 this.endscreen.push(end);
@@ -52,7 +51,7 @@ class World {
         }
     }
     checkEndbossDeath() {
-        if (this.endboss.isDead() && endscreenOn) {
+        if (gameWasWon()) {
             this.endscreenOn = true;
             setTimeout(() => {
                 let end = new Endscreen(this.character.x, this.character.y);
@@ -62,12 +61,17 @@ class World {
         }
     }
 
+    gameWasLost() { return this.character.isDead() && !this.endscreenOn }
+    gameWasWon() {return this.endboss.isDead() && endscreenOn}
+
+
     checkBottleCount() {
         if (!this.character.isDead()) {
             document.getElementById('bottleCounter').innerHTML = `
                 <img class="bottle-stat" src="img/7.Marcadores/Icono/Botella.png"> 
                 <div>= ${this.bottleCount}<div>`
-        } else { setTimeout(() => { document.getElementById('bottleCounter').innerHTML = ""; }, 2000); }
+        }
+        else { setTimeout(() => { document.getElementById('bottleCounter').innerHTML = ""; }, 2000); }
     }
 
     checkCoinCount() {
@@ -88,7 +92,7 @@ class World {
                 this.character.hit(5);
                 this.statusbar.setPercentage(this.character.energy);
             }
-            if (!(enemy instanceof Endboss) && this.jumpKill(enemy)) {
+            if (this.jumpKill(enemy)) {
                 enemy.energy = 0;
                 setTimeout(() => {
                     let index = this.level.enemies.indexOf(enemy)
@@ -169,11 +173,11 @@ class World {
     }
 
 
-    canThrow() { return this.keyboard.THROW && !this.character.isDead() &&  this.bottleCount > 0}
+    canThrow() { return this.keyboard.THROW && !this.character.isDead() && this.bottleCount > 0 }
     bottleHit(enemy, bottle) { return this.throwableObject[bottle].objectIsColliding(enemy) && !enemy.isHurt() && !enemy.isDead() && !this.character.isHurt() }
     canTake(loot) { return this.character.isColliding(loot) }
     charGotHitBy(enemy) { return this.character.isColliding(enemy) && !this.character.isAboveGround() && !enemy.isDead() && !this.character.isHurt(); }
-    jumpKill(enemy) { return this.character.isAboveGround() && this.character.isColliding(enemy) && !enemy.isDead() }
+    jumpKill(enemy) { return !(enemy instanceof Endboss) && this.character.isAboveGround() && this.character.isColliding(enemy) && !enemy.isDead() }
 
 
 

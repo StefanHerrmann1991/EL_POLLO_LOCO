@@ -75,14 +75,18 @@ class Endboss extends MovableObject {
             if (this.hadFirstContact && this.i < 10) {
                 this.playAnimation(this.IMAGES_PERCEIVING);
                 this.i++;
-                if (this.i >= 9) { this.hadFirstContact = false;
-                console.log(this.i, this.hadFirstContact) }
+                if (this.i >= 9) {
+                    this.hadFirstContact = false;
+                    console.log(this.i, this.hadFirstContact)
+                }
             }
 
             if (this.isDead() && !this.death && !this.hadFirstContact) {
                 this.playAnimation(this.IMAGES_DYING);
                 this.death = true;
+
                 setTimeout(() => {
+                    this.otherDirection = false;
                     this.loadImage('img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/4.Muerte/G27.png');
                 }, 1500);
             }
@@ -90,7 +94,7 @@ class Endboss extends MovableObject {
             if (!this.isDead() && this.attack && !this.isHurt() && !this.hadFirstContact) {
                 this.playAnimation(this.IMAGES_ATTACKING);
                 if (!this.isDead() && !this.isAboveGround()) {
-                    this.speedY = 45;                
+                    this.speedY = 45;
                 }
             }
 
