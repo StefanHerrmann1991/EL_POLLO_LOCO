@@ -16,10 +16,6 @@ class World {
     lastThrow = 0;
     endbossActive = false;
 
-
-
-
-
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -199,6 +195,10 @@ class World {
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
+        this.ctx.translate(-this.camera_x, 0);
+        this.addToMap(this.statusbar);
+        this.addToMap(this.statusbarEndboss);
+        this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.endscreen);
         this.ctx.translate(-this.camera_x, 0);
         /* draw wird immer wieder aufgerufen */
