@@ -149,9 +149,9 @@ class MovableObject extends DrawableObject {
     isCollidingEndboss(movableObject) {
 
         if (this.world.keyboard.DODGE) {
-            return this.x + 20 + this.width - 55 > movableObject.x + 20
-                && this.y + 190 + this.height - 200 > movableObject.y + 100
-                && this.x + 20 < movableObject.x + 20 + movableObject.width
+            return this.x + 20 + this.width - 55 > movableObject.x + 40
+                && this.y + 190 + this.height - 200 > movableObject.y + 110
+                && this.x + 20 < movableObject.x + 40 + movableObject.width -80
                 && this.y + 190 < movableObject.y + 110 + movableObject.height - 180
         }
         else {

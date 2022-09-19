@@ -11,7 +11,7 @@ let settingsAreOpen = false;
 */
 
 
-function init() {
+function initGame() {
     start = true;
     loadControlPanel();
     stopGame();
@@ -265,29 +265,16 @@ function exitFullscreen() {
 
 function toggleOptionPanel() {
     let settings = document.getElementById('settingMenu');
+    styleSetting = document.getElementById('settingMenu').classList.toggle('d-none');
     settingsAreOpen = !settingsAreOpen;
-    if (!settingsAreOpen) { settings.innerHTML = ''; }
-    else {
-        settings.innerHTML = `
-
+    settings.innerHTML = `
         <div class="settings-menu" >
-        <button class="btn-right"><img src ="img/0.Own_Pictures/Icons/close.png"></button>
+        <button onclick="toggleOptionPanel()" class="btn-right"><img src ="img/0.Own_Pictures/Icons/close.png"></button>
         <div class="settings-links">
         <a>Show fast Help</a>
-        <a>Detailed Help</a>
-        <a>Impressum</a>
-        <a>Datasecurity</a>
+        <a href="help.html">Detailed Help</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datasecruity.html">Datasecurity</a>
         </div>    
-
-        </div>    
-`;
-    }
-
-
-
-
-
-
-
-
+        </div>    `;
 }

@@ -82,9 +82,10 @@ class Endboss extends MovableObject {
 
             if (this.isDead() && !this.death && !this.hadFirstContact) {
                 this.playAnimation(this.IMAGES_DYING);
-                this.death = true;
+                
 
                 setTimeout(() => {
+                    this.death = true;
                     this.otherDirection = false;
                     this.loadImage('img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/4.Muerte/G27.png');
                 }, 1500);

@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Pollo Loco</title>
     <link rel="stylesheet" href="style.css">
+    <script src="js/includeHTML.js"></script>
     <script src="models/drawable-object.class.js"></script>
     <script src="models/startscreen.class.js"></script>
     <script src="models/movable-object.class.js"></script>
@@ -43,7 +44,7 @@
     </style>
 </head>
 
-<body>
+<body onload="includeHTML()">
     <div class="responsive">
         <h1>El Pollo Loco</h1>
         <div class="main-container" id="mainContainer">
@@ -52,7 +53,7 @@
 
             <div class="option-buttons">
                 <div class="option-child">
-                    <div class="start-btn" onclick="init()">Start </div>
+                    <div class="start-btn" onclick="initGame()">Start </div>
                     <div class="counter">
                         <div class="bottle-counter" id="bottleCounter"></div>
                         <div class="coin-counter" id="coinCounter"></div>
@@ -60,7 +61,7 @@
                     <div class="menu-btn">
                         <button  onclick="changeToFullscreen()"><img class="options"
                                 src="img/0.Own_Pictures/Icons/fullscreen.png"></button>
-                        <button onclick="toggleOptionPanel(true)"><img class="options settings" 
+                        <button onclick="toggleOptionPanel(true)"><img class="options settings mgn-l" 
                                 src="img/0.Own_Pictures/Icons/settings.png"></button>
                     </div>
                 </div>

@@ -12,6 +12,12 @@ body {
 
 }
 
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
 h1 {
     text-decoration: none;
     font-size: 80px;
@@ -233,19 +239,19 @@ canvas {
 
 
 .mgn-t {
-    margin-top: 10%;
+    margin-top: 10px;
 }
 
 .mgn-l {
-    margin-left: 10%;
+    margin-left: 10px;
 }
 
 .mgn-b {
-    margin-bottom: 15%;
+    margin-bottom: 10px;
 }
 
 .mgn-r {
-    margin-right: 10%;
+    margin-right: 10px;
 }
 
 .cross {
