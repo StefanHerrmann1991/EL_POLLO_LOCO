@@ -10,16 +10,23 @@ let isInFullscreen = false;
  * 
 */
 
+function generateLevel () {
+    canvas = document.getElementById('canvas');
+    initLevel1();
+}
+
 
 function initGame() {
     start = true;
     loadControlPanel();
-    stopGame();
-    canvas = document.getElementById('canvas');
-    initLevel1();
+    canvas = document.getElementById('canvas');  
     keyboard = new Keyboard();
     world = new World(canvas, keyboard);
 }
+
+
+
+
 
 /**
  * The function enables the usage of the keyboard.
@@ -218,8 +225,10 @@ function touchCrossEnd(img, position) {
 
 
 function setStoppableInterval(fn, frame) {
-    let id = setInterval(fn, frame);
-    allIntervals.push(id);
+    if (start) {
+        let id = setInterval(fn, frame);
+        allIntervals.push(id);
+    }
 }
 
 function stopGame() {
@@ -264,5 +273,5 @@ function exitFullscreen() {
 /* TODO */
 
 function toggleOptionPanel() {
-     styleSetting = document.getElementById('settingMenu').classList.toggle('d-none');
+    styleSetting = document.getElementById('settingMenu').classList.toggle('d-none');
 }
