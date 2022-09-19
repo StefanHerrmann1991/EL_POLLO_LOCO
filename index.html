@@ -43,7 +43,7 @@
     </style>
 </head>
 
-<body onload="loadControlPanel()">
+<body>
     <div class="responsive">
         <h1>El Pollo Loco</h1>
         <div class="main-container" id="mainContainer">
@@ -58,18 +58,18 @@
                         <div class="coin-counter" id="coinCounter"></div>
                     </div>
                     <div class="menu-btn">
-                        <img class="options" onclick="changeToFullscreen()"
-                            src="img/0.Own_Pictures/Icons/fullscreen.png">
-                        <img class="options settings" onclick="toggleOptionPanel()" src="img/0.Own_Pictures/Icons/settings.png">
+                        <button  onclick="changeToFullscreen()"><img class="options"
+                                src="img/0.Own_Pictures/Icons/fullscreen.png"></button>
+                        <button onclick="toggleOptionPanel(true)"><img class="options settings" 
+                                src="img/0.Own_Pictures/Icons/settings.png"></button>
                     </div>
                 </div>
             </div>
-
-            <div class="settings-menu" id="settingMenu"></div>
+            <div id="settingMenu"></div>
             <div class="responsive-control-landscape" id="responsiveControll">
                 <div class="cross">
                     <div id="crossPosition"></div>
-                </div>              
+                </div>
             </div>
         </div>
     </div>

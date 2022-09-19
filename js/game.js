@@ -4,10 +4,13 @@ let keyboard;
 let allIntervals = [];
 let start = false;
 let isInFullscreen = false;
+let settingsAreOpen = false;
 /** 
  * The function initiates the canvas and for the game relevant functions.
  * 
 */
+
+
 function init() {
     start = true;
     loadControlPanel();
@@ -262,15 +265,23 @@ function exitFullscreen() {
 
 function toggleOptionPanel() {
     let settings = document.getElementById('settingMenu');
-    settings.innerHTML = '';
-    settings.innerHTML = `
-        <img class="closing-cross" src = "">
-        <div>Show fast Help</div>
-        <div>Detailed Help</div>
-        <div>Impressum</div>
-        <div>Datasecurity</div>
-   `;
+    settingsAreOpen = !settingsAreOpen;
+    if (!settingsAreOpen) { settings.innerHTML = ''; }
+    else {
+        settings.innerHTML = `
 
+        <div class="settings-menu" >
+        <button class="btn-right"><img src ="img/0.Own_Pictures/Icons/close.png"></button>
+        <div class="settings-links">
+        <a>Show fast Help</a>
+        <a>Detailed Help</a>
+        <a>Impressum</a>
+        <a>Datasecurity</a>
+        </div>    
+
+        </div>    
+`;
+    }
 
 
 
