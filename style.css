@@ -35,6 +35,10 @@ canvas {
     display: block;
 }
 
+.background-img-formalities {
+    background-image: url('img/0.Own_Pictures/storyBackgroundNew.png');
+}
+
 .background-img-1 {
     background-image: url('img/9.Intro _ Outro Image/Start Screen/Opción 1.png');
 }
@@ -155,6 +159,15 @@ canvas {
     margin-left: 2%;
     cursor: pointer;
 }
+
+.fullscreen-btn {
+    transition: transform 2s ease-in-out;
+}
+
+.fullscreen-btn:hover {
+    transform: scale(0.75)
+}
+
 
 .settings {
     transition: transform 2s ease-in-out;

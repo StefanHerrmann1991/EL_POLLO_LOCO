@@ -4,7 +4,7 @@ let keyboard;
 let allIntervals = [];
 let start = false;
 let isInFullscreen = false;
-let settingsAreOpen = false;
+
 /** 
  * The function initiates the canvas and for the game relevant functions.
  * 
@@ -264,17 +264,5 @@ function exitFullscreen() {
 /* TODO */
 
 function toggleOptionPanel() {
-    let settings = document.getElementById('settingMenu');
-    styleSetting = document.getElementById('settingMenu').classList.toggle('d-none');
-    settingsAreOpen = !settingsAreOpen;
-    settings.innerHTML = `
-        <div class="settings-menu" >
-        <button onclick="toggleOptionPanel()" class="btn-right"><img src ="img/0.Own_Pictures/Icons/close.png"></button>
-        <div class="settings-links">
-        <a>Show fast Help</a>
-        <a href="help.html">Detailed Help</a>
-        <a href="impressum.html">Impressum</a>
-        <a href="datasecruity.html">Datasecurity</a>
-        </div>    
-        </div>    `;
+     styleSetting = document.getElementById('settingMenu').classList.toggle('d-none');
 }

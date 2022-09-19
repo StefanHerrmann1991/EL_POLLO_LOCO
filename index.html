@@ -59,14 +59,25 @@
                         <div class="coin-counter" id="coinCounter"></div>
                     </div>
                     <div class="menu-btn">
-                        <button  onclick="changeToFullscreen()"><img class="options"
+                        <button onclick="changeToFullscreen()"><img class="options fullscreen-btn"
                                 src="img/0.Own_Pictures/Icons/fullscreen.png"></button>
-                        <button onclick="toggleOptionPanel(true)"><img class="options settings mgn-l" 
+                        <button onclick="toggleOptionPanel()"><img class="options settings mgn-l"
                                 src="img/0.Own_Pictures/Icons/settings.png"></button>
                     </div>
                 </div>
             </div>
-            <div id="settingMenu"></div>
+            <div id="settingMenu" class="d-none">
+                <div class="settings-menu">
+                    <button onclick="toggleOptionPanel()" class="btn-right"><img
+                            src="img/0.Own_Pictures/Icons/close.png"></button>
+                    <div class="settings-links">
+                        <a>Show fast Help</a>
+                        <a href="help.html">Detailed Help</a>
+                        <a href="impressum.html">Impressum</a>
+                        <a href="datasecruity.html">Datasecurity</a>
+                    </div>
+                </div>
+            </div>
             <div class="responsive-control-landscape" id="responsiveControll">
                 <div class="cross">
                     <div id="crossPosition"></div>
