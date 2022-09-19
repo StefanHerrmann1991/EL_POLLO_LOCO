@@ -77,8 +77,7 @@ class Endboss extends MovableObject {
                 this.i++;
                 if (this.i >= 9) {
                     this.hadFirstContact = false;
-                    console.log(this.i, this.hadFirstContact)
-                }
+                 }
             }
 
             if (this.isDead() && !this.death && !this.hadFirstContact) {
@@ -101,7 +100,7 @@ class Endboss extends MovableObject {
             else if (this.isHurt() && !this.isDead() && !this.attack && !this.hadFirstContact) {
                 this.playAnimation(this.IMAGES_HURTING);
             }
-            else if (!this.isDead() && this.walking && !this.isHurt()) { this.playAnimation(this.IMAGES_WALKING) }
+            else if (!this.isDead() && !this.isHurt() && this.walking  ) { this.playAnimation(this.IMAGES_WALKING) }
 
         }, 90);
     }

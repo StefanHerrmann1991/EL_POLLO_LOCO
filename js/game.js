@@ -256,3 +256,27 @@ function exitFullscreen() {
         document.webkitExitFullscreen();
     }
 }
+
+
+/* TODO */
+
+function toggleOptionPanel() {
+    let settings = document.getElementById('settingMenu');
+    settings.innerHTML = '';
+    settings.innerHTML = `
+        <img class="closing-cross" src = "">
+        <div>Show fast Help</div>
+        <div>Detailed Help</div>
+        <div>Impressum</div>
+        <div>Datasecurity</div>
+   `;
+
+
+
+
+
+
+
+
+
+}

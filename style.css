@@ -110,6 +110,16 @@ canvas {
     transform: rotate(360deg);
 }
 
+.settings-menu {
+    background-image: url('img/0.Own_Pictures/optionBackground.JPG');
+    font-family: 'Rye', cursive;
+    color: black;
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+}
+
 
 .counter {
     display: flex;
