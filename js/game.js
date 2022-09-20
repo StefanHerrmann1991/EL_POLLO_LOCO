@@ -135,7 +135,6 @@ function insertCross(path) {
 */
 function generateCross(path) {
     let sideLength = document.getElementById('canvas').offsetWidth / 6;
-
     let coord1 = sideLength * 3 / 8;
     let coord2 = sideLength * 5 / 8;
     let cross = `
@@ -167,7 +166,6 @@ function generateButtons() {
     </button>
     </div>`;
     return newButtons;
-
 }
 
 

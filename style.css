@@ -77,7 +77,9 @@ canvas {
     position: relative;
 }
 
-area{cursor: pointer;}
+area {
+    cursor: pointer;
+}
 
 
 .control-btn {
@@ -342,14 +344,11 @@ area{cursor: pointer;}
 }
 
 
-.cross-position {z-index: 100;}
-
-.cross {
-    position: relative;
-    width: 40%;
-    height: 40%;
+.cross-position {
+    z-index: 100;
     padding: 5%;
 }
+
 
 .help {
     position: absolute;
@@ -366,21 +365,21 @@ area{cursor: pointer;}
 .throw {
     position: absolute;
     top: 8%;
-    left: 21%;
+    left: 10.5%;
 }
 
 
 .right {
     position: absolute;
     top: 45%;
-    left: 45%;
+    left: 23%;
 }
 
 
 .dodge {
     position: absolute;
     top: 80%;
-    left: 21%;
+    left: 10.5%;
 }
 
 .left {
@@ -472,11 +471,6 @@ area{cursor: pointer;}
 
 
 @media all and (display-mode: landscape) {
-    .cross {
-        width: 40%;
-        height: 40%;
-    }
-
     .pushable-btn {
         height: 5%;
         width: 10%;
@@ -534,7 +528,7 @@ area{cursor: pointer;}
 @media screen and (max-width:641px) {
 
 
-  
+
 
     .help {
         position: absolute;
@@ -544,39 +538,10 @@ area{cursor: pointer;}
         height: 100%;
     }
 
-    
+
     .help div {
         font-size: 60%;
     }
-    
-    .throw {
-        position: absolute;
-        top: 5%;
-        left: 28%;
-    }
-    
-    
-    .right {
-        position: absolute;
-        top: 45%;
-        left: 60%;
-    }
-    
-    
-    .dodge {
-        position: absolute;
-        top: 80%;
-        left: 28%;
-    }
-    
-    .left {
-    
-        position: absolute;
-        top: 45%;
-        left: 0%;
-    
-    }       
-
 
     .bottle-stat {
         height: 3vh;
