@@ -109,7 +109,7 @@ class Character extends MovableObject {
                 this.otherDirection = true;
             }
             if (!this.isDead() && this.world.keyboard.SPACE && !this.isAboveGround()) {
-                this.speedY = 35;
+                this.speedY = 35;      
             }
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);

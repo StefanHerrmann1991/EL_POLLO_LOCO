@@ -177,7 +177,7 @@ class World {
     bottleHit(enemy, bottle) { return this.throwableObject[bottle].objectIsColliding(enemy) && !enemy.isHurt() && !enemy.isDead() && !this.character.isHurt() }
     canTake(loot) { return this.character.isColliding(loot) }
     charGotHitBy(enemy) { return this.character.isColliding(enemy) && !this.character.isAboveGround() && !enemy.isDead() && !this.character.isHurt(); }
-    jumpKill(enemy) { return !(enemy instanceof Endboss) && this.character.isAboveGround() && this.character.isColliding(enemy) && !enemy.isDead() }
+    jumpKill(enemy) { return !(enemy instanceof Endboss) && this.character.isAboveGround() && this.character.speedY < 0 && this.character.isColliding(enemy) && !enemy.isDead() }
 
 
 

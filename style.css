@@ -77,10 +77,6 @@ canvas {
     position: relative;
 }
 
-area {
-    cursor: pointer;
-}
-
 
 .control-btn {
     display: flex;
@@ -102,6 +98,9 @@ area {
     justify-content: space-between;
     width: 100%;
 }
+
+
+
 
 .menu-btn {
 
@@ -360,6 +359,8 @@ area {
 
 .help div {
     font-size: 100%;
+    -webkit-text-stroke: 0.1px rgb(211, 172, 45);
+    
 }
 
 .throw {

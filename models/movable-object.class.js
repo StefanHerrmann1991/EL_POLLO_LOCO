@@ -23,7 +23,7 @@ class MovableObject extends DrawableObject {
         setStoppableInterval(() => {
             if (this.isAboveGround() || this.speedY > yPosition) {
                 this.y -= this.speedY;
-                this.speedY -= this.acceleration;
+                this.speedY -= this.acceleration;               
             }
         }, 1000 / 60);
     }
@@ -106,6 +106,7 @@ class MovableObject extends DrawableObject {
 
     jump() {
         this.speedY = 30;
+        
     }
 
 

@@ -57,17 +57,4 @@ class DrawableObject {
             ctx.stroke();
         }
     }
-
-    drawFrame(ctx) {
-        if (this instanceof Endboss) {
-            ctx.beginPath();
-            ctx.lineWidth = '5';
-            ctx.strokeStyle = 'green';
-            ctx.rect(this.x + 40, this.y + 110, this.width - 80, this.height - 180)
-            ctx.stroke();
-        }
-    }
-
-
-
 }

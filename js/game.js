@@ -18,7 +18,6 @@ function generateLevel() {
 
 function initGame() {
 
-
     start = true;
     initLevel1();
     canvas = document.getElementById('canvas');
@@ -94,9 +93,6 @@ document.onkeyup = function (e) {
  * 
  */
 
-
-
-
 function loadControlPanel() {
 
     let crossPosition = document.getElementById('crossPosition');
@@ -104,18 +100,10 @@ function loadControlPanel() {
     if (window.matchMedia("(orientation: portrait)").matches) {
         insertCross('controlCross1');
     }
-
     if (window.matchMedia("(orientation: landscape)").matches) {
         insertCross('controlCross1');
     }
-
 }
-
-
-function onSmallScreen() { return window.innerWidth >= 320 && window.innerWidth <= 640 }
-function onMiddleScreen() { return window.innerWidth >= 641 && window.innerWidth <= 1007 }
-function onBigScreen() { return window.innerWidth > 1008 }
-
 
 /**
  * The function enables the responsivness of the map cross element.
@@ -149,7 +137,7 @@ function generateCross(path) {
 }
 
 function insertButtons() {
-    let buttonPosition = document.getElementById('buttonAB');
+    let buttonPosition = document.getElementById('controlBtn');
     let text = generateButtons();
     buttonPosition.insertAdjacentHTML('afterbegin', text);
 }
@@ -157,7 +145,7 @@ function insertButtons() {
 function generateButtons() {
     let newButtons = `  
     <div class="control-btn-container">
-    <button class="pushable-btn mgn-r mgn-t" id="buttonA">
+    <button ontouchstart="jumpBtn()" ontouchend ="jumpBtnFalse()" class="pushable-btn mgn-r mgn-t" id="buttonA">
         <span class="shadow-child"></span>
         <span class="edge"></span>
         <span class="front">
@@ -168,8 +156,13 @@ function generateButtons() {
     return newButtons;
 }
 
+function jumpBtn() {
+    keyboard.SPACE = true;
+}
 
-
+function jumpBtnFalse() {
+    keyboard.SPACE = false;
+}
 
 /**
  * The function simulates pressing the control pad.
@@ -201,14 +194,10 @@ function touchCrossEnd(img, position) {
     }
 }
 
-
-
 /**
  * 
  * @param {string} intervalName The name of the interval which needs to be cleared while restarting the game.
  */
-
-
 
 function setStoppableInterval(fn, frame) {
     if (start) {
@@ -235,7 +224,6 @@ function changeToFullscreen() {
     }
 }
 
-
 function enterFullscreen(element) {
     if (element.requestFullscreen) {
         element.requestFullscreen();
@@ -246,7 +234,6 @@ function enterFullscreen(element) {
     }
 }
 
-
 function exitFullscreen() {
     if (document.exitFullscreen) {
         document.exitFullscreen();
@@ -254,9 +241,6 @@ function exitFullscreen() {
         document.webkitExitFullscreen();
     }
 }
-
-
-/* TODO */
 
 function toggleOptionPanel() {
     styleSetting = document.getElementById('settingMenu').classList.toggle('d-none');
