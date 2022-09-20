@@ -44,7 +44,7 @@
     </style>
 </head>
 
-<body onload="generateLevel(); includeHTML() ">
+<body onload=" loadControlPanel(); includeHTML() ">
     <div class="responsive">
         <h1>El Pollo Loco</h1>
         <div class="main-container" id="mainContainer">
@@ -84,15 +84,13 @@
 
 
             <div class="responsive-control-landscape" id="responsiveControll">
-                <div class="cross">
-                    <div class="help" id="help">
-                        <div class="throw">Throw</div>
-                        <div class="right">Right</div>
-                        <div class="dodge">Dodge</div>
-                        <div class="left">Left</div>
-                    </div>
-                    <div id="crossPosition"></div>
+                <div class="help" id="help">
+                    <div class="throw">Throw</div>
+                    <div class="right">Right</div>
+                    <div class="dodge">Dodge</div>
+                    <div class="left">Left</div>
                 </div>
+                <div id="crossPosition" class="cross-position"></div>
             </div>
         </div>
     </div>

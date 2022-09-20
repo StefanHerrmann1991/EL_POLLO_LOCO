@@ -10,8 +10,8 @@ let isInFullscreen = false;
  * 
 */
 
-function generateLevel () {
-    loadControlPanel();  
+function generateLevel() {
+
 
 }
 
@@ -21,8 +21,7 @@ function initGame() {
 
     start = true;
     initLevel1();
-
-    canvas = document.getElementById('canvas'); 
+    canvas = document.getElementById('canvas');
     keyboard = new Keyboard();
     world = new World(canvas, keyboard);
 }
@@ -100,21 +99,16 @@ document.onkeyup = function (e) {
 
 function loadControlPanel() {
 
-        let crossPosition = document.getElementById('crossPosition');
-        crossPosition.innerHTML = '';
-        if (window.matchMedia("(orientation: portrait)").matches) {
-            if (onSmallScreen()) { insertCross(80, 'controlCross1'); }
-            if (onMiddleScreen()) { insertCross(120, 'controlCross1'); }
-            if (onBigScreen()) { insertCross(140, 'controlCross1'); }
-        }
+    let crossPosition = document.getElementById('crossPosition');
+    crossPosition.innerHTML = '';
+    if (window.matchMedia("(orientation: portrait)").matches) {
+        insertCross('controlCross1');
+    }
 
-        if (window.matchMedia("(orientation: landscape)").matches) {
+    if (window.matchMedia("(orientation: landscape)").matches) {
+        insertCross('controlCross1');
+    }
 
-            if (onSmallScreen()) { insertCross(80, 'controlCross2'); }
-            if (onMiddleScreen()) { insertCross(120, 'controlCross2'); }
-            if (onBigScreen()) { insertCross(140, 'controlCross2'); }
-        }
-   
 }
 
 
@@ -127,9 +121,9 @@ function onBigScreen() { return window.innerWidth > 1008 }
  * The function enables the responsivness of the map cross element.
  * 
  */
-function insertCross(sideLength, path) {
+function insertCross(path) {
     let crossPosition = document.getElementById('crossPosition');
-    let text = generateCross(sideLength, path);
+    let text = generateCross(path);
     crossPosition.insertAdjacentHTML('afterbegin', text);
 }
 
@@ -139,20 +133,21 @@ function insertCross(sideLength, path) {
 * @param {number} sideLength The side length of the cross element.
 * @returns {string} Returns the cross properties.
 */
-function generateCross(sideLength, path) {
+function generateCross(path) {
+    let sideLength = document.getElementById('canvas').offsetWidth / 6;
+
     let coord1 = sideLength * 3 / 8;
     let coord2 = sideLength * 5 / 8;
     let cross = `
            <img class='cross-map' id="crossMap" src="img/0.Own_Pictures/${path}/cross.png" usemap='#image-map' height="${sideLength}px" width="${sideLength}px">
              <map name='image-map'>
-                 <area target="" alt="up"    title="up"     id="up"     ontouchstart="touchCross('${path}','up')"   ontouchend="touchCrossEnd('${path}','cross')" coords="${coord1},0,${coord2},${coord1}" shape="rect">
+                 <area target="" alt="up"    title="up"     id="up"    ontouchstart="touchCross('${path}','up')"  ontouchend="touchCrossEnd('${path}','cross')"  coords="${coord1},0,${coord2},${coord1}" shape="rect">
                  <area target="" alt="left"  title="left"   id="left"   ontouchstart="touchCross('${path}','left')" ontouchend="touchCrossEnd('${path}','cross')" coords="0,${coord1},${coord1},${coord2}" shape="rect">
                  <area target="" alt="down"  title="down"   id="down"   ontouchstart="touchCross('${path}','down')" ontouchend="touchCrossEnd('${path}','cross')" coords="${coord2},${coord2},${coord1},${sideLength}" shape="rect">
                  <area target="" alt="right" title="right"  id="right"  ontouchstart="touchCross('${path}','right')" ontouchend="touchCrossEnd('${path}','cross')" coords="${sideLength},${coord1},${coord2},${coord2}" shape="rect">   
              </map> `;
     return cross;
 }
-
 
 function insertButtons() {
     let buttonPosition = document.getElementById('buttonAB');

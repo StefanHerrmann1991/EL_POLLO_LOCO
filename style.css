@@ -77,6 +77,7 @@ canvas {
     position: relative;
 }
 
+area{cursor: pointer;}
 
 
 .control-btn {
@@ -341,6 +342,7 @@ canvas {
 }
 
 
+.cross-position {z-index: 100;}
 
 .cross {
     position: relative;
@@ -532,6 +534,48 @@ canvas {
 @media screen and (max-width:641px) {
 
 
+  
+
+    .help {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    
+    .help div {
+        font-size: 60%;
+    }
+    
+    .throw {
+        position: absolute;
+        top: 5%;
+        left: 28%;
+    }
+    
+    
+    .right {
+        position: absolute;
+        top: 45%;
+        left: 60%;
+    }
+    
+    
+    .dodge {
+        position: absolute;
+        top: 80%;
+        left: 28%;
+    }
+    
+    .left {
+    
+        position: absolute;
+        top: 45%;
+        left: 0%;
+    
+    }       
 
 
     .bottle-stat {
