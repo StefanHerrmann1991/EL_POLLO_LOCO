@@ -11,21 +11,21 @@ let isInFullscreen = false;
 */
 
 function generateLevel () {
-    canvas = document.getElementById('canvas');
-    initLevel1();
+    loadControlPanel();  
+
 }
 
 
 function initGame() {
+
+
     start = true;
-    loadControlPanel();
-    canvas = document.getElementById('canvas');  
+    initLevel1();
+
+    canvas = document.getElementById('canvas'); 
     keyboard = new Keyboard();
     world = new World(canvas, keyboard);
 }
-
-
-
 
 
 /**
@@ -99,7 +99,7 @@ document.onkeyup = function (e) {
 
 
 function loadControlPanel() {
-    if (start) {
+
         let crossPosition = document.getElementById('crossPosition');
         crossPosition.innerHTML = '';
         if (window.matchMedia("(orientation: portrait)").matches) {
@@ -114,7 +114,7 @@ function loadControlPanel() {
             if (onMiddleScreen()) { insertCross(120, 'controlCross2'); }
             if (onBigScreen()) { insertCross(140, 'controlCross2'); }
         }
-    }
+   
 }
 
 
@@ -168,13 +168,6 @@ function generateButtons() {
         <span class="edge"></span>
         <span class="front">
             A
-        </span>
-    </button>
-    <button class="pushable-btn" id="buttonB">
-        <span class="shadow-child"></span>
-        <span class="edge"></span>
-        <span class="front">
-            B
         </span>
     </button>
     </div>`;

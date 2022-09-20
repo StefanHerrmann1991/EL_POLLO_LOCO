@@ -293,11 +293,7 @@ canvas {
     margin-right: 10px;
 }
 
-.cross {
-    position: relative;
-    width: 40%;
-    height: 40%;
-}
+
 
 
 .control-btn-container {
@@ -343,6 +339,58 @@ canvas {
     border-radius: 40px;
     background: linear-gradient(to right, black 58%, white 150%);
 }
+
+
+
+.cross {
+    position: relative;
+    width: 40%;
+    height: 40%;
+    padding: 5%;
+}
+
+.help {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.help div {
+    font-size: 100%;
+}
+
+.throw {
+    position: absolute;
+    top: 8%;
+    left: 21%;
+}
+
+
+.right {
+    position: absolute;
+    top: 45%;
+    left: 45%;
+}
+
+
+.dodge {
+    position: absolute;
+    top: 80%;
+    left: 21%;
+}
+
+.left {
+
+    position: absolute;
+    top: 45%;
+    left: 0%;
+
+}
+
+
+
 
 .front {
     display: block;
@@ -482,6 +530,8 @@ canvas {
 }
 
 @media screen and (max-width:641px) {
+
+
 
 
     .bottle-stat {
