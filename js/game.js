@@ -97,6 +97,8 @@ function loadControlPanel() {
 
     let crossPosition = document.getElementById('crossPosition');
     crossPosition.innerHTML = '';
+    controlBtnPosition.innerHTML = '';
+    insertButtons();
     if (window.matchMedia("(orientation: portrait)").matches) {
         insertCross('controlCross1');
     }
@@ -137,14 +139,14 @@ function generateCross(path) {
 }
 
 function insertButtons() {
-    let buttonPosition = document.getElementById('controlBtn');
+    let buttonPosition = document.getElementById('controlBtnPosition');
     let text = generateButtons();
     buttonPosition.insertAdjacentHTML('afterbegin', text);
 }
 
 function generateButtons() {
     let newButtons = `  
-    <div class="control-btn-container">
+   
     <button ontouchstart="jumpBtn()" ontouchend ="jumpBtnFalse()" class="pushable-btn mgn-r mgn-t" id="buttonA">
         <span class="shadow-child"></span>
         <span class="edge"></span>
@@ -152,7 +154,7 @@ function generateButtons() {
             A
         </span>
     </button>
-    </div>`;
+`;
     return newButtons;
 }
 

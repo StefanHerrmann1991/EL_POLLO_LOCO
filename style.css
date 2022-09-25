@@ -155,13 +155,11 @@ canvas {
     flex-direction: column;
 }
 
-
 .settings-menu img {
     height: 20px;
     width: 20px;
     margin-left: 12px;
 }
-
 
 .start-btn {
     cursor: pointer;
@@ -200,7 +198,6 @@ canvas {
     transform: scale(0.75)
 }
 
-
 .settings {
     transition: transform 2s ease-in-out;
 }
@@ -209,14 +206,11 @@ canvas {
     transform: rotate(360deg);
 }
 
-
-
 .counter {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
 
 .bottle-counter {
     display: flex;
@@ -271,18 +265,6 @@ canvas {
     margin-right: 5%;
 }
 
-.control-btn {
-    background-color: black;
-    font-family: 'Rye', cursive;
-    color: rgb(211, 172, 45);
-    font-size: 15%;
-    height: 60%;
-    width: 60%;
-    border-radius: 10vh;
-}
-
-
-
 .mgn-t {
     margin-top: 10px;
 }
@@ -297,18 +279,6 @@ canvas {
 
 .mgn-r {
     margin-right: 10px;
-}
-
-
-
-
-.control-btn-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    width: 200px;
-    height: 200px;
-    align-items: flex-end;
 }
 
 .pushable-btn {
@@ -346,12 +316,10 @@ canvas {
     background: linear-gradient(to right, black 58%, white 150%);
 }
 
-
 .cross-position {
     z-index: 100;
     padding: 5%;
 }
-
 
 .help {
     position: absolute;
@@ -380,7 +348,6 @@ canvas {
     left: 23%;
 }
 
-
 .dodge {
     position: absolute;
     top: 80%;
@@ -395,14 +362,15 @@ canvas {
 
 }
 
-
-
-
 .front {
     display: block;
     position: relative;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     border-radius: 50%;
-    font-size: 30px;
+    font-size: 35px;
     -webkit-text-stroke: 1px black;
     font-family: 'Rye', cursive;
     color: rgb(211, 172, 45);
@@ -564,12 +532,7 @@ canvas {
 
     .coin-counter {
         font-size: 20px;
-    }
-
-    .pushable-btn {
-        height: 15%;
-        width: 15%;
-    }
+    } 
 
     .front {
         font-size: 20px;
