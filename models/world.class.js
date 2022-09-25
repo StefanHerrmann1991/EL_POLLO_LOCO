@@ -93,11 +93,7 @@ class World {
                 this.statusbar.setPercentage(this.character.energy);
             }
             if (this.jumpKill(enemy)) {
-                enemy.energy = 0;
-                setTimeout(() => {
-                    let index = this.level.enemies.indexOf(enemy)
-                    this.level.enemies.splice(index, 1);
-                }, 1000);
+                this.removeAn(enemy);
             }
 
             if (!enemy.isDead() && enemy instanceof Endboss) {
@@ -158,6 +154,15 @@ class World {
                 this.coinCount++;
             }
         });
+    }
+
+
+    removeAn(enemy) {
+        enemy.energy = 0;
+        setTimeout(() => {
+            let index = this.level.enemies.indexOf(enemy)
+            this.level.enemies.splice(index, 1);
+        }, 1000);
     }
 
     throwObject() {
