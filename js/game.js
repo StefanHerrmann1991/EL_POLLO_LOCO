@@ -247,8 +247,10 @@ function toggleOptionPanel() {
     styleSetting = document.getElementById('settingMenu').classList.toggle('d-none');
 }
 
-function toggleFastHelp() {  
-     
+function toggleFastHelp() {       
         document.getElementById('help').classList.toggle('d-none');
-    
-}
+    }
+
+    function toggleControls() {
+        document.getElementById('controls').classList.toggle('d-none');
+    }
