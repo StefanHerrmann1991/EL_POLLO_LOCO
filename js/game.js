@@ -17,7 +17,6 @@ function generateLevel() {
 
 
 function initGame() {
-
     start = true;
     initLevel1();
     canvas = document.getElementById('canvas');
@@ -152,7 +151,7 @@ function generateButtons() {
         <span class="edge"></span>
         <span class="front">A</span>
     </button>
-    <div class="jump">Jump</div>
+    <div class="btn-help" id="helpBtn" >Jump</div>
     </div>
 `;
     return newButtons;
@@ -246,4 +245,8 @@ function exitFullscreen() {
 
 function toggleOptionPanel() {
     styleSetting = document.getElementById('settingMenu').classList.toggle('d-none');
+}
+
+function toggleFastHelp() {
+let helpIsOn = document.getElementById('helpCheckbox');
 }

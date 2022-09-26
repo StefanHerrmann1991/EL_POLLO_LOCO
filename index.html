@@ -67,17 +67,20 @@
                 </div>
             </div>
             <div id="settingMenu" class="d-none">
-                <div class="settings-menu">
-                    <button onclick="toggleOptionPanel()" class="btn-right"><img
-                            src="img/0.Own_Pictures/Icons/close.png"></button>
-                    <div class="settings-links">
-                        <a href="help.html">Detailed Help</a>
-                        <a href="impressum.html">Impressum</a>
-                        <a href="datasecruity.html">Datasecurity</a>
-                        <div class="checkbox"><input type="checkbox" id="showControl"> Show Controls</div>
-                        <div class="checkbox"><input type="checkbox" id="showHelp">Show fast Help</div>
+                <fieldset class="settings-menu">
+                    <legend>Settings</legend>
+                    <div>
+                        <button  onclick="toggleOptionPanel()" class="btn-right legend2"><img
+                                src="img/0.Own_Pictures/Icons/close.png"></button>
+                        <div class="settings-links">
+                            <a href="help.html">Detailed Help</a>
+                            <a href="impressum.html">Impressum</a>
+                            <a href="datasecruity.html">Datasecurity</a>
+                            <div class="checkbox"><input type="checkbox" id="showControl"> Show Controls</div>
+                            <div class="checkbox"><input type="checkbox" id="showHelp">Show fast Help</div>
+                        </div>
                     </div>
-                </div>
+                </fieldset>
             </div>
             <div class="responsive-control-landscape" id="responsiveControll">
                 <div class="help" id="help">
@@ -88,8 +91,9 @@
                 </div>
                 <div id="crossPosition" class="cross-position"></div>
                 <div id="controlBtnPosition" class="control-btn">
-          
+                    <div class="jump">Jump</div>
                 </div>
+
             </div>
         </div>
     </div>
