@@ -337,6 +337,12 @@ canvas {
 
 }
 
+.A-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .throw {
     position: absolute;
     top: 8%;

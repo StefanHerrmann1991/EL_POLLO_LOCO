@@ -146,14 +146,14 @@ function insertButtons() {
 
 function generateButtons() {
     let newButtons = `  
-   
-    <button ontouchstart="jumpBtn()" ontouchend ="jumpBtnFalse()" class="pushable-btn mgn-r mgn-t" id="buttonA">
+    <div class="A-btn  mgn-r mgn-t">
+    <button ontouchstart="jumpBtn()" ontouchend ="jumpBtnFalse()" class="pushable-btn" id="buttonA">
         <span class="shadow-child"></span>
         <span class="edge"></span>
-        <span class="front">
-            A
-        </span>
+        <span class="front">A</span>
     </button>
+    <div class="jump">Jump</div>
+    </div>
 `;
     return newButtons;
 }

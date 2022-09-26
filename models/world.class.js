@@ -51,7 +51,7 @@ class World {
         }
     }
     checkEndbossDeath() {
-        if (gameWasWon()) {
+        if (this.gameWasWon()) {
             this.endscreenOn = true;
             setTimeout(() => {
                 let end = new Endscreen(this.character.x, this.character.y);
