@@ -102,7 +102,7 @@ function loadControlPanel() {
         insertCross('controlCross1');
     }
     if (window.matchMedia("(orientation: landscape)").matches) {
-        insertCross('controlCross1');
+        insertCross('controlCross2');
     }
 }
 
@@ -247,6 +247,8 @@ function toggleOptionPanel() {
     styleSetting = document.getElementById('settingMenu').classList.toggle('d-none');
 }
 
-function toggleFastHelp() {
-let helpIsOn = document.getElementById('helpCheckbox');
+function toggleFastHelp() {  
+     
+        document.getElementById('help').classList.toggle('d-none');
+    
 }

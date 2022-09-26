@@ -42,6 +42,7 @@ legend {
     background: black;
     -webkit-text-stroke: 0.2px black;
     color:rgb(211, 172, 45);
+
   }
 
   .legend2 {
@@ -212,7 +213,7 @@ canvas {
 }
 
 .fullscreen-btn {
-    transition: transform 2s ease-in-out;
+    transition: transform 0.5s ease-in-out;
 }
 
 .fullscreen-btn:hover {
