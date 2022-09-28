@@ -99,7 +99,8 @@ function loadControlPanel() {
     controlBtnPosition.innerHTML = '';
     insertButtons();
     if (window.matchMedia("(orientation: portrait)").matches) {
-        insertCross('controlCross1');
+        document.getElementById('responsiveControl').classList.toggle('responsive-control-portrait'); 
+        insertCross('controlCross1');     
     }
     if (window.matchMedia("(orientation: landscape)").matches) {
         insertCross('controlCross2');
@@ -253,5 +254,5 @@ function toggleFastHelp() {
     }
 
     function toggleControls() {
-        document.getElementById('controls').classList.toggle('d-none');
+        document.getElementById('responsiveControl').classList.toggle('d-none');
     }

@@ -273,7 +273,7 @@ canvas {
 }
 
 .d-none {
-    display: none;
+    display: none !important;
 }
 
 .responsive-control-landscape {
@@ -448,6 +448,12 @@ canvas {
     outline: none;
 }
 
+.shadow-child {
+    background: transparent;
+}
+
+
+
 @media only screen and (max-width: 720px) {
     canvas {
         width: 100%;
@@ -480,7 +486,7 @@ canvas {
 }
 
 
-@media all and (display-mode: landscape) {
+@media (orientation: landscape)  {
 
     .front {
         display: block;
