@@ -273,7 +273,7 @@ canvas {
 }
 
 .d-none {
-    display: none;
+    display: none !important;
 }
 
 .responsive-control-landscape {
