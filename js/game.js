@@ -249,6 +249,7 @@ function toggleOptionPanel() {
 
 function toggleFastHelp() {       
         document.getElementById('help').classList.toggle('d-none');
+        document.getElementById('crossPosition').classList.toggle('cross-position2');
     }
 
     function toggleControls() {

@@ -91,7 +91,7 @@
                 </div>
                 <div id="crossPosition" class="cross-position"></div>
                 <div id="controlBtnPosition" class="control-btn">
-                    <div class="jump">Jump</div>
+                    <div class="jump" id="jumpBtn">Jump</div>
                 </div>
 
             </div>
@@ -99,13 +99,13 @@
     </div>
 </body>
 <script>
-    addEventListener('orientationchange', (event) => { loadControlPanel(); });
+    addEventListener('orientationchange', (event) => { loadControlPanel();});
     window.onresize = (event) => { loadControlPanel(); };
     let helpCheckBox = document.getElementById('helpIsOn').addEventListener('click', event => {
         toggleFastHelp();
     });
     let controlsCheckBox = document.getElementById('controlsAreOn').addEventListener('click', event => {
-        toggleFastHelp();
+        toggleControls();
     });
 </script>
 

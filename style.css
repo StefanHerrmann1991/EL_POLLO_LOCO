@@ -343,6 +343,12 @@ canvas {
     padding: 5%;
 }
 
+.cross-position2 {
+    z-index: 100;
+    padding: 1% !important;
+}
+
+
 .help {
     position: absolute;
     top: 0;
