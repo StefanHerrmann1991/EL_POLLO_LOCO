@@ -99,12 +99,12 @@ function loadControlPanel() {
     controlBtnPosition.innerHTML = '';
     insertButtons();
     if (window.matchMedia("(orientation: portrait)").matches) {
-        document.getElementById('responsiveControl').classList.add('responsive-control-portrait'); 
-        insertCross('controlCross1');     
+        document.getElementById('responsiveControl').classList.add('responsive-control-portrait');
+        insertCross('controlCross1');
     }
     if (window.matchMedia("(orientation: landscape)").matches) {
         insertCross('controlCross2');
-        document.getElementById('responsiveControl').classList.remove('responsive-control-portrait'); 
+        document.getElementById('responsiveControl').classList.remove('responsive-control-portrait');
     }
 }
 
@@ -129,15 +129,20 @@ function generateCross(path) {
     let coord1 = sideLength * 3 / 8;
     let coord2 = sideLength * 5 / 8;
     let cross = `
+         <div>
            <img class='cross-map' id="crossMap" src="img/0.Own_Pictures/${path}/cross.png" usemap='#image-map' height="${sideLength}px" width="${sideLength}px">
              <map name='image-map'>
+              
                  <area target="" alt="up"    title="up"     id="up"    ontouchstart="touchCross('${path}','up')"  ontouchend="touchCrossEnd('${path}','cross')"  coords="${coord1},0,${coord2},${coord1}" shape="rect">
                  <area target="" alt="left"  title="left"   id="left"   ontouchstart="touchCross('${path}','left')" ontouchend="touchCrossEnd('${path}','cross')" coords="0,${coord1},${coord1},${coord2}" shape="rect">
                  <area target="" alt="down"  title="down"   id="down"   ontouchstart="touchCross('${path}','down')" ontouchend="touchCrossEnd('${path}','cross')" coords="${coord2},${coord2},${coord1},${sideLength}" shape="rect">
                  <area target="" alt="right" title="right"  id="right"  ontouchstart="touchCross('${path}','right')" ontouchend="touchCrossEnd('${path}','cross')" coords="${sideLength},${coord1},${coord2},${coord2}" shape="rect">   
-             </map> `;
+             </map>                          
+         </div>`;
     return cross;
 }
+
+
 
 function insertButtons() {
     let buttonPosition = document.getElementById('controlBtnPosition');
@@ -249,12 +254,12 @@ function toggleOptionPanel() {
     styleSetting = document.getElementById('settingMenu').classList.toggle('d-none');
 }
 
-function toggleFastHelp() {       
-        document.getElementById('help').classList.toggle('d-none');
-        document.getElementById('crossPosition').classList.toggle('cross-position2');
-        document.getElementById('helpBtn').classList.toggle('d-none');
-    }
+function toggleFastHelp() {
+    document.getElementById('help').classList.toggle('d-none');
+    document.getElementById('crossPosition').classList.toggle('cross-position2');
+    document.getElementById('helpBtn').classList.toggle('d-none');
+}
 
-    function toggleControls() {
-        document.getElementById('responsiveControl').classList.toggle('d-none');
-    }
+function toggleControls() {
+    document.getElementById('responsiveControl').classList.toggle('d-none');
+}

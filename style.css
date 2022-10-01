@@ -9,11 +9,7 @@ body {
     background-image: url('img/0.Own_Pictures/background2.jpg');
     background-position: center;
     background-size: cover;
-
 }
-
-
-
 
 a {
     text-decoration: none;
@@ -81,6 +77,24 @@ fieldset {
     margin-right: 5%;
 }
 
+/* 
+#up::after {
+    content: up;
+}
+
+#left::after {
+    content: left;
+}
+
+#down::after {
+    content: down;
+}
+
+#right::after {
+    content: right;
+} */
+
+
 .formalities-links {
     text-decoration: none;
     font-size: 40px;
@@ -106,16 +120,10 @@ canvas {
     display: block;
 }
 
-.btn-right {
-    margin-left: -10px
-}
-
-
 .background-img-formalities {
     background-image: url('img/0.Own_Pictures/storyBackgroundNew.png');
     background-size: cover;
     background-repeat: no-repeat;
-
 }
 
 
@@ -153,6 +161,9 @@ canvas {
     width: 100%;
 }
 
+.checkbox input[type="checkbox"] {
+    accent-color: black;
+}
 
 
 
@@ -371,6 +382,7 @@ canvas {
 }
 
 .cross-position2 {
+    width: 100%;
     z-index: 100;
     padding: 1% !important;
 }
@@ -390,6 +402,7 @@ canvas {
 }
 
 .help div {
+    position: relative;
     font-size: 100%;
     -webkit-text-stroke: 0.1px rgb(211, 172, 45);
 }
