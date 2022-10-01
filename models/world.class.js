@@ -23,7 +23,16 @@ class World {
         this.draw();
         this.setWorld();
         this.checkWorld();
+        this.start();        
     }
+
+
+    start() {
+        this.character.animate();
+        this.level.enemies.forEach(e => e.animate());
+        this.level.clouds.forEach(c => c.animate(this.level.LEVEL_END_X));        
+    }
+
 
     setWorld() {
         this.character.world = this;

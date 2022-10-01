@@ -54,7 +54,6 @@ function initLevel1() {
         generateEnemies(worldLength);
         generateClouds(worldLength);
         generateBottles(worldLength);
-
     }
 
 

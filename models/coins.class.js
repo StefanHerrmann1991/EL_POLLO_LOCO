@@ -18,12 +18,12 @@ class Coin extends LootableObject {
         this.x = x;
         this.height = 100;
         this.width = 100;
-        this.coinAnimate();
+        this.animate();
    }
 
 
 
-    coinAnimate() {
+    animate() {
         setStoppableInterval(() => {
             this.playAnimation(this.IMAGES_COIN);
         }, 160);
