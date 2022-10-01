@@ -10,10 +10,6 @@ let isInFullscreen = false;
  * 
 */
 
-function generateLevel() {
-
-
-}
 
 
 function initGame() {
@@ -24,6 +20,10 @@ function initGame() {
     world = new World(canvas, keyboard);
 }
 
+function startStory() {
+    document.getElementById('canvas').classList.toggle('background-img-1');
+    document.getElementById('canvas').classList.toggle('background-img-2');
+}
 
 /**
  * The function enables the usage of the keyboard.
@@ -99,11 +99,12 @@ function loadControlPanel() {
     controlBtnPosition.innerHTML = '';
     insertButtons();
     if (window.matchMedia("(orientation: portrait)").matches) {
-        document.getElementById('responsiveControl').classList.toggle('responsive-control-portrait'); 
+        document.getElementById('responsiveControl').classList.add('responsive-control-portrait'); 
         insertCross('controlCross1');     
     }
     if (window.matchMedia("(orientation: landscape)").matches) {
         insertCross('controlCross2');
+        document.getElementById('responsiveControl').classList.remove('responsive-control-portrait'); 
     }
 }
 

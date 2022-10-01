@@ -349,6 +349,10 @@ canvas {
 }
 
 
+.responsive-control-portrait {
+    position:  relative !important;
+}
+
 .help {
     position: absolute;
     top: 0;
