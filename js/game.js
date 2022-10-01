@@ -14,6 +14,7 @@ let isInFullscreen = false;
 
 function initGame() {
     start = true;
+    stopGame();
     initLevel1();
     canvas = document.getElementById('canvas');
     keyboard = new Keyboard();
@@ -67,6 +68,7 @@ document.onkeyup = function (e) {
     switch (e.key) {
         case ' ':
             keyboard.SPACE = false;
+            e.preventDefault()
             break;
         case 'ArrowLeft':
         case 'a':

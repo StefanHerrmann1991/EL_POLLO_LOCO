@@ -77,6 +77,11 @@ fieldset {
     margin-right: 5%;
 }
 
+.absolute {
+    position: absolute;
+}
+
+
 /* 
 #up::after {
     content: up;
@@ -402,7 +407,7 @@ canvas {
 }
 
 .help div {
-    position: relative;
+    
     font-size: 100%;
     -webkit-text-stroke: 0.1px rgb(211, 172, 45);
 }
@@ -427,7 +432,7 @@ canvas {
 
 .right {
     position: absolute;
-    top: 45%;
+    top: 43.5%;
     left: 23%;
 }
 
@@ -440,7 +445,7 @@ canvas {
 .left {
 
     position: absolute;
-    top: 45%;
+    top: 43.5%;
     left: 0%;
 
 }
