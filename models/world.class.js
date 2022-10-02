@@ -53,11 +53,12 @@ class World {
         if (this.gameWasLost())
             this.showEndScreen();
     }
+
     gameWasLost() { return this.character.isDead() && !this.endscreenOn }
     showEndScreen() {
         this.endscreenOn = true;
         setTimeout(() => {
-            let end = new Endscreen(this.character.x, this.character.y);
+            let end = new Endscreen(this.character.x, this.character.y, 'lost');
             this.endscreen.push(end);
             stopGame();
         }, 3000);
@@ -115,16 +116,15 @@ class World {
                 }
             }
 
-            if (enemy.isDead() && enemy instanceof Endboss) {
-                if (this.gameWasWon()) {
-                    this.endscreenOn = true;
-                    setTimeout(() => {
-                        let end = new Endscreen(this.character.x, this.character.y);
-                        this.endscreen.push(end);
-                        this.endscreen.won = true;
-                        stopGame();
-                    }, 3000);
-                }
+            if (enemy.isDead() && enemy instanceof Endboss && !this.endscreenOn) {
+                this.endscreenOn = true;                
+                setTimeout(() => {
+                    let end = new Endscreen(this.character.x, this.character.y, 'won');                   
+                    this.endscreen.push(end);   
+                    this.endscreen[0].won = true;    
+                    console.log(this.endscreen);            
+                    stopGame();
+                }, 3000);
             }
 
 
@@ -217,7 +217,7 @@ class World {
         this.addToMap(this.statusbar);
         this.addToMap(this.statusbarEndboss);
         this.ctx.translate(this.camera_x, 0);
-        this.addObjectsToMap(this.endscreen);
+        this.addObjectsToMap(this.endscreen);      
         this.ctx.translate(-this.camera_x, 0);
         let self = this;
         requestAnimationFrame(function () { self.draw() });
