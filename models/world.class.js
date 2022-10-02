@@ -247,8 +247,8 @@ class World {
         if (movableObject.otherDirection) {
             this.flipImage(movableObject)
         }
-        movableObject.draw(this.ctx);
-        movableObject.drawFrame(this.ctx);
+         movableObject.draw(this.ctx);
+       /*  movableObject.drawFrame(this.ctx);  */
         if (movableObject.otherDirection) {
             this.flipImageBack(movableObject);
         }
