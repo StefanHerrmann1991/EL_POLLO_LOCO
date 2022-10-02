@@ -90,15 +90,17 @@ class Endboss extends MovableObject {
             if (!this.isDead() && this.attack && !this.isHurt() && !this.hadFirstContact) {
                 this.playAnimation(this.IMAGES_ATTACKING);
                 if (!this.isDead() && !this.isAboveGround()) {
-                    this.speedY = 20;
+                    this.speedY = 20;                   
                 }
-
             }
 
             else if (this.isHurt() && !this.isDead() && !this.attack && !this.hadFirstContact) {
                 this.playAnimation(this.IMAGES_HURTING);
             }
-            else if (!this.isDead() && !this.isHurt() && this.walking) { this.playAnimation(this.IMAGES_WALKING) }
+
+            else if (!this.isDead() && !this.isHurt() && this.walking && !this.attack) 
+            { this.playAnimation(this.IMAGES_WALKING) }
+
         }, 90);
     }
 

@@ -23,14 +23,14 @@ class World {
         this.draw();
         this.setWorld();
         this.checkWorld();
-        this.start();        
+        this.start();
     }
 
 
     start() {
         this.character.animate();
-        this.level.enemies.forEach(e => e.animate()); 
-        this.level.clouds.forEach(c => c.animate(this.level.level_end_x));                
+        this.level.enemies.forEach(e => e.animate());
+        this.level.clouds.forEach(c => c.animate(this.level.level_end_x));
     }
 
 
@@ -50,28 +50,18 @@ class World {
 
 
     checkDeath() {
-        if (this.gameWasLost()) {
-            this.endscreenOn = true;
-            setTimeout(() => {
-                let end = new Endscreen(this.character.x, this.character.y);
-                this.endscreen.push(end);
-                stopGame();
-            }, 3000);
-        }
+        if (this.gameWasLost())
+            this.showEndScreen();
     }
-    checkEndbossDeath() {
-        if (this.gameWasWon()) {
-            this.endscreenOn = true;
-            setTimeout(() => {
-                let end = new Endscreen(this.character.x, this.character.y);
-                this.endscreen.push(end);
-                stopGame();
-            }, 3000);
-        }
-    }
-
     gameWasLost() { return this.character.isDead() && !this.endscreenOn }
-    gameWasWon() {return this.endboss.isDead() && endscreenOn}
+    showEndScreen() {
+        this.endscreenOn = true;
+        setTimeout(() => {
+            let end = new Endscreen(this.character.x, this.character.y);
+            this.endscreen.push(end);
+            stopGame();
+        }, 3000);
+    }
 
 
     checkBottleCount() {
@@ -117,11 +107,23 @@ class World {
                     if (this.character.isClose(enemy)) {
                         enemy.walking = false;
                         enemy.attack = true;
-                        enemy.moveToPosition(this.character);                       
+                        enemy.moveToPosition(this.character);
                     }
                     if (this.character.isCollidingEndboss(enemy instanceof Endboss)) {
                         this.character.hit(20);
                     }
+                }
+            }
+
+            if (enemy.isDead() && enemy instanceof Endboss) {
+                if (this.gameWasWon()) {
+                    this.endscreenOn = true;
+                    setTimeout(() => {
+                        let end = new Endscreen(this.character.x, this.character.y);
+                        this.endscreen.push(end);
+                        this.endscreen.won = true;
+                        stopGame();
+                    }, 3000);
                 }
             }
 
