@@ -141,7 +141,7 @@ canvas {
 }
 
 .main-container {
-    position: relative;
+    position: relative !important;
 }
 
 
@@ -381,6 +381,11 @@ canvas {
     background: linear-gradient(to right, black 58%, white 150%);
 }
 
+
+.relative {
+    position: relative;
+}
+
 .cross-position {
     z-index: 100;
     padding: 5%;
@@ -425,28 +430,28 @@ canvas {
 
 .throw {
     position: absolute;
-    top: 8%;
-    left: 10.5%;
+    top: -15%;
+    left: 26.5%;
 }
 
 
 .right {
     position: absolute;
-    top: 43.5%;
-    left: 23%;
+    top: 38.5%;
+    left: 104%;
 }
 
 .dodge {
     position: absolute;
-    top: 80%;
-    left: 10.5%;
+    top: 95%;
+    left: 27.5%;
 }
 
 .left {
 
     position: absolute;
-    top: 43.5%;
-    left: 0%;
+    top: 38.5%;
+    left: -29%;
 
 }
 
