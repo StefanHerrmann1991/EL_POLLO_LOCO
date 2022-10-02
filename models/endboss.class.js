@@ -1,14 +1,15 @@
 class Endboss extends MovableObject {
 
     energy = 500;
-    height = 500;
-    width = 400;
-    y = -30;
+    height = 400;
+    width = this.height * 4 / 5;
+    y = 50;
     speed = 8;
     attack = false;
     walking = false;
     hadFirstContact = false;
     i = 0;
+    acceleration = 1.5;
 
     IMAGES_WALKING = [
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/1.Caminata/G1.png',
@@ -58,8 +59,8 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_HURTING);
         this.loadImages(this.IMAGES_DYING);
         this.x = x;
-        this.animate();
-        this.applyGravity(30);
+        this.applyGravity(0);
+
     }
 
     /**
@@ -67,23 +68,18 @@ class Endboss extends MovableObject {
      */
 
     animate() {
-
         setStoppableInterval(() => {
-
-
 
             if (this.hadFirstContact && this.i < 10) {
                 this.playAnimation(this.IMAGES_PERCEIVING);
                 this.i++;
                 if (this.i >= 9) {
                     this.hadFirstContact = false;
-                 }
+                }
             }
 
             if (this.isDead() && !this.death && !this.hadFirstContact) {
                 this.playAnimation(this.IMAGES_DYING);
-                
-
                 setTimeout(() => {
                     this.death = true;
                     this.otherDirection = false;
@@ -94,17 +90,16 @@ class Endboss extends MovableObject {
             if (!this.isDead() && this.attack && !this.isHurt() && !this.hadFirstContact) {
                 this.playAnimation(this.IMAGES_ATTACKING);
                 if (!this.isDead() && !this.isAboveGround()) {
-                    this.speedY = 45;
+                    this.speedY = 35;
                 }
+
             }
 
             else if (this.isHurt() && !this.isDead() && !this.attack && !this.hadFirstContact) {
                 this.playAnimation(this.IMAGES_HURTING);
             }
-            else if (!this.isDead() && !this.isHurt() && this.walking  ) { this.playAnimation(this.IMAGES_WALKING) }
-
+            else if (!this.isDead() && !this.isHurt() && this.walking) { this.playAnimation(this.IMAGES_WALKING) }
         }, 90);
     }
-
 
 }

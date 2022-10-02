@@ -12,7 +12,10 @@ class MovableObject extends DrawableObject {
     lastMove = 0;
     death = false;
     returnToPosition = false;
-
+    collisionX = this.x;
+    collisionY = this.y;
+    collisionWidth = this.width;
+    collisionHeight = this.height;
 
     /**
      * The function enables the falling of obejects on the map like the character when it jumps or thrown bottles.
@@ -23,7 +26,7 @@ class MovableObject extends DrawableObject {
         setStoppableInterval(() => {
             if (this.isAboveGround() || this.speedY > yPosition) {
                 this.y -= this.speedY;
-                this.speedY -= this.acceleration;               
+                this.speedY -= this.acceleration;
             }
         }, 1000 / 60);
     }
@@ -37,7 +40,7 @@ class MovableObject extends DrawableObject {
             return true;
         }
         if (this instanceof Endboss) {
-            return this.y < -30;
+            return this.y < 20;
         }
 
         else { return this.y < 180; }
@@ -78,10 +81,10 @@ class MovableObject extends DrawableObject {
                 this.returnToPosition = true;
             }
         }
-        if (this.returnToPosition && this.x <= movableObject.x + 600) {
+        if (this.returnToPosition && this.x <= movableObject.x + 800) {
             this.moveRight();
             this.otherDirection = true;
-            if (this.x >= movableObject.x + 500) {
+            if (this.x >= movableObject.x + 700) {
                 this.returnToPosition = false;
             }
         }
@@ -106,20 +109,10 @@ class MovableObject extends DrawableObject {
 
     jump() {
         this.speedY = 30;
-        
     }
 
 
 
-    /**
-     * The function checks, if the Object is colliding with another object.
-     * @param {*} movableObject 
-     * @param {*} characterCorX 
-     * @param {*} characterCorY 
-     * @param {*} corWidth 
-     * @param {*} corHeight 
-     * @returns 
-     */
 
     isColliding(movableObject) {
 
@@ -152,7 +145,7 @@ class MovableObject extends DrawableObject {
         if (this.world.keyboard.DODGE) {
             return this.x + 20 + this.width - 55 > movableObject.x + 40
                 && this.y + 190 + this.height - 200 > movableObject.y + 110
-                && this.x + 20 < movableObject.x + 40 + movableObject.width -80
+                && this.x + 20 < movableObject.x + 40 + movableObject.width - 80
                 && this.y + 190 < movableObject.y + 110 + movableObject.height - 180
         }
         else {
@@ -173,7 +166,7 @@ class MovableObject extends DrawableObject {
     }
 
     isClose(movableObject) {
-        return this.x + this.width + 50> movableObject.x
+        return this.x + this.width + 70 > movableObject.x
             && this.y + this.height > movableObject.y
             && this.x < movableObject.x + movableObject.width
             && this.y < movableObject.y + movableObject.height

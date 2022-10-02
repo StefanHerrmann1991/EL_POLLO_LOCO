@@ -29,8 +29,8 @@ class World {
 
     start() {
         this.character.animate();
-        this.level.enemies.forEach(e => e.animate());
-        this.level.clouds.forEach(c => c.animate(this.level.LEVEL_END_X));        
+        this.level.enemies.forEach(e => e.animate()); 
+        this.level.clouds.forEach(c => c.animate(this.level.level_end_x));                
     }
 
 
@@ -117,7 +117,7 @@ class World {
                     if (this.character.isClose(enemy)) {
                         enemy.walking = false;
                         enemy.attack = true;
-                        enemy.moveToPosition(this.character);
+                        enemy.moveToPosition(this.character);                       
                     }
                     if (this.character.isCollidingEndboss(enemy instanceof Endboss)) {
                         this.character.hit(20);
