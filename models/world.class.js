@@ -15,6 +15,7 @@ class World {
     throwableObject = [];
     lastThrow = 0;
     endbossActive = false;
+    cameraOffsetX = 0;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -44,7 +45,7 @@ class World {
             this.throwObject();
             this.checkDeath();
             this.checkBottleCount();
-            this.checkCoinCount();
+            this.checkCoinCount();      
         }, 1000 / 60);
     }
 
@@ -88,7 +89,7 @@ class World {
     checkCollisions() {
 
         this.level.enemies.forEach((enemy) => {
-            if (this.charGotHitBy(enemy)) {
+            if (this.characterGotHitBy(enemy)) {
                 this.character.hit(5);
                 this.statusbar.setPercentage(this.character.energy);
             }
@@ -101,7 +102,7 @@ class World {
                     enemy.hadFirstContact = true;
                     this.endbossActive = true;
                 }
-                if (!enemy.hadFirstContact && this.endbossActive) {
+                if (!enemy.hadFirstContact && this.endbossActive && !enemy.isHurt() ) {
                     enemy.walking = true;
                     enemy.attack = false;
                     enemy.moveToPosition(this.character);
@@ -117,12 +118,12 @@ class World {
             }
 
             if (enemy.isDead() && enemy instanceof Endboss && !this.endscreenOn) {
-                this.endscreenOn = true;                
+                this.endscreenOn = true;
                 setTimeout(() => {
-                    let end = new Endscreen(this.character.x, this.character.y, 'won');                   
-                    this.endscreen.push(end);   
-                    this.endscreen[0].won = true;    
-                    console.log(this.endscreen);            
+                    let end = new Endscreen(this.character.x, this.character.y, 'won');
+                    this.endscreen.push(end);
+                    this.endscreen[0].won = true;
+                    console.log(this.endscreen);
                     stopGame();
                 }, 3000);
             }
@@ -192,9 +193,21 @@ class World {
     canThrow() { return this.keyboard.THROW && !this.character.isDead() && this.bottleCount > 0 }
     bottleHit(enemy, bottle) { return this.throwableObject[bottle].objectIsColliding(enemy) && !enemy.isHurt() && !enemy.isDead() && !this.character.isHurt() }
     canTake(loot) { return this.character.isColliding(loot) }
-    charGotHitBy(enemy) { return this.character.isColliding(enemy) && !this.character.isAboveGround() && !enemy.isDead() && !this.character.isHurt(); }
+    characterGotHitBy(enemy) { return this.character.isColliding(enemy) && !this.character.isAboveGround() && !enemy.isDead() && !this.character.isHurt(); }
     jumpKill(enemy) { return !(enemy instanceof Endboss) && this.character.isAboveGround() && this.character.speedY < 0 && this.character.isColliding(enemy) && !enemy.isDead() }
 
+
+    /**
+     * Check if camera target is inside Boundaries to allow camera movement
+     * @param {number} leftBoundary - minium distance for target to achieve for camera to move.
+     * @param {number} rightBoundary - maximum distance for target to achieve for camera to move.
+     * @param {number} distanceFromCamera - how far is the camera's offset from target
+     * @returns {boolean}
+     */
+    canMoveCamera(leftBoundary, rightBoundary, distanceFromCamera) {
+        return distanceFromCamera > leftBoundary &&
+            distanceFromCamera < rightBoundary;
+    }
 
 
 
@@ -217,7 +230,7 @@ class World {
         this.addToMap(this.statusbar);
         this.addToMap(this.statusbarEndboss);
         this.ctx.translate(this.camera_x, 0);
-        this.addObjectsToMap(this.endscreen);      
+        this.addObjectsToMap(this.endscreen);
         this.ctx.translate(-this.camera_x, 0);
         let self = this;
         requestAnimationFrame(function () { self.draw() });
