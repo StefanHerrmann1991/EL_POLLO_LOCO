@@ -9,7 +9,7 @@ class Endboss extends MovableObject {
     walking = false;
     hadFirstContact = false;
     i = 0;
-    acceleration = 1.5;
+    acceleration = 0.8;
 
     IMAGES_WALKING = [
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/1.Caminata/G1.png',
@@ -90,7 +90,7 @@ class Endboss extends MovableObject {
             if (!this.isDead() && this.attack && !this.isHurt() && !this.hadFirstContact) {
                 this.playAnimation(this.IMAGES_ATTACKING);
                 if (!this.isDead() && !this.isAboveGround()) {
-                    this.speedY = 35;
+                    this.speedY = 20;
                 }
 
             }
