@@ -111,9 +111,10 @@ class World {
                     enemy.moveToPosition(this.character);
                     if (this.character.isClose(enemy)) {
                         enemy.walking = false;
-                        enemy.attack = true;
+                        enemy.attack = true;                       
                         enemy.moveToPosition(this.character);
                     }
+                    
                     if (this.character.isCollidingEndboss(enemy instanceof Endboss)) {
                         this.character.hit(20);
                     }

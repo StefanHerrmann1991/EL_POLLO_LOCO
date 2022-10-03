@@ -58,8 +58,7 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_ATTACKING);
         this.loadImages(this.IMAGES_HURTING);
         this.loadImages(this.IMAGES_DYING);
-        this.x = x;
-        this.applyGravity(0);
+        this.x = x;    
     }
 
     /**
@@ -67,6 +66,7 @@ class Endboss extends MovableObject {
      */
 
     animate() {
+        this.applyGravity(0);
         setStoppableInterval(() => {
             if (this.hadFirstContact && this.i < 10) {
                 this.playAnimation(this.IMAGES_PERCEIVING);
@@ -83,17 +83,17 @@ class Endboss extends MovableObject {
                     this.loadImage('img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/4.Muerte/G27.png');
                 }, 1500);
             }
-            if (!this.isDead() && this.attack && !this.isHurt() && !this.hadFirstContact) {
+            if (!this.isDead() && this.attack && !this.isHurt() && !this.hadFirstContact && !this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_ATTACKING);
-                if (!this.isDead() && !this.isAboveGround()) {
-                    this.speedY = 20;
-                }
+                this.speedY = 20;
             }
+
             else if (this.isHurt() && !this.isDead() && !this.attack && !this.hadFirstContact) {
                 this.playAnimation(this.IMAGES_HURTING);
             }
 
             else if (!this.isDead() && !this.isHurt() && this.walking && !this.attack) { this.playAnimation(this.IMAGES_WALKING) }
+            console.log(this.speedY);
 
         }, 60);
     }

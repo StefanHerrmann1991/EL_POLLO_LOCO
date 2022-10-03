@@ -5,7 +5,19 @@ class Statusbar extends DrawableObject {
         'img/7.Marcadores/Barra/Marcador vida/azul/40_.png',
         'img/7.Marcadores/Barra/Marcador vida/azul/60_.png',
         'img/7.Marcadores/Barra/Marcador vida/azul/80_.png',
-        'img/7.Marcadores/Barra/Marcador vida/azul/100_.png']
+        'img/7.Marcadores/Barra/Marcador vida/azul/100_.png',
+        'img/7.Marcadores/Barra/Marcador vida/Naranja/0_ .png',
+        'img/7.Marcadores/Barra/Marcador vida/Naranja/20__1.png',
+        'img/7.Marcadores/Barra/Marcador vida/Naranja/40_ .png',
+        'img/7.Marcadores/Barra/Marcador vida/Naranja/60_ .png',
+        'img/7.Marcadores/Barra/Marcador vida/Naranja/80_ .png',
+        'img/7.Marcadores/Barra/Marcador vida/Naranja/100_ .png',
+        'img/7.Marcadores/Barra/Marcador vida/verde/0_.png',
+        'img/7.Marcadores/Barra/Marcador vida/verde/20_.png',
+        'img/7.Marcadores/Barra/Marcador vida/verde/40_.png',
+        'img/7.Marcadores/Barra/Marcador vida/verde/60_.png',
+        'img/7.Marcadores/Barra/Marcador vida/verde/80_.png',
+        'img/7.Marcadores/Barra/Marcador vida/verde/100_.png']
 
 
     percentage = 100;
@@ -28,6 +40,14 @@ class Statusbar extends DrawableObject {
 
     whichStatus() {
         if (this.percentage >= 100) { return 5; }
+        else if (this.percentage > 80) { return 4; }
+        else if (this.percentage > 220) { return 4; }
+        else if (this.percentage > 200) { return 4; }
+        else if (this.percentage > 180) { return 4; }
+        else if (this.percentage > 160) { return 4; }
+        else if (this.percentage > 140) { return 4; }
+        else if (this.percentage > 120) { return 4; }
+        else if (this.percentage > 100) { return 4; }
         else if (this.percentage > 80) { return 4; }
         else if (this.percentage > 60) { return 3; }
         else if (this.percentage > 40) { return 2; }
