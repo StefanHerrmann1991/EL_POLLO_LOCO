@@ -81,25 +81,6 @@ fieldset {
     position: absolute;
 }
 
-
-/* 
-#up::after {
-    content: up;
-}
-
-#left::after {
-    content: left;
-}
-
-#down::after {
-    content: down;
-}
-
-#right::after {
-    content: right;
-} */
-
-
 .formalities-links {
     text-decoration: none;
     font-size: 40px;
@@ -152,7 +133,7 @@ canvas {
 
 .option-buttons {
     position: absolute;
-    top: 0px;
+    top: 10px;
     left: 0px;
     width: 98%;
     display: flex;
@@ -412,7 +393,7 @@ canvas {
 }
 
 .help div {
-    
+
     font-size: 100%;
     -webkit-text-stroke: 0.1px rgb(211, 172, 45);
 }
@@ -593,8 +574,50 @@ canvas {
 
 }
 
+@media screen and (max-width:440px) {
+   
+   
+    .options {
+        height: 20px !important;
+        width: 20px !important;
+    }
+    
+    .start-btn {
+        font-size: 20px !important;
+    }
+    
+    .bottle-stat {
+        height: 3vh;
+        width: 6vw;
+    }
+    
+    .coin-stat {
+        height: 3vh;
+        width: 6vw;
+    }
+    
+    .bottle-counter {
+        font-size: 20px !important;
+    }
+    
+    .coin-counter {
+        font-size: 20px !important;
+    }
+}
+
+
+
+
 @media screen and (max-width:641px) {
 
+    .options {
+        height: 30px;
+        width: 30px;
+    }
+
+    .start-btn {
+        font-size: 30px;
+    }
 
     .formalies-main-link a {
 
