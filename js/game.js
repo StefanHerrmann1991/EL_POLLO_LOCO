@@ -14,24 +14,35 @@ let isInFullscreen = false;
 function generateLevel1() {
     canvas = document.getElementById('canvas');
     initLevel1();
-    toggleStartBtn();
+    toggleStartBtn('noStart');
 }
 
 
 function initGame() {
     start = true;
-    toggleStartBtn();
+    toggleStartBtn('restart');
     keyboard = new Keyboard();
     world = new World(canvas, keyboard);
 }
 
 
-function toggleStartBtn() {
-    if (!start)
-        document.getElementById('startButton').innerHTML = `<div onclick="restartGame()">Start</div>`;
-    if (start) {
+function toggleStartBtn(startCondition) {
+    
+    if (startCondition == 'noStart') {    
+        document.getElementById('startButton').innerHTML = `
+        <div onclick="toggleStartBtn('firstStart')">Start</div>`;  
+    }
+    
+    if (startCondition == 'firstStart') {    
+        startStory();
+        document.getElementById('startButton').innerHTML = `
+        <div onclick="initGame()">Start</div>`;             
+    }
+    
+    if (startCondition == 'restart') {
         stopGame();
-        document.getElementById('startButton').innerHTML = `<div onclick="restartGame()">Restart</div>`;
+        document.getElementById('startButton').innerHTML = `
+        <div onclick="restartGame()">Restart</div>`;
     }
 }
 
