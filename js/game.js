@@ -14,22 +14,35 @@ let isInFullscreen = false;
 function generateLevel1() {
     canvas = document.getElementById('canvas');
     initLevel1();
+    toggleStartBtn();
 }
 
 
 function initGame() {
-    start = true;   
+    start = true;
+    toggleStartBtn();
     keyboard = new Keyboard();
     world = new World(canvas, keyboard);
 }
 
 
-function restartGame() {
+function toggleStartBtn() {
+    if (!start)
+        document.getElementById('startButton').innerHTML = `<div onclick="restartGame()">Start</div>`;
     if (start) {
-        document.getElementById('startButton').innerHTML = 'Restart';
         stopGame();
+        document.getElementById('startButton').innerHTML = `<div onclick="restartGame()">Restart</div>`;
     }
 }
+
+function restartGame() {
+    stopGame();
+    initLevel1();
+    initGame()
+}
+
+
+
 
 function startStory() {
     document.getElementById('canvas').classList.toggle('background-img-1');
