@@ -26,6 +26,7 @@ class Chicken extends MovableObject {
     }
 
     animate() {
+        
         /* Hühner bewegen sich nach links */
 
         setStoppableInterval(() => {
@@ -36,7 +37,6 @@ class Chicken extends MovableObject {
         }, 1000 / 60);
 
         /* Hühner laufen (nur Animation und Ton) */
-
 
         setStoppableInterval(() => {
             if (!this.isDead()) {

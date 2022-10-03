@@ -40,7 +40,7 @@
     </style>
 </head>
 
-<body onload=" loadControlPanel(); includeHTML() ">
+<body onload="bufferLevel1(); loadControlPanel(); includeHTML() ">
     <div class="responsive">
         <h1>El Pollo Loco</h1>
         <div class="main-container" id="mainContainer">
@@ -49,7 +49,7 @@
 
             <div class="option-buttons">
                 <div class="option-child">
-                    <div class="start-btn" onclick="initGame()">Start </div>
+                    <div class="start-btn" id="startButton" onclick="initGame()">Start </div>
                     <div class="counter">
                         <div class="bottle-counter" id="bottleCounter"></div>
                         <div class="coin-counter" id="coinCounter"></div>

@@ -17,21 +17,24 @@ class World {
     endbossActive = false;
     cameraOffsetX = 0;
 
+
+
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        this.checkWorld();
         this.start();
+        this.checkWorld();
     }
 
 
     start() {
         this.character.animate();
-        this.level.enemies.forEach(e => e.animate());
-        this.level.clouds.forEach(c => c.animate(this.level.level_end_x));
+        this.level.enemies.forEach(enemy => enemy.animate());
+        this.level.clouds.forEach(cloud => cloud.animate(this.level.level_end_x));
+        this.level.coins.forEach(coin => coin.animate())
     }
 
 
@@ -45,7 +48,7 @@ class World {
             this.throwObject();
             this.checkDeath();
             this.checkBottleCount();
-            this.checkCoinCount();      
+            this.checkCoinCount();
         }, 1000 / 60);
     }
 
@@ -102,7 +105,7 @@ class World {
                     enemy.hadFirstContact = true;
                     this.endbossActive = true;
                 }
-                if (!enemy.hadFirstContact && this.endbossActive && !enemy.isHurt() ) {
+                if (!enemy.hadFirstContact && this.endbossActive && !enemy.isHurt()) {
                     enemy.walking = true;
                     enemy.attack = false;
                     enemy.moveToPosition(this.character);
@@ -247,8 +250,8 @@ class World {
         if (movableObject.otherDirection) {
             this.flipImage(movableObject)
         }
-         movableObject.draw(this.ctx);
-       /*  movableObject.drawFrame(this.ctx);  */
+        movableObject.draw(this.ctx);
+        /*  movableObject.drawFrame(this.ctx);  */
         if (movableObject.otherDirection) {
             this.flipImageBack(movableObject);
         }

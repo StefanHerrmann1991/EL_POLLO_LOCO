@@ -11,14 +11,24 @@ let isInFullscreen = false;
 */
 
 
+function generateLevel1() {
+    canvas = document.getElementById('canvas');
+    initLevel1();
+}
+
 
 function initGame() {
-    start = true;
-    stopGame();
-    initLevel1();
-    canvas = document.getElementById('canvas');
+    start = true;   
     keyboard = new Keyboard();
     world = new World(canvas, keyboard);
+}
+
+
+function restartGame() {
+    if (start) {
+        document.getElementById('startButton').innerHTML = 'Restart';
+        stopGame();
+    }
 }
 
 function startStory() {
