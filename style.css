@@ -292,10 +292,12 @@ canvas {
 .detailed-help {
     font-family: 'Rye', cursive;
     background-image: url('img/0.Own_Pictures/storyBackgroundNew.png');
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-size: 100% 100%;   
     background-color: transparent;
-    padding: 40px;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 10%;
+    padding-top: 10%;
 }
 
 
