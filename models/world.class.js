@@ -133,36 +133,35 @@ class World {
                     stopGame();
                 }, 3000);
             }
-
-
-
-            this.throwableObject.forEach((thrownObject, bottle) => {
-                if (this.bottleHit(enemy, bottle)) {
-                    thrownObject.collision = true;
-                    thrownObject.speedX = 0;
-                    thrownObject.speedY = 0;
-                    thrownObject.acceleration = 0;
-                    setTimeout(() => {
-                        this.throwableObject.splice(bottle, 1);
-                    }, 100);
-                    enemy.hit(100);
-                    if (enemy instanceof Endboss) {
-                        this.statusbarEndboss.setPercentage(enemy.energy);
-                    }
-                    if (!(enemy instanceof Endboss) && enemy.isDead()) {
-                        removeAn(enemy)
-                    }
-                }
-            })
+            this.throwBottleOn(enemy)
         });
-
-
-        this.getBottle();
-        this.getCoin();
+        this.pickUpBottle();
+        this.pickUpCoin();
     }
 
 
-    getBottle() {
+    throwBottleOn(enemy) {
+        this.throwableObject.forEach((thrownObject, bottle) => {
+            if (this.bottleHit(enemy, bottle)) {
+                thrownObject.collision = true;
+                thrownObject.speedX = 0;
+                thrownObject.speedY = 0;
+                thrownObject.acceleration = 0;
+                setTimeout(() => {
+                    this.throwableObject.splice(bottle, 1);
+                }, 100);
+                enemy.hit(100);
+                if (enemy instanceof Endboss) {
+                    this.statusbarEndboss.setPercentage(enemy.energy);
+                }
+                if (!(enemy instanceof Endboss) && enemy.isDead()) {
+                    this.removeAn(enemy)
+                }
+            }
+        })
+    }
+
+    pickUpBottle() {
         this.level.bottles.forEach((bottle, i) => {
             if (this.canTake(bottle)) {
                 this.level.bottles.splice(i, 1);
@@ -171,7 +170,7 @@ class World {
         });
     }
 
-    getCoin() {
+    pickUpCoin() {
         this.level.coins.forEach((coin, i) => {
             if (this.canTake(coin)) {
                 this.level.coins.splice(i, 1);
