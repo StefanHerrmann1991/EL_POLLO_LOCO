@@ -309,3 +309,4 @@ function toggleFastHelp() {
 function toggleControls() {
     document.getElementById('responsiveControl').classList.toggle('d-none');
 }
+

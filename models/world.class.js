@@ -90,9 +90,9 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if(this.character.isInArea(enemy) && !(enemy instanceof Endboss))
-            {enemy.sawCharacter = true;
-            console.log('sawCharacter')}           
+            if(this.character.isClose(enemy) && !(enemy instanceof Endboss))
+            {enemy.sawCharacter = true;}
+                 
             this.characterGotDamage(enemy);
             this.jumpKill(enemy);
             this.throwBottleOn(enemy);
