@@ -16,6 +16,7 @@ class World {
     lastThrow = 0;
     endbossActive = false;
     cameraOffsetX = 0;
+    endbossDeath = false;
 
 
 
@@ -71,7 +72,7 @@ class World {
 
 
     checkBottleCount() {
-        if (!this.character.isDead()) {
+        if (!this.character.isDead() && !this.endbossDeath) {
             document.getElementById('bottleCounter').innerHTML = `
                 <img class="bottle-stat" src="img/7.Marcadores/Icono/Botella.png"> 
                 <div>= ${this.bottleCount}<div>`
@@ -80,7 +81,8 @@ class World {
     }
 
     checkCoinCount() {
-        if (!this.character.isDead()) {
+        if (!this.character.isDead() && !this.endbossDeath) {
+            console.log(this.endbossDeath);
             document.getElementById('coinCounter').innerHTML = `
                 <img class="bottle-stat" src="img/7.Marcadores/Icono/Monedas.png"> 
                 <div>= ${this.coinCount}<div>`
@@ -90,7 +92,7 @@ class World {
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
             this.characterGotDamage(enemy);
-            this.jumpKill(enemy);           
+            this.jumpKill(enemy);
             this.throwBottleOn(enemy);
             this.startEndbossFight(enemy);
         });
@@ -108,8 +110,8 @@ class World {
                 this.charHitByEndboss(enemy);
             }
         }
-        if (this.endbossWasDefeated(enemy)) 
-            this.showEndcreenWon();  
+        if (this.endbossWasDefeated(enemy))
+            this.showEndcreenWon();
     }
 
     endbossIsWalking(enemy) {
@@ -153,10 +155,7 @@ class World {
     throwBottleOn(enemy) {
         this.throwableObject.forEach((thrownObject, bottle) => {
             if (this.bottleHit(enemy, bottle)) {
-                thrownObject.collision = true;
-                thrownObject.speedX = 0;
-                thrownObject.speedY = 0;
-                thrownObject.acceleration = 0;
+                this.slowDown(thrownObject);
                 setTimeout(() => {
                     this.throwableObject.splice(bottle, 1);
                 }, 100);
@@ -169,6 +168,13 @@ class World {
                 }
             }
         })
+    }
+
+    slowDown(thrownObject) {
+        thrownObject.collision = true;
+        thrownObject.speedX = 0;
+        thrownObject.speedY = 0;
+        thrownObject.acceleration = 0;
     }
 
     characterGotDamage(enemy) {
@@ -222,8 +228,9 @@ class World {
     showEndcreenWon() {
 
         this.endscreenOn = true;
+        this.endbossDeath = true;
         setTimeout(() => {
-            let end = new Endscreen(this.character.x, this.character.y, 'won');
+            let end = new Endscreen(this.character.x, this.character.y, 'won');            
             this.endscreen.push(end);
             this.endscreen[0].won = true;
             stopGame();
