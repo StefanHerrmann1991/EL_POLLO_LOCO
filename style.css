@@ -289,6 +289,16 @@ canvas {
     width: 6vh;
 }
 
+.detailed-help {
+    font-family: 'Rye', cursive;
+    background-image: url('img/0.Own_Pictures/storyBackgroundNew.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    padding: 40px;
+}
+
+
 .start-screen {
     width: 720px;
     height: 480px;
@@ -575,31 +585,31 @@ canvas {
 }
 
 @media screen and (max-width:440px) {
-   
-   
+
+
     .options {
         height: 20px !important;
         width: 20px !important;
     }
-    
+
     .start-btn {
         font-size: 20px !important;
     }
-    
+
     .bottle-stat {
         height: 3vh;
         width: 6vw;
     }
-    
+
     .coin-stat {
         height: 3vh;
         width: 6vw;
     }
-    
+
     .bottle-counter {
         font-size: 20px !important;
     }
-    
+
     .coin-counter {
         font-size: 20px !important;
     }

@@ -96,8 +96,11 @@ class World {
                 this.character.hit(5);
                 this.statusbar.setPercentage(this.character.energy);
             }
+
+
             if (this.jumpKill(enemy)) {
-                this.removeAn(enemy);
+                this.removeAn(enemy);           
+                this.character.speedY = 3; 
             }
 
             if (!enemy.isDead() && enemy instanceof Endboss) {
@@ -126,8 +129,7 @@ class World {
                 setTimeout(() => {
                     let end = new Endscreen(this.character.x, this.character.y, 'won');
                     this.endscreen.push(end);
-                    this.endscreen[0].won = true;
-                    console.log(this.endscreen);
+                    this.endscreen[0].won = true;                   
                     stopGame();
                 }, 3000);
             }
