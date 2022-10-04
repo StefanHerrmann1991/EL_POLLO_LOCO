@@ -1,7 +1,7 @@
 class Chicken extends MovableObject {
     energy = 100;
     y = 375;
-
+    sawCharacter = false;
     /* 
       y = 320; */
     height = 60;
@@ -22,18 +22,22 @@ class Chicken extends MovableObject {
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_DYING);
         this.x = x; // Zahl zwischen 0 und 500 Math ramdom generiert eine zufällige Zahl zwischen 0 und 1
-        this.speed = 0.25 + Math.random() * 0.7;     
+        this.speed = 0.25 + Math.random() * 0.7;
     }
 
     animate() {
-        
+
         /* Hühner bewegen sich nach links */
 
         setStoppableInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DYING);
             }
-            else { this.moveLeft(); }
+            else {
+                this.moveLeft();
+                if (this.sawCharacter) { this.chicken_sound.play(); }
+            }
+
         }, 1000 / 60);
 
         /* Hühner laufen (nur Animation und Ton) */
@@ -46,9 +50,5 @@ class Chicken extends MovableObject {
 
 
 
-
-        /*    setInterval(() => {
-              this.chicken_sound.play();
-          }, 4000) */
     }
 }

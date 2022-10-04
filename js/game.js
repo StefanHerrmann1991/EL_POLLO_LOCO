@@ -4,7 +4,7 @@ let keyboard;
 let allIntervals = [];
 let start = false;
 let isInFullscreen = false;
-
+let menuSound = new Audio('audio/selectSound.mp3');
 /** 
  * The function initiates the canvas and for the game relevant functions.
  * 
@@ -28,6 +28,9 @@ function initGame() {
 
 function toggleStartBtn(startCondition) {
     
+    let menuSound = new Audio('audio/selectSound.mp3');
+   
+
     if (startCondition == 'noStart') {    
         document.getElementById('startButton').innerHTML = `
         <div onclick="toggleStartBtn('firstStart')">Start</div>`;  
@@ -36,13 +39,15 @@ function toggleStartBtn(startCondition) {
     if (startCondition == 'firstStart') {    
         startStory();
         document.getElementById('startButton').innerHTML = `
-        <div onclick="initGame()">Start</div>`;             
+        <div onclick="initGame()">Start</div>`;     
+        menuSound.play();        
     }
     
     if (startCondition == 'restart') {
         stopGame();
         document.getElementById('startButton').innerHTML = `
         <div onclick="restartGame()">Restart</div>`;
+        menuSound.play();
     }
 }
 

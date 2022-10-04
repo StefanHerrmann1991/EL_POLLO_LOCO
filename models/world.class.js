@@ -82,7 +82,6 @@ class World {
 
     checkCoinCount() {
         if (!this.character.isDead() && !this.endbossDeath) {
-            console.log(this.endbossDeath);
             document.getElementById('coinCounter').innerHTML = `
                 <img class="bottle-stat" src="img/7.Marcadores/Icono/Monedas.png"> 
                 <div>= ${this.coinCount}<div>`
@@ -91,6 +90,9 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
+            if(this.character.isInArea(enemy) && !(enemy instanceof Endboss))
+            {enemy.sawCharacter = true;
+            console.log('sawCharacter')}           
             this.characterGotDamage(enemy);
             this.jumpKill(enemy);
             this.throwBottleOn(enemy);
@@ -100,6 +102,8 @@ class World {
         this.pickUpCoin();
     }
 
+
+    
 
     startEndbossFight(enemy) {
         if (!enemy.isDead() && enemy instanceof Endboss) {
@@ -230,7 +234,7 @@ class World {
         this.endscreenOn = true;
         this.endbossDeath = true;
         setTimeout(() => {
-            let end = new Endscreen(this.character.x, this.character.y, 'won');            
+            let end = new Endscreen(this.character.x, this.character.y, 'won');
             this.endscreen.push(end);
             this.endscreen[0].won = true;
             stopGame();
