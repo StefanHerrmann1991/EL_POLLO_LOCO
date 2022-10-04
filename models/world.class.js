@@ -87,35 +87,29 @@ class World {
         } else { setTimeout(() => { document.getElementById('coinCounter').innerHTML = ""; }, 2000); }
     }
 
-
     checkCollisions() {
-
         this.level.enemies.forEach((enemy) => {
             this.characterGotDamage(enemy);
-            this.jumpKill(enemy);
-            if (!enemy.isDead() && enemy instanceof Endboss) {
-                this.endbossFirstEncounter(enemy)
-                if (!enemy.hadFirstContact && this.endbossActive && !enemy.isHurt()) {
-                    this.endbossIsWalking(enemy);
-                    if (this.character.isClose(enemy)) {
-                        enemy.walking = false;
-                        enemy.attack = true;                        
-                        enemy.moveToPosition(this.character);
-                    }
-
-                    if (this.character.isCollidingEndboss(enemy instanceof Endboss)) {
-                        this.character.hit(20);
-                    }
-                }
-            }
-
-            if (this.endbossWasDefeated(enemy)) {
-                this.showEndcreenWon();
-            }
+            this.jumpKill(enemy);           
             this.throwBottleOn(enemy);
+            this.startEndbossFight(enemy);
         });
         this.pickUpBottle();
         this.pickUpCoin();
+    }
+
+
+    startEndbossFight(enemy) {
+        if (!enemy.isDead() && enemy instanceof Endboss) {
+            this.endbossFirstEncounter(enemy)
+            if (!enemy.hadFirstContact && this.endbossActive && !enemy.isHurt()) {
+                this.endbossIsWalking(enemy);
+                this.endbossIsAttacking(enemy);
+                this.charHitByEndboss(enemy);
+            }
+        }
+        if (this.endbossWasDefeated(enemy)) 
+            this.showEndcreenWon();  
     }
 
     endbossIsWalking(enemy) {
@@ -124,8 +118,20 @@ class World {
         enemy.moveToPosition(this.character);
     }
 
-    
+    endbossIsAttacking(enemy) {
+        if (this.character.isClose(enemy)) {
+            enemy.walking = false;
+            enemy.attack = true;
+            enemy.moveToPosition(this.character);
+        }
 
+    }
+
+    charHitByEndboss(enemy) {
+        if (this.character.isCollidingEndboss(enemy instanceof Endboss)) {
+            this.character.hit(20);
+        }
+    }
 
 
     endbossFirstEncounter(enemy) {
