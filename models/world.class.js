@@ -55,11 +55,12 @@ class World {
 
     checkDeath() {
         if (this.gameWasLost())
-            this.showEndScreen();
+            this.showEndscreenLost();
     }
 
     gameWasLost() { return this.character.isDead() && !this.endscreenOn }
-    showEndScreen() {
+
+    showEndscreenLost() {
         this.endscreenOn = true;
         setTimeout(() => {
             let end = new Endscreen(this.character.x, this.character.y, 'lost');
@@ -83,9 +84,7 @@ class World {
             document.getElementById('coinCounter').innerHTML = `
                 <img class="bottle-stat" src="img/7.Marcadores/Icono/Monedas.png"> 
                 <div>= ${this.coinCount}<div>`
-
         } else { setTimeout(() => { document.getElementById('coinCounter').innerHTML = ""; }, 2000); }
-
     }
 
 
@@ -98,7 +97,7 @@ class World {
             }
 
 
-            if (this.jumpKill(enemy)) {
+            if (this.isKillableByJumping(enemy)) {
                 this.removeAn(enemy);
                 this.character.speedY = 3;
             }
@@ -124,16 +123,11 @@ class World {
                 }
             }
 
-            if (enemy.isDead() && enemy instanceof Endboss && !this.endscreenOn) {
-                this.endscreenOn = true;
-                setTimeout(() => {
-                    let end = new Endscreen(this.character.x, this.character.y, 'won');
-                    this.endscreen.push(end);
-                    this.endscreen[0].won = true;
-                    stopGame();
-                }, 3000);
+            if (this.endbossWasDefeated(enemy)) {
+                this.showEndcreenWon();
             }
-            this.throwBottleOn(enemy)
+
+            this.throwBottleOn(enemy);
         });
         this.pickUpBottle();
         this.pickUpCoin();
@@ -202,12 +196,25 @@ class World {
         }
     }
 
+    showEndcreenWon() {
 
+        this.endscreenOn = true;
+        setTimeout(() => {
+            let end = new Endscreen(this.character.x, this.character.y, 'won');
+            this.endscreen.push(end);
+            this.endscreen[0].won = true;
+            stopGame();
+        }, 3000);
+    }
+
+
+
+    endbossWasDefeated(enemy) { return enemy.isDead() && enemy instanceof Endboss && !this.endscreenOn }
     canThrow() { return this.keyboard.THROW && !this.character.isDead() && this.bottleCount > 0 }
     bottleHit(enemy, bottle) { return this.throwableObject[bottle].objectIsColliding(enemy) && !enemy.isHurt() && !enemy.isDead() && !this.character.isHurt() }
     canTake(loot) { return this.character.isColliding(loot) }
     characterGotHitBy(enemy) { return this.character.isColliding(enemy) && !this.character.isAboveGround() && !enemy.isDead() && !this.character.isHurt(); }
-    jumpKill(enemy) { return !(enemy instanceof Endboss) && this.character.isAboveGround() && this.character.speedY < 0 && this.character.isColliding(enemy) && !enemy.isDead() }
+    isKillableByJumping(enemy) { return !(enemy instanceof Endboss) && this.character.isAboveGround() && this.character.speedY < 0 && this.character.isColliding(enemy) && !enemy.isDead() }
 
 
     /**
