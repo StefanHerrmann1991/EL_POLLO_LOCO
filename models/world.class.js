@@ -99,8 +99,8 @@ class World {
 
 
             if (this.jumpKill(enemy)) {
-                this.removeAn(enemy);           
-                this.character.speedY = 3; 
+                this.removeAn(enemy);
+                this.character.speedY = 3;
             }
 
             if (!enemy.isDead() && enemy instanceof Endboss) {
@@ -114,10 +114,10 @@ class World {
                     enemy.moveToPosition(this.character);
                     if (this.character.isClose(enemy)) {
                         enemy.walking = false;
-                        enemy.attack = true;                       
+                        enemy.attack = true;
                         enemy.moveToPosition(this.character);
                     }
-                    
+
                     if (this.character.isCollidingEndboss(enemy instanceof Endboss)) {
                         this.character.hit(20);
                     }
@@ -129,7 +129,7 @@ class World {
                 setTimeout(() => {
                     let end = new Endscreen(this.character.x, this.character.y, 'won');
                     this.endscreen.push(end);
-                    this.endscreen[0].won = true;                   
+                    this.endscreen[0].won = true;
                     stopGame();
                 }, 3000);
             }
@@ -150,20 +150,28 @@ class World {
                         this.statusbarEndboss.setPercentage(enemy.energy);
                     }
                     if (!(enemy instanceof Endboss) && enemy.isDead()) {
-                        setTimeout(() => {
-                            let index = this.level.enemies.indexOf(enemy)
-                            this.level.enemies.splice(index, 1);
-                        }, 1000);
+                        removeAn(enemy)
                     }
                 }
             })
         });
+
+
+        this.getBottle();
+        this.getCoin();
+    }
+
+
+    getBottle() {
         this.level.bottles.forEach((bottle, i) => {
             if (this.canTake(bottle)) {
                 this.level.bottles.splice(i, 1);
                 this.bottleCount++;
             }
         });
+    }
+
+    getCoin() {
         this.level.coins.forEach((coin, i) => {
             if (this.canTake(coin)) {
                 this.level.coins.splice(i, 1);

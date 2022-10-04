@@ -623,12 +623,12 @@ canvas {
 @media screen and (max-width:641px) {
 
     .options {
-        height: 30px;
-        width: 30px;
+        height: 25px;
+        width: 25px;
     }
 
     .start-btn {
-        font-size: 30px;
+        font-size: 25px;
     }
 
     .formalies-main-link a {
