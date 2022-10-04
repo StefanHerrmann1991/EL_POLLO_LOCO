@@ -91,29 +91,15 @@ class World {
     checkCollisions() {
 
         this.level.enemies.forEach((enemy) => {
-            if (this.characterGotHitBy(enemy)) {
-                this.character.hit(5);
-                this.statusbar.setPercentage(this.character.energy);
-            }
-
-
-            if (this.isKillableByJumping(enemy)) {
-                this.removeAn(enemy);
-                this.character.speedY = 3;
-            }
-
+            this.characterGotDamage(enemy);
+            this.jumpKill(enemy);
             if (!enemy.isDead() && enemy instanceof Endboss) {
-                if (this.character.isInArea(enemy) && !this.endbossActive) {
-                    enemy.hadFirstContact = true;
-                    this.endbossActive = true;
-                }
+                this.endbossFirstEncounter(enemy)
                 if (!enemy.hadFirstContact && this.endbossActive && !enemy.isHurt()) {
-                    enemy.walking = true;
-                    enemy.attack = false;
-                    enemy.moveToPosition(this.character);
+                    this.endbossIsWalking(enemy);
                     if (this.character.isClose(enemy)) {
                         enemy.walking = false;
-                        enemy.attack = true;
+                        enemy.attack = true;                        
                         enemy.moveToPosition(this.character);
                     }
 
@@ -126,11 +112,35 @@ class World {
             if (this.endbossWasDefeated(enemy)) {
                 this.showEndcreenWon();
             }
-
             this.throwBottleOn(enemy);
         });
         this.pickUpBottle();
         this.pickUpCoin();
+    }
+
+    endbossIsWalking(enemy) {
+        enemy.walking = true;
+        enemy.attack = false;
+        enemy.moveToPosition(this.character);
+    }
+
+    
+
+
+
+    endbossFirstEncounter(enemy) {
+        if (this.character.isInArea(enemy) && !this.endbossActive) {
+            enemy.hadFirstContact = true;
+            this.endbossActive = true;
+        }
+    }
+
+
+    jumpKill(enemy) {
+        if (this.isKillableByJumping(enemy)) {
+            this.removeAn(enemy);
+            this.character.speedY = 3;
+        }
     }
 
 
@@ -153,6 +163,13 @@ class World {
                 }
             }
         })
+    }
+
+    characterGotDamage(enemy) {
+        if (this.characterGotHitBy(enemy)) {
+            this.character.hit(5);
+            this.statusbar.setPercentage(this.character.energy);
+        }
     }
 
     pickUpBottle() {

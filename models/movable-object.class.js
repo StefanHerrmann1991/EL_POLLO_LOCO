@@ -40,7 +40,7 @@ class MovableObject extends DrawableObject {
             return true;
         }
         if (this instanceof Endboss) {
-            return this.y < 20;
+            return this.y < 50;
         }
 
         else { return this.y < 180; }

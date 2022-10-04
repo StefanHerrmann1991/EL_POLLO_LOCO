@@ -164,7 +164,7 @@ function initLevel1() {
 
 
     function generateEnemies(worldLength) {
-        endbossPosition = LEVEL_END - 800;
+        endbossPosition = LEVEL_END - 8000;
         ENEMIES.push(new Endboss(endbossPosition));
         for (let i = 0; i < worldLength - 1; i++) {
             minX = 500;
