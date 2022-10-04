@@ -24,7 +24,7 @@ class Chicken extends MovableObject {
 
     CHICKEN_SOUND_DEATH = new Audio('audio/chickenDeath.mp3');
 
-    soundIsPlayedOnce = 0;
+    soundIsPlayedOnce = false;
 
 
     constructor(x) {
@@ -36,7 +36,7 @@ class Chicken extends MovableObject {
     }
 
     playAudioOnce(audio) {
-        if (this.soundIsPlayedOnce == 0) {
+        if (!this.soundIsPlayedOnce) {
             this.soundIsPlayedOnce = true;
             let soundDuration = audio.duration;
             audio.play();
