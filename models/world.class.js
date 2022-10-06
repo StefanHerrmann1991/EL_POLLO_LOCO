@@ -91,9 +91,8 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if(this.character.isClose(enemy) && !(enemy instanceof Endboss))
-            {enemy.sawCharacter = true;}
-                 
+            if (this.character.isClose(enemy) && !(enemy instanceof Endboss)) { enemy.sawCharacter = true; }
+
             this.characterGotDamage(enemy);
             this.jumpKill(enemy);
             this.throwBottleOn(enemy);
@@ -104,7 +103,7 @@ class World {
     }
 
 
-    
+
 
     startEndbossFight(enemy) {
         if (!enemy.isDead() && enemy instanceof Endboss) {
@@ -252,18 +251,6 @@ class World {
     characterGotHitBy(enemy) { return this.character.isColliding(enemy) && !this.character.isAboveGround() && !enemy.isDead() && !this.character.isHurt(); }
     isKillableByJumping(enemy) { return !(enemy instanceof Endboss) && this.character.isAboveGround() && this.character.speedY < 0 && this.character.isColliding(enemy) && !enemy.isDead() }
 
-
-    /**
-     * Check if camera target is inside Boundaries to allow camera movement
-     * @param {number} leftBoundary - minium distance for target to achieve for camera to move.
-     * @param {number} rightBoundary - maximum distance for target to achieve for camera to move.
-     * @param {number} distanceFromCamera - how far is the camera's offset from target
-     * @returns {boolean}
-     */
-    canMoveCamera(leftBoundary, rightBoundary, distanceFromCamera) {
-        return distanceFromCamera > leftBoundary &&
-            distanceFromCamera < rightBoundary;
-    }
 
 
 
