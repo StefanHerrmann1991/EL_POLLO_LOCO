@@ -2,6 +2,7 @@ let canvas;
 let world;
 let keyboard;
 let allIntervals = [];
+let allTimeouts = [];
 let start = false;
 let isInFullscreen = false;
 let menuSound = new Audio('audio/selectSound.mp3');
@@ -27,22 +28,22 @@ function initGame() {
 
 
 function toggleStartBtn(startCondition) {
-    
-    let menuSound = new Audio('audio/selectSound.mp3');
-   
 
-    if (startCondition == 'noStart') {    
+    let menuSound = new Audio('audio/selectSound.mp3');
+
+
+    if (startCondition == 'noStart') {
         document.getElementById('startButton').innerHTML = `
-        <div onclick="toggleStartBtn('firstStart')">Start</div>`;  
+        <div onclick="toggleStartBtn('firstStart')">Start</div>`;
     }
-    
-    if (startCondition == 'firstStart') {    
+
+    if (startCondition == 'firstStart') {
         startStory();
         document.getElementById('startButton').innerHTML = `
-        <div onclick="initGame()">Start</div>`;     
-        menuSound.play();        
+        <div onclick="initGame()">Start</div>`;
+        menuSound.play();
     }
-    
+
     if (startCondition == 'restart') {
         stopGame();
         document.getElementById('startButton').innerHTML = `
@@ -264,6 +265,65 @@ function stopGame() {
     allIntervals.forEach(clearInterval);
     allIntervals = [];
 }
+
+/**
+ * The function uses a JSON in the following format:
+ * CHICKEN_SOUND = {
+        'audios': [
+            new Audio('audio/chickenSound0.mp3'),
+            new Audio('audio/chickenSound1.mp3'),
+            new Audio('audio/chickenSound2.mp3'),
+            new Audio('audio/chickenSound3.mp3'),
+            new Audio('audio/chickenSound4.mp3')],
+        'soundIsPlayedOnce': false,
+        'timeoutId' : '', 
+        'randomSound' : '',
+    }    
+ * The audios in the first Line will be played once and on will be attached randomly to 
+ * an object. If only one audio is in the array it will be played.   
+ * @param {JSON} mp3JSON 
+ * @param {Number} mp3JSON.randomSound is the random sound number which will be played.
+ * @param {Number} soundDuration is the length in seconds of the mp3 file.
+ * @param {Number} timeoutId is the id of the timeout which can later be cleared. 
+ *
+ *
+ *
+ *
+*/
+
+function playAudioOnce(mp3JSON) {
+
+    if (!mp3JSON.soundIsPlayedOnce) {
+        mp3JSON.randomSound = (Math.floor(Math.random() * mp3JSON.audios.length));
+        let randomSoundPosition = mp3JSON.randomSound
+        let soundDuration = mp3JSON.audios[randomSoundPosition].duration;
+        mp3JSON.soundIsPlayedOnce = true;
+        mp3JSON.audios[randomSoundPosition].play();
+        let timeoutId = setTimeout(() => {
+            mp3JSON.audios[randomSoundPosition].pause();
+        }, 1000 * soundDuration);
+        allTimeouts.push(timeoutId);
+        mp3JSON['timeoutId'] = timeoutId;
+    }
+}
+
+
+function stopAllTimeouts() {
+    allTimeouts.forEach(clearTimeout);
+    allTimeouts = [];
+}
+
+/**
+ * The function stops a single audio depending on the id of the audio.
+ * @param {string} mp3JSON.timeoutId The id of the corresponing timeout.
+*/
+
+function stopTimeout(mp3JSON) {
+    mp3JSON.audios.forEach(audio => audio.pause());
+    clearTimeout(JSON.parse(mp3JSON.timeoutId));
+}
+
+
 
 function changeToFullscreen() {
     let fullscreen = document.getElementById('mainContainer');

@@ -41,6 +41,7 @@ class DrawableObject {
 
 
 
+
  /*    drawFrame(ctx) {
         if (this instanceof Endboss) {
             ctx.beginPath();

@@ -12,20 +12,29 @@ class Chicken extends MovableObject {
         'img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/3.Ga_paso izquierdo.png'
     ];
     IMAGES_DYING = [
-
         'img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/4.G_muerte.png'
     ];
-    CHICKEN_SOUND = [
-        new Audio('audio/chickenSound0.mp3'),
-        new Audio('audio/chickenSound1.mp3'),
-        new Audio('audio/chickenSound2.mp3'),
-        new Audio('audio/chickenSound3.mp3'),
-        new Audio('audio/chickenSound4.mp3')];
 
-    CHICKEN_SOUND_DEATH = new Audio('audio/chickenDeath.mp3');
+    CHICKEN_SOUND = {
+        'audios': [
+            new Audio('audio/chickenSound0.mp3'),
+            new Audio('audio/chickenSound1.mp3'),
+            new Audio('audio/chickenSound2.mp3'),
+            new Audio('audio/chickenSound3.mp3'),
+            new Audio('audio/chickenSound4.mp3')],
+        'soundIsPlayedOnce': false,
+        'timeoutId' : '', 
+        'randomSound' : '',
+    }
 
-    soundIsPlayedOnce = false;
 
+
+    CHICKEN_SOUND_DEATH = {
+        'audios': [new Audio('audio/chickenDeath.mp3')],
+        'soundIsPlayedOnce': false,
+        'timeoutId' : '',
+        'randomSound' : '',
+    }
 
     constructor(x) {
         super().loadImage('img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/1.Ga_paso_derecho.png');
@@ -35,38 +44,22 @@ class Chicken extends MovableObject {
         this.speed = 0.25 + Math.random() * 0.7;
     }
 
-    playAudioOnce(audio) {
-        if (!this.soundIsPlayedOnce) {
-            this.soundIsPlayedOnce = true;
-            let soundDuration = audio.duration;
-            audio.play();
-            setTimeout(() => {
-                audio.pause();
-            }, 1000 * soundDuration);          
-        }
-    }
-
 
 
     animate() {
 
-        /* Hühner bewegen sich nach links */
-
-
-
-
         setStoppableInterval(() => {
-            let soundPosition = (Math.floor(Math.random() * 4));
+
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DYING);
-                this.playAudioOnce(this.CHICKEN_SOUND_DEATH);
-                this.CHICKEN_SOUND[soundPosition].pause();
-            }
+                stopTimeout(this.CHICKEN_SOUND);   
+                playAudioOnce(this.CHICKEN_SOUND_DEATH);              
+            } 
 
             else {
-                this.moveLeft();                
-                if (this.sawCharacter && !this.soundIsPlayedOnce) {
-                    this.playAudioOnce(this.CHICKEN_SOUND[soundPosition])                  
+                this.moveLeft();
+                if (this.sawCharacter) {
+                    playAudioOnce(this.CHICKEN_SOUND)
                 }
             }
 

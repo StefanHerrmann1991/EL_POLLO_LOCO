@@ -67,6 +67,7 @@ class World {
             let end = new Endscreen(this.character.x, this.character.y, 'lost');
             this.endscreen.push(end);
             stopGame();
+            stopAllTimeouts();
         }, 3000);
     }
 
@@ -238,6 +239,7 @@ class World {
             this.endscreen.push(end);
             this.endscreen[0].won = true;
             stopGame();
+            stopAllTimeouts();
         }, 3000);
     }
 
