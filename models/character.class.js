@@ -99,6 +99,7 @@ class Character extends MovableObject {
 
         setStoppableInterval(() => {
             this.walking_sound.pause();
+            this.jumping_sound.pause();
             if (!this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.walking_sound.play();
@@ -110,7 +111,8 @@ class Character extends MovableObject {
                 this.otherDirection = true;
             }
             if (!this.isDead() && this.world.keyboard.SPACE && !this.isAboveGround()) {
-                this.speedY = 35;      
+                this.speedY = 35;     
+                
             }
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
@@ -131,6 +133,7 @@ class Character extends MovableObject {
 
             if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
+                this.jumping_sound.play(); 
             }
 
             if (this.canWalk() ) {
@@ -158,5 +161,12 @@ class Character extends MovableObject {
     }
     standIdle() { return !this.isDead() && !this.isHurt() && !this.isAboveGround() }
     canWalk() { return !this.world.keyboard.SPACE && !this.world.keyboard.DODGE && !this.isDead() && (this.world.keyboard.RIGHT ||  this.world.keyboard.LEFT) }
+
+ playJumpAnimation() {
+    this.world.keyboard.SPACE
+    let timePassed = new Date().getTime() 
+ }
+ 
+ 
 
 }

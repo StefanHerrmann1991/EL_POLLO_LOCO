@@ -319,8 +319,11 @@ function stopAllTimeouts() {
 */
 
 function stopTimeout(mp3JSON) {
-    mp3JSON.audios.forEach(audio => audio.pause());
-    clearTimeout(JSON.parse(mp3JSON.timeoutId));
+    if (mp3JSON.soundIsPlayedOnce) {
+        mp3JSON.audios.forEach(audio => audio.pause());
+        clearTimeout(JSON.parse(mp3JSON.timeoutId));
+    }
+
 }
 
 
