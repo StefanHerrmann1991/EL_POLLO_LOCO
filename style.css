@@ -597,15 +597,6 @@ canvas {
         font-size: 20px !important;
     }
 
-    .bottle-stat {
-        height: 3vh;
-        width: 6vw;
-    }
-
-    .coin-stat {
-        height: 3vh;
-        width: 6vw;
-    }
 
     .bottle-counter {
         font-size: 20px !important;
@@ -669,15 +660,7 @@ canvas {
         font-size: 60%;
     }
 
-    .bottle-stat {
-        height: 3vh;
-        width: 6vw;
-    }
-
-    .coin-stat {
-        height: 3vh;
-        width: 6vw;
-    }
+  
 
     .bottle-counter {
         font-size: 20px;

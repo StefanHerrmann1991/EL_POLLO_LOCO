@@ -164,7 +164,7 @@ class Character extends MovableObject {
 
  playJumpAnimation() {
     this.world.keyboard.SPACE
-    let timePassed = new Date().getTime() 
+    let timePassed = new Date().getTime();
  }
  
  
