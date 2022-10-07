@@ -123,7 +123,7 @@ class MovableObject extends DrawableObject {
                 && this.x + 20 < movableObject.x + movableObject.width
                 && this.y + 190 < movableObject.y + movableObject.height
         }
-        else {
+        else {           
             return this.x + 20 + this.width - 55 > movableObject.x
                 && this.y + 90 + this.height - 100 > movableObject.y
                 && this.x + 20 < movableObject.x + movableObject.width
@@ -141,14 +141,15 @@ class MovableObject extends DrawableObject {
 
 
     isCollidingEndboss(movableObject) {
-
+        
         if (this.world.keyboard.DODGE) {
             return this.x + 20 + this.width - 55 > movableObject.x + 40
                 && this.y + 190 + this.height - 200 > movableObject.y + 110
-                && this.x + 20 < movableObject.x + 40 + movableObject.width - 80
+                && this.x + 20 < movableObject.x + 40 + movableObject.width - 40
                 && this.y + 190 < movableObject.y + 110 + movableObject.height - 180
         }
         else {
+         
             return this.x + 20 + this.width - 55 > movableObject.x + 40
                 && this.y + 90 + this.height - 100 > movableObject.y + 110
                 && this.x + 20 < movableObject.x + 40 + movableObject.width - 40

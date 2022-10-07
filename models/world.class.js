@@ -134,8 +134,8 @@ class World {
     }
 
     charHitByEndboss(enemy) {
-        if (this.character.isCollidingEndboss(enemy instanceof Endboss)) {
-            this.character.hit(20);
+        if (this.character.isCollidingEndboss(enemy)) {
+            this.character.hit(5);
         }
     }
 
@@ -248,7 +248,7 @@ class World {
     canThrow() { return this.keyboard.THROW && !this.character.isDead() && this.bottleCount > 0 }
     bottleHit(enemy, bottle) { return this.throwableObject[bottle].objectIsColliding(enemy) && !enemy.isHurt() && !enemy.isDead() && !this.character.isHurt() }
     canTake(loot) { return this.character.isColliding(loot) }
-    characterGotHitBy(enemy) { return this.character.isColliding(enemy) && !this.character.isAboveGround() && !enemy.isDead() && !this.character.isHurt(); }
+    characterGotHitBy(enemy) { return !(enemy instanceof Endboss) && this.character.isColliding(enemy) && !this.character.isAboveGround() && !enemy.isDead() && !this.character.isHurt(); }
     isKillableByJumping(enemy) { return !(enemy instanceof Endboss) && this.character.isAboveGround() && this.character.speedY < 0 && this.character.isColliding(enemy) && !enemy.isDead() }
 
 
@@ -291,7 +291,7 @@ class World {
             this.flipImage(movableObject)
         }
         movableObject.draw(this.ctx);
-        /*  movableObject.drawFrame(this.ctx);  */
+        movableObject.drawFrame(this.ctx);  
         if (movableObject.otherDirection) {
             this.flipImageBack(movableObject);
         }

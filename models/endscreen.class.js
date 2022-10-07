@@ -21,6 +21,6 @@ class Endscreen extends DrawableObject {
         this.height = 480;
         this.width = 720;
         this.x = x - 100;
-        this.y = y - 190;
+        this.y = y - 190 ;
     }
 }

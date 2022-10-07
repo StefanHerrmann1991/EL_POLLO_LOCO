@@ -6,7 +6,7 @@ class Character extends MovableObject {
     energy = 100;
     dodgeAnimation = 0;
     dodge = false;
-    cameraOffsetX = 0;
+    camera_position =0;
 
 
     /* constructor führt sobald der Charakter geladen wird, die Funktionen innerhalb des Constructors aus. */
@@ -98,33 +98,29 @@ class Character extends MovableObject {
 
     animate() {
 
-        setStoppableInterval(() => {
-            this.walking_sound.pause();
-            this.jumping_sound.pause();
-            if (!this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-                this.moveRight();
-                this.walking_sound.play();
-                this.otherDirection = false;
+                setStoppableInterval(() => {
+                this.walking_sound.pause();
+                this.jumping_sound.pause();
+                if (!this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+                    this.moveRight();
+                    this.walking_sound.play();
+                    this.otherDirection = false;
+                }
+                if (!this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.LEFT && this.x > 0) {
+                    this.moveLeft();
+                    this.walking_sound.play();
+                    this.otherDirection = true;
+                }
+                if (!this.isDead() && this.world.keyboard.SPACE && !this.isAboveGround()) {
+                    this.speedY = 35;     
+                    
+                }
                 this.world.camera_x = -this.x + 100;
-                console.log(this.world.camera_x);             
-            }
-            if (!this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.LEFT && this.x > 0) {
-                this.moveLeft();
-                this.walking_sound.play();
-                this.otherDirection = true;
-                this.world.camera_x = -this.x + 620 - this.width;
-                this.world.camera_x -= 20; 
-
-                console.log(this.world.camera_x);
-               
-            }
-            if (!this.isDead() && this.world.keyboard.SPACE && !this.isAboveGround()) {
-                this.speedY = 35;     
-                
-            }
+            }, 1000 / 60);
         
-        }, 1000 / 60);
+   
 
+       
         setStoppableInterval(() => {
             // walk animation  
             if (this.isDead() && !this.death) {
@@ -170,11 +166,7 @@ class Character extends MovableObject {
     standIdle() { return !this.isDead() && !this.isHurt() && !this.isAboveGround() }
     canWalk() { return !this.world.keyboard.SPACE && !this.world.keyboard.DODGE && !this.isDead() && (this.world.keyboard.RIGHT ||  this.world.keyboard.LEFT) }
 
- playJumpAnimation() {
-    this.world.keyboard.SPACE
-    let timePassed = new Date().getTime();
- }
- 
+
  
 
 }
