@@ -128,7 +128,7 @@ canvas {
 
 .control-btn {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
 }
 
 .option-buttons {
@@ -380,7 +380,10 @@ canvas {
 
 .cross-position {
     z-index: 100;
-    padding: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 5%;
+    padding-bottom: 2%;
 }
 
 .cross-position2 {
