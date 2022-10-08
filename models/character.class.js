@@ -6,8 +6,8 @@ class Character extends MovableObject {
     energy = 100;
     dodgeAnimation = 0;
     dodge = false;
-    camera_position =0;
-
+    camera_position = 0;
+    audioJumping = false;
 
     /* constructor führt sobald der Charakter geladen wird, die Funktionen innerhalb des Constructors aus. */
     IMAGES_WALKING = [
@@ -42,7 +42,7 @@ class Character extends MovableObject {
         'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-56.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-57.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-58.png']
-   
+
     IMAGES_HURTING = [
         'img/2.Secuencias_Personaje-Pepe-corrección/4.Herido/H-41.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/4.Herido/H-42.png',
@@ -87,7 +87,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_HURTING);
         this.loadImages(this.IMAGES_DYING);
         this.loadImages(this.IMAGES_DODGING);
-        this.applyGravity(0);     
+        this.applyGravity(0);
     }
 
     /**
@@ -98,29 +98,31 @@ class Character extends MovableObject {
 
     animate() {
 
-                setStoppableInterval(() => {
-                this.walking_sound.pause();
-                this.jumping_sound.pause();
-                if (!this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-                    this.moveRight();
-                    this.walking_sound.play();
-                    this.otherDirection = false;
-                }
-                if (!this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.LEFT && this.x > 0) {
-                    this.moveLeft();
-                    this.walking_sound.play();
-                    this.otherDirection = true;
-                }
-                if (!this.isDead() && this.world.keyboard.SPACE && !this.isAboveGround()) {
-                    this.speedY = 35;     
-                    
-                }
-                this.world.camera_x = -this.x + 100;
-            }, 1000 / 60);
-        
-   
+        setStoppableInterval(() => {
+            this.walking_sound.pause();
 
-       
+
+            if (!this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+                this.moveRight();
+                this.walking_sound.play();
+                this.otherDirection = false;
+            }
+            if (!this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.LEFT && this.x > 0) {
+                this.moveLeft();
+                this.walking_sound.play();
+                this.otherDirection = true;
+            }
+            if (!this.isDead() && this.world.keyboard.SPACE && !this.isAboveGround()) {
+                this.speedY = 35;
+                this.playAudioOnKey(this.jumping_sound);
+
+            }
+            this.world.camera_x = -this.x + 100;
+        }, 1000 / 60);
+
+
+
+
         setStoppableInterval(() => {
             // walk animation  
             if (this.isDead() && !this.death) {
@@ -137,36 +139,46 @@ class Character extends MovableObject {
 
             if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
-                this.jumping_sound.play(); 
             }
 
-            if (this.canWalk() ) {
+            if (this.canWalk()) {
                 this.playAnimation(this.IMAGES_WALKING);
             }
-            
+
             else if (!this.isDead() && !this.isHurt() && !this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_IDLE);
             }
-            
+
             if (this.world.keyboard.DODGE && !this.isDead() && !this.isHurt() && !this.isAboveGround()) {
                 if (this.dodgeAnimation < 1) {
                     this.playAnimation(this.IMAGES_DODGING);
-               
+
                 }
                 else { this.loadImage(this.IMAGES_DODGING[2]); }
                 this.dodgeAnimation++;
             }
 
-            if (!this.world.keyboard.DODGE) 
-            { this.dodgeAnimation = 0; }
+            if (!this.world.keyboard.DODGE) { this.dodgeAnimation = 0; }
 
         }, 120);
 
     }
     standIdle() { return !this.isDead() && !this.isHurt() && !this.isAboveGround() }
-    canWalk() { return !this.world.keyboard.SPACE && !this.world.keyboard.DODGE && !this.isDead() && (this.world.keyboard.RIGHT ||  this.world.keyboard.LEFT) }
+    canWalk() { return !this.world.keyboard.SPACE && !this.world.keyboard.DODGE && !this.isDead() && (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) }
 
 
- 
+    playAudioOnKey(mp3JSON) {
+
+        if (!this.audioJumping) {
+            let soundDuration = mp3JSON.duration;
+            this.audioJumping = true;
+            mp3JSON.play();
+            setTimeout(() => {
+                this.audioJumping = false;
+                mp3JSON.pause();
+            }, 1000 * soundDuration);
+        }
+    }
+
 
 }

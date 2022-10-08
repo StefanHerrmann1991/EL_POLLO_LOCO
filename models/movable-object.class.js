@@ -118,7 +118,7 @@ class MovableObject extends DrawableObject {
 
 
         if (this.world.keyboard.DODGE) {
-            return this.x + 20 + this.width - 55 > movableObject.x
+                return this.x + 20 + this.width - 55 > movableObject.x
                 && this.y + 190 + this.height - 200 > movableObject.y
                 && this.x + 20 < movableObject.x + movableObject.width
                 && this.y + 190 < movableObject.y + movableObject.height
@@ -148,12 +148,11 @@ class MovableObject extends DrawableObject {
                 && this.x + 20 < movableObject.x + 40 + movableObject.width - 40
                 && this.y + 190 < movableObject.y + 110 + movableObject.height - 180
         }
-        else {
-         
+        else {           
             return this.x + 20 + this.width - 55 > movableObject.x + 40
-                && this.y + 90 + this.height - 100 > movableObject.y + 110
+                && this.y + 120 + this.height - 130 > movableObject.y + 110
                 && this.x + 20 < movableObject.x + 40 + movableObject.width - 40
-                && this.y + 90 < movableObject.y + 110 + movableObject.height - 180
+                && this.y + 120 < movableObject.y + 110 + movableObject.height - 180
         }
     }
 

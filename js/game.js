@@ -300,7 +300,7 @@ function playAudioOnce(mp3JSON) {
         mp3JSON.soundIsPlayedOnce = true;
         mp3JSON.audios[randomSoundPosition].play();
         let timeoutId = setTimeout(() => {
-            mp3JSON.audios[randomSoundPosition].pause();
+            mp3JSON.audios[randomSoundPosition].pause();          
         }, 1000 * soundDuration);
         allTimeouts.push(timeoutId);
         mp3JSON['timeoutId'] = timeoutId;
@@ -308,10 +308,17 @@ function playAudioOnce(mp3JSON) {
 }
 
 
+
 function stopAllTimeouts() {
     allTimeouts.forEach(clearTimeout);
     allTimeouts = [];
 }
+
+function audioOnKeypress (mp3JSON) {
+
+}
+
+
 
 /**
  * The function stops a single audio depending on the id of the audio.
@@ -323,7 +330,6 @@ function stopTimeout(mp3JSON) {
         mp3JSON.audios.forEach(audio => audio.pause());
         clearTimeout(JSON.parse(mp3JSON.timeoutId));
     }
-
 }
 
 

@@ -40,7 +40,7 @@ class DrawableObject {
 
   
 
-    drawFrame(ctx) {
+ /*    drawFrame(ctx) {
         if (this instanceof Endboss) {
             ctx.beginPath();
             ctx.lineWidth = '5';
@@ -56,5 +56,5 @@ class DrawableObject {
             ctx.rect(this.x + 20, this.y  + 120, this.width - 55, this.height - 130)
             ctx.stroke();
         }
-    } 
+    }  */
 }

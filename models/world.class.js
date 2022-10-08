@@ -68,7 +68,7 @@ class World {
             this.endscreen.push(end);
             stopGame();
             stopAllTimeouts();
-        }, 3000);
+        }, 5000);
     }
 
 
@@ -92,8 +92,7 @@ class World {
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isClose(enemy) && !(enemy instanceof Endboss)) { enemy.sawCharacter = true; }
-
-            this.characterGotDamage(enemy);
+            this.characterGotDamage(enemy, 5);           
             this.jumpKill(enemy);
             this.throwBottleOn(enemy);
             this.startEndbossFight(enemy);
@@ -111,7 +110,7 @@ class World {
             if (!enemy.hadFirstContact && this.endbossActive && !enemy.isHurt()) {
                 this.endbossIsWalking(enemy);
                 this.endbossIsAttacking(enemy);
-                this.charHitByEndboss(enemy);
+                this.charHitByEndboss(enemy, 15);               
             }
         }
         if (this.endbossWasDefeated(enemy))
@@ -133,13 +132,7 @@ class World {
 
     }
 
-    charHitByEndboss(enemy) {
-        if (this.character.isCollidingEndboss(enemy)) {
-            this.character.hit(5);
-        }
-    }
-
-
+ 
     endbossFirstEncounter(enemy) {
         if (this.character.isInArea(enemy) && !this.endbossActive) {
             enemy.hadFirstContact = true;
@@ -181,12 +174,22 @@ class World {
         thrownObject.acceleration = 0;
     }
 
-    characterGotDamage(enemy) {
-        if (this.characterGotHitBy(enemy)) {
-            this.character.hit(5);
+    characterGotDamage(enemy, damage) {
+        if (this.characterGotHitBy(enemy, 5)) {
+            this.character.hit(damage);
+            this.statusbar.setPercentage(this.character.energy);           
+        }   
+    }
+
+
+
+    charHitByEndboss(enemy, damage) {
+        if (this.character.isCollidingEndboss(enemy) && !this.character.isHurt() && enemy instanceof Endboss) {
+            this.character.hit(damage);
             this.statusbar.setPercentage(this.character.energy);
         }
-    }
+    } d
+
 
     pickUpBottle() {
         this.level.bottles.forEach((bottle, i) => {
@@ -239,7 +242,7 @@ class World {
             this.endscreen[0].won = true;
             stopGame();
             stopAllTimeouts();
-        }, 3000);
+        }, 5000);
     }
 
 
@@ -291,7 +294,7 @@ class World {
             this.flipImage(movableObject)
         }
         movableObject.draw(this.ctx);
-        movableObject.drawFrame(this.ctx);  
+       /*  movableObject.drawFrame(this.ctx);   */
         if (movableObject.otherDirection) {
             this.flipImageBack(movableObject);
         }

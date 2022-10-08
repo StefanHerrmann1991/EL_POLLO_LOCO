@@ -30,7 +30,7 @@ class Chicken extends MovableObject {
 
 
     CHICKEN_SOUND_DEATH = {
-        'audios': [new Audio('audio/chickenDeath.mp3')],
+        'audios': [new Audio('audio/chickenDeath3.mp3')],
         'soundIsPlayedOnce': false,
         'timeoutId' : '',
         'randomSound' : '',
@@ -52,8 +52,8 @@ class Chicken extends MovableObject {
 
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DYING);
-                stopTimeout(this.CHICKEN_SOUND);   
-                playAudioOnce(this.CHICKEN_SOUND_DEATH);              
+                playAudioOnce(this.CHICKEN_SOUND_DEATH);        
+                stopTimeout(this.CHICKEN_SOUND);                   
             } 
 
             else {
