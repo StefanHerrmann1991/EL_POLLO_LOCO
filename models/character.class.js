@@ -106,59 +106,21 @@ class Character extends MovableObject {
         setStoppableInterval(() => {
             this.walking_sound.pause();
 
-
-
-            if (!this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-                this.otherDirection = false;              
-                this.moveRight();
-                adjustCameraRight();
-                let rightBorder = -this.x + 100;
-                this.camera_position_storage = this.world.camera_x;
-                if (this.changeCameraRight && rightBorder <= this.camera_position_storage) {
-                    this.world.camera_x -= 20;
-                }
-
-                else {
-                    this.changeCameraRight = false;
-                    this.world.camera_x = rightBorder;
-                    this.changeCameraLeft = true
-                }
-            }
-
-
-            if (!this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.LEFT) {
-                this.otherDirection = true;
-                this.moveLeft();
-                adjustCameraLeft();
-                let leftBorder = -this.x + 620 - this.width;
-                this.camera_position_storage = this.world.camera_x;
-                if (this.changeCameraLeft && leftBorder >= this.camera_position_storage) {
-                    this.world.camera_x += 20;
-                }
-
-                else {
-                    this.changeCameraLeft = false;
-                    this.world.camera_x = leftBorder;
-                    this.changeCameraRight = true;
-                }
-
+            if (!this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.RIGHT) {
+                this.otherDirection = false;
+                this.adjustCameraRight();
                 this.walking_sound.play();
             }
 
-
-
-
-            /*   this.world.camera_x = -this.x + 620 - this.width; */
-            /*   while (this.camera_position_storage < (-this.x + 620 - this.width)) {
-                               this.world.camera_x = -this.x - this.cameraOffsetX;
-                               this.cameraOffsetX += 0.2;
-                               this.moveLeft();
-                           } */
+            if (!this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.LEFT) {
+                this.otherDirection = true;
+                this.adjustCameraLeft();
+                this.walking_sound.play();
+            }
 
             if (!this.isDead() && this.world.keyboard.SPACE && !this.isAboveGround()) {
                 this.speedY = 35;
                 this.playAudioOnKey(this.jumping_sound);
-
             }
 
         }, 1000 / 60);
@@ -223,7 +185,51 @@ class Character extends MovableObject {
         }
     }
 
-    adjustCameraRight() {}
-    adjustCameraLeft() {}
+    adjustCameraRight() {
+        let rightBorder = -this.x + 100;
+
+        if (this.x > this.world.level.level_end_x - 300) { this.camera_position_storage = this.world.camera_x }
+
+        else {
+            this.camera_position_storage = this.world.camera_x;
+       
+            if (this.changeCameraRight && rightBorder <= this.camera_position_storage) {
+                this.moveRight();
+                this.world.camera_x -= 20;
+            }
+    
+            else {
+                this.changeCameraRight = false;
+                this.moveRight();
+                this.world.camera_x = rightBorder;
+                this.changeCameraLeft = true
+            }
+        }
+
+    
+    }
+
+    adjustCameraLeft() {
+        let leftBorder = -this.x + 620 - this.width;       
+
+        if (this.x < - 200) { this.camera_position_storage = this.world.camera_x }
+
+        else {
+            this.camera_position_storage = this.world.camera_x;
+
+            if (this.changeCameraLeft && leftBorder >= this.camera_position_storage) {
+                this.moveLeft();                
+                this.world.camera_x += 20;
+            }
+
+            else {
+                this.changeCameraLeft = false;
+                this.moveLeft();
+                this.world.camera_x = leftBorder;
+                this.changeCameraRight = true;
+            }
+        }
+    }
+
 
 }
