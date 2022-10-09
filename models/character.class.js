@@ -7,7 +7,12 @@ class Character extends MovableObject {
     dodgeAnimation = 0;
     dodge = false;
     camera_position = 0;
+    camera_position_storage = 0;
     audioJumping = false;
+    changeCameraLeft = true;
+    changeCameraRight = true;
+    cameraStatic = false;
+
 
     /* constructor führt sobald der Charakter geladen wird, die Funktionen innerhalb des Constructors aus. */
     IMAGES_WALKING = [
@@ -102,22 +107,60 @@ class Character extends MovableObject {
             this.walking_sound.pause();
 
 
+
             if (!this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+                this.otherDirection = false;              
                 this.moveRight();
-                this.walking_sound.play();
-                this.otherDirection = false;
+                adjustCameraRight();
+                let rightBorder = -this.x + 100;
+                this.camera_position_storage = this.world.camera_x;
+                if (this.changeCameraRight && rightBorder <= this.camera_position_storage) {
+                    this.world.camera_x -= 20;
+                }
+
+                else {
+                    this.changeCameraRight = false;
+                    this.world.camera_x = rightBorder;
+                    this.changeCameraLeft = true
+                }
             }
-            if (!this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.LEFT && this.x > 0) {
-                this.moveLeft();
-                this.walking_sound.play();
+
+
+            if (!this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.LEFT) {
                 this.otherDirection = true;
+                this.moveLeft();
+                adjustCameraLeft();
+                let leftBorder = -this.x + 620 - this.width;
+                this.camera_position_storage = this.world.camera_x;
+                if (this.changeCameraLeft && leftBorder >= this.camera_position_storage) {
+                    this.world.camera_x += 20;
+                }
+
+                else {
+                    this.changeCameraLeft = false;
+                    this.world.camera_x = leftBorder;
+                    this.changeCameraRight = true;
+                }
+
+                this.walking_sound.play();
             }
+
+
+
+
+            /*   this.world.camera_x = -this.x + 620 - this.width; */
+            /*   while (this.camera_position_storage < (-this.x + 620 - this.width)) {
+                               this.world.camera_x = -this.x - this.cameraOffsetX;
+                               this.cameraOffsetX += 0.2;
+                               this.moveLeft();
+                           } */
+
             if (!this.isDead() && this.world.keyboard.SPACE && !this.isAboveGround()) {
                 this.speedY = 35;
                 this.playAudioOnKey(this.jumping_sound);
 
             }
-            this.world.camera_x = -this.x + 100;
+
         }, 1000 / 60);
 
 
@@ -180,5 +223,7 @@ class Character extends MovableObject {
         }
     }
 
+    adjustCameraRight() {}
+    adjustCameraLeft() {}
 
 }
