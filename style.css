@@ -153,7 +153,7 @@ canvas {
 
 
 
-.menu-btn {
+.menu-btn-container {
 
     display: flex;
     flex-direction: row;
@@ -161,10 +161,12 @@ canvas {
     justify-content: flex-end;
 }
 
-.menu-btn button {
-    background-color: transparent;
-    border: none
+.menu-btn {
+    background-color: black;
+    padding: 2px;
+    border-radius: 20%;
 }
+
 
 .settings-menu {
     background-image: url('img/0.Own_Pictures/optionBackground.JPG');
@@ -232,7 +234,6 @@ canvas {
     border-color: black;
     height: 40px;
     width: 40px;
-    margin-left: 2%;
     cursor: pointer;
 }
 

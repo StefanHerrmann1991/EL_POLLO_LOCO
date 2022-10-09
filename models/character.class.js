@@ -106,7 +106,7 @@ class Character extends MovableObject {
         setStoppableInterval(() => {
             this.walking_sound.pause();
 
-            if (!this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.RIGHT) {
+            if (!this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.otherDirection = false;
                 this.adjustCameraRight();
                 this.walking_sound.play();
@@ -188,31 +188,27 @@ class Character extends MovableObject {
     adjustCameraRight() {
         let rightBorder = -this.x + 100;
 
-        if (this.x > this.world.level.level_end_x - 300) { this.camera_position_storage = this.world.camera_x }
+        if (this.x > 400) { this.camera_position_storage = this.world.camera_x }
 
-        else {
-            this.camera_position_storage = this.world.camera_x;
+        this.camera_position_storage = this.world.camera_x;
        
-            if (this.changeCameraRight && rightBorder <= this.camera_position_storage) {
-                this.moveRight();
-                this.world.camera_x -= 20;
-            }
-    
-            else {
-                this.changeCameraRight = false;
-                this.moveRight();
-                this.world.camera_x = rightBorder;
-                this.changeCameraLeft = true
-            }
+        if (this.changeCameraRight && rightBorder <= this.camera_position_storage) {
+            this.moveRight();
+            this.world.camera_x -= 20;
         }
 
-    
+        else {
+            this.changeCameraRight = false;
+            this.moveRight();
+            this.world.camera_x = rightBorder;
+            this.changeCameraLeft = true
+        }
     }
 
     adjustCameraLeft() {
         let leftBorder = -this.x + 620 - this.width;       
 
-        if (this.x < - 200) { this.camera_position_storage = this.world.camera_x }
+        if (this.x < -400) { this.camera_position_storage = this.world.camera_x }
 
         else {
             this.camera_position_storage = this.world.camera_x;
