@@ -196,9 +196,10 @@ class Character extends MovableObject {
         else {
             this.changeCameraRight = false;
             this.world.camera_x = rightBorder;
-            this.moveRight();          
-            this.changeCameraLeft = true;
+            this.moveRight();         
+            
         }
+        this.changeCameraLeft = true;
         this.camera_position_storage = this.world.camera_x;
     }
 
@@ -216,8 +217,9 @@ class Character extends MovableObject {
             this.changeCameraLeft = false;
             this.world.camera_x = leftBorder;
             this.moveLeft();            
-            this.changeCameraRight = true;
+            
         }
+        this.changeCameraRight = true;
         this.camera_position_storage = this.world.camera_x;
     }
 }
