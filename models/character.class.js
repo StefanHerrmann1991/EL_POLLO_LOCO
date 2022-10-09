@@ -11,7 +11,7 @@ class Character extends MovableObject {
     audioJumping = false;
     changeCameraLeft = true;
     changeCameraRight = true;
-    cameraStatic = false;
+    
 
 
     /* constructor führt sobald der Charakter geladen wird, die Funktionen innerhalb des Constructors aus. */
@@ -186,48 +186,39 @@ class Character extends MovableObject {
     }
 
     adjustCameraRight() {
-        let rightBorder = -this.x + 100;
+        let rightBorder = -this.x + 100;      
 
-        if ( this.x > this.world.level.level_end_x) { this.camera_position_storage = this.world.camera_x }
+        if (this.changeCameraRight && rightBorder <= this.camera_position_storage) {
+            this.world.camera_x -= 20;
+            this.moveRight();            
+        }
 
         else {
-            this.camera_position_storage = this.world.camera_x;
-            if (this.changeCameraRight && rightBorder <= this.camera_position_storage) {
-                this.moveRight();
-                this.world.camera_x -= 20;
-            }
-
-            else {
-                this.changeCameraRight = false;
-                this.moveRight();
-                this.world.camera_x = rightBorder;
-                this.changeCameraLeft = true
-            }
+            this.changeCameraRight = false;
+            this.world.camera_x = rightBorder;
+            this.moveRight();          
+            this.changeCameraLeft = true;
         }
+        this.camera_position_storage = this.world.camera_x;
     }
+
 
     adjustCameraLeft() {
         let leftBorder = -this.x + 620 - this.width;
-
-        if (this.x < -400) { this.camera_position_storage = this.world.camera_x }
+      
+        
+        if (this.changeCameraLeft && leftBorder >= this.camera_position_storage) {
+            this.world.camera_x += 20;
+            this.moveLeft();           
+        }
 
         else {
-            this.camera_position_storage = this.world.camera_x;
-
-
-            if (this.changeCameraLeft && leftBorder >= this.camera_position_storage) {
-                this.moveLeft();
-                this.world.camera_x += 20;
-            }
-
-            else {
-                this.changeCameraLeft = false;
-                this.moveLeft();
-                this.world.camera_x = leftBorder;
-                this.changeCameraRight = true;
-            }
+            this.changeCameraLeft = false;
+            this.world.camera_x = leftBorder;
+            this.moveLeft();            
+            this.changeCameraRight = true;
         }
+        this.camera_position_storage = this.world.camera_x;
     }
-
-
 }
+
