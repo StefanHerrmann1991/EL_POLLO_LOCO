@@ -106,13 +106,13 @@ class Character extends MovableObject {
         setStoppableInterval(() => {
             this.walking_sound.pause();
 
-            if (!this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.RIGHT) {
+            if (!this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.otherDirection = false;
                 this.adjustCameraRight();
                 this.walking_sound.play();
             }
 
-            if (!this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.LEFT) {
+            if (!this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.LEFT && this.x > 0) {
                 this.otherDirection = true;
                 this.adjustCameraLeft();
                 this.walking_sound.play();
