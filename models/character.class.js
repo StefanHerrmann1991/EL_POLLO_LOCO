@@ -106,7 +106,7 @@ class Character extends MovableObject {
         setStoppableInterval(() => {
             this.walking_sound.pause();
 
-            if (!this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+            if (!this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.RIGHT) {
                 this.otherDirection = false;
                 this.adjustCameraRight();
                 this.walking_sound.play();
@@ -188,33 +188,35 @@ class Character extends MovableObject {
     adjustCameraRight() {
         let rightBorder = -this.x + 100;
 
-        if (this.x > 400) { this.camera_position_storage = this.world.camera_x }
-
-        this.camera_position_storage = this.world.camera_x;
-       
-        if (this.changeCameraRight && rightBorder <= this.camera_position_storage) {
-            this.moveRight();
-            this.world.camera_x -= 20;
-        }
+        if ( this.x > this.world.level.level_end_x) { this.camera_position_storage = this.world.camera_x }
 
         else {
-            this.changeCameraRight = false;
-            this.moveRight();
-            this.world.camera_x = rightBorder;
-            this.changeCameraLeft = true
+            this.camera_position_storage = this.world.camera_x;
+            if (this.changeCameraRight && rightBorder <= this.camera_position_storage) {
+                this.moveRight();
+                this.world.camera_x -= 20;
+            }
+
+            else {
+                this.changeCameraRight = false;
+                this.moveRight();
+                this.world.camera_x = rightBorder;
+                this.changeCameraLeft = true
+            }
         }
     }
 
     adjustCameraLeft() {
-        let leftBorder = -this.x + 620 - this.width;       
+        let leftBorder = -this.x + 620 - this.width;
 
         if (this.x < -400) { this.camera_position_storage = this.world.camera_x }
 
         else {
             this.camera_position_storage = this.world.camera_x;
 
+
             if (this.changeCameraLeft && leftBorder >= this.camera_position_storage) {
-                this.moveLeft();                
+                this.moveLeft();
                 this.world.camera_x += 20;
             }
 

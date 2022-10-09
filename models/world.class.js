@@ -155,7 +155,7 @@ class World {
                 this.slowDown(thrownObject);
                 setTimeout(() => {
                     this.throwableObject.splice(bottle, 1);
-                }, 100);
+                }, 200);
                 enemy.hit(100);
                 if (enemy instanceof Endboss) {
                     this.statusbarEndboss.setPercentage(enemy.energy);
@@ -172,6 +172,7 @@ class World {
         thrownObject.speedX = 0;
         thrownObject.speedY = 0;
         thrownObject.acceleration = 0;
+        
     }
 
     characterGotDamage(enemy, damage) {

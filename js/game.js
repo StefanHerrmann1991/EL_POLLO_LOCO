@@ -314,9 +314,6 @@ function stopAllTimeouts() {
     allTimeouts = [];
 }
 
-function audioOnKeypress (mp3JSON) {
-
-}
 
 
 
