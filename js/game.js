@@ -135,17 +135,19 @@ document.onkeyup = function (e) {
 function loadControlPanel() {
 
     let crossPosition = document.getElementById('crossPosition');
+    let controlBtnPosition = document.getElementById('controlBtnPosition');
     crossPosition.innerHTML = '';
     controlBtnPosition.innerHTML = '';
-    insertButtons();
 
     if (window.matchMedia("(orientation: portrait)").matches) {
         document.getElementById('responsiveControl').classList.add('responsive-control-portrait');
         insertCross('controlCross1');
+        insertButtons();
     }
     if (window.matchMedia("(orientation: landscape)").matches) {
         insertCross('controlCross2');
         document.getElementById('responsiveControl').classList.remove('responsive-control-portrait');
+        insertButtons();
     }
 }
 
@@ -197,19 +199,21 @@ function renderHelpBar() {
     let desktopHelp = getId('desktopHelp');
     let smartHelp = getId('help');
     let helpSmartDesk = getId('helpSmartDesk');
-   
+    let crossPosition = getId('crossPosition');
+
     if (checkBoxSmart.checked) {
         checkBoxDesk.checked = false;
-        desktopHelp.classList.add('d-none');
+        touchScreen = true;
     }
     if (checkBoxDesk.checked) {
         checkBoxSmart.checked = false;
-        document.getElementById('crossMap').classList.add('d-none');
-        document.getElementById('help').classList.add('d-none');
-        desktopHelp.innerHTML = keyboardHelpBar();
+        crossPosition.innerHTML = keyboardHelpBar();
+        buttonPosition.innerHTML = '';
+        touchScreen = false;
     }
 
-    if (helpSmartDesk.checked) { }
+
+
 }
 
 
