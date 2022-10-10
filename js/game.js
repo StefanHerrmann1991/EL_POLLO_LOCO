@@ -196,9 +196,9 @@ function renderHelpBar() {
     let checkBoxDesk = getId('desktop');
     let checkBoxSmart = getId('smartphone');
     let buttonPosition = getId('controlBtnPosition');
-    let desktopHelp = getId('desktopHelp');
+    
     let smartHelp = getId('help');
-    let helpSmartDesk = getId('helpSmartDesk');
+    let checkBoxHelp = getId('helpSmartDesk');
     let crossPosition = getId('crossPosition');
 
     if (checkBoxSmart.checked) {
@@ -212,6 +212,16 @@ function renderHelpBar() {
         touchScreen = false;
     }
 
+    if (!checkBoxHelp.checked) {
+        if(touchScreen) {
+            smartHelp.classList.remove('d-none');  
+        }
+        if(!touchScreen) {
+            let desktopHelp = getId('desktopHelp1');
+            smartHelp.classList.add('d-none');
+            desktopHelp.classList.add('d-none')
+        }
+    }
 
 
 }
@@ -221,11 +231,13 @@ function getId(id) { return document.getElementById(`${id}`) }
 
 function keyboardHelpBar() {
     let keyboardHelp = ` 
+    <div class="desk-help" id="desktopHelp1">
     <div><b>Jump</b>: Space</div>
     <div><b>Throw</b>: &uarr; or W</div>       
     <div><b>Dodge</b>: &darr; or S</div>
     <div><b>Left</b>:  &larr; or A</div>
     <div><b>Right</b>: &rarr; or D</div>
+    </div>
     `;
     return keyboardHelp
 }
