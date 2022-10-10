@@ -200,15 +200,16 @@ function generateCross(path) {
 function renderHelpBar() {
     let checkBoxDesk = document.getElementById('desktop')
     let checkBoxSmart = document.getElementById('smartphone')
-    let responsiveControl = document.getElementById('responsiveControl');
+    let responsiveControl = document.getElementById('crossPosition');
     responsiveControl.innerHTML = '';
-    if (checkBoxDesk.checked) {
+    if (!touchScreen && checkBoxDesk.checked) {
+        touchScreen = true;
         checkBoxSmart.checked = false;
         let text = '';
         text = keyboardHelpBar();
         responsiveControl.insertAdjacentHTML('afterbegin', text);
     }
-    if (checkBoxSmart.checked) {
+    if (checkBoxSmart.checked) {        
         checkBoxDesk.checked = false;
         loadControlPanel();
     }
