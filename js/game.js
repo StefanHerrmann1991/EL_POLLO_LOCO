@@ -196,7 +196,6 @@ function renderHelpBar() {
     let checkBoxDesk = getId('desktop');
     let checkBoxSmart = getId('smartphone');
     let buttonPosition = getId('controlBtnPosition');
-    
     let smartHelp = getId('help');
     let checkBoxHelp = getId('helpSmartDesk');
     let crossPosition = getId('crossPosition');
@@ -213,17 +212,17 @@ function renderHelpBar() {
     }
 
     if (!checkBoxHelp.checked) {
-        if(touchScreen) {
-            smartHelp.classList.remove('d-none');  
+        if (touchScreen) {
+            smartHelp.classList.remove('d-none');
         }
-        if(!touchScreen) {
+        if (!touchScreen) {
             let desktopHelp = getId('desktopHelp1');
             smartHelp.classList.add('d-none');
-            desktopHelp.classList.add('d-none')
+            if (desktopHelp !== null) {
+                desktopHelp.classList.add('d-none')
+            }
         }
     }
-
-
 }
 
 
