@@ -59,15 +59,6 @@ function restartGame() {
     initGame()
 }
 
-
-
-function closeDevicePanel() {
-    document.getElementById('deviceSetting').classList.add('d-none');
-}
-
-
-
-
 function startStory() {
     document.getElementById('canvas').classList.toggle('background-img-1');
     document.getElementById('canvas').classList.toggle('background-img-2');
@@ -147,6 +138,7 @@ function loadControlPanel() {
     crossPosition.innerHTML = '';
     controlBtnPosition.innerHTML = '';
     insertButtons();
+
     if (window.matchMedia("(orientation: portrait)").matches) {
         document.getElementById('responsiveControl').classList.add('responsive-control-portrait');
         insertCross('controlCross1');
@@ -191,33 +183,40 @@ function generateCross(path) {
              <div class="right">Right</div>
              <div class="dodge">Dodge</div>
              <div class="left">Left</div>
-         </div>                       
-         </div>`;
+        </div>                       
+        </div>`;
     return cross;
 }
 
 
 function renderHelpBar() {
-    let checkBoxDesk = document.getElementById('desktop')
-    let checkBoxSmart = document.getElementById('smartphone')
-    let responsiveControl = document.getElementById('crossPosition');
-    responsiveControl.innerHTML = '';
-    if (!touchScreen && checkBoxDesk.checked) {
-        touchScreen = true;
-        checkBoxSmart.checked = false;
-        let text = '';
-        text = keyboardHelpBar();
-        responsiveControl.insertAdjacentHTML('afterbegin', text);
-    }
-    if (checkBoxSmart.checked) {        
+    loadControlPanel();
+    let checkBoxDesk = getId('desktop');
+    let checkBoxSmart = getId('smartphone');
+    let buttonPosition = getId('controlBtnPosition');
+    let desktopHelp = getId('desktopHelp');
+    let smartHelp = getId('help');
+    let helpSmartDesk = getId('helpSmartDesk');
+   
+    if (checkBoxSmart.checked) {
         checkBoxDesk.checked = false;
-        loadControlPanel();
+        desktopHelp.classList.add('d-none');
     }
+    if (checkBoxDesk.checked) {
+        checkBoxSmart.checked = false;
+        document.getElementById('crossMap').classList.add('d-none');
+        document.getElementById('help').classList.add('d-none');
+        desktopHelp.innerHTML = keyboardHelpBar();
+    }
+
+    if (helpSmartDesk.checked) { }
 }
 
 
+function getId(id) { return document.getElementById(`${id}`) }
+
 function keyboardHelpBar() {
-    let keyboardHelp = `   
+    let keyboardHelp = ` 
     <div><b>Jump</b>: Space</div>
     <div><b>Throw</b>: &uarr; or W</div>       
     <div><b>Dodge</b>: &darr; or S</div>
@@ -232,6 +231,11 @@ function insertButtons() {
     let text = generateButtons();
     buttonPosition.insertAdjacentHTML('afterbegin', text);
 }
+
+function closeDevicePanel() {
+    document.getElementById('deviceSetting').classList.add('d-none');
+}
+
 
 function generateButtons() {
     let newButtons = `  
@@ -254,6 +258,22 @@ function jumpBtn() {
 function jumpBtnFalse() {
     keyboard.SPACE = false;
 }
+
+
+function toggleOptionPanel() {
+    styleSetting = document.getElementById('settingMenu').classList.toggle('d-none');
+}
+
+function toggleFastHelp() {
+    document.getElementById('help').classList.toggle('d-none');
+    document.getElementById('crossPosition').classList.toggle('cross-position2');
+    document.getElementById('helpBtn').classList.toggle('d-none');
+}
+
+function toggleControls() {
+    document.getElementById('responsiveControl').classList.toggle('d-none');
+}
+
 
 /**
  * The function simulates pressing the control pad.
@@ -316,9 +336,6 @@ function stopGame() {
  * @param {Number} mp3JSON.randomSound is the random sound number which will be played.
  * @param {Number} soundDuration is the length in seconds of the mp3 file.
  * @param {Number} timeoutId is the id of the timeout which can later be cleared. 
- *
- *
- *
  *
 */
 
@@ -393,17 +410,5 @@ function exitFullscreen() {
     }
 }
 
-function toggleOptionPanel() {
-    styleSetting = document.getElementById('settingMenu').classList.toggle('d-none');
-}
 
-function toggleFastHelp() {
-    document.getElementById('help').classList.toggle('d-none');
-    document.getElementById('crossPosition').classList.toggle('cross-position2');
-    document.getElementById('helpBtn').classList.toggle('d-none');
-}
-
-function toggleControls() {
-    document.getElementById('responsiveControl').classList.toggle('d-none');
-}
 

@@ -40,7 +40,7 @@
     </style>
 </head>
 
-<body onload="generateLevel1(); includeHTML()">
+<body onload="generateLevel1(); includeHTML(); renderHelpBar()">
     <div class="responsive">
         <h1>El Pollo Loco</h1>
         <div class="main-container" id="mainContainer">
@@ -72,27 +72,33 @@
                             <a href="help.html">Detailed Help</a>
                             <a href="impressum.html">Impressum</a>
                             <a href="datasecruity.html">Datasecurity</a>
-                            <div class="checkbox"><input type="checkbox" onclick="toggleFastHelp();" checked id="helpIsOn">Help for Controls</div>
-                            <div class="checkbox"><input type="checkbox" onclick="toggleControls();" checked id="controlsAreOn">Show Controls</div>
+                            <div class="checkbox"><input type="checkbox" onclick="toggleFastHelp();" checked
+                                    id="helpIsOn">Help for Controls</div>
+                            <div class="checkbox"><input type="checkbox" onclick="toggleControls();" checked
+                                    id="controlsAreOn">Show Controls</div>
                         </div>
                     </div>
                 </fieldset>
             </div>
             <div class="responsive-control-landscape" id="responsiveControl">
                 <div id="crossPosition" class="cross-position"></div>
-                <div id="controlBtnPosition" class="control-btn">                
-                </div>
+                <div id="controlBtnPosition" class="control-btn"></div>
+                <div id="desktopHelp" class="cross-position d-none"></div>
             </div>
         </div>
         <div class="device-setting" id="deviceSetting">
             <fieldset class="device-menu" align="center">
                 <legend>Choose your device! </legend>
                 <div class="device-boxes">
-                    <div class="checkbox"><input type="checkbox" onclick="renderHelpBar()"  id="smartphone">Touchscreen</div>
-                    <div class="checkbox"><input type="checkbox" onclick="renderHelpBar()"  id="desktop">Desktop Laptop</div>
+                    <div class="checkbox"><input type="checkbox" onclick="renderHelpBar()" id="smartphone">Touchscreen
+                    </div>
+                    <div class="checkbox"><input type="checkbox" onclick="renderHelpBar()" id="desktop">Desktop laptop
+                    </div>
+                    <div class="checkbox"><input type="checkbox" onclick="renderHelpBar()" id="helpSmartDesk">Help for controls
+                    </div>
                     <button onclick="closeDevicePanel()" class="proceed-btn">Proceed</button>
                 </div>
-            </fieldset> 
+            </fieldset>
         </div>
     </div>
 </body>
@@ -101,7 +107,7 @@
         loadControlPanel();
     });
     window.onresize = (event) => { loadControlPanel(); };
- </script>
+</script>
 
 
 </html>
