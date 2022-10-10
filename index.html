@@ -29,7 +29,7 @@
     <script src="levels/level1.js"></script>
     <script src="js/game.js"></script>
     <link rel="icon" type="image/x-icon"
-        href="img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/1.Alerta/G5.png">    
+        href="img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/1.Alerta/G5.png">
     <style>
         * {
             margin: 0;
@@ -40,7 +40,7 @@
     </style>
 </head>
 
-<body onload="generateLevel1(); loadControlPanel(); includeHTML() ">
+<body onload="generateLevel1(); includeHTML()">
     <div class="responsive">
         <h1>El Pollo Loco</h1>
         <div class="main-container" id="mainContainer">
@@ -72,21 +72,27 @@
                             <a href="help.html">Detailed Help</a>
                             <a href="impressum.html">Impressum</a>
                             <a href="datasecruity.html">Datasecurity</a>
-                            <div class="checkbox"><input type="checkbox" checked id="helpIsOn">Show fast Help</div>
+                            <div class="checkbox"><input type="checkbox" checked id="helpIsOn">Help for Controls</div>
                             <div class="checkbox"><input type="checkbox" checked id="controlsAreOn">Show Controls</div>
                         </div>
                     </div>
                 </fieldset>
             </div>
             <div class="responsive-control-landscape" id="responsiveControl">
-
                 <div id="crossPosition" class="cross-position"></div>
-            
-                <div id="controlBtnPosition" class="control-btn">
-                    <div class="jump" id="jumpBtn">Jump</div>
+                <div id="controlBtnPosition" class="control-btn">                
                 </div>
-
             </div>
+        </div>
+        <div class="device-setting" id="deviceSetting">
+            <fieldset class="device-menu" align="center">
+                <legend>Choose your device! </legend>
+                <div class="device-boxes">
+                    <div class="checkbox"><input type="checkbox" onclick="loadControlPanel()"  id="smartphone">Touchscreen</div>
+                    <div class="checkbox"><input type="checkbox" onclick=""  id="desktop">Desktop Laptop</div>
+                    <button onclick="closeDevicePanel()" class="proceed-btn">Proceed</button>
+                </div>
+            </fieldset> `
         </div>
     </div>
 </body>
@@ -102,6 +108,14 @@
     let controlsCheckBox = document.getElementById('controlsAreOn').addEventListener('click', event => {
         toggleControls();
     });
+    let deviceCheckBox = document.getElementById('smartphone').addEventListener('click', event => {
+
+    });
+
+
+
+
+
 </script>
 
 

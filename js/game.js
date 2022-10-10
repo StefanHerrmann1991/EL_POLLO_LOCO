@@ -6,6 +6,7 @@ let allTimeouts = [];
 let start = false;
 let isInFullscreen = false;
 let menuSound = new Audio('audio/selectSound.mp3');
+let touchScreen = false;
 /** 
  * The function initiates the canvas and for the game relevant functions.
  * 
@@ -56,6 +57,12 @@ function restartGame() {
     stopGame();
     initLevel1();
     initGame()
+}
+
+
+
+function closeDevicePanel() {
+    document.getElementById('deviceSetting').classList.add('d-none');
 }
 
 
@@ -190,6 +197,22 @@ function generateCross(path) {
 }
 
 
+function renderHelpBar() {
+    let helpMenu = document.getElementById('help');
+    helpMenu.innerHTML = '';
+}
+
+
+function keyboardHelpBar() {
+    let helpBar = document.getElementById('help')   
+    helpBar.innerHTML = `   
+    <div><b>Jump</b> - Space</div>
+    <div><b>Throw</b> – Arrow Up &uarr; or W</div>       
+    <div><b>Dodge</b> – Arrow Down &darr; or S</div>
+    <div><b>Left</b> – Arrow Left &larr; or A</div>
+    <div><b>Right</b> – Arrow Right &rarr; or D</div>
+    `;
+}
 
 function insertButtons() {
     let buttonPosition = document.getElementById('controlBtnPosition');
@@ -205,7 +228,7 @@ function generateButtons() {
         <span class="edge"></span>
         <span class="front">A</span>
     </button>
-    <div class="btn-help" id="helpBtn" >Jump</div>
+    <div class="btn-help" id="helpBtn">Jump</div>
     </div>
 `;
     return newButtons;
@@ -295,7 +318,7 @@ function playAudioOnce(mp3JSON) {
         mp3JSON.soundIsPlayedOnce = true;
         mp3JSON.audios[randomSoundPosition].play();
         let timeoutId = setTimeout(() => {
-            mp3JSON.audios[randomSoundPosition].pause();          
+            mp3JSON.audios[randomSoundPosition].pause();
         }, 1000 * soundDuration);
         allTimeouts.push(timeoutId);
         mp3JSON['timeoutId'] = timeoutId;
