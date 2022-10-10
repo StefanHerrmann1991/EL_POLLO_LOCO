@@ -212,11 +212,15 @@ canvas {
 .start-btn {
     cursor: pointer;
     margin-left: 1%;
-    font-size: 40px;
+    font-size: 32px;
     border: none;
     -webkit-text-stroke: 1px black;
     font-family: 'Rye', cursive;
     color: rgb(211, 172, 45);
+    padding: 0px 5px;
+    cursor: pointer;
+    border-radius: 16px;
+
 
 }
 
@@ -293,7 +297,7 @@ canvas {
 .detailed-help {
     font-family: 'Rye', cursive;
     background-image: url('img/0.Own_Pictures/storyBackgroundNew.png');
-    background-size: 100% 100%;   
+    background-size: 100% 100%;
     background-color: transparent;
     padding-left: 10%;
     padding-right: 10%;
@@ -593,21 +597,21 @@ canvas {
 
 
     .options {
-        height: 20px !important;
-        width: 20px !important;
+        height: 18px !important;
+        width: 18px !important;
     }
 
     .start-btn {
-        font-size: 20px !important;
+        font-size: 18px !important;
     }
 
 
     .bottle-counter {
-        font-size: 20px !important;
+        font-size: 18px !important;
     }
 
     .coin-counter {
-        font-size: 20px !important;
+        font-size: 18px !important;
     }
 }
 
@@ -617,12 +621,12 @@ canvas {
 @media screen and (max-width:641px) {
 
     .options {
-        height: 25px;
-        width: 25px;
+        height: 22px;
+        width: 22px;
     }
 
     .start-btn {
-        font-size: 25px;
+        font-size: 18px;
     }
 
     .formalies-main-link a {
@@ -661,10 +665,10 @@ canvas {
 
 
     .help div {
-        font-size: 60%;
+        font-size: 70%;
     }
 
-  
+
 
     .bottle-counter {
         font-size: 20px;
@@ -680,8 +684,3 @@ canvas {
     }
 
 }
-
-@media screen and (max-width:1008px) {}
-
-
-/* @media all and (display-mode: portrait) {} */
