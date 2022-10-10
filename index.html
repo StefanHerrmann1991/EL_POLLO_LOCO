@@ -72,8 +72,8 @@
                             <a href="help.html">Detailed Help</a>
                             <a href="impressum.html">Impressum</a>
                             <a href="datasecruity.html">Datasecurity</a>
-                            <div class="checkbox"><input type="checkbox" checked id="helpIsOn">Help for Controls</div>
-                            <div class="checkbox"><input type="checkbox" checked id="controlsAreOn">Show Controls</div>
+                            <div class="checkbox"><input type="checkbox" onclick="toggleFastHelp();" checked id="helpIsOn">Help for Controls</div>
+                            <div class="checkbox"><input type="checkbox" onclick="toggleControls();" checked id="controlsAreOn">Show Controls</div>
                         </div>
                     </div>
                 </fieldset>
@@ -88,35 +88,20 @@
             <fieldset class="device-menu" align="center">
                 <legend>Choose your device! </legend>
                 <div class="device-boxes">
-                    <div class="checkbox"><input type="checkbox" onclick="loadControlPanel()"  id="smartphone">Touchscreen</div>
-                    <div class="checkbox"><input type="checkbox" onclick=""  id="desktop">Desktop Laptop</div>
+                    <div class="checkbox"><input type="checkbox" onclick="renderHelpBar()"  id="smartphone">Touchscreen</div>
+                    <div class="checkbox"><input type="checkbox" onclick="renderHelpBar()"  id="desktop">Desktop Laptop</div>
                     <button onclick="closeDevicePanel()" class="proceed-btn">Proceed</button>
                 </div>
-            </fieldset> `
+            </fieldset> 
         </div>
     </div>
 </body>
 <script>
-
     addEventListener('orientationchange', (event) => {
         loadControlPanel();
     });
     window.onresize = (event) => { loadControlPanel(); };
-    let helpCheckBox = document.getElementById('helpIsOn').addEventListener('click', event => {
-        toggleFastHelp();
-    });
-    let controlsCheckBox = document.getElementById('controlsAreOn').addEventListener('click', event => {
-        toggleControls();
-    });
-    let deviceCheckBox = document.getElementById('smartphone').addEventListener('click', event => {
-
-    });
-
-
-
-
-
-</script>
+ </script>
 
 
 </html>

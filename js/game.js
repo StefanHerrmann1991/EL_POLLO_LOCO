@@ -198,20 +198,32 @@ function generateCross(path) {
 
 
 function renderHelpBar() {
-    let helpMenu = document.getElementById('help');
-    helpMenu.innerHTML = '';
+    let checkBoxDesk = document.getElementById('desktop')
+    let checkBoxSmart = document.getElementById('smartphone')
+    let responsiveControl = document.getElementById('responsiveControl');
+    responsiveControl.innerHTML = '';
+    if (checkBoxDesk.checked) {
+        checkBoxSmart.checked = false;
+        let text = '';
+        text = keyboardHelpBar();
+        responsiveControl.insertAdjacentHTML('afterbegin', text);
+    }
+    if (checkBoxSmart.checked) {
+        checkBoxDesk.checked = false;
+        loadControlPanel();
+    }
 }
 
 
 function keyboardHelpBar() {
-    let helpBar = document.getElementById('help')   
-    helpBar.innerHTML = `   
-    <div><b>Jump</b> - Space</div>
-    <div><b>Throw</b> – Arrow Up &uarr; or W</div>       
-    <div><b>Dodge</b> – Arrow Down &darr; or S</div>
-    <div><b>Left</b> – Arrow Left &larr; or A</div>
-    <div><b>Right</b> – Arrow Right &rarr; or D</div>
+    let keyboardHelp = `   
+    <div><b>Jump</b>: Space</div>
+    <div><b>Throw</b>: &uarr; or W</div>       
+    <div><b>Dodge</b>: &darr; or S</div>
+    <div><b>Left</b>:  &larr; or A</div>
+    <div><b>Right</b>: &rarr; or D</div>
     `;
+    return keyboardHelp
 }
 
 function insertButtons() {
