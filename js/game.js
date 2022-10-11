@@ -195,10 +195,9 @@ function renderHelpBar(menuNumber) {
     loadControlPanel();
     let checkBoxDesk = getId('desktop' + menuNumber);
     let checkBoxSmart = getId('smartphone' + menuNumber);
-    let checkBoxHelp = getId('helpSmartDesk'  + menuNumber);
-    let buttonPosition = getId('controlBtnPosition');    
+    let checkBoxHelp = getId('helpSmartDesk' + menuNumber);
+    let buttonPosition = getId('controlBtnPosition');
     let smartHelp = getId('help');
-   
     let crossPosition = getId('crossPosition');
 
     if (checkBoxSmart.checked) {
@@ -213,19 +212,24 @@ function renderHelpBar(menuNumber) {
     }
 
     if (!checkBoxHelp.checked) {
-        if(touchScreen) {
-            
+        if (touchScreen) {
             smartHelp.classList.add('d-none');
         }
-        if(!touchScreen) {
-            let desktopHelp = getId('desktopHelp1');
-                       if(desktopHelp !== null) {
+        if (!touchScreen) {
+            let desktopHelp = getId('desktopHelp' + menuNumber);
+            if (desktopHelp !== null) {
                 desktopHelp.classList.add('d-none')
-            }           
+            }
         }
     }
 }
 
+
+function showHelp() {}
+
+function showSmartCrl() {}
+
+function showDesktopCrl() {}
 
 function getId(id) { return document.getElementById(`${id}`) }
 
