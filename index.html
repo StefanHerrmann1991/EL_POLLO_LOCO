@@ -47,7 +47,7 @@
             <canvas class="background-img-1" id="canvas" width="720px" height="480px">
             </canvas>
 
-            <div class="option-buttons">
+            <div class="option-buttons d-none" id="menuOptions" >
                 <div class="option-child">
                     <button class="start-btn menu-btn" id="startButton"></button>
                     <div class="counter">
@@ -72,10 +72,12 @@
                             <a href="help.html">Detailed Help</a>
                             <a href="impressum.html">Impressum</a>
                             <a href="datasecruity.html">Datasecurity</a>
-                            <div class="checkbox"><input type="checkbox" onclick="toggleFastHelp();" checked
-                                    id="helpIsOn">Help for Controls</div>
-                            <div class="checkbox"><input type="checkbox" onclick="toggleControls();" checked
-                                    id="controlsAreOn">Show Controls</div>
+                            <div class="checkbox"><input type="checkbox" onclick="renderHelpBar(0)" id="smartphone0">Touchscreen
+                            </div>
+                            <div class="checkbox"><input type="checkbox" onclick="renderHelpBar(0)" checked id="desktop0">Desktop laptop
+                            </div>
+                            <div class="checkbox"><input type="checkbox" onclick="renderHelpBar(0)" checked id="helpSmartDesk0">Help for controls
+                            </div>
                         </div>
                     </div>
                 </fieldset>
@@ -90,11 +92,11 @@
             <fieldset class="device-menu" align="center">
                 <legend>Choose your device! </legend>
                 <div class="device-boxes">
-                    <div class="checkbox"><input type="checkbox" onclick="renderHelpBar()" id="smartphone">Touchscreen
+                    <div class="checkbox"><input type="checkbox" onclick="renderHelpBar(1)" id="smartphone1">Touchscreen
                     </div>
-                    <div class="checkbox"><input type="checkbox" onclick="renderHelpBar()" checked id="desktop">Desktop laptop
+                    <div class="checkbox"><input type="checkbox" onclick="renderHelpBar(1)" checked id="desktop1">Desktop laptop
                     </div>
-                    <div class="checkbox"><input type="checkbox" onclick="renderHelpBar()" checked id="helpSmartDesk">Help for controls
+                    <div class="checkbox"><input type="checkbox" onclick="renderHelpBar(1)" checked id="helpSmartDesk1">Help for controls
                     </div>
                     <button onclick="closeDevicePanel()" class="proceed-btn">Proceed</button>
                 </div>

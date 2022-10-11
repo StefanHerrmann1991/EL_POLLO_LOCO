@@ -191,13 +191,14 @@ function generateCross(path) {
 }
 
 
-function renderHelpBar() {
+function renderHelpBar(menuNumber) {
     loadControlPanel();
-    let checkBoxDesk = getId('desktop');
-    let checkBoxSmart = getId('smartphone');
-    let buttonPosition = getId('controlBtnPosition');
+    let checkBoxDesk = getId('desktop' + menuNumber);
+    let checkBoxSmart = getId('smartphone' + menuNumber);
+    let checkBoxHelp = getId('helpSmartDesk'  + menuNumber);
+    let buttonPosition = getId('controlBtnPosition');    
     let smartHelp = getId('help');
-    let checkBoxHelp = getId('helpSmartDesk');
+   
     let crossPosition = getId('crossPosition');
 
     if (checkBoxSmart.checked) {
@@ -212,15 +213,15 @@ function renderHelpBar() {
     }
 
     if (!checkBoxHelp.checked) {
-        if (touchScreen) {
-            smartHelp.classList.remove('d-none');
-        }
-        if (!touchScreen) {
-            let desktopHelp = getId('desktopHelp1');
+        if(touchScreen) {
+            
             smartHelp.classList.add('d-none');
-            if (desktopHelp !== null) {
+        }
+        if(!touchScreen) {
+            let desktopHelp = getId('desktopHelp1');
+                       if(desktopHelp !== null) {
                 desktopHelp.classList.add('d-none')
-            }
+            }           
         }
     }
 }
@@ -249,6 +250,7 @@ function insertButtons() {
 
 function closeDevicePanel() {
     document.getElementById('deviceSetting').classList.add('d-none');
+    getId('menuOptions').classList.remove('d-none');
 }
 
 
@@ -279,15 +281,6 @@ function toggleOptionPanel() {
     styleSetting = document.getElementById('settingMenu').classList.toggle('d-none');
 }
 
-function toggleFastHelp() {
-    document.getElementById('help').classList.toggle('d-none');
-    document.getElementById('crossPosition').classList.toggle('cross-position2');
-    document.getElementById('helpBtn').classList.toggle('d-none');
-}
-
-function toggleControls() {
-    document.getElementById('responsiveControl').classList.toggle('d-none');
-}
 
 
 /**
