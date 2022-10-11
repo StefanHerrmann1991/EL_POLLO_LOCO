@@ -20,7 +20,7 @@ class Endscreen extends DrawableObject {
         {this.loadImage('img/0.Own_Pictures/background-story-end.png');}        
         this.height = 480;
         this.width = 720;
-        this.x = x - 100;
+        this.x = x;
         this.y = y - 190 ;
     }
 }

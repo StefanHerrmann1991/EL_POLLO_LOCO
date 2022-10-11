@@ -64,7 +64,9 @@ class World {
     showEndscreenLost() {
         this.endscreenOn = true;
         setTimeout(() => {
-            let end = new Endscreen(this.character.x, this.character.y, 'lost');
+            let characterPosition = -1 * (this.character.camera_position_storage)
+            console.log(characterPosition);
+            let end = new Endscreen(characterPosition, this.character.y, 'lost');
             this.endscreen.push(end);
             stopGame();
             stopAllTimeouts();
