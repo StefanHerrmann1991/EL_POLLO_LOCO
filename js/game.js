@@ -195,23 +195,26 @@ function generateCross(path) {
 function renderDeviceBar() {
     if (deviceStart) {
         let chooseDevice = getId('chooseDevice');
-        chooseDevice.innerHTML = deviceBar();
+        let text = deviceBar();
+        chooseDevice.insertAdjacentHTML('afterbegin', text);
+        renderHelpBar();
     }
     else {
         let chooseSettingDevice = getId('settingCheckboxes');
-        chooseSettingDevice.innerHTML = deviceBar();
+        let text = deviceBar();
+        chooseSettingDevice.insertAdjacentHTML('afterbegin', text);
+        renderHelpBar();
     }
 }
 
 function deviceBar() {
     return `
-    <div class="checkbox"><input type="checkbox" onclick="renderHelpBar()" id="smartphone">Touchscreen
+    <div class="checkbox"><input type="checkbox"  onclick="renderHelpBar()" id="smartphone">Touchscreen
     </div>
-    <div class="checkbox"><input type="checkbox" onclick="renderHelpBar()" checked id="desktop">Desktop laptop
+    <div class="checkbox"><input type="checkbox" id="desktop" checked onclick="renderHelpBar()" >Desktop laptop
     </div>
-    <div class="checkbox"><input type="checkbox" onclick="renderHelpBar()" checked id="helpSmartDesk">Help for controls
-    </div>
-    `
+    <div class="checkbox"><input type="checkbox" id="helpSmartDesk" checked onclick="renderHelpBar()">Help for controls
+    </div>`
 }
 
 function closeDevicePanel() {
@@ -221,8 +224,7 @@ function closeDevicePanel() {
     renderDeviceBar();
 }
 
-
-function renderHelpBar(menuNumber) {
+function renderHelpBar() {
     loadControlPanel();
     let checkBoxDesk = getId('desktop');
     let checkBoxSmart = getId('smartphone');
@@ -248,7 +250,7 @@ function renderHelpBar(menuNumber) {
             smartHelp.classList.add('d-none');
         }
         if (!touchScreen) {
-            let desktopHelp = getId('desktopHelp' + menuNumber);
+            let desktopHelp = getId('desktopHelp');
             if (desktopHelp !== null) {
                 desktopHelp.classList.add('d-none')
             }
@@ -267,7 +269,7 @@ function getId(id) { return document.getElementById(`${id}`) }
 
 function keyboardHelpBar() {
     let keyboardHelp = ` 
-    <div class="desk-help" id="desktopHelp1">
+    <div class="desk-help" id="desktopHelp">
     <div><b>Jump</b>: Space</div>
     <div><b>Throw</b>: &uarr; or W</div>       
     <div><b>Dodge</b>: &darr; or S</div>
@@ -283,9 +285,6 @@ function insertButtons() {
     let text = generateButtons();
     buttonPosition.insertAdjacentHTML('afterbegin', text);
 }
-
-
-
 
 function generateButtons() {
     let newButtons = `  
