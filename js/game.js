@@ -244,9 +244,12 @@ function renderHelpBar() {
 
     if (!touchScreen) {
         touchScreen = false;
-        crossPosition.innerHTML = keyboardHelpBar();
-        buttonPosition.innerHTML = '';
-        uncheckBox();
+        if (help) {
+            crossPosition.innerHTML = keyboardHelpBar();
+            buttonPosition.innerHTML = '';
+        }
+        else {  getId('helpSmartDesk').checked = false;}
+              uncheckBox();
     }
 }
 
@@ -256,6 +259,7 @@ function showHelp() {
     let smartHelp = getId('help');
     let helpBtn = getId('helpBtn');
     let desktopHelp = getId('desktopHelp');
+    help = !help;
     if (touchScreen) {
         smartHelp.classList.toggle('d-none');
         helpBtn.classList.toggle('d-none');
@@ -276,6 +280,7 @@ function uncheckBox() {
         checkBoxDesk.checked = true;
         checkBoxSmart.checked = false;
     }
+
 }
 
 
