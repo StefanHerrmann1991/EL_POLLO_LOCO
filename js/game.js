@@ -131,7 +131,7 @@ document.onkeyup = function (e) {
 
 /**
  * The function renders the elements for the responsive view of the game.
- * 
+ * 400px größtes handy
  */
 
 function loadControlPanel() {
@@ -141,6 +141,10 @@ function loadControlPanel() {
     crossPosition.innerHTML = '';
     controlBtnPosition.innerHTML = '';
 
+    if(window.innerWidth > 400) {
+        
+    }
+
     if (window.matchMedia("(orientation: portrait)").matches) {
         document.getElementById('responsiveControl').classList.add('responsive-control-portrait');
         insertCross('controlCross1');
@@ -148,8 +152,9 @@ function loadControlPanel() {
     }
     if (window.matchMedia("(orientation: landscape)").matches) {
         insertCross('controlCross2');
+        changeToFullscreen();
         document.getElementById('responsiveControl').classList.remove('responsive-control-portrait');
-        insertButtons();
+        insertButtons();       
     }
 }
 
@@ -282,10 +287,6 @@ function uncheckBox() {
     }
 
 }
-
-
-
-
 
 function getId(id) { return document.getElementById(`${id}`) }
 
