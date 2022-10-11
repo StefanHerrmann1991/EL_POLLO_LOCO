@@ -64,8 +64,7 @@ class World {
     showEndscreenLost() {
         this.endscreenOn = true;
         setTimeout(() => {
-            let characterPosition = -1 * (this.character.camera_position_storage)
-            console.log(characterPosition);
+            let characterPosition = -1 * (this.character.camera_position_storage);        
             let end = new Endscreen(characterPosition, this.character.y, 'lost');
             this.endscreen.push(end);
             stopGame();
@@ -240,7 +239,8 @@ class World {
         this.endscreenOn = true;
         this.endbossDeath = true;
         setTimeout(() => {
-            let end = new Endscreen(this.character.x, this.character.y, 'won');
+            let characterPosition = -1 * (this.character.camera_position_storage);      
+            let end = new Endscreen(characterPosition, this.character.y, 'won');
             this.endscreen.push(end);
             this.endscreen[0].won = true;
             stopGame();
