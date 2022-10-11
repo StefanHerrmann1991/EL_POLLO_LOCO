@@ -8,6 +8,7 @@ let isInFullscreen = false;
 let menuSound = new Audio('audio/selectSound.mp3');
 let touchScreen = false;
 let deviceStart = true;
+let help = true;
 /** 
  * The function initiates the canvas and for the game relevant functions.
  * 
@@ -209,11 +210,11 @@ function renderDeviceBar() {
 
 function deviceBar() {
     return `
-    <div class="checkbox"><input type="checkbox"  onclick="renderHelpBar()" id="smartphone">Touchscreen
+    <div class="checkbox"><input type="checkbox" id="smartphone" onclick="chooseDevice('touchScreen')" >Touchscreen
     </div>
-    <div class="checkbox"><input type="checkbox" id="desktop" checked onclick="renderHelpBar()" >Desktop laptop
+    <div class="checkbox"><input type="checkbox" id="desktop" onclick="chooseDevice('desktop')" >Desktop laptop
     </div>
-    <div class="checkbox"><input type="checkbox" id="helpSmartDesk" checked onclick="renderHelpBar()">Help for controls
+    <div class="checkbox"><input type="checkbox" id="helpSmartDesk" checked onclick="showHelp()">Help for controls
     </div>`
 }
 
@@ -224,46 +225,65 @@ function closeDevicePanel() {
     renderDeviceBar();
 }
 
+function chooseDevice(boolean) {
+    if (boolean == 'touchScreen') { touchScreen = true; }
+    if (boolean == 'desktop') { touchScreen = false; }
+    renderHelpBar();
+}
+
+
 function renderHelpBar() {
-    loadControlPanel();
-    let checkBoxDesk = getId('desktop');
-    let checkBoxSmart = getId('smartphone');
-    let checkBoxHelp = getId('helpSmartDesk');
+
     let buttonPosition = getId('controlBtnPosition');
-    let smartHelp = getId('help');
+
     let crossPosition = getId('crossPosition');
 
-    if (checkBoxSmart.checked) {
-        checkBoxDesk.checked = false;
-        touchScreen = true;
+    if (touchScreen) {
+        loadControlPanel();
+        uncheckBox();
     }
 
-    if (checkBoxDesk.checked) {
-        checkBoxSmart.checked = false;
+    if (!touchScreen) {
+        touchScreen = false;
         crossPosition.innerHTML = keyboardHelpBar();
         buttonPosition.innerHTML = '';
-        touchScreen = false;
-    }
-
-    if (!checkBoxHelp.checked) {
-        if (touchScreen) {
-            smartHelp.classList.add('d-none');
-        }
-        if (!touchScreen) {
-            let desktopHelp = getId('desktopHelp');
-            if (desktopHelp !== null) {
-                desktopHelp.classList.add('d-none')
-            }
-        }
+        uncheckBox();
     }
 }
 
 
-function showHelp() { }
 
-function showSmartCrl() { }
+function showHelp() {
+    let smartHelp = getId('help');
+    let desktopHelp = getId('desktopHelp');
+    if (touchScreen) {
+        smartHelp.classList.toggle('d-none');
+    }
 
-function showDesktopCrl() { }
+    if (!touchScreen) {
+        desktopHelp.classList.toggle('d-none')
+    }
+
+}
+
+
+
+function uncheckBox() {
+    let checkBoxDesk = getId('desktop');
+    let checkBoxSmart = getId('smartphone');
+    if (touchScreen) {
+        checkBoxDesk.checked = false;
+        checkBoxSmart.checked = true;
+    }
+    if (!touchScreen) {
+        checkBoxDesk.checked = true;
+        checkBoxSmart.checked = false;
+    }
+}
+
+
+
+
 
 function getId(id) { return document.getElementById(`${id}`) }
 
