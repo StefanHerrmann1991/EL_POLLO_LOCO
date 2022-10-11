@@ -40,14 +40,14 @@
     </style>
 </head>
 
-<body onload="generateLevel1(); includeHTML(); renderHelpBar()">
+<body onload="generateLevel1(); includeHTML(); renderDeviceBar()">
     <div class="responsive">
         <h1>El Pollo Loco</h1>
         <div class="main-container" id="mainContainer">
             <canvas class="background-img-1" id="canvas" width="720px" height="480px">
             </canvas>
 
-            <div class="option-buttons d-none" id="menuOptions" >
+            <div class="option-buttons d-none" id="menuOptions">
                 <div class="option-child">
                     <button class="start-btn menu-btn" id="startButton"></button>
                     <div class="counter">
@@ -72,11 +72,7 @@
                             <a href="help.html">Detailed Help</a>
                             <a href="impressum.html">Impressum</a>
                             <a href="datasecruity.html">Datasecurity</a>
-                            <div class="checkbox"><input type="checkbox" onclick="renderHelpBar(0)" id="smartphone0">Touchscreen
-                            </div>
-                            <div class="checkbox"><input type="checkbox" onclick="renderHelpBar(0)" checked id="desktop0">Desktop laptop
-                            </div>
-                            <div class="checkbox"><input type="checkbox" onclick="renderHelpBar(0)" checked id="helpSmartDesk0">Help for controls
+                            <div id="settingCheckboxes">
                             </div>
                         </div>
                     </div>
@@ -85,21 +81,14 @@
             <div class="responsive-control-landscape" id="responsiveControl">
                 <div id="crossPosition" class="cross-position"></div>
                 <div id="controlBtnPosition" class="control-btn"></div>
-            
+                
             </div>
         </div>
         <div class="device-setting" id="deviceSetting">
             <fieldset class="device-menu" align="center">
                 <legend>Choose your device! </legend>
-                <div class="device-boxes">
-                    <div class="checkbox"><input type="checkbox" onclick="renderHelpBar(1)" id="smartphone1">Touchscreen
-                    </div>
-                    <div class="checkbox"><input type="checkbox" onclick="renderHelpBar(1)" checked id="desktop1">Desktop laptop
-                    </div>
-                    <div class="checkbox"><input type="checkbox" onclick="renderHelpBar(1)" checked id="helpSmartDesk1">Help for controls
-                    </div>
-                    <button onclick="closeDevicePanel()" class="proceed-btn">Proceed</button>
-                </div>
+                <div class="device-boxes" id="chooseDevice"></div>
+                <button onclick="closeDevicePanel()" class="proceed-btn">Proceed</button>
             </fieldset>
         </div>
     </div>

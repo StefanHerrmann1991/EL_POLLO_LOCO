@@ -7,6 +7,7 @@ let start = false;
 let isInFullscreen = false;
 let menuSound = new Audio('audio/selectSound.mp3');
 let touchScreen = false;
+let deviceStart = true;
 /** 
  * The function initiates the canvas and for the game relevant functions.
  * 
@@ -191,11 +192,41 @@ function generateCross(path) {
 }
 
 
+function renderDeviceBar() {
+    if (deviceStart) {
+        let chooseDevice = getId('chooseDevice');
+        chooseDevice.innerHTML = deviceBar();
+    }
+    else {
+        let chooseSettingDevice = getId('settingCheckboxes');
+        chooseSettingDevice.innerHTML = deviceBar();
+    }
+}
+
+function deviceBar() {
+    return `
+    <div class="checkbox"><input type="checkbox" onclick="renderHelpBar()" id="smartphone">Touchscreen
+    </div>
+    <div class="checkbox"><input type="checkbox" onclick="renderHelpBar()" checked id="desktop">Desktop laptop
+    </div>
+    <div class="checkbox"><input type="checkbox" onclick="renderHelpBar()" checked id="helpSmartDesk">Help for controls
+    </div>
+    `
+}
+
+function closeDevicePanel() {
+    getId('deviceSetting').innerHTML = '';
+    getId('menuOptions').classList.remove('d-none');
+    deviceStart = false;
+    renderDeviceBar();
+}
+
+
 function renderHelpBar(menuNumber) {
     loadControlPanel();
-    let checkBoxDesk = getId('desktop' + menuNumber);
-    let checkBoxSmart = getId('smartphone' + menuNumber);
-    let checkBoxHelp = getId('helpSmartDesk' + menuNumber);
+    let checkBoxDesk = getId('desktop');
+    let checkBoxSmart = getId('smartphone');
+    let checkBoxHelp = getId('helpSmartDesk');
     let buttonPosition = getId('controlBtnPosition');
     let smartHelp = getId('help');
     let crossPosition = getId('crossPosition');
@@ -204,6 +235,7 @@ function renderHelpBar(menuNumber) {
         checkBoxDesk.checked = false;
         touchScreen = true;
     }
+
     if (checkBoxDesk.checked) {
         checkBoxSmart.checked = false;
         crossPosition.innerHTML = keyboardHelpBar();
@@ -225,11 +257,11 @@ function renderHelpBar(menuNumber) {
 }
 
 
-function showHelp() {}
+function showHelp() { }
 
-function showSmartCrl() {}
+function showSmartCrl() { }
 
-function showDesktopCrl() {}
+function showDesktopCrl() { }
 
 function getId(id) { return document.getElementById(`${id}`) }
 
@@ -252,10 +284,7 @@ function insertButtons() {
     buttonPosition.insertAdjacentHTML('afterbegin', text);
 }
 
-function closeDevicePanel() {
-    document.getElementById('deviceSetting').classList.add('d-none');
-    getId('menuOptions').classList.remove('d-none');
-}
+
 
 
 function generateButtons() {
