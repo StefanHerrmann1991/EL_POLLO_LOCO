@@ -235,7 +235,6 @@ function chooseDevice(boolean) {
 function renderHelpBar() {
 
     let buttonPosition = getId('controlBtnPosition');
-
     let crossPosition = getId('crossPosition');
 
     if (touchScreen) {
@@ -255,18 +254,16 @@ function renderHelpBar() {
 
 function showHelp() {
     let smartHelp = getId('help');
+    let helpBtn = getId('helpBtn');
     let desktopHelp = getId('desktopHelp');
     if (touchScreen) {
         smartHelp.classList.toggle('d-none');
+        helpBtn.classList.toggle('d-none');
     }
-
     if (!touchScreen) {
         desktopHelp.classList.toggle('d-none')
     }
-
 }
-
-
 
 function uncheckBox() {
     let checkBoxDesk = getId('desktop');
