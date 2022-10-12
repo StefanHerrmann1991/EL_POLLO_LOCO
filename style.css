@@ -451,6 +451,8 @@ canvas {
 
 }
 
+
+
 .help {
     position: absolute;
     top: 0;
@@ -733,3 +735,13 @@ canvas {
     }
 
 }
+
+@media (orientation: landscape) and (max-width:961px) {
+    canvas {
+      width: 100vw;
+      height: 100vh;
+ }
+
+.start-btn {font-size: 24px;}
+
+  }

@@ -117,9 +117,6 @@ document.onkeydown = function (e) {
     };
 }
 
-
-
-
 /**
  * The function enables the usage of the keyboard.
  * @param {event} e when  the corresponing key isn't clicked anymore
@@ -153,6 +150,17 @@ document.onkeyup = function (e) {
     };
 }
 
+function jumpBtn() {
+    if(start)
+    keyboard.SPACE = true;
+}
+
+function jumpBtnFalse() {
+    if(start)
+    keyboard.SPACE = false;
+}
+
+
 
 /**
  * The function renders the elements for the responsive view of the game.
@@ -165,10 +173,9 @@ function loadControlPanel() {
     let controlBtnPosition = document.getElementById('controlBtnPosition');
     crossPosition.innerHTML = '';
     controlBtnPosition.innerHTML = '';
-
     if (isMobileDevice) {
 
-        if (window.matchMedia("(orientation: landscape)").matches) {
+        if (screen.matchMedia("(orientation: landscape)").matches) {
             insertCross('controlCross2');
             document.getElementById('responsiveControl').classList.remove('responsive-control-portrait');
             insertButtons();
@@ -271,13 +278,6 @@ function generateButtons() {
     return newButtons;
 }
 
-function jumpBtn() {
-    keyboard.SPACE = true;
-}
-
-function jumpBtnFalse() {
-    keyboard.SPACE = false;
-}
 
 
 function toggleOptionPanel() {
@@ -299,8 +299,7 @@ function renderHelpBar() {
 
     if (touchScreen) {
         loadControlPanel();
-        uncheckBox();
-    
+        uncheckBox();    
     }
 
     if (!touchScreen) {
