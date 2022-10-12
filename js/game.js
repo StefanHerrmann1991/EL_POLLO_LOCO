@@ -300,6 +300,7 @@ function renderHelpBar() {
     if (touchScreen) {
         loadControlPanel();
         uncheckBox();
+    
     }
 
     if (!touchScreen) {
