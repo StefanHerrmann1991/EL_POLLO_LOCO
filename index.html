@@ -47,7 +47,7 @@
             <canvas class="background-img-1" id="canvas" width="720px" height="480px">
             </canvas>
 
-            <div class="option-buttons d-none" id="menuOptions">
+            <div class="option-buttons" id="menuOptions">
                 <div class="option-child">
                     <button class="start-btn menu-btn" id="startButton"></button>
                     <div class="counter">
@@ -83,21 +83,15 @@
                 <div id="controlBtnPosition" class="control-btn"></div>
                 
             </div>
-        </div>
-        <div class="device-setting" id="deviceSetting">
-            <fieldset class="device-menu" align="center">
-                <legend>Choose your device! </legend>
-                <div class="device-boxes" id="chooseDevice"></div>
-                <button onclick="closeDevicePanel()" class="proceed-btn">Proceed</button>
-            </fieldset>
-        </div>
+        </div>      
     </div>
 </body>
 <script>
     addEventListener('orientationchange', (event) => {
+        changeToFullscreen();
         loadControlPanel();
     });
-    window.onresize = (event) => { loadControlPanel(); };
+   
 </script>
 
 

@@ -15,6 +15,22 @@ let help = true;
 */
 
 
+
+
+/* Storing user's device details in a variable*/
+let details = navigator.userAgent;
+
+/* Creating a regular expression
+containing some mobile devices keywords
+to search it in details string*/
+let regexp = /android|iphone|kindle|ipad/i;
+
+/* Using test() method to search regexp in details
+it returns boolean value*/
+let isMobileDevice = regexp.test(details);
+
+
+
 function generateLevel1() {
     canvas = document.getElementById('canvas');
     initLevel1();
@@ -71,32 +87,37 @@ function startStory() {
  * @param {event} e when clicking the corresponing key
  */
 
+
 document.onkeydown = function (e) {
-    switch (e.key) {
-        case ' ':
-            keyboard.SPACE = true;
-            break;
-        case 'ArrowLeft':
-        case 'a':
-            keyboard.LEFT = true;
-            break;
-        case 'ArrowRight':
-        case 'd':
-            keyboard.RIGHT = true;
-            break;
-        case 'w':
-        case 'ArrowUp':
-            keyboard.THROW = true;
-            break;
-        case 's':
-        case 'ArrowDown':
-            keyboard.DODGE = true;
-            break;
-        case 'F11':
-            changeToFullscreen();
-            break;
-    }
-};
+    if (start) {
+        switch (e.key) {
+            case ' ':
+                keyboard.SPACE = true;
+                break;
+            case 'ArrowLeft':
+            case 'a':
+                keyboard.LEFT = true;
+                break;
+            case 'ArrowRight':
+            case 'd':
+                keyboard.RIGHT = true;
+                break;
+            case 'w':
+            case 'ArrowUp':
+                keyboard.THROW = true;
+                break;
+            case 's':
+            case 'ArrowDown':
+                keyboard.DODGE = true;
+                break;
+            case 'F11':
+                changeToFullscreen();
+                break;
+        }
+    };
+}
+
+
 
 
 /**
@@ -104,30 +125,34 @@ document.onkeydown = function (e) {
  * @param {event} e when  the corresponing key isn't clicked anymore
  */
 
+
 document.onkeyup = function (e) {
-    switch (e.key) {
-        case ' ':
-            keyboard.SPACE = false;
-            e.preventDefault()
-            break;
-        case 'ArrowLeft':
-        case 'a':
-            keyboard.LEFT = false;
-            break;
-        case 'ArrowRight':
-        case 'd':
-            keyboard.RIGHT = false;
-            break;
-        case 'w':
-        case 'ArrowUp':
-            keyboard.THROW = false;
-            break;
-        case 's':
-        case 'ArrowDown':
-            keyboard.DODGE = false;
-            break;
-    }
-};
+    if (start) {
+        switch (e.key) {
+            case ' ':
+                keyboard.SPACE = false;
+                e.preventDefault()
+                break;
+            case 'ArrowLeft':
+            case 'a':
+                keyboard.LEFT = false;
+                break;
+            case 'ArrowRight':
+            case 'd':
+                keyboard.RIGHT = false;
+                break;
+            case 'w':
+            case 'ArrowUp':
+                keyboard.THROW = false;
+                break;
+            case 's':
+            case 'ArrowDown':
+                keyboard.DODGE = false;
+                break;
+        }
+    };
+}
+
 
 /**
  * The function renders the elements for the responsive view of the game.
@@ -141,20 +166,18 @@ function loadControlPanel() {
     crossPosition.innerHTML = '';
     controlBtnPosition.innerHTML = '';
 
-    if(window.innerWidth > 400) {
-        
-    }
+    if (isMobileDevice) {
 
-    if (window.matchMedia("(orientation: portrait)").matches) {
-        document.getElementById('responsiveControl').classList.add('responsive-control-portrait');
-        insertCross('controlCross1');
-        insertButtons();
+        if (window.matchMedia("(orientation: landscape)").matches) {
+            insertCross('controlCross2');
+            document.getElementById('responsiveControl').classList.remove('responsive-control-portrait');
+            insertButtons();
+        }
     }
-    if (window.matchMedia("(orientation: landscape)").matches) {
-        insertCross('controlCross2');
-        changeToFullscreen();
-        document.getElementById('responsiveControl').classList.remove('responsive-control-portrait');
-        insertButtons();       
+    else {
+        let helpForDesktop = getId('crossPosition');
+        let desktopHelp = keyboardHelpBar();
+        helpForDesktop.insertAdjacentHTML('afterbegin', desktopHelp);
     }
 }
 
@@ -199,94 +222,19 @@ function generateCross(path) {
 
 
 function renderDeviceBar() {
-    if (deviceStart) {
-        let chooseDevice = getId('chooseDevice');
-        let text = deviceBar();
-        chooseDevice.insertAdjacentHTML('afterbegin', text);
-        renderHelpBar();
-    }
-    else {
-        let chooseSettingDevice = getId('settingCheckboxes');
-        let text = deviceBar();
-        chooseSettingDevice.insertAdjacentHTML('afterbegin', text);
-        renderHelpBar();
-    }
+    let chooseSettingDevice = getId('settingCheckboxes');
+    let text = controlBar();
+    chooseSettingDevice.insertAdjacentHTML('afterbegin', text);
+    loadControlPanel();
 }
 
-function deviceBar() {
+function controlBar() {
     return `
-    <div class="checkbox"><input type="checkbox" id="smartphone" onclick="chooseDevice('touchScreen')" >Touchscreen
-    </div>
-    <div class="checkbox"><input type="checkbox" id="desktop" onclick="chooseDevice('desktop')" >Desktop laptop
-    </div>
     <div class="checkbox"><input type="checkbox" id="helpSmartDesk" checked onclick="showHelp()">Help for controls
     </div>`
 }
 
-function closeDevicePanel() {
-    getId('deviceSetting').innerHTML = '';
-    getId('menuOptions').classList.remove('d-none');
-    deviceStart = false;
-    renderDeviceBar();
-}
 
-function chooseDevice(boolean) {
-    if (boolean == 'touchScreen') { touchScreen = true; }
-    if (boolean == 'desktop') { touchScreen = false; }
-    renderHelpBar();
-}
-
-
-function renderHelpBar() {
-
-    let buttonPosition = getId('controlBtnPosition');
-    let crossPosition = getId('crossPosition');
-
-    if (touchScreen) {
-        loadControlPanel();
-        uncheckBox();
-    }
-
-    if (!touchScreen) {
-        touchScreen = false;
-        if (help) {
-            crossPosition.innerHTML = keyboardHelpBar();
-            buttonPosition.innerHTML = '';
-        }
-        else {  getId('helpSmartDesk').checked = false;}
-              uncheckBox();
-    }
-}
-
-
-
-function showHelp() {
-    let smartHelp = getId('help');
-    let helpBtn = getId('helpBtn');
-    let desktopHelp = getId('desktopHelp');
-    help = !help;
-    if (touchScreen) {
-        smartHelp.classList.toggle('d-none');
-        helpBtn.classList.toggle('d-none');
-    }
-    if (!touchScreen) {
-        desktopHelp.classList.toggle('d-none')
-    }
-}
-
-function uncheckBox() {
-    let checkBoxDesk = getId('desktop');
-    let checkBoxSmart = getId('smartphone');
-    if (touchScreen) {
-        checkBoxDesk.checked = false;
-        checkBoxSmart.checked = true;
-    }
-    if (!touchScreen) {
-        checkBoxDesk.checked = true;
-        checkBoxSmart.checked = false;
-    }
-
-}
 
 function getId(id) { return document.getElementById(`${id}`) }
 
@@ -337,6 +285,64 @@ function toggleOptionPanel() {
 }
 
 
+function chooseDevice(boolean) {
+    if (boolean == 'touchScreen') { touchScreen = true; }
+    if (boolean == 'desktop') { touchScreen = false; }
+    renderHelpBar();
+}
+
+
+function renderHelpBar() {
+
+    let buttonPosition = getId('controlBtnPosition');
+    let crossPosition = getId('crossPosition');
+
+    if (touchScreen) {
+        loadControlPanel();
+        uncheckBox();
+    }
+
+    if (!touchScreen) {
+        touchScreen = false;
+        if (help) {
+            crossPosition.innerHTML = keyboardHelpBar();
+            buttonPosition.innerHTML = '';
+        }
+        else { getId('helpSmartDesk').checked = false; }
+        uncheckBox();
+    }
+}
+
+
+
+function showHelp() {
+    let smartHelp = getId('help');
+    let helpBtn = getId('helpBtn');
+    let desktopHelp = getId('desktopHelp');
+    help = !help;
+    if (touchScreen) {
+        smartHelp.classList.toggle('d-none');
+        helpBtn.classList.toggle('d-none');
+    }
+    if (!touchScreen) {
+        desktopHelp.classList.toggle('d-none')
+    }
+}
+
+function uncheckBox() {
+    let checkBoxDesk = getId('desktop');
+    let checkBoxSmart = getId('smartphone');
+    if (touchScreen) {
+        checkBoxDesk.checked = false;
+        checkBoxSmart.checked = true;
+    }
+    if (!touchScreen) {
+        checkBoxDesk.checked = true;
+        checkBoxSmart.checked = false;
+    }
+
+}
+
 
 /**
  * The function simulates pressing the control pad.
@@ -344,28 +350,33 @@ function toggleOptionPanel() {
  */
 function touchCross(path, position) {
     document.getElementById('crossMap').src = `img/0.Own_Pictures/${path}/${position}.png`;
-    switch (position) {
-        case 'up': keyboard.THROW = true;
-            break;
-        case 'left': keyboard.LEFT = true;
-            break;
-        case 'down': keyboard.DODGE = true;
-            break;
-        case 'right': keyboard.RIGHT = true;
-            break;
+    if (start) {
+        switch (position) {
+            case 'up': keyboard.THROW = true;
+                break;
+            case 'left': keyboard.LEFT = true;
+                break;
+            case 'down': keyboard.DODGE = true;
+                break;
+            case 'right': keyboard.RIGHT = true;
+                break;
+        }
     }
 }
 
 function touchCrossEnd(img, position) {
     document.getElementById('crossMap').src = `img/0.Own_Pictures/${img}/${position}.png`;
-    switch (position) {
-        case 'cross':
-            keyboard.LEFT = false;
-            keyboard.THROW = false;
-            keyboard.DODGE = false;
-            keyboard.RIGHT = false;
-            break;
+    if (start) {
+        switch (position) {
+            case 'cross':
+                keyboard.LEFT = false;
+                keyboard.THROW = false;
+                keyboard.DODGE = false;
+                keyboard.RIGHT = false;
+                break;
+        }
     }
+
 }
 
 /**

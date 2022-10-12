@@ -1,7 +1,7 @@
 class ThrowableObject extends MovableObject {
 
-    speedY = 30;
-    speedX = 50;
+    speedY = 20;
+    speedX = 60;
     lastThrow = 0;
     collision = false;
     IMAGES_BOTTLE_THROWING = [
@@ -58,7 +58,7 @@ class ThrowableObject extends MovableObject {
 
     throw(otherDirection) {
 
-        this.speedY = 30;
+       
         this.applyGravity();
 
         setStoppableInterval(() => {
@@ -78,7 +78,7 @@ class ThrowableObject extends MovableObject {
             else {this.playAnimation(this.IMAGES_BOTTLE_EXPLODING);
                 playAudioOnce(this.HITTING_SOUND);                
              }
-        }, 20);
+        }, 40);
     }
 }
 
