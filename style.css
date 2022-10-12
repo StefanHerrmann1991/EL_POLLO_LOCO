@@ -259,14 +259,14 @@ canvas {
 .start-btn {
     cursor: pointer;
     margin-left: 1%;
-    font-size: 32px;
+    font-size: 25px;
     border: none;
     -webkit-text-stroke: 1px black;
     font-family: 'Rye', cursive;
     color: rgb(211, 172, 45);
-    padding: 0px 5px;
+    padding: 0px 3px;
     cursor: pointer;
-    border-radius: 16px;
+    border-radius: 14px;
 
 
 }

@@ -14,9 +14,6 @@ let help = true;
  * 
 */
 
-
-
-
 /* Storing user's device details in a variable*/
 let details = navigator.userAgent;
 
@@ -41,6 +38,7 @@ function generateLevel1() {
 function initGame() {
     start = true;
     toggleStartBtn('restart');
+    loadControlPanel();
     keyboard = new Keyboard();
     world = new World(canvas, keyboard);
 }
@@ -174,13 +172,12 @@ function loadControlPanel() {
     crossPosition.innerHTML = '';
     controlBtnPosition.innerHTML = '';
     if (isMobileDevice) {
-
-        if (screen.matchMedia("(orientation: landscape)").matches) {
-            insertCross('controlCross2');
-            document.getElementById('responsiveControl').classList.remove('responsive-control-portrait');
+        if (window.matchMedia("(orientation: landscape)").matches) {
+            insertCross('controlCross2');  
             insertButtons();
-        }
+        }     
     }
+
     else {
         let helpForDesktop = getId('crossPosition');
         let desktopHelp = keyboardHelpBar();
@@ -316,15 +313,16 @@ function renderHelpBar() {
 
 
 function showHelp() {
-    let smartHelp = getId('help');
-    let helpBtn = getId('helpBtn');
-    let desktopHelp = getId('desktopHelp');
+  
     help = !help;
     if (touchScreen) {
+        let smartHelp = getId('help');
+        let helpBtn = getId('helpBtn');
         smartHelp.classList.toggle('d-none');
         helpBtn.classList.toggle('d-none');
     }
     if (!touchScreen) {
+        let desktopHelp = getId('desktopHelp');
         desktopHelp.classList.toggle('d-none')
     }
 }
