@@ -81,17 +81,18 @@
             <div class="responsive-control-landscape" id="responsiveControl">
                 <div id="crossPosition" class="cross-position"></div>
                 <div id="controlBtnPosition" class="control-btn"></div>
-                
+
             </div>
-        </div>      
+        </div>
     </div>
 </body>
 <script>
-    addEventListener('orientationchange', (event) => {      
-        loadControlPanel();
+    addEventListener('orientationchange', (event) => {
+        if (start) { loadControlPanel(); }
+
     });
-    addEventListener('resize', (event) => {      
-        loadControlPanel();
+    addEventListener('resize', (event) => {
+        if (start) { loadControlPanel(); }
     });
 </script>
 

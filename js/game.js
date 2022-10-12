@@ -14,17 +14,12 @@ let help = true;
  * 
 */
 
-/* Storing user's device details in a variable*/
-let details = navigator.userAgent;
 
-/* Creating a regular expression
-containing some mobile devices keywords
-to search it in details string*/
-let regexp = /android|iphone|kindle|ipad/i;
 
 /* Using test() method to search regexp in details
 it returns boolean value*/
-let isMobileDevice = regexp.test(details);
+const isMobile = () => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
 
 
 
@@ -149,13 +144,13 @@ document.onkeyup = function (e) {
 }
 
 function jumpBtn() {
-    if(start)
-    keyboard.SPACE = true;
+    if (start)
+        keyboard.SPACE = true;
 }
 
 function jumpBtnFalse() {
-    if(start)
-    keyboard.SPACE = false;
+    if (start)
+        keyboard.SPACE = false;
 }
 
 
@@ -171,14 +166,16 @@ function loadControlPanel() {
     let controlBtnPosition = document.getElementById('controlBtnPosition');
     crossPosition.innerHTML = '';
     controlBtnPosition.innerHTML = '';
-    if (isMobileDevice) {
+    if (isMobile) {
+        touchScreen = true;
         if (window.matchMedia("(orientation: landscape)").matches) {
-            insertCross('controlCross2');  
+            insertCross('controlCross2');
             insertButtons();
-        }     
+        }
     }
 
     else {
+        touchScreen = false;
         let helpForDesktop = getId('crossPosition');
         let desktopHelp = keyboardHelpBar();
         helpForDesktop.insertAdjacentHTML('afterbegin', desktopHelp);
@@ -296,7 +293,7 @@ function renderHelpBar() {
 
     if (touchScreen) {
         loadControlPanel();
-        uncheckBox();    
+        uncheckBox();
     }
 
     if (!touchScreen) {
@@ -313,7 +310,7 @@ function renderHelpBar() {
 
 
 function showHelp() {
-  
+
     help = !help;
     if (touchScreen) {
         let smartHelp = getId('help');
