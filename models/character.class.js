@@ -11,7 +11,7 @@ class Character extends MovableObject {
     audioJumping = false;
     changeCameraLeft = true;
     changeCameraRight = true;
-    
+
 
 
     /* constructor führt sobald der Charakter geladen wird, die Funktionen innerhalb des Constructors aus. */
@@ -106,21 +106,16 @@ class Character extends MovableObject {
         setStoppableInterval(() => {
             this.walking_sound.pause();
 
-            if (!this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-                this.otherDirection = false;
-                this.adjustCameraRight();
-                this.walking_sound.play();
+            if (this.canWalkRight()) {
+                this.isWalkingRight();
             }
 
-            if (!this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.LEFT && this.x > 0) {
-                this.otherDirection = true;
-                this.adjustCameraLeft();
-                this.walking_sound.play();
+            if (this.canWalkLeft()) {
+                this.isWalkingLeft();
             }
 
-            if (!this.isDead() && this.world.keyboard.SPACE && !this.isAboveGround()) {
-                this.speedY = 35;
-                this.playAudioOnKey(this.jumping_sound);
+            if (this.canJump()) {
+                this.isJumping();
             }
 
         }, 1000 / 60);
@@ -130,12 +125,8 @@ class Character extends MovableObject {
 
         setStoppableInterval(() => {
             // walk animation  
-            if (this.isDead() && !this.death) {
-                this.playAnimation(this.IMAGES_DYING);
-                this.death = true;
-                setTimeout(() => {
-                    this.loadImage('img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-58.png');
-                }, 400);
+            if (this.canDie()) {
+                this.isDying();
             }
 
             if (this.isHurt()) {
@@ -150,27 +141,64 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_WALKING);
             }
 
-            else if (!this.isDead() && !this.isHurt() && !this.isAboveGround()) {
+            else if (this.canWait()) {
                 this.playAnimation(this.IMAGES_IDLE);
             }
 
-            if (this.world.keyboard.DODGE && !this.isDead() && !this.isHurt() && !this.isAboveGround()) {
-                if (this.dodgeAnimation < 1) {
-                    this.playAnimation(this.IMAGES_DODGING);
-
-                }
-                else { this.loadImage(this.IMAGES_DODGING[2]); }
-                this.dodgeAnimation++;
+            if (this.canDodge()) {
+                this.isDodging();
             }
 
             if (!this.world.keyboard.DODGE) { this.dodgeAnimation = 0; }
 
+
+
         }, 120);
 
     }
-    standIdle() { return !this.isDead() && !this.isHurt() && !this.isAboveGround() }
-    canWalk() { return !this.world.keyboard.SPACE && !this.world.keyboard.DODGE && !this.isDead() && (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) }
+  
+    isJumping() {
+        this.speedY = 35;
+        this.playAudioOnKey(this.jumping_sound);
+    }
 
+    isWalkingRight() {
+        this.otherDirection = false;
+        this.adjustCameraRight();
+        this.walking_sound.play();
+    }
+
+    isWalkingLeft() {
+        this.otherDirection = true;
+        this.adjustCameraLeft();
+        this.walking_sound.play();
+    }
+
+    isDying() {
+        this.playAnimation(this.IMAGES_DYING);
+        this.death = true;
+        setTimeout(() => {
+            this.loadImage('img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-58.png');
+        }, 400);
+    }
+
+    isDodging() {
+        if (this.dodgeAnimation < 1) {
+            this.playAnimation(this.IMAGES_DODGING);
+
+        }
+        else { this.loadImage(this.IMAGES_DODGING[2]); }
+        this.dodgeAnimation++;
+    }
+
+    standIdle() { return !this.isDead() && !this.isHurt() && !this.isAboveGround() }
+    canJump() { return !this.isDead() && this.world.keyboard.SPACE && !this.isAboveGround() }
+    canWalk() { return !this.world.keyboard.SPACE && !this.world.keyboard.DODGE && !this.isDead() && (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) }
+    canWalkRight() { return !this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x }
+    canWalkLeft() { return !this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.LEFT && this.x > 0 }
+    canWait() { return !this.isDead() && !this.isHurt() && !this.isAboveGround() }
+    canDodge() { return this.world.keyboard.DODGE && !this.isDead() && !this.isHurt() && !this.isAboveGround() }
+    canDie() { return this.isDead() && !this.death }
 
     playAudioOnKey(mp3JSON) {
 
@@ -185,19 +213,25 @@ class Character extends MovableObject {
         }
     }
 
+    /**The funcion adjusts the camera to the right side depending on the position of the camera, when the character moves right.
+     * 
+     * @param {Number} rightBorder - The right border of the canvas where the camera locks in position, until the character moves left.
+     * 
+     */
+
     adjustCameraRight() {
-        let rightBorder = -this.x + 100;      
+        let rightBorder = -this.x + 100;
 
         if (this.changeCameraRight && rightBorder <= this.camera_position_storage) {
             this.world.camera_x -= 20;
-            this.moveRight();            
+            this.moveRight();
         }
 
         else {
             this.changeCameraRight = false;
             this.world.camera_x = rightBorder;
-            this.moveRight();         
-            
+            this.moveRight();
+
         }
         this.changeCameraLeft = true;
         this.camera_position_storage = this.world.camera_x;
@@ -206,18 +240,17 @@ class Character extends MovableObject {
 
     adjustCameraLeft() {
         let leftBorder = -this.x + 620 - this.width;
-      
-        
+
         if (this.changeCameraLeft && leftBorder >= this.camera_position_storage) {
             this.world.camera_x += 20;
-            this.moveLeft();           
+            this.moveLeft();
         }
 
         else {
             this.changeCameraLeft = false;
             this.world.camera_x = leftBorder;
-            this.moveLeft();            
-            
+            this.moveLeft();
+
         }
         this.changeCameraRight = true;
         this.camera_position_storage = this.world.camera_x;
