@@ -1,6 +1,7 @@
 let canvas;
 let world;
 let keyboard;
+
 let allIntervals = [];
 let allTimeouts = [];
 let start = false;
@@ -9,8 +10,6 @@ let menuSound = new Audio('audio/selectSound.mp3');
 let touchScreen = false;
 let deviceStart = true;
 let help = true;
-
-
 
 
 /* Using test() method to search regexp in details
@@ -41,14 +40,12 @@ function initGame() {
     world = new World(canvas, keyboard);
 }
 
-
 /**
  * The function changes the start button depending on the state of the game.
  * @param {string} startCondition 
  * 
  * 
  */
-
 
 function toggleStartBtn(startCondition) {
     let start = getId('startButton');
@@ -127,7 +124,6 @@ document.onkeydown = function (e) {
  * @param {event} e when  the corresponing key isn't clicked anymore
  */
 
-
 document.onkeyup = function (e) {
     if (start) {
         switch (e.key) {
@@ -165,7 +161,6 @@ function jumpBtnFalse() {
         keyboard.SPACE = false;
 }
 
-
 /**
  * The function renders the control cross and the help button depending on the device and orientation. * 
  */
@@ -186,7 +181,6 @@ function loadControlPanel() {
         showDesktopMode();
     }
 }
-
 
 function showDesktopMode() {
     touchScreen = false;
@@ -209,8 +203,6 @@ function checkMobile() {
     }
 
 }
-
-
 
 /**
  * The function enables the responsivness of the map cross element.
@@ -266,8 +258,6 @@ function changeOrientation(orientation) {
     }
 }
 
-
-
 function renderDeviceBar() {
     if (start) {
         let helpCheckbox = getId('settingCheckboxes');
@@ -283,8 +273,6 @@ function controlBar() {
     <div class="checkbox"><input type="checkbox" id="helpSmartDesk" checked onclick="showHelp()">Help for controls
     </div>`
 }
-
-
 
 function getId(id) { return document.getElementById(`${id}`) }
 
