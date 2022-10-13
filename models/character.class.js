@@ -103,60 +103,51 @@ class Character extends MovableObject {
 
     animate() {
 
-        setStoppableInterval(() => {
-            this.walking_sound.pause();
-
-            if (this.canWalkRight()) {
-                this.isWalkingRight();
-            }
-
-            if (this.canWalkLeft()) {
-                this.isWalkingLeft();
-            }
-
-            if (this.canJump()) {
-                this.isJumping();
-            }
-
-        }, 1000 / 60);
-
-
-
-
-        setStoppableInterval(() => {
-            // walk animation  
-            if (this.canDie()) {
-                this.isDying();
-            }
-
-            if (this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURTING);
-            }
-
-            if (this.isAboveGround()) {
-                this.playAnimation(this.IMAGES_JUMPING);
-            }
-
-            if (this.canWalk()) {
-                this.playAnimation(this.IMAGES_WALKING);
-            }
-
-            else if (this.canWait()) {
-                this.playAnimation(this.IMAGES_IDLE);
-            }
-
-            if (this.canDodge()) {
-                this.isDodging();
-            }
-
-            if (!this.world.keyboard.DODGE) { this.dodgeAnimation = 0; }
-
-
-
-        }, 120);
+        setStoppableInterval(() => this.moveCharacter(), 1000 / 60);
+        setStoppableInterval(() => this.playCharacterAnimation(), 120);
 
     }
-  
+
+
+    playCharacterAnimation() {
+        if (this.canDie()) 
+            this.isDying();
+        
+        if (this.isHurt()) 
+            this.playAnimation(this.IMAGES_HURTING);
+        
+        if (this.isAboveGround()) 
+            this.playAnimation(this.IMAGES_JUMPING);
+        
+        if (this.canWalk()) 
+            this.playAnimation(this.IMAGES_WALKING);
+        
+        else if (this.canWait()) 
+            this.playAnimation(this.IMAGES_IDLE);
+        
+        if (this.canDodge()) 
+            this.isDodging();
+        
+        if (!this.world.keyboard.DODGE)  
+            this.dodgeAnimation = 0; 
+    }
+
+    moveCharacter() {
+        this.walking_sound.pause();
+        if (this.canWalkRight()) {
+            this.isWalkingRight();
+        }
+
+        if (this.canWalkLeft()) {
+            this.isWalkingLeft();
+        }
+
+        if (this.canJump()) {
+            this.isJumping();
+        }
+    }
+
+
     isJumping() {
         this.speedY = 35;
         this.playAudioOnKey(this.jumping_sound);
@@ -200,6 +191,11 @@ class Character extends MovableObject {
     canDodge() { return this.world.keyboard.DODGE && !this.isDead() && !this.isHurt() && !this.isAboveGround() }
     canDie() { return this.isDead() && !this.death }
 
+/**
+ * The function uses a mp3 file to play a sound while a certain key is pressed and stops the sound, when the key isn't pressed anymore.
+ * @param {object} mp3JSON - An object containing the path to the audio data.
+ */
+
     playAudioOnKey(mp3JSON) {
 
         if (!this.audioJumping) {
@@ -236,6 +232,12 @@ class Character extends MovableObject {
         this.changeCameraLeft = true;
         this.camera_position_storage = this.world.camera_x;
     }
+
+  /**The funcion adjusts the camera to the left side depending on the position of the camera, when the character moves left.
+     * 
+     * @param {Number} leftBorder - The left border of the canvas where the camera locks in position, until the character moves right.
+     * 
+     */
 
 
     adjustCameraLeft() {

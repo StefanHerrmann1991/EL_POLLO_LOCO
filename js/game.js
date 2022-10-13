@@ -49,27 +49,26 @@ function initGame() {
 
 function toggleStartBtn(startCondition) {
     let start = getId('startButton');
-    let menuSound = new Audio('audio/selectSound.mp3');
 
     if (startCondition == 'showStory') {
         start.innerHTML = `
         <div onclick="toggleStartBtn('firstStart')">Start</div>`;
+        
     }
 
     if (startCondition == 'firstStart') {
         startStory();
         start.innerHTML = `
-        <div onclick="initGame()">Start</div>`;
-  
+        <div onclick="initGame()">Start</div>`;       
     }
 
     if (startCondition == 'restart') {
         stopGame();
         start.innerHTML = `
         <div onclick="restartGame()">Restart</div>`;
-        renderDeviceBar();
+        renderDeviceBar();  
     }
-    menuSound.play();
+    
 }
 
 function restartGame() {
