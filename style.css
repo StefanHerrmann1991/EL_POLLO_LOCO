@@ -177,7 +177,7 @@ canvas {
 
 .option-buttons {
     position: absolute;
-    top: 10px;
+    top: 3%;
     left: 0px;
     width: 98%;
     display: flex;
@@ -339,8 +339,8 @@ canvas {
 }
 
 .bottle-stat {
-    height: 6vh;
-    width: 6vh;
+    height: 37px;
+    width: 37px;
 }
 
 .detailed-help {

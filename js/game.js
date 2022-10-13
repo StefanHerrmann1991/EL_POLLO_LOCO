@@ -25,7 +25,7 @@ const isMobile = () => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera
 function generateLevel1() {
     canvas = document.getElementById('canvas');
     initLevel1();
-    toggleStartBtn('noStart');
+    toggleStartBtn('showStory');
 }
 
 /** 
@@ -43,35 +43,36 @@ function initGame() {
 
 
 /**
- * The function 
+ * The function changes the start button depending on the state of the game.
+ * @param {string} startCondition 
  * 
  * 
  */
 
 
 function toggleStartBtn(startCondition) {
-
+    let start = getId('startButton');
     let menuSound = new Audio('audio/selectSound.mp3');
 
-
-    if (startCondition == 'noStart') {
-        document.getElementById('startButton').innerHTML = `
+    if (startCondition == 'showStory') {
+        start.innerHTML = `
         <div onclick="toggleStartBtn('firstStart')">Start</div>`;
     }
 
     if (startCondition == 'firstStart') {
         startStory();
-        document.getElementById('startButton').innerHTML = `
+        start.innerHTML = `
         <div onclick="initGame()">Start</div>`;
-        menuSound.play();
+  
     }
 
     if (startCondition == 'restart') {
         stopGame();
-        document.getElementById('startButton').innerHTML = `
+        start.innerHTML = `
         <div onclick="restartGame()">Restart</div>`;
-        menuSound.play();
+        renderDeviceBar();
     }
+    menuSound.play();
 }
 
 function restartGame() {
@@ -165,10 +166,8 @@ function jumpBtnFalse() {
 }
 
 
-
 /**
- * The function renders the elements for the responsive view of the game.
- * 400px größtes handy
+ * The function renders the control cross and the help button depending on the device and orientation. * 
  */
 
 function loadControlPanel() {
@@ -178,26 +177,40 @@ function loadControlPanel() {
     crossPosition.innerHTML = '';
     controlBtnPosition.innerHTML = '';
     if (isMobile()) {
-        touchScreen = true;
-        if (window.matchMedia("(orientation: landscape)").matches) {
-            changeOrientation('landscape');
-            if(start) {
-                insertCross('controlCross2');
-                insertButtons();
-            }           
-        }
-        if (window.matchMedia("(orientation: portrait)").matches) {
-            changeOrientation('portrait');
-        }
+        getId('fullscreen').classList.add('d-none');
+        checkMobile();
     }
 
     else {
-        touchScreen = false;
-        let helpForDesktop = getId('crossPosition');
-        let desktopHelp = keyboardHelpBar();
-        helpForDesktop.insertAdjacentHTML('afterbegin', desktopHelp);
+        getId('fullscreen').classList.remove('d-none');
+        showDesktopMode();
     }
 }
+
+
+function showDesktopMode() {
+    touchScreen = false;
+    let helpForDesktop = getId('crossPosition');
+    let desktopHelp = keyboardHelpBar();
+    helpForDesktop.insertAdjacentHTML('afterbegin', desktopHelp);
+}
+
+function checkMobile() {
+    touchScreen = true;
+    if (window.matchMedia("(orientation: landscape)").matches) {
+        changeOrientation('landscape');
+        if (start) {
+            insertCross('controlCross2');
+            insertButtons();
+        }
+    }
+    if (window.matchMedia("(orientation: portrait)").matches) {
+        changeOrientation('portrait');
+    }
+
+}
+
+
 
 /**
  * The function enables the responsivness of the map cross element.
@@ -211,7 +224,7 @@ function insertCross(path) {
 
 /**
 * This function generates a cross with an area function fitting the img of the cross element.
-* Depending of the side length the scale of the cross element is determined.
+* Depending of the side length, the scale of the cross element is determined.
 * @param {number} sideLength The side length of the cross element.
 * @returns {string} Returns the cross properties.
 */
@@ -238,10 +251,16 @@ function generateCross(path) {
     return cross;
 }
 
+/**
+ * The function that is responsible for the pop up window, which occurs when the device is in portrait
+ * @param {string} orientation Landscape or portrait change
+ */
+
 function changeOrientation(orientation) {
     let chooseDevice = getId('deviceSetting');
     if (orientation == 'landscape') {
-    chooseDevice.classList.add('d-none');  }
+        chooseDevice.classList.add('d-none');
+    }
     if (orientation == 'portrait') {
         chooseDevice.classList.remove('d-none')
     }
@@ -250,10 +269,13 @@ function changeOrientation(orientation) {
 
 
 function renderDeviceBar() {
-    let chooseSettingDevice = getId('settingCheckboxes');
-    let text = controlBar();
-    chooseSettingDevice.insertAdjacentHTML('afterbegin', text);
-    loadControlPanel();
+    if (start) {
+        let helpCheckbox = getId('settingCheckboxes');
+        helpCheckbox.innerHTML = '';
+        let text = controlBar();
+        helpCheckbox.insertAdjacentHTML('afterbegin', text);
+    }
+
 }
 
 function controlBar() {
@@ -313,28 +335,6 @@ function chooseDevice(boolean) {
 }
 
 
-function renderHelpBar() {
-
-    let buttonPosition = getId('controlBtnPosition');
-    let crossPosition = getId('crossPosition');
-
-    if (touchScreen) {
-        loadControlPanel();
-        uncheckBox();
-    }
-
-    if (!touchScreen) {
-        touchScreen = false;
-        if (help) {
-            crossPosition.innerHTML = keyboardHelpBar();
-            buttonPosition.innerHTML = '';
-        }
-        else { getId('helpSmartDesk').checked = false; }
-        uncheckBox();
-    }
-}
-
-
 
 function showHelp() {
 
@@ -349,20 +349,6 @@ function showHelp() {
         let desktopHelp = getId('desktopHelp');
         desktopHelp.classList.toggle('d-none')
     }
-}
-
-function uncheckBox() {
-    let checkBoxDesk = getId('desktop');
-    let checkBoxSmart = getId('smartphone');
-    if (touchScreen) {
-        checkBoxDesk.checked = false;
-        checkBoxSmart.checked = true;
-    }
-    if (!touchScreen) {
-        checkBoxDesk.checked = true;
-        checkBoxSmart.checked = false;
-    }
-
 }
 
 
