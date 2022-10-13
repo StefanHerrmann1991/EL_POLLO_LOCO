@@ -122,14 +122,17 @@ fieldset {
     background-image: url('img/0.Own_Pictures/optionBackground.JPG');
     font-family: 'Rye', cursive;
     color: black;
-    position: absolute; 
+    position: absolute;
     width: 30%;
-    height: 25%;
     top: 30%;
     left: 35%;
+    padding: 2%;
+    font-size: 20px;
 }
 
-.device-boxes div {padding-bottom: 10px;}
+.device-boxes div {
+    padding-bottom: 10px;
+}
 
 .device-boxes {
     display: flex;
@@ -190,7 +193,7 @@ canvas {
 
 .checkbox input[type="checkbox"] {
     accent-color: black;
-    
+
 }
 
 
@@ -267,8 +270,6 @@ canvas {
     padding: 0px 3px;
     cursor: pointer;
     border-radius: 14px;
-
-
 }
 
 .start-btn:hover {
@@ -589,6 +590,8 @@ canvas {
         display: none;
     }
 
+
+
 }
 
 
@@ -644,32 +647,12 @@ canvas {
 
 }
 
-@media screen and (max-width:440px) {
-
-
-    .options {
-        height: 18px !important;
-        width: 18px !important;
-    }
-
-    .start-btn {
-        font-size: 18px !important;
-    }
-
-
-    .bottle-counter {
-        font-size: 18px !important;
-    }
-
-    .coin-counter {
-        font-size: 18px !important;
-    }
-}
-
-
-
-
 @media screen and (max-width:641px) {
+
+
+    .device-menu {
+        font-size: 18px;
+    }
 
     .options {
         height: 22px;
@@ -736,12 +719,43 @@ canvas {
 
 }
 
+
+
+@media screen and (max-width:440px) {
+
+
+    .options {
+        height: 18px !important;
+        width: 18px !important;
+    }
+
+    .start-btn {
+        font-size: 18px !important;
+    }
+
+    .device-menu {
+        font-size: 14px;
+    }
+
+    .bottle-counter {
+        font-size: 18px !important;
+    }
+
+    .coin-counter {
+        font-size: 18px !important;
+    }
+}
+
+
+
 @media (orientation: landscape) and (max-width:961px) {
     canvas {
-      width: 100vw;
-      height: 100vh;
- }
+        width: 100vw;
+        height: 100vh;
+    }
 
-.start-btn {font-size: 24px;}
+    .start-btn {
+        font-size: 24px;
+    }
 
-  }
+}

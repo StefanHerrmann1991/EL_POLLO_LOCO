@@ -9,10 +9,7 @@ let menuSound = new Audio('audio/selectSound.mp3');
 let touchScreen = false;
 let deviceStart = true;
 let help = true;
-/** 
- * The function initiates the canvas and for the game relevant functions.
- * 
-*/
+
 
 
 
@@ -20,7 +17,9 @@ let help = true;
 it returns boolean value*/
 const isMobile = () => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-
+/**
+ * The functio generates the Level before the game is started, to reduce the loading time.
+ */
 
 
 function generateLevel1() {
@@ -29,6 +28,10 @@ function generateLevel1() {
     toggleStartBtn('noStart');
 }
 
+/** 
+ * The function initiates the canvas and for the game relevant functions.
+ * 
+*/
 
 function initGame() {
     start = true;
@@ -37,6 +40,13 @@ function initGame() {
     keyboard = new Keyboard();
     world = new World(canvas, keyboard);
 }
+
+
+/**
+ * The function 
+ * 
+ * 
+ */
 
 
 function toggleStartBtn(startCondition) {
@@ -66,8 +76,9 @@ function toggleStartBtn(startCondition) {
 
 function restartGame() {
     stopGame();
+    stopAllTimeouts();
     initLevel1();
-    initGame()
+    initGame();
 }
 
 function startStory() {
@@ -166,11 +177,17 @@ function loadControlPanel() {
     let controlBtnPosition = document.getElementById('controlBtnPosition');
     crossPosition.innerHTML = '';
     controlBtnPosition.innerHTML = '';
-    if (isMobile) {
+    if (isMobile()) {
         touchScreen = true;
         if (window.matchMedia("(orientation: landscape)").matches) {
-            insertCross('controlCross2');
-            insertButtons();
+            changeOrientation('landscape');
+            if(start) {
+                insertCross('controlCross2');
+                insertButtons();
+            }           
+        }
+        if (window.matchMedia("(orientation: portrait)").matches) {
+            changeOrientation('portrait');
         }
     }
 
@@ -220,6 +237,16 @@ function generateCross(path) {
         </div>`;
     return cross;
 }
+
+function changeOrientation(orientation) {
+    let chooseDevice = getId('deviceSetting');
+    if (orientation == 'landscape') {
+    chooseDevice.classList.add('d-none');  }
+    if (orientation == 'portrait') {
+        chooseDevice.classList.remove('d-none')
+    }
+}
+
 
 
 function renderDeviceBar() {
