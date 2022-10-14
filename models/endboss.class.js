@@ -78,9 +78,9 @@ class Endboss extends MovableObject {
                 this.attackEnemy();
 
 
-            else if (this.canBeHurt()) {
-                this.gotHurt;
-            }
+            if (this.canBeHurt())
+                this.playAnimation(this.IMAGES_HURTING);
+
 
             else if (this.canWalk()) {
                 this.isWalking()
@@ -90,7 +90,7 @@ class Endboss extends MovableObject {
     }
 
     canAttack() { return !this.isDead() && this.attack && !this.isHurt() && !this.hadFirstContact && !this.isAboveGround() }
-    canBeHurt() { return this.isHurt() && !this.isDead() && !this.attack && !this.hadFirstContact }
+    canBeHurt() { return this.isHurt() && !this.isDead() && !this.hadFirstContact }
     canWalk() { return !this.isDead() && !this.isHurt() && this.walking && !this.attack }
     isDying() { return this.isDead() && !this.death && !this.hadFirstContact }
     isEncountingCharacter() { return this.hadFirstContact && this.i < 10 }
@@ -116,9 +116,7 @@ class Endboss extends MovableObject {
             this.hadFirstContact = false;
         }
     }
-
-    gotHurt() { this.playAnimation(this.IMAGES_HURTING); }
-
+  
     isWalking() { this.playAnimation(this.IMAGES_WALKING) }
 
 

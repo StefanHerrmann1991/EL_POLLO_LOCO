@@ -56,6 +56,10 @@ function initLevel1() {
         generateBottles(worldLength);
     }
 
+    /**
+     * The funciton generates the background with the BACKGROUND_CHANGING array.
+     * @param {number} worldLength The variable represents the map size. As higher the number as bigger the size of the map.
+     */
 
 
     function generateBackground(worldLength) {
@@ -77,6 +81,11 @@ function initLevel1() {
         LEVEL_END = worldLength * 719 - 630;
        }
 
+/**
+ * The function generates clouds in the map depending on it's length.
+ * @param {number} worldLength 
+ */
+
     function generateClouds(worldLength) {
         for (let i = -1; i < worldLength; i++) {
             if (isOdd(i) == true) {
@@ -94,6 +103,12 @@ function initLevel1() {
         }
     }
 
+
+/**
+ * The function sets randomly bottles on the map.
+ * @param {number} worldLength 
+ */
+
     function generateBottles(worldLength) {
         for (let i = 0; i < worldLength; i++) {
             let xPosition = Number(getRandomArbitrary(LEVEL_START, LEVEL_END - 1200).toFixed(0));
@@ -105,11 +120,9 @@ function initLevel1() {
 
 
 
-    /* TODO: not doubled xPosition
-    in interval to prevent coins from being to near to each other*/
 
     /**
-     * 
+     * The function generates coin cluster without overlapping in form of a parabel in the world.
      * @param {number} worldLength The parameter reflects the length of the world. 
      * @param {number} coinNumber The total number of coins in the world.
      */
@@ -130,7 +143,7 @@ function initLevel1() {
 
 
     /**
-     * 
+     * The function generates a random number of coins in the world and checks if the maximum number of coins in the world is reached.
      * @param {number} randomXPosition Position where a cluster of coins will be generated.
      * @param {number} numberOfCoins Number of coins in the whole world.
      * @param {number} clusterMin Minimum number of coins in a cluster.
@@ -151,6 +164,12 @@ function initLevel1() {
         }
     }
 
+    /**
+     * The function generate coin parables depending on the cluster number at a ramdom x position on the map.
+     * @param {number} clusterNumber - The number of coins in a cluster.
+     * @param {number} randomXPosition - Random position where a cluster will be generated.
+     */
+
     function generateCoinParabel(clusterNumber, randomXPosition) {
 
         let randomYPosition = Number(getRandomArbitrary(5, 150).toFixed(0))
@@ -161,7 +180,10 @@ function initLevel1() {
         }
     }
 
-
+/**
+ * The generates a certain amount of enemies in the world with an upper number of enemies in a certain area.
+ * @param {number} worldLength 
+ */
 
     function generateEnemies(worldLength) {
         endbossPosition = LEVEL_END - 700;
@@ -180,6 +202,13 @@ function initLevel1() {
         }
     }
 
+    /**
+     * The function generates a certain amount of enemies in a given level part at random positions.
+     * @param {number} minX - storages the last position of the map where enemies were generated.
+     * @param {number} levelPart - the next part of the level, together with minX a destinct part of the level is represented
+     * @param {number} enemy - The enemy type to be generated.
+     * @param {number} enemyAmount - the amount of enemies in the level part.
+     */
 
     function generateEnemiesAtX(minX, levelPart, enemy, enemyAmount) {
 
@@ -190,6 +219,13 @@ function initLevel1() {
             ENEMIES.push(currentEnemy);
         }
     }
+
+    /**
+     * The function generate a number in a certain interval.
+     * @param {number} min The lower border of the interval.
+     * @param {number} max The upper border of the interval.
+     * @returns 
+     */
 
     function getRandomArbitrary(min, max) {
         return Math.random() * (max - min) + min;

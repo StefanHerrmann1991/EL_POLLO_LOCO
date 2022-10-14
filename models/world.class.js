@@ -260,7 +260,7 @@ class World {
 
 
 
-
+/* The funcion draws the canvas of the world including all object instances. */
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -286,12 +286,12 @@ class World {
         requestAnimationFrame(function () { self.draw() });
     }
 
-    /* adds more than one object to the map*/
+    /* Adds more than one object instances to the map*/
 
     addObjectsToMap(objects) {
         objects.forEach(o => { this.addToMap(o); });
     }
-    /* adds one object to the map*/
+    /* Adds one object instances to the map*/
 
     addToMap(movableObject) {
         if (movableObject.otherDirection) {
@@ -310,6 +310,8 @@ class World {
         this.ctx.scale(-1, 1);
         movableObject.x = movableObject.x * -1;
     }
+
+
     flipImageBack(movableObject) {
         movableObject.x = movableObject.x * -1;
         this.ctx.restore();

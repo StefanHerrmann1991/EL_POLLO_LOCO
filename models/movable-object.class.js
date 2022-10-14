@@ -243,17 +243,19 @@ class MovableObject extends DrawableObject {
 playAudioOnce(mp3JSON) {
 
     if (!mp3JSON.soundIsPlayedOnce) {
-        mp3JSON.randomSound = (Math.floor(Math.random() * mp3JSON.audios.length));
-        let randomSoundPosition = mp3JSON.randomSound
-        let soundDuration = mp3JSON.audios[randomSoundPosition].duration;
-        mp3JSON.soundIsPlayedOnce = true;
-        mp3JSON.audios[randomSoundPosition].play();
-        let timeoutId = setTimeout(() => {
-            mp3JSON.audios[randomSoundPosition].pause();
-        }, 1000 * soundDuration);
-        allTimeouts.push(timeoutId);
-        mp3JSON['timeoutId'] = timeoutId;
+       
+            mp3JSON.randomSound = (Math.floor(Math.random() * mp3JSON.audios.length));
+            let randomSoundPosition = mp3JSON.randomSound
+            let soundDuration = mp3JSON.audios[randomSoundPosition].duration;
+            mp3JSON.soundIsPlayedOnce = true;
+            mp3JSON.audios[randomSoundPosition].play();
+            let timeoutId = setTimeout(() => {
+                mp3JSON.audios[randomSoundPosition].pause();
+            }, 1000 * soundDuration);
+            allTimeouts.push(timeoutId);
+            mp3JSON['timeoutId'] = timeoutId;
+        
+
     }
 }
-
 }

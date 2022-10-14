@@ -22,6 +22,8 @@ h1 {
     -webkit-text-stroke: 1px black;
     font-family: 'Rye', cursive;
     color: rgb(211, 172, 45);
+    display: flex;
+    justify-content: center;
 }
 
 h1 a {
@@ -30,6 +32,8 @@ h1 a {
     -webkit-text-stroke: 1px black;
     font-family: 'Rye', cursive;
     color: rgb(211, 172, 45);
+
+
 }
 
 
@@ -57,6 +61,12 @@ fieldset {
     padding-left: 5%;
     padding-right: 5%;
     background-color: white;
+}
+
+.h1-formalities a {
+    font-size: 60px;
+    display: flex;
+    justify-content: center;
 }
 
 .formalities-main a {
@@ -87,15 +97,10 @@ fieldset {
     -webkit-text-stroke: 0.1px black;
     font-family: 'Rye', cursive;
     color: rgb(211, 172, 45);
+    display: flex;
+    justify-content: center;
 }
 
-.formalies-main-link a {
-    text-decoration: none;
-    font-size: 80px;
-    -webkit-text-stroke: 3px black;
-    font-family: 'Rye', cursive;
-    color: rgb(211, 172, 45);
-}
 
 .proceed-btn {
     cursor: pointer;
@@ -523,6 +528,10 @@ canvas {
         transform 600ms cubic-bezier(.3, .7, .4, 1);
 }
 
+.h1-formalities {
+    font-size: 40px;
+    display: block !important;
+}
 
 .pushable-btn:hover .front {
     transform: translateY(-3px);
@@ -663,12 +672,19 @@ canvas {
         font-size: 18px;
     }
 
+    .h1-formalities a {
+        font-size: 40px;
+        display: flex;
+        justify-content: center;
+    }
+
     .formalies-main-link a {
 
-        font-size: 40px;
+        font-size: 26px;
         -webkit-text-stroke: 1.5px black;
         display: flex;
         text-align: center;
+        justify-content: center;
     }
 
     .formalities-main {
