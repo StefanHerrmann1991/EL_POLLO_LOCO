@@ -58,7 +58,7 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_ATTACKING);
         this.loadImages(this.IMAGES_HURTING);
         this.loadImages(this.IMAGES_DYING);
-        this.x = x;    
+        this.x = x;
     }
 
     /**
@@ -68,33 +68,58 @@ class Endboss extends MovableObject {
     animate() {
         this.applyGravity(0);
         setStoppableInterval(() => {
-            if (this.hadFirstContact && this.i < 10) {
-                this.playAnimation(this.IMAGES_PERCEIVING);
-                this.i++;
-                if (this.i >= 9) {
-                    this.hadFirstContact = false;
-                }
-            }
-            if (this.isDead() && !this.death && !this.hadFirstContact) {
-                this.playAnimation(this.IMAGES_DYING);
-                setTimeout(() => {
-                    this.death = true;
-                    this.otherDirection = false;
-                    this.loadImage('img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/4.Muerte/G27.png');
-                }, 1500);
-            }
-            if (!this.isDead() && this.attack && !this.isHurt() && !this.hadFirstContact && !this.isAboveGround()) {
-                this.playAnimation(this.IMAGES_ATTACKING);
-               this.speedY = 12;
+            if (this.isEncountingCharacter())
+                this.noteCharacter()
+
+            if (this.isDying())
+                this.EndbossIsDead()
+
+            if (this.canAttack())
+                this.attackEnemy();
+
+
+            else if (this.canBeHurt()) {
+                this.gotHurt;
             }
 
-            else if (this.isHurt() && !this.isDead() && !this.attack && !this.hadFirstContact) {
-                this.playAnimation(this.IMAGES_HURTING);
+            else if (this.canWalk()) {
+                this.isWalking()
             }
-
-            else if (!this.isDead() && !this.isHurt() && this.walking && !this.attack) { this.playAnimation(this.IMAGES_WALKING) }
-          
-
-        }, 60);
+        }
+            , 60);
     }
+
+    canAttack() { return !this.isDead() && this.attack && !this.isHurt() && !this.hadFirstContact && !this.isAboveGround() }
+    canBeHurt() { return this.isHurt() && !this.isDead() && !this.attack && !this.hadFirstContact }
+    canWalk() { return !this.isDead() && !this.isHurt() && this.walking && !this.attack }
+    isDying() { return this.isDead() && !this.death && !this.hadFirstContact }
+    isEncountingCharacter() { return this.hadFirstContact && this.i < 10 }
+
+    attackEnemy() {
+        this.attack = true;
+        this.playAnimation(this.IMAGES_ATTACKING);
+        this.speedY = 12;
+    }
+
+    EndbossIsDead() {
+        this.playAnimation(this.IMAGES_DYING);
+        setTimeout(() => {
+            this.death = true;
+            this.otherDirection = false;
+            this.loadImage('img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/4.Muerte/G27.png');
+        }, 1500);
+    }
+    noteCharacter() {
+        this.playAnimation(this.IMAGES_PERCEIVING);
+        this.i++;
+        if (this.i >= 9) {
+            this.hadFirstContact = false;
+        }
+    }
+
+    gotHurt() { this.playAnimation(this.IMAGES_HURTING); }
+
+    isWalking() { this.playAnimation(this.IMAGES_WALKING) }
+
+
 }

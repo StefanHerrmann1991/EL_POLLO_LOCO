@@ -32,7 +32,7 @@ class MovableObject extends DrawableObject {
     }
 
     /**
-     * The function checks if an object is in the air.
+     * The function checks if an object is in the air depending of the object.
      * @returns 
      */
     isAboveGround() {
@@ -71,6 +71,10 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * The function is mainly an attacking pattern for the endboss.
+     * @param {Object} movableObject - Any movable object on the map dispite the character.
+     */
 
     moveToPosition(movableObject) {
 
@@ -90,7 +94,7 @@ class MovableObject extends DrawableObject {
         }
     }
 
-    /**The function increments through images. When the last image in an array is loaded it starts from the beginning. */
+    /**The function increments through images. When the last image in an array is loaded, it starts from the beginning. */
 
     playAnimation(images) {
         let i = this.currentImage % images.length;
@@ -104,7 +108,7 @@ class MovableObject extends DrawableObject {
 
 
     /**
-   * @param {number} this.speedY represents the jumping height.
+   * @param {number} speedY represents the jumping height.
    */
 
     jump() {
@@ -113,10 +117,13 @@ class MovableObject extends DrawableObject {
 
 
 
+    /**
+     * The function checks the collision of the character with it's surroundings.
+     * @param {Object} movableObject - The colliding object like enemies or bottles in the world.
+     * @returns true if a collision is detected.
+     */
 
     isColliding(movableObject) {
-
-
         if (this.world.keyboard.DODGE) {
                 return this.x + 20 + this.width - 55 > movableObject.x
                 && this.y + 190 + this.height - 200 > movableObject.y
@@ -132,12 +139,25 @@ class MovableObject extends DrawableObject {
 
     }
 
+/**
+ * The function checks the collision of an object dispite the character with it's surroundings.
+ * @param {*} movableObject - The colliding object like enemies or bottles in the world.
+ * @returns true if two different objects are colliding.
+ */
+
     objectIsColliding(movableObject) {
         return this.x + this.width > movableObject.x
             && this.y + this.height > movableObject.y
             && this.x < movableObject.x + movableObject.width
             && this.y < movableObject.y + movableObject.height
     }
+
+
+    /**
+     * The function checks the collision of the character with the endboss.
+     * @param {object} movableObject - The colliding object like enemies or bottles in the world.
+     * @returns true if a collision is detected.
+     */
 
 
     isCollidingEndboss(movableObject) {
@@ -157,6 +177,12 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * The functon is used by enemies to determine wether the player is in the area or not.
+     * @param {Object} movableObject The player
+     * @returns true if the player is in the area.
+     */
+
 
     isInArea(movableObject) {
         return this.x + this.width > movableObject.x - 400
@@ -164,6 +190,13 @@ class MovableObject extends DrawableObject {
             && this.x < movableObject.x - 400 + movableObject.width + 800
             && this.y < movableObject.y - 400 + movableObject.height + 200
     }
+
+   /**
+     * The functon is used by enemies to determine wether the player is very close to an enemy or not.
+     * @param {Object} movableObject The player
+     * @returns true if the player is really close to the enemy.
+     */
+
 
     isClose(movableObject) {
         return this.x + this.width + 70 > movableObject.x

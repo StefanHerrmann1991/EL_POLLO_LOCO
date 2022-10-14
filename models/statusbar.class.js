@@ -36,6 +36,11 @@ class Statusbar extends DrawableObject {
         this.img = this.imageCache[path];
     }
 
+/**
+ * The function checks the energy of the character and sets it lifebar depending on the characters energy .
+ * @returns true if the energy of the player reaches certain levels.
+ */
+
     whichStatus() {
         if (this.percentage >= 280) { return 16; }                 
         else if (this.percentage >= 260) { return 15; }

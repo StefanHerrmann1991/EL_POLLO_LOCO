@@ -7,7 +7,7 @@ class Level {
   level_end_x;
 
 /**
- * the constructor for generate new levels.
+ * The constructor for generating new levels.
  * @param {object} enemies The different enemies which be encountered in the game.
  * @param {object} clouds Moving clouds in the background.
  * @param {object} backgrounds The background images of the level.

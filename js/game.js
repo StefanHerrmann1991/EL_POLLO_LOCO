@@ -402,6 +402,35 @@ function stopAllTimeouts() {
 
 
 
+/**The function prevents an audio bug in chrome. */
+
+/* // Initializing values
+let isPlaying = true;
+
+// On video playing toggle values
+audio.onplaying = function() {
+    isPlaying = true;
+};
+
+// On video pause toggle values
+audio.onpause = function() {
+    isPlaying = false;
+};
+
+// Play video function
+async function playVid() {      
+    if (audio.paused && !isPlaying) {
+        return audio.play();
+    }
+} 
+
+// Pause video function
+function pauseVid() {     
+    if (!audio.paused && isPlaying) {
+        audio.pause();
+    }
+}
+ */
 
 /**
  * The function stops a single audio depending on the id of the audio.
