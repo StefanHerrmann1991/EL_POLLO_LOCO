@@ -5,7 +5,14 @@ class Coin extends LootableObject {
         'img/8.Coin/Moneda2.png']
 
 
-
+        COIN_SOUND = {
+            'audios': [new Audio ('audio/coinCollect.mp3')
+       ],
+            'soundIsPlayedOnce': false,
+            'timeoutId': '',
+            'randomSound': '',
+        }
+    
         
     /**
      * The constructor for lootable objects in the map like coins and bottles.

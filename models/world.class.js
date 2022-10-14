@@ -64,7 +64,7 @@ class World {
     showEndscreenLost() {
         this.endscreenOn = true;
         setTimeout(() => {
-            let characterPosition = -1 * (this.character.camera_position_storage);        
+            let characterPosition = -1 * (this.character.camera_position_storage);
             let end = new Endscreen(characterPosition, this.character.y, 'lost');
             this.endscreen.push(end);
             stopGame();
@@ -93,7 +93,7 @@ class World {
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isClose(enemy) && !(enemy instanceof Endboss)) { enemy.sawCharacter = true; }
-            this.characterGotDamage(enemy, 5);           
+            this.characterGotDamage(enemy, 5);
             this.jumpKill(enemy);
             this.throwBottleOn(enemy);
             this.startEndbossFight(enemy);
@@ -111,7 +111,7 @@ class World {
             if (!enemy.hadFirstContact && this.endbossActive && !enemy.isHurt()) {
                 this.endbossIsWalking(enemy);
                 this.endbossIsAttacking(enemy);
-                this.charHitByEndboss(enemy, 15);               
+                this.charHitByEndboss(enemy, 15);
             }
         }
         if (this.endbossWasDefeated(enemy))
@@ -133,7 +133,7 @@ class World {
 
     }
 
- 
+
     endbossFirstEncounter(enemy) {
         if (this.character.isInArea(enemy) && !this.endbossActive) {
             enemy.hadFirstContact = true;
@@ -173,14 +173,14 @@ class World {
         thrownObject.speedX = 0;
         thrownObject.speedY = 0;
         thrownObject.acceleration = 0;
-        
+
     }
 
     characterGotDamage(enemy, damage) {
         if (this.characterGotHitBy(enemy, 5)) {
             this.character.hit(damage);
-            this.statusbar.setPercentage(this.character.energy);           
-        }   
+            this.statusbar.setPercentage(this.character.energy);
+        }
     }
 
 
@@ -205,6 +205,7 @@ class World {
     pickUpCoin() {
         this.level.coins.forEach((coin, i) => {
             if (this.canTake(coin)) {
+                coin.playAudioOnce(coin.COIN_SOUND);
                 this.level.coins.splice(i, 1);
                 this.statusbar.percentage += 1;
                 this.character.energy += 1;
@@ -239,7 +240,7 @@ class World {
         this.endscreenOn = true;
         this.endbossDeath = true;
         setTimeout(() => {
-            let characterPosition = -1 * (this.character.camera_position_storage);      
+            let characterPosition = -1 * (this.character.camera_position_storage);
             let end = new Endscreen(characterPosition, this.character.y, 'won');
             this.endscreen.push(end);
             this.endscreen[0].won = true;
@@ -297,7 +298,7 @@ class World {
             this.flipImage(movableObject)
         }
         movableObject.draw(this.ctx);
-       /*  movableObject.drawFrame(this.ctx);   */
+        /*  movableObject.drawFrame(this.ctx);   */
         if (movableObject.otherDirection) {
             this.flipImageBack(movableObject);
         }

@@ -26,17 +26,17 @@ class ThrowableObject extends MovableObject {
     THROWING_SOUND = {
         'audios': [new Audio('audio/throwingBottle.mp3')],
         'soundIsPlayedOnce': false,
-        'timeoutId' : '',
-        'randomSound' : '',
+        'timeoutId': '',
+        'randomSound': '',
     }
     HITTING_SOUND = {
         'audios': [new Audio('audio/bottleHits2.mp3')],
         'soundIsPlayedOnce': false,
-        'timeoutId' : '',
-        'randomSound' : '',
+        'timeoutId': '',
+        'randomSound': '',
     }
 
-  
+
     constructor(x, y, otherDirection) {
 
         super().loadImage('img/6.botella/Rotación/Mesa de trabajo 1.png');
@@ -58,7 +58,7 @@ class ThrowableObject extends MovableObject {
 
     throw(otherDirection) {
 
-       
+
         this.applyGravity();
 
         setStoppableInterval(() => {
@@ -69,15 +69,15 @@ class ThrowableObject extends MovableObject {
         }, 60);
 
 
-
         setStoppableInterval(() => {
             if (!this.collision) {
                 this.playAnimation(this.IMAGES_BOTTLE_THROWING);
-                playAudioOnce(this.THROWING_SOUND);
+                this.playAudioOnce(this.THROWING_SOUND);
             }
-            else {this.playAnimation(this.IMAGES_BOTTLE_EXPLODING);
-                playAudioOnce(this.HITTING_SOUND);                
-             }
+            else {
+                this.playAnimation(this.IMAGES_BOTTLE_EXPLODING);
+                this.playAudioOnce(this.HITTING_SOUND);
+            }
         }, 40);
     }
 }

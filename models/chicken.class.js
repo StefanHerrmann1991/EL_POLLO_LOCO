@@ -23,8 +23,8 @@ class Chicken extends MovableObject {
             new Audio('audio/chickenSound3.mp3'),
             new Audio('audio/chickenSound4.mp3')],
         'soundIsPlayedOnce': false,
-        'timeoutId' : '', 
-        'randomSound' : '',
+        'timeoutId': '',
+        'randomSound': '',
     }
 
 
@@ -32,8 +32,8 @@ class Chicken extends MovableObject {
     CHICKEN_SOUND_DEATH = {
         'audios': [new Audio('audio/chickenDeath3.mp3')],
         'soundIsPlayedOnce': false,
-        'timeoutId' : '',
-        'randomSound' : '',
+        'timeoutId': '',
+        'randomSound': '',
     }
 
     constructor(x) {
@@ -51,27 +51,32 @@ class Chicken extends MovableObject {
         setStoppableInterval(() => {
 
             if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DYING);
-                playAudioOnce(this.CHICKEN_SOUND_DEATH);        
-                stopTimeout(this.CHICKEN_SOUND);                   
-            } 
-
-            else {
-                this.moveLeft();
-                if (this.sawCharacter) {
-                    playAudioOnce(this.CHICKEN_SOUND)
-                }
+                this.chickenIsDying()
             }
-
+            else {
+                this.chickenIsAttacking()
+            }
         }, 1000 / 60);
-
-        /* Hühner laufen (nur Animation und Ton) */
 
         setStoppableInterval(() => {
             if (!this.isDead()) {
                 this.playAnimation(this.IMAGES_WALKING)
             };
         }, 200);
+    }
+
+
+    chickenIsAttacking() {
+        this.moveLeft();
+        if (this.sawCharacter) {
+            this.playAudioOnce(this.CHICKEN_SOUND)
+        }
+    }
+
+    chickenIsDying() {
+        this.playAnimation(this.IMAGES_DYING);
+        this.playAudioOnce(this.CHICKEN_SOUND_DEATH);
+        stopTimeout(this.CHICKEN_SOUND);
     }
 }
 

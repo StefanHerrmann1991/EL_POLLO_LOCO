@@ -391,38 +391,7 @@ function stopGame() {
     allIntervals = [];
 }
 
-/**
- * The function uses a JSON in the following format:
- * CHICKEN_SOUND = {
-        'audios': [],
-        'soundIsPlayedOnce': false,
-        'timeoutId' : '', 
-        'randomSound' : '',
-    }    
- * The audios in the first Line will be played once and will be attached randomly to 
- * an object. If only one audio is in the array it will be played.   
- * @param {JSON} mp3JSON The name of the audio file.
- * @param {Number} mp3JSON.randomSound is the random sound number which will be played.
- * @param {Number} soundDuration is the length in seconds of the mp3 file.
- * @param {Number} timeoutId is the id of the timeout which can later be cleared. 
- *
-*/
 
-function playAudioOnce(mp3JSON) {
-
-    if (!mp3JSON.soundIsPlayedOnce) {
-        mp3JSON.randomSound = (Math.floor(Math.random() * mp3JSON.audios.length));
-        let randomSoundPosition = mp3JSON.randomSound
-        let soundDuration = mp3JSON.audios[randomSoundPosition].duration;
-        mp3JSON.soundIsPlayedOnce = true;
-        mp3JSON.audios[randomSoundPosition].play();
-        let timeoutId = setTimeout(() => {
-            mp3JSON.audios[randomSoundPosition].pause();
-        }, 1000 * soundDuration);
-        allTimeouts.push(timeoutId);
-        mp3JSON['timeoutId'] = timeoutId;
-    }
-}
 
 
 
