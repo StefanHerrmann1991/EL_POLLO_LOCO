@@ -1,7 +1,6 @@
 let canvas;
 let world;
 let keyboard;
-
 let allIntervals = [];
 let allTimeouts = [];
 let start = false;
@@ -10,7 +9,8 @@ let menuSound = new Audio('audio/selectSound.mp3');
 let touchScreen = false;
 let deviceStart = true;
 let help = true;
-
+let walking_sound = new Audio('audio/walking.mp3');
+let jumping_sound = new Audio('audio/jumping.mp3');
 
 /* Using test() method to search regexp in details
 it returns boolean value*/
@@ -33,7 +33,7 @@ function generateLevel1() {
 */
 
 function initGame() {
-    start = true;
+    start = true;  
     toggleStartBtn('restart');
     loadControlPanel();
     keyboard = new Keyboard();

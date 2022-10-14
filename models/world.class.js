@@ -25,7 +25,7 @@ class World {
         this.canvas = canvas;
         this.keyboard = keyboard;
         this.draw();
-        this.setWorld();
+        this.setWorld();     
         this.start();
         this.checkWorld();
     }
