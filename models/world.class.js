@@ -205,7 +205,7 @@ class World {
     pickUpCoin() {
         this.level.coins.forEach((coin, i) => {
             if (this.canTake(coin)) {
-                coin.playAudioOnce(coin.COIN_SOUND);
+                coin.playAudioOnce(coin.COIN_SOUND, 0.5);
                 this.level.coins.splice(i, 1);
                 this.statusbar.percentage += 1;
                 this.character.energy += 1;

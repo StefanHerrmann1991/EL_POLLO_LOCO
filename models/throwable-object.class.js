@@ -3,6 +3,7 @@ class ThrowableObject extends MovableObject {
     speedY = 20;
     speedX = 60;
     lastThrow = 0;
+    volume = 0.2;
     collision = false;
     IMAGES_BOTTLE_THROWING = [
         'img/6.botella/Rotación/Mesa de trabajo 1.png',
@@ -72,11 +73,11 @@ class ThrowableObject extends MovableObject {
         setStoppableInterval(() => {
             if (!this.collision) {
                 this.playAnimation(this.IMAGES_BOTTLE_THROWING);
-                this.playAudioOnce(this.THROWING_SOUND);
+                this.playAudioOnce(this.THROWING_SOUND, this.volume);
             }
             else {
                 this.playAnimation(this.IMAGES_BOTTLE_EXPLODING);
-                this.playAudioOnce(this.HITTING_SOUND);
+                this.playAudioOnce(this.HITTING_SOUND, this.volume);
             }
         }, 40);
     }

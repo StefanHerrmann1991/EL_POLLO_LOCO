@@ -1,5 +1,6 @@
 class Chicken extends MovableObject {
     energy = 100;
+    volume = 0.4
     y = 375;
     sawCharacter = false;
     /* 
@@ -69,13 +70,13 @@ class Chicken extends MovableObject {
     chickenIsAttacking() {
         this.moveLeft();
         if (this.sawCharacter) {
-            this.playAudioOnce(this.CHICKEN_SOUND)
+            this.playAudioOnce(this.CHICKEN_SOUND, this.volume)
         }
     }
 
     chickenIsDying() {
         this.playAnimation(this.IMAGES_DYING);
-        this.playAudioOnce(this.CHICKEN_SOUND_DEATH);
+        this.playAudioOnce(this.CHICKEN_SOUND_DEATH, this.volume);
         stopTimeout(this.CHICKEN_SOUND);
     }
 }

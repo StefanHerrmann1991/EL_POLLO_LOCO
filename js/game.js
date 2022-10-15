@@ -177,7 +177,8 @@ function loadControlPanel() {
 
     else {
         getId('fullscreen').classList.remove('d-none');
-        showDesktopMode();
+        if(start)
+         showDesktopMode();
     }
 }
 

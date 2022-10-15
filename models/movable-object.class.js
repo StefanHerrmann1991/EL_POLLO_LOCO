@@ -16,7 +16,7 @@ class MovableObject extends DrawableObject {
     collisionY = this.y;
     collisionWidth = this.width;
     collisionHeight = this.height;
-
+    volume = 1;
     /**
      * The function enables the falling of obejects on the map like the character when it jumps or thrown bottles.
      * 
@@ -240,7 +240,7 @@ class MovableObject extends DrawableObject {
  *
 */
 
-playAudioOnce(mp3JSON) {
+playAudioOnce(mp3JSON, soundVolume) {
 
     if (!mp3JSON.soundIsPlayedOnce) {
        
@@ -248,6 +248,7 @@ playAudioOnce(mp3JSON) {
             let randomSoundPosition = mp3JSON.randomSound
             let soundDuration = mp3JSON.audios[randomSoundPosition].duration;
             mp3JSON.soundIsPlayedOnce = true;
+            mp3JSON.audios[randomSoundPosition].volume = soundVolume;
             mp3JSON.audios[randomSoundPosition].play();
             let timeoutId = setTimeout(() => {
                 mp3JSON.audios[randomSoundPosition].pause();
