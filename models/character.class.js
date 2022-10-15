@@ -1,7 +1,7 @@
 class Character extends MovableObject {
 
     y = 80;
-    speed = 15;
+    speed = 12;
     jump = false;
     energy = 100;
     dodgeAnimation = 0;

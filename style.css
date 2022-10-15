@@ -11,10 +11,15 @@ body {
     background-size: cover;
 }
 
+div { font-family: 'Rye', cursive;}
+
 a {
     text-decoration: none;
     color: black;
 }
+
+
+img {touch-action: none;}
 
 h1 {
     text-decoration: none;
@@ -579,9 +584,7 @@ canvas {
         width: 100%;
     }
 
-    h1 {
-        display: none;
-    }
+  h1 { font-size: 65px;}
 
 }
 
@@ -596,7 +599,7 @@ canvas {
     }
 
     h1 {
-        display: none;
+        font-size: 40px;
     }
 
 
@@ -605,6 +608,8 @@ canvas {
 
 
 @media (orientation: landscape) {
+
+
 
     .front {
         display: block;
@@ -732,6 +737,8 @@ canvas {
         font-size: 20px;
         padding: 10px 15px;
     }
+
+    h1 {font-size: 45px;}
 
 }
 

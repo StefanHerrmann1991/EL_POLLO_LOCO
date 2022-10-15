@@ -173,10 +173,12 @@ function loadControlPanel() {
     if (isMobile()) {
         getId('fullscreen').classList.add('d-none');
         checkMobile();
+        getId('title').classList.add('d-none');
     }
 
     else {
         getId('fullscreen').classList.remove('d-none');
+        getId('title').classList.remove('d-none');
         if(start)
          showDesktopMode();
     }
