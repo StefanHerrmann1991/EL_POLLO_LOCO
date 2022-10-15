@@ -17,6 +17,7 @@ class World {
     endbossActive = false;
     cameraOffsetX = 0;
     endbossDeath = false;
+    backgroundMusic = new Audio('');
 
 
 
@@ -226,7 +227,7 @@ class World {
     throwObject() {
         if (this.canThrow()) {
             let timePassed = new Date().getTime() - this.lastThrow;
-            if (timePassed > 500) {
+            if (timePassed > 1000) {
                 this.bottleCount--;
                 let thrownBottle = new ThrowableObject(this.character.x, this.character.y, this.character.otherDirection);
                 this.throwableObject.push(thrownBottle);

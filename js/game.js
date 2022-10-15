@@ -11,6 +11,8 @@ let deviceStart = true;
 let help = true;
 let walking_sound = new Audio('audio/walking.mp3');
 let jumping_sound = new Audio('audio/jumping.mp3');
+let musicIsOn = false;
+let backgroundMusic = new Audio('audio/backgroundMusic.mp3');
 
 /* Using test() method to search regexp in details
 it returns boolean value*/
@@ -58,12 +60,13 @@ function toggleStartBtn(startCondition) {
 
     if (startCondition == 'firstStart') {
         startStory();
+        toggleMusic();
         start.innerHTML = `
         <div onclick="initGame()">Start</div>`;       
     }
 
     if (startCondition == 'restart') {
-        stopGame();
+        stopGame();      
         start.innerHTML = `
         <div onclick="restartGame()">Restart</div>`;
         renderDeviceBar();  
@@ -184,6 +187,18 @@ function loadControlPanel() {
     }
 }
 
+function toggleMusic() {
+    musicIsOn = !musicIsOn;
+    if(musicIsOn) {
+        backgroundMusic.volume = 0.2;
+        backgroundMusic.play();
+    } 
+    else {
+        backgroundMusic.pause();
+    }
+   
+}
+
 function showDesktopMode() {
     touchScreen = false;
     let helpForDesktop = getId('crossPosition');
@@ -273,6 +288,8 @@ function renderDeviceBar() {
 function controlBar() {
     return `
     <div class="checkbox"><input type="checkbox" id="helpSmartDesk" checked onclick="showHelp()">Help for controls
+    </div>
+    <div class="checkbox"><input type="checkbox" id="backgroundMusic" checked onclick="toggleMusic()">Background music
     </div>`
 }
 
