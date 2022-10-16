@@ -131,7 +131,6 @@ class World {
             enemy.attack = true;
             enemy.moveToPosition(this.character);
         }
-
     }
 
 

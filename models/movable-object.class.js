@@ -255,8 +255,6 @@ playAudioOnce(mp3JSON, soundVolume) {
             }, 1000 * soundDuration);
             allTimeouts.push(timeoutId);
             mp3JSON['timeoutId'] = timeoutId;
-        
-
     }
 }
 }
