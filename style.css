@@ -457,8 +457,9 @@ canvas {
 }
 
 
-.cross-map img{
+.cross-map {
     -webkit-touch-callout: default;
+    user-select: none
 }
 
 .responsive-control-portrait {
