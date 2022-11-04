@@ -60,13 +60,13 @@ function toggleStartBtn(startCondition) {
 
     if (startCondition == 'firstStart') {
         startStory();
-        toggleMusic();
         start.innerHTML = `
-        <div onclick="initGame()">Start</div>`;       
+        <div onclick="initGame()">Start</div>`;   
+         
     }
 
     if (startCondition == 'restart') {
-        stopGame();      
+        toggleMusic();     
         start.innerHTML = `
         <div onclick="restartGame()">Restart</div>`;
         renderDeviceBar();  
