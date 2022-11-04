@@ -35,7 +35,7 @@ function generateLevel1() {
 */
 
 function initGame() {
-    start = true;  
+    start = true;
     toggleStartBtn('restart');
     loadControlPanel();
     keyboard = new Keyboard();
@@ -55,23 +55,23 @@ function toggleStartBtn(startCondition) {
     if (startCondition == 'showStory') {
         start.innerHTML = `
         <div onclick="toggleStartBtn('firstStart')">Start</div>`;
-        
+
     }
 
     if (startCondition == 'firstStart') {
         startStory();
         start.innerHTML = `
-        <div onclick="initGame()">Start</div>`;   
-         
+        <div onclick="initGame()">Start</div>`;
+
     }
 
     if (startCondition == 'restart') {
-        toggleMusic();     
+        toggleMusic();
         start.innerHTML = `
         <div onclick="restartGame()">Restart</div>`;
-        renderDeviceBar();  
+        renderDeviceBar();
     }
-    
+
 }
 
 function restartGame() {
@@ -182,21 +182,21 @@ function loadControlPanel() {
     else {
         getId('fullscreen').classList.remove('d-none');
         getId('title').classList.remove('d-none');
-        if(start)
-         showDesktopMode();
+        if (start)
+            showDesktopMode();
     }
 }
 
 function toggleMusic() {
     musicIsOn = !musicIsOn;
-    if(musicIsOn) {
+    if (musicIsOn) {
         backgroundMusic.volume = 0.2;
         backgroundMusic.play();
-    } 
+    }
     else {
         backgroundMusic.pause();
     }
-   
+
 }
 
 function showDesktopMode() {
@@ -363,11 +363,11 @@ function showHelp() {
  * The function simulates pressing the control pad.
  * @param {string} position The parameter resembles the 
  */
-function touchCross(path, position) {
-    document.getElementById('crossMap').src = `img/0.Own_Pictures/${path}/${position}.png`;
+function touchCross(img, position) {
+    document.getElementById('crossMap').src = `img/0.Own_Pictures/${img}/${position}.png`;
     if (start) {
         switch (position) {
-            case 'up': keyboard.THROW = true;
+            case 'up': keyboard.THROW = true;               
                 break;
             case 'left': keyboard.LEFT = true;
                 break;
@@ -388,6 +388,7 @@ function touchCrossEnd(img, position) {
                 keyboard.THROW = false;
                 keyboard.DODGE = false;
                 keyboard.RIGHT = false;
+                event.preventDefault();
                 break;
         }
     }

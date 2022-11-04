@@ -457,6 +457,10 @@ canvas {
 }
 
 
+.cross-map {
+    -webkit-touch-callout: default
+}
+
 .responsive-control-portrait {
     position: relative !important;
 
