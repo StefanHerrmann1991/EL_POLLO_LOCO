@@ -35,7 +35,7 @@ function generateLevel1() {
 */
 
 function initGame() {
-    start = true;    
+    start = true;
     toggleStartBtn('restart');
     loadControlPanel();
     keyboard = new Keyboard();
@@ -265,10 +265,10 @@ function generateCross(path) {
          <div class="relative">
            <img class='cross-map' id="crossMap" src="img/0.Own_Pictures/${path}/cross.png" usemap='#image-map' height="${sideLength}px" width="${sideLength}px">
              <map name='image-map'>              
-                 <area target="" alt="up"    title="up"     id="up"    ontouchstart="touchCross('${path}','up')"  ontouchend="touchCrossEnd('${path}','cross')"  coords="${coord1},0,${coord2},${coord1}" shape="rect">
-                 <area target="" alt="left"  title="left"   id="left"   ontouchstart="touchCross('${path}','left')" ontouchend="touchCrossEnd(${path}','cross')" coords="0,${coord1},${coord1},${coord2}" shape="rect">
-                 <area target="" alt="down"  title="down"   id="down"   ontouchstart="touchCross('${path}','down')" ontouchend="touchCrossEnd('${path}','cross')" coords="${coord2},${coord2},${coord1},${sideLength}" shape="rect">
-                 <area target="" alt="right" title="right"  id="right"  ontouchstart="touchCross('${path}','right')" ontouchend="touchCrossEnd('${path}','cross')" coords="${sideLength},${coord1},${coord2},${coord2}" shape="rect">   
+                 <area target="" alt="up"    title="up"     id="up"    ontouchstart="touchCross('${path}','up')"  ontouchend="touchCrossEnd(event, '${path}','cross')"  coords="${coord1},0,${coord2},${coord1}" shape="rect">
+                 <area target="" alt="left"  title="left"   id="left"   ontouchstart="touchCross('${path}','left')" ontouchend="touchCrossEnd(event, '${path}','cross')" coords="0,${coord1},${coord1},${coord2}" shape="rect">
+                 <area target="" alt="down"  title="down"   id="down"   ontouchstart="touchCross('${path}','down')" ontouchend="touchCrossEnd(event, '${path}','cross')" coords="${coord2},${coord2},${coord1},${sideLength}" shape="rect">
+                 <area target="" alt="right" title="right"  id="right"  ontouchstart="touchCross('${path}','right')" ontouchend="touchCrossEnd(event, '${path}','cross')" coords="${sideLength},${coord1},${coord2},${coord2}" shape="rect">   
              </map>   
         <div class="help" id="help">
              <div class="throw">Throw</div>
@@ -395,11 +395,11 @@ function touchCross(img, position) {
                 break;
             case 'right': keyboard.RIGHT = true;
                 break;
-        }
+        }      
     }
 }
 
-function touchCrossEnd(img, position) {
+function touchCrossEnd(event, img, position) {
     document.getElementById('crossMap').src = `img/0.Own_Pictures/${img}/${position}.png`;
     if (start) {
         switch (position) {
@@ -408,11 +408,10 @@ function touchCrossEnd(img, position) {
                 keyboard.THROW = false;
                 keyboard.DODGE = false;
                 keyboard.RIGHT = false;
-                event.preventDefault();
                 break;
-        }
+        }       
+        event.preventDefault();
     }
-
 }
 
 /**

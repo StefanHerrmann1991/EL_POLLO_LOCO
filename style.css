@@ -11,7 +11,9 @@ body {
     background-size: cover;
 }
 
-div { font-family: 'Rye', cursive;}
+div {
+    font-family: 'Rye', cursive;
+}
 
 a {
     text-decoration: none;
@@ -19,7 +21,9 @@ a {
 }
 
 
-img {touch-action: none;}
+img {
+    touch-action: none;
+}
 
 h1 {
     text-decoration: none;
@@ -458,7 +462,7 @@ canvas {
 
 
 .cross-map {
-    -webkit-touch-callout: default;
+    -webkit-touch-callout: none;
     user-select: none
 }
 
@@ -589,7 +593,9 @@ canvas {
         width: 100%;
     }
 
-  h1 { font-size: 65px;}
+    h1 {
+        font-size: 65px;
+    }
 
 }
 
@@ -743,7 +749,9 @@ canvas {
         padding: 10px 15px;
     }
 
-    h1 {font-size: 45px;}
+    h1 {
+        font-size: 45px;
+    }
 
 }
 
