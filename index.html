@@ -100,6 +100,7 @@
     addEventListener('touchend', function (e) {
         preventLongPressMenu(document.getElementsByClassName('cross-map'));
     });
+    window.addEventListener("contextmenu", function(e) { e.preventDefault(); })
 </script>
 
 </html>

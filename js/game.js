@@ -75,16 +75,13 @@ function toggleStartBtn(startCondition) {
     if (startCondition == 'showStory') {
         start.innerHTML = `
         <div onclick="toggleStartBtn('firstStart')">Start</div>`;
-
     }
-
     if (startCondition == 'firstStart') {
         startStory();
         start.innerHTML = `
         <div onclick="initGame()">Start</div>`;
 
     }
-
     if (startCondition == 'restart') {
         toggleMusic();
         start.innerHTML = `
@@ -262,7 +259,7 @@ function generateCross(path) {
     let coord1 = sideLength * 3 / 8;
     let coord2 = sideLength * 5 / 8;
     let cross = `
-         <div class="relative">
+         <div class="relative prevent-longpress">
            <img class='cross-map' id="crossMap" src="img/0.Own_Pictures/${path}/cross.png" usemap='#image-map' height="${sideLength}px" width="${sideLength}px">
              <map name='image-map'>              
                  <area target="" alt="up"    title="up"     id="up"    ontouchstart="touchCross('${path}','up')"  ontouchend="touchCrossEnd(event, '${path}','cross')"  coords="${coord1},0,${coord2},${coord1}" shape="rect">
@@ -395,7 +392,7 @@ function touchCross(img, position) {
                 break;
             case 'right': keyboard.RIGHT = true;
                 break;
-        }      
+        }
     }
 }
 
@@ -408,9 +405,9 @@ function touchCrossEnd(event, img, position) {
                 keyboard.THROW = false;
                 keyboard.DODGE = false;
                 keyboard.RIGHT = false;
+                event.preventDefault();
                 break;
-        }       
-        event.preventDefault();
+        }
     }
 }
 

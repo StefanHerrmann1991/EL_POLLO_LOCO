@@ -11,6 +11,16 @@ body {
     background-size: cover;
 }
 
+.prevent-longpress {
+    user-select: none;
+    -webkit-user-select: none;    
+    -webkit-touch-callout: none;  
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+  
+}
+
 div {
     font-family: 'Rye', cursive;
 }
