@@ -97,10 +97,7 @@
         loadControlPanel();
     });
 
-    addEventListener('touchend', function (e) {
-        preventLongPressMenu(document.getElementsByClassName('cross-map'));
-    });
-    window.addEventListener("contextmenu", function(e) { e.preventDefault(); })
+    document.getElementById("crossPosition").addEventListener("contextmenu", function(e) {e.preventDefault();});
 </script>
 
 </html>

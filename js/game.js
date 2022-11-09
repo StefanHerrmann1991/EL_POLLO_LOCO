@@ -35,7 +35,7 @@ function generateLevel1() {
 */
 
 function initGame() {
-    start = true;
+    start = true;    
     toggleStartBtn('restart');
     loadControlPanel();
     keyboard = new Keyboard();
@@ -230,6 +230,7 @@ function checkMobile() {
         if (start) {
             insertCross('controlCross2');
             insertButtons();
+            preventLongPressMenu(document.getElementsByClassName('cross-map'));
         }
     }
     if (window.matchMedia("(orientation: portrait)").matches) {
