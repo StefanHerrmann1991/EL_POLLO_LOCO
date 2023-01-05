@@ -71,7 +71,6 @@ function preventLongPressMenu(nodes) {
 
 function toggleStartBtn(startCondition) {
     let start = getId('startButton');
-
     if (startCondition == 'showStory') {
         start.innerHTML = `
         <div onclick="toggleStartBtn('firstStart')">Start</div>`;
@@ -80,7 +79,6 @@ function toggleStartBtn(startCondition) {
         startStory();
         start.innerHTML = `
         <div onclick="initGame()">Start</div>`;
-
     }
     if (startCondition == 'restart') {
         toggleMusic();
@@ -88,7 +86,6 @@ function toggleStartBtn(startCondition) {
         <div onclick="restartGame()">Restart</div>`;
         renderDeviceBar();
     }
-
 }
 
 function restartGame() {
@@ -195,7 +192,6 @@ function loadControlPanel() {
         checkMobile();
         getId('title').classList.add('d-none');
     }
-
     else {
         getId('fullscreen').classList.remove('d-none');
         getId('title').classList.remove('d-none');

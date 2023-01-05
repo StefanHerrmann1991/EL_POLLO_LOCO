@@ -190,7 +190,7 @@ class World {
             this.character.hit(damage);
             this.statusbar.setPercentage(this.character.energy);
         }
-    } d
+    } 
 
 
     pickUpBottle() {
