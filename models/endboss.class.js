@@ -81,7 +81,6 @@ class Endboss extends MovableObject {
             if (this.canBeHurt())
                 this.playAnimation(this.IMAGES_HURTING);
 
-
             else if (this.canWalk()) {
                 this.isWalking()
             }

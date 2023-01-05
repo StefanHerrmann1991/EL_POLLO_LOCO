@@ -240,17 +240,11 @@ function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
 }
 
-
-
-
 /**
     * 
     * @param {number} num The parameter tests if a number is odd.
     * @returns true when the number isOdd
     */
-
-
-
 function isOdd(num) { return Math.abs(num % 2) }
 
 

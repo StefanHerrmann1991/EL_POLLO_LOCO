@@ -5,6 +5,7 @@ class smallChicken extends MovableObject {
     sawCharacter = false;
     height = 60;
     width = 60;
+    acceleration = 1.8
     IMAGES_WALKING = [
         'img/3.Secuencias_Enemy_básico/Versión_pollito/1.Paso_derecho.png',
         'img/3.Secuencias_Enemy_básico/Versión_pollito/2.Centro.png',
@@ -40,12 +41,14 @@ class smallChicken extends MovableObject {
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_DYING);
         this.x = x; // Zahl zwischen 0 und 500 Math ramdom generiert eine zufällige Zahl zwischen 0 und 1
-        this.speed = 0.25 + Math.random() * 0.7;
+        this.speed = 0.5 + Math.random() * 0.7;
+       
     }
 
 
 
-    animate() {
+    animate() {   
+        this.applyGravity(0)
         setStoppableInterval(() => {
             if (this.isDead()) this.chickenIsDying()
             else this.chickenIsAttacking()
@@ -60,6 +63,7 @@ class smallChicken extends MovableObject {
         this.moveLeft();
         if (this.sawCharacter) {
             this.playAudioOnce(this.CHICKEN_SOUND, this.volume)
+         if (!this.isAboveGround()) this.speedY = 25;           
         }
     }
 

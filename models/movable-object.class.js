@@ -22,7 +22,7 @@ class MovableObject extends DrawableObject {
      * 
      */
 
-    applyGravity(yPosition) {
+    applyGravity(yPosition) {        
         setStoppableInterval(() => {
             if (this.isAboveGround() || this.speedY > yPosition) {
                 this.y -= this.speedY;
@@ -36,14 +36,10 @@ class MovableObject extends DrawableObject {
      * @returns 
      */
     isAboveGround() {
-        if (this instanceof ThrowableObject) {
-            return true;
-        }
-        if (this instanceof Endboss) {
-            return this.y < 50;
-        }
-
-        else { return this.y < 180; }
+        if (this instanceof ThrowableObject) return true
+        if (this instanceof Endboss) return this.y < 50;      
+        if (this instanceof smallChicken) return this.y < 370
+        else return this.y < 180; 
     }
 
     /**loadImage('img/test.png')

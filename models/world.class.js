@@ -56,8 +56,7 @@ class World {
 
 
     checkDeath() {
-        if (this.gameWasLost())
-            this.showEndscreenLost();
+        if (this.gameWasLost()) this.showEndscreenLost();
     }
 
     gameWasLost() { return this.character.isDead() && !this.endscreenOn }
@@ -80,7 +79,7 @@ class World {
                 <img class="bottle-stat" src="img/7.Marcadores/Icono/Botella.png"> 
                 <div>= ${this.bottleCount}<div>`
         }
-        else { setTimeout(() => { document.getElementById('bottleCounter').innerHTML = ""; }, 2000); }
+        else  setTimeout(() => { document.getElementById('bottleCounter').innerHTML = ""; }, 2000); 
     }
 
     checkCoinCount() {
@@ -236,7 +235,6 @@ class World {
     }
 
     showEndcreenWon() {
-
         this.endscreenOn = true;
         this.endbossDeath = true;
         setTimeout(() => {
