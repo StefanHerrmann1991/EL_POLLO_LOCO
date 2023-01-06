@@ -4,7 +4,6 @@ class MovableObject extends DrawableObject {
     sprintSpeed = 1.5;
     otherDirection = false;
     currentImage = 0;
-    currentImage2 = 0;
     speedY = 0;
     acceleration = 2.5;
     energy;
@@ -28,7 +27,7 @@ class MovableObject extends DrawableObject {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
             }
-        }, 1000 / 60);
+        }, 1000 / 50);
     }
 
     /**
