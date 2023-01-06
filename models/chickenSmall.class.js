@@ -6,7 +6,7 @@ class smallChicken extends MovableObject {
     height = 60;
     width = 60;
     acceleration = 1.5
-    
+    defaultSpeed;
 
 
     IMAGES_WALKING = [
@@ -44,7 +44,8 @@ class smallChicken extends MovableObject {
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_DYING);
         this.x = x; // Zahl zwischen 0 und 500 Math ramdom generiert eine zufällige Zahl zwischen 0 und 1
-        this.speed = 0.5 + Math.random() * 0.7 ;
+        this.speed = 0.5 + Math.random() * 0.7;
+        this.defaultSpeed = this.speed;
     }
 
 
@@ -68,7 +69,10 @@ class smallChicken extends MovableObject {
             if (!this.isAboveGround()) {
                 this.speedY = 15;                
                 this.speed = 14;
-                this.sawCharacter = false;              
+                this.sawCharacter = false; 
+                setTimeout(() => {
+                    this.speed = this.defaultSpeed;   
+                }, 400);                          
             }
         }
     }

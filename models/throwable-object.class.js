@@ -1,7 +1,8 @@
 class ThrowableObject extends MovableObject {
 
-    speedY = 20;
+    speedY = 10;
     speedX = 60;
+    acceleration = 2
     lastThrow = 0;
     volume = 0.2;
     collision = false;
