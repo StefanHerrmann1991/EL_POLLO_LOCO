@@ -5,7 +5,7 @@ class smallChicken extends MovableObject {
     sawCharacter = false;
     height = 60;
     width = 60;
-    acceleration = 1.5
+    acceleration = 1.2
     defaultSpeed;
 
 
