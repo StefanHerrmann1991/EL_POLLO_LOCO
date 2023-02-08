@@ -14,6 +14,7 @@ let walking_sound = new Audio('audio/walking.mp3');
 let jumping_sound = new Audio('audio/jumping.mp3');
 let backgroundMusic = new Audio('audio/backgroundMusic.mp3');
 let gameEnded = false;
+let soundIsOn = true;
 
 /* Using test() method to search regexp in details
 it returns boolean value*/
@@ -201,9 +202,8 @@ function toggleMusic() {
         backgroundMusic.volume = 0.2;
         backgroundMusic.play();
     }
-    else {
-        backgroundMusic.pause();
-    }
+    else backgroundMusic.pause();
+    
 
 }
 
@@ -292,6 +292,8 @@ function controlBar() {
     <div class="checkbox"><input type="checkbox" id="helpSmartDesk" checked onclick="showHelp()">Help for controls
     </div>
     <div class="checkbox"><input type="checkbox" id="backgroundMusic" checked onclick="toggleMusic()">Background music
+    </div>
+    <div class="checkbox"><input type="checkbox" id="sound" checked onclick="toggleSounds()">Active sounds
     </div>`
 }
 
@@ -427,7 +429,9 @@ function stopAllTimeouts() {
     allTimeouts = [];
 }
 
-
+function toggleSounds() {
+    soundIsOn = !soundIsOn;
+}
 
 /**The function prevents an audio bug in chrome. */
 

@@ -1,5 +1,5 @@
 class MovableObject extends DrawableObject {
-
+   
     speed = 0.15;
     sprintSpeed = 1.5;
     otherDirection = false;
@@ -237,8 +237,8 @@ class MovableObject extends DrawableObject {
 
 playAudioOnce(mp3JSON, soundVolume) {
 
-    if (!mp3JSON.soundIsPlayedOnce) {
-       
+    if (!mp3JSON.soundIsPlayedOnce && soundIsOn) {
+            console.log(soundIsOn)
             mp3JSON.randomSound = (Math.floor(Math.random() * mp3JSON.audios.length));
             let randomSoundPosition = mp3JSON.randomSound
             let soundDuration = mp3JSON.audios[randomSoundPosition].duration;

@@ -136,7 +136,7 @@ class Character extends MovableObject {
     isWalkingRight() {
         this.otherDirection = false;
         this.adjustCameraRight();
-        walking_sound.play();
+        if(soundIsOn) walking_sound.play();
     }
 
     isWalkingLeft() {
@@ -178,7 +178,7 @@ class Character extends MovableObject {
 
     playAudioOnKey(mp3JSON) {
 
-        if (!this.audioJumping) {
+        if (!this.audioJumping && soundIsOn) {
             let soundDuration = mp3JSON.duration;
             this.audioJumping = true;
             mp3JSON.play();
