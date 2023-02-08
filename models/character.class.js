@@ -1,7 +1,7 @@
 class Character extends MovableObject {
 
     y = 80;
-    speed = 12;
+    speed = 8;
     jump = false;
     energy = 100;
     dodgeAnimation = 0;
@@ -118,17 +118,13 @@ class Character extends MovableObject {
 
     moveCharacter() {
         walking_sound.pause();
-        if (this.canWalkRight()) {
+        if (this.canWalkRight())
             this.isWalkingRight();
-        }
-
-        if (this.canWalkLeft()) {
+        if (this.canWalkLeft())
             this.isWalkingLeft();
-        }
-
-        if (this.canJump()) {
+        if (this.canJump())
             this.isJumping();
-        }
+
     }
 
 
