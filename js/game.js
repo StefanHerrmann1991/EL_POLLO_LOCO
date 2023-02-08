@@ -202,9 +202,18 @@ function toggleMusic() {
         backgroundMusic.volume = 0.2;
         backgroundMusic.play();
     }
-    else backgroundMusic.pause();
-    
+    else backgroundMusic.pause();   
+}
 
+
+function jumpBtn() {
+    if (start)
+        keyboard.SPACE = true;
+}
+
+function jumpBtnFalse() {
+    if (start)
+        keyboard.SPACE = false;
 }
 
 function showDesktopMode() {

@@ -1,8 +1,8 @@
 class ThrowableObject extends MovableObject {
 
     speedY = 8;
-    speedX = 30;
-    acceleration = 0.9
+    speedX = 35;
+    acceleration = 0.8
     lastThrow = 0;
     volume = 0.2;
     collision = false;
@@ -64,10 +64,9 @@ class ThrowableObject extends MovableObject {
         this.applyGravity();
 
         setStoppableInterval(() => {
-            if (!otherDirection) { this.x += this.speedX; }
-            else {
-                this.x -= this.speedX;
-            }
+            if (!otherDirection)  this.x += this.speedX; 
+            else this.x -= this.speedX;
+            
         }, 60);
 
 
