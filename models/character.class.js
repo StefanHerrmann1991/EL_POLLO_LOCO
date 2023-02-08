@@ -113,6 +113,7 @@ class Character extends MovableObject {
         else if (this.canWait()) this.playAnimation(this.IMAGES_IDLE);
         if (this.canDodge()) this.isDodging();
         if (!this.world.keyboard.DODGE) this.dodgeAnimation = 0;
+        console.log(this.y);
     }
 
     moveCharacter() {

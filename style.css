@@ -9,17 +9,32 @@ body {
     background-image: url('img/0.Own_Pictures/background2.jpg');
     background-position: center;
     background-size: cover;
-    
+
 }
 
 .prevent-longpress img {
-    user-select: none  !important;
-    -webkit-user-select: none  !important;    
-    -webkit-touch-callout: none !important;  
-    -khtml-user-select:none !important;
-    -moz-user-select:none !important;
-    -ms-user-select:none !important;
-  
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    -webkit-touch-callout: none !important;
+    -khtml-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+
+}
+
+
+.continue {
+    justify-content: center;
+    align-items: center;
+    top: 38% !important;
+    height: 100%;
+    width: 100%;
+}
+
+.continue .option-child {justify-content: center !important;}
+
+.continue #menuBtnContainer {
+    display: none;
 }
 
 div {

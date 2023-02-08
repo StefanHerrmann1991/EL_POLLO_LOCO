@@ -72,7 +72,7 @@ class smallChicken extends MovableObject {
                 this.sawCharacter = false; 
                 setTimeout(() => {
                     this.speed = this.defaultSpeed;   
-                }, 400);                          
+                }, 600);                          
             }
         }
     }

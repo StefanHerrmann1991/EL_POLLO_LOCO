@@ -5,14 +5,15 @@ let allIntervals = [];
 let allTimeouts = [];
 let start = false;
 let isInFullscreen = false;
-let menuSound = new Audio('audio/selectSound.mp3');
 let touchScreen = false;
 let deviceStart = true;
 let help = true;
+let musicIsOn = false;
+let menuSound = new Audio('audio/selectSound.mp3');
 let walking_sound = new Audio('audio/walking.mp3');
 let jumping_sound = new Audio('audio/jumping.mp3');
-let musicIsOn = false;
 let backgroundMusic = new Audio('audio/backgroundMusic.mp3');
+let gameEnded = false;
 
 /* Using test() method to search regexp in details
 it returns boolean value*/
@@ -35,7 +36,7 @@ function generateLevel1() {
 */
 
 function initGame() {
-    start = true;    
+    start = true;
     toggleStartBtn('restart');
     loadControlPanel();
     keyboard = new Keyboard();
@@ -71,16 +72,19 @@ function preventLongPressMenu(nodes) {
 
 function toggleStartBtn(startCondition) {
     let start = getId('startButton');
+    let menu  = getId('menuOptions')
     if (startCondition == 'showStory') {
         start.innerHTML = `
         <div onclick="toggleStartBtn('firstStart')">Start</div>`;
     }
     if (startCondition == 'firstStart') {
         startStory();
+        menu.classList.add('continue')
         start.innerHTML = `
-        <div onclick="initGame()">Start</div>`;
+        <div onclick="initGame()">Continue</div>`;
     }
     if (startCondition == 'restart') {
+        menu.classList.remove('continue')
         toggleMusic();
         start.innerHTML = `
         <div onclick="restartGame()">Restart</div>`;
@@ -167,15 +171,7 @@ document.onkeyup = function (e) {
     };
 }
 
-function jumpBtn() {
-    if (start)
-        keyboard.SPACE = true;
-}
 
-function jumpBtnFalse() {
-    if (start)
-        keyboard.SPACE = false;
-}
 
 /**
  * The function renders the control cross and the help button depending on the device and orientation. * 
@@ -195,8 +191,7 @@ function loadControlPanel() {
     else {
         getId('fullscreen').classList.remove('d-none');
         getId('title').classList.remove('d-none');
-        if (start)
-            showDesktopMode();
+        if (start) showDesktopMode();
     }
 }
 
@@ -229,10 +224,7 @@ function checkMobile() {
             preventLongPressMenu(document.getElementsByClassName('cross-map'));
         }
     }
-    if (window.matchMedia("(orientation: portrait)").matches) {
-        changeOrientation('portrait');
-    }
-
+    if (window.matchMedia("(orientation: portrait)").matches) changeOrientation('portrait');
 }
 
 /**
@@ -281,12 +273,8 @@ function generateCross(path) {
 
 function changeOrientation(orientation) {
     let chooseDevice = getId('deviceSetting');
-    if (orientation == 'landscape') {
-        chooseDevice.classList.add('d-none');
-    }
-    if (orientation == 'portrait') {
-        chooseDevice.classList.remove('d-none')
-    }
+    if (orientation == 'landscape') chooseDevice.classList.add('d-none');
+    if (orientation == 'portrait') chooseDevice.classList.remove('d-none')
 }
 
 function renderDeviceBar() {
@@ -307,7 +295,7 @@ function controlBar() {
     </div>`
 }
 
-function getId(id) { return document.getElementById(`${id}`) }
+function getId(id) { return document?.getElementById(`${id}`) }
 
 function keyboardHelpBar() {
     let keyboardHelp = ` 
@@ -358,17 +346,26 @@ function chooseDevice(boolean) {
 
 
 function showHelp() {
-
+    let smartHelp = getId('help');
+    let helpBtn = getId('helpBtn');
+    let desktopHelp = getId('desktopHelp');
     help = !help;
     if (touchScreen) {
-        let smartHelp = getId('help');
-        let helpBtn = getId('helpBtn');
         smartHelp.classList.toggle('d-none');
         helpBtn.classList.toggle('d-none');
     }
     if (!touchScreen) {
-        let desktopHelp = getId('desktopHelp');
         desktopHelp.classList.toggle('d-none')
+    }
+    if (gameEnded) {
+        smartHelp.classList.add('d-none');
+        helpBtn.classList.add('d-none');
+        desktopHelp.classList.add('d-none')
+    }
+    if (!gameEnded) {
+        smartHelp.classList.add('d-none');
+        helpBtn.classList.add('d-none');
+        desktopHelp.classList.add('d-none')
     }
 }
 
