@@ -82,5 +82,7 @@ class smallChicken extends MovableObject {
         this.playAudioOnce(this.CHICKEN_SOUND_DEATH, this.volume);
         stopTimeout(this.CHICKEN_SOUND);
     }
+
+   
 }
 

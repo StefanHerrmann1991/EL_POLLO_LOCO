@@ -4,11 +4,13 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+    min-height: 100vh;
     margin: 0px;
     padding: 0px;
     background-image: url('img/0.Own_Pictures/background2.jpg');
     background-position: center;
     background-size: cover;
+    touch-action: manipulation;
 
 }
 

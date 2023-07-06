@@ -112,19 +112,14 @@ class Character extends MovableObject {
         if (this.canWalk()) this.playAnimation(this.IMAGES_WALKING);
         else if (this.canWait()) this.playAnimation(this.IMAGES_IDLE);
         if (this.canDodge()) this.isDodging();
-        if (!this.world.keyboard.DODGE) this.dodgeAnimation = 0;
-        console.log(this.y);
+        if (!this.world.keyboard.DODGE) this.dodgeAnimation = 0;     
     }
 
     moveCharacter() {
         walking_sound.pause();
-        if (this.canWalkRight())
-            this.isWalkingRight();
-        if (this.canWalkLeft())
-            this.isWalkingLeft();
-        if (this.canJump())
-            this.isJumping();
-
+        if (this.canWalkRight()) this.isWalkingRight();
+        if (this.canWalkLeft()) this.isWalkingLeft();
+        if (this.canJump()) this.isJumping();
     }
 
 
@@ -136,7 +131,7 @@ class Character extends MovableObject {
     isWalkingRight() {
         this.otherDirection = false;
         this.adjustCameraRight();
-        if(soundIsOn) walking_sound.play();
+        if (soundIsOn) walking_sound.play();
     }
 
     isWalkingLeft() {
@@ -156,7 +151,6 @@ class Character extends MovableObject {
     isDodging() {
         if (this.dodgeAnimation < 1) {
             this.playAnimation(this.IMAGES_DODGING);
-
         }
         else { this.loadImage(this.IMAGES_DODGING[2]); }
         this.dodgeAnimation++;
@@ -227,12 +221,10 @@ class Character extends MovableObject {
             this.world.camera_x += 20;
             this.moveLeft();
         }
-
         else {
             this.changeCameraLeft = false;
             this.world.camera_x = leftBorder;
             this.moveLeft();
-
         }
         this.changeCameraRight = true;
         this.camera_position_storage = this.world.camera_x;

@@ -25,11 +25,11 @@ let CLOUDS_CHANGING = [
 
 function initLevel1() {
     generatedCoinCluster = 0;
-    BOTTLE = [];
+    BACKGROUND = [];
     CLOUDS = [];
+    BOTTLE = [];
     LOOT = [];
     ENEMIES = [];
-    BACKGROUND = [];
     generateLevel(16);
 
     /**
@@ -54,9 +54,9 @@ function initLevel1() {
 
 function generateLevel(worldLength) {
     generateBackground(worldLength);
+    generateClouds(worldLength);
     generateLoot(worldLength);
     generateEnemies(worldLength);
-    generateClouds(worldLength);
     generateBottles(worldLength);
 }
 
