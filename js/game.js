@@ -63,14 +63,12 @@ function preventLongPressMenu(nodes) {
 }
 
 
-
 /**
  * The function changes the start button depending on the state of the game.
  * @param {string} startCondition 
  * 
  * 
  */
-
 function toggleStartBtn(startCondition) {
     let start = getId('startButton');
     let menu  = getId('menuOptions')
@@ -93,6 +91,7 @@ function toggleStartBtn(startCondition) {
     }
 }
 
+
 function restartGame() {
     stopGame();
     stopAllTimeouts();
@@ -100,17 +99,17 @@ function restartGame() {
     initGame();
 }
 
+
 function startStory() {
     document.getElementById('canvas').classList.toggle('background-img-1');
     document.getElementById('canvas').classList.toggle('background-img-2');
 }
 
+
 /**
  * The function enables the usage of the keyboard.
  * @param {event} e when clicking the corresponing key
  */
-
-
 document.onkeydown = function (e) {
     if (start) {
         switch (e.key) {
@@ -140,11 +139,11 @@ document.onkeydown = function (e) {
     };
 }
 
+
 /**
  * The function enables the usage of the keyboard.
  * @param {event} e when  the corresponing key isn't clicked anymore
  */
-
 document.onkeyup = function (e) {
     if (start) {
         switch (e.key) {
@@ -173,11 +172,9 @@ document.onkeyup = function (e) {
 }
 
 
-
 /**
  * The function renders the control cross and the help button depending on the device and orientation. * 
  */
-
 function loadControlPanel() {
 
     let crossPosition = document.getElementById('crossPosition');
@@ -196,6 +193,7 @@ function loadControlPanel() {
     }
 }
 
+
 function toggleMusic() {
     musicIsOn = !musicIsOn;
     if (musicIsOn) {
@@ -211,10 +209,12 @@ function jumpBtn() {
         keyboard.SPACE = true;
 }
 
+
 function jumpBtnFalse() {
     if (start)
         keyboard.SPACE = false;
 }
+
 
 function showDesktopMode() {
     touchScreen = false;
@@ -222,6 +222,7 @@ function showDesktopMode() {
     let desktopHelp = keyboardHelpBar();
     helpForDesktop.insertAdjacentHTML('afterbegin', desktopHelp);
 }
+
 
 function checkMobile() {
     touchScreen = true;
@@ -236,6 +237,7 @@ function checkMobile() {
     if (window.matchMedia("(orientation: portrait)").matches) changeOrientation('portrait');
 }
 
+
 /**
  * The function enables the responsivness of the map cross element.
  * 
@@ -245,6 +247,7 @@ function insertCross(path) {
     let text = generateCross(path);
     crossPosition.insertAdjacentHTML('afterbegin', text);
 }
+
 
 /**
 * This function generates a cross with an area function fitting the img of the cross element.
@@ -280,6 +283,7 @@ function generateCross(path) {
  * @param {string} orientation Landscape or portrait change
  */
 
+
 function changeOrientation(orientation) {
     let chooseDevice = getId('deviceSetting');
     if (orientation == 'landscape') chooseDevice.classList.add('d-none');
@@ -293,8 +297,8 @@ function renderDeviceBar() {
         let text = controlBar();
         helpCheckbox.insertAdjacentHTML('afterbegin', text);
     }
-
 }
+
 
 function controlBar() {
     return `
@@ -307,6 +311,7 @@ function controlBar() {
 }
 
 function getId(id) { return document?.getElementById(`${id}`) }
+
 
 function keyboardHelpBar() {
     let keyboardHelp = ` 
@@ -321,11 +326,13 @@ function keyboardHelpBar() {
     return keyboardHelp
 }
 
+
 function insertButtons() {
     let buttonPosition = document.getElementById('controlBtnPosition');
     let text = generateButtons();
     buttonPosition.insertAdjacentHTML('afterbegin', text);
 }
+
 
 function generateButtons() {
     let newButtons = `  
@@ -342,7 +349,6 @@ function generateButtons() {
 }
 
 
-
 function toggleOptionPanel() {
     styleSetting = document.getElementById('settingMenu').classList.toggle('d-none');
 }
@@ -353,7 +359,6 @@ function chooseDevice(boolean) {
     if (boolean == 'desktop') { touchScreen = false; }
     renderHelpBar();
 }
-
 
 
 function showHelp() {
@@ -401,6 +406,7 @@ function touchCross(img, position) {
     }
 }
 
+
 function touchCrossEnd(event, img, position) {
     document.getElementById('crossMap').src = `img/0.Own_Pictures/${img}/${position}.png`;
     if (start) {
@@ -416,11 +422,11 @@ function touchCrossEnd(event, img, position) {
     }
 }
 
+
 /**
  * 
  * @param {string} intervalName The name of the interval which needs to be cleared while restarting the game.
  */
-
 function setStoppableInterval(fn, frame) {
     if (start) {
         let id = setInterval(fn, frame);
@@ -428,22 +434,22 @@ function setStoppableInterval(fn, frame) {
     }
 }
 
+
 function stopGame() {
     allIntervals.forEach(clearInterval);
     allIntervals = [];
 }
+
 
 function stopAllTimeouts() {
     allTimeouts.forEach(clearTimeout);
     allTimeouts = [];
 }
 
+
 function toggleSounds() {
     soundIsOn = !soundIsOn;
 }
-
-/**The function prevents an audio bug in chrome. */
-
 
 
 /**
@@ -459,7 +465,6 @@ function stopTimeout(mp3JSON) {
 }
 
 
-
 function changeToFullscreen() {
     let fullscreen = document.getElementById('mainContainer');
     if (!isInFullscreen) {
@@ -473,6 +478,7 @@ function changeToFullscreen() {
     }
 }
 
+
 function enterFullscreen(element) {
     if (element.requestFullscreen) {
         element.requestFullscreen();
@@ -482,6 +488,7 @@ function enterFullscreen(element) {
         element.webkitRequestFullscreen();
     }
 }
+
 
 function exitFullscreen() {
     if (document.exitFullscreen) {

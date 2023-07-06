@@ -20,13 +20,12 @@ class World {
     backgroundMusic = new Audio('');
 
 
-
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
         this.draw();
-        this.setWorld();     
+        this.setWorld();
         this.start();
         this.checkWorld();
     }
@@ -79,7 +78,7 @@ class World {
                 <img class="bottle-stat" src="img/7.Marcadores/Icono/Botella.png"> 
                 <div>= ${this.bottleCount}<div>`
         }
-        else  setTimeout(() => { document.getElementById('bottleCounter').innerHTML = ""; }, 2000); 
+        else setTimeout(() => { document.getElementById('bottleCounter').innerHTML = ""; }, 2000);
     }
 
     checkCoinCount() {
@@ -101,8 +100,6 @@ class World {
         this.pickUpBottle();
         this.pickUpCoin();
     }
-
-
 
 
     startEndbossFight(enemy) {
@@ -172,7 +169,6 @@ class World {
         thrownObject.speedX = 0;
         thrownObject.speedY = 0;
         thrownObject.acceleration = 0;
-
     }
 
     characterGotDamage(enemy, damage) {
@@ -189,7 +185,7 @@ class World {
             this.character.hit(damage);
             this.statusbar.setPercentage(this.character.energy);
         }
-    } 
+    }
 
 
     pickUpBottle() {
@@ -258,7 +254,7 @@ class World {
 
 
 
-/* The funcion draws the canvas of the world including all object instances. */
+    /* The funcion draws the canvas of the world including all object instances. */
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);

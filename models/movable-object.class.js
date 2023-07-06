@@ -1,5 +1,5 @@
 class MovableObject extends DrawableObject {
-   
+
     speed = 0.15;
     sprintSpeed = 1.5;
     otherDirection = false;
@@ -21,7 +21,7 @@ class MovableObject extends DrawableObject {
      * 
      */
 
-    applyGravity(yPosition) {        
+    applyGravity(yPosition) {
         setStoppableInterval(() => {
             if (this.isAboveGround() || this.speedY > yPosition) {
                 this.y -= this.speedY;
@@ -36,9 +36,9 @@ class MovableObject extends DrawableObject {
      */
     isAboveGround() {
         if (this instanceof ThrowableObject) return true
-        if (this instanceof Endboss) return this.y < 50;      
+        if (this instanceof Endboss) return this.y < 50;
         if (this instanceof smallChicken) return this.y < 370
-        else return this.y < 180; 
+        else return this.y < 180;
     }
 
     /**loadImage('img/test.png')
@@ -102,6 +102,8 @@ class MovableObject extends DrawableObject {
     }
 
 
+
+
     /**
    * @param {number} speedY represents the jumping height.
    */
@@ -120,12 +122,12 @@ class MovableObject extends DrawableObject {
 
     isColliding(movableObject) {
         if (this.world.keyboard.DODGE) {
-                return this.x + 20 + this.width - 55 > movableObject.x
+            return this.x + 20 + this.width - 55 > movableObject.x
                 && this.y + 190 + this.height - 200 > movableObject.y
                 && this.x + 20 < movableObject.x + movableObject.width
                 && this.y + 190 < movableObject.y + movableObject.height
         }
-        else {           
+        else {
             return this.x + 20 + this.width - 55 > movableObject.x
                 && this.y + 90 + this.height - 100 > movableObject.y
                 && this.x + 20 < movableObject.x + movableObject.width
@@ -134,11 +136,11 @@ class MovableObject extends DrawableObject {
 
     }
 
-/**
- * The function checks the collision of an object dispite the character with it's surroundings.
- * @param {*} movableObject - The colliding object like enemies or bottles in the world.
- * @returns true if two different objects are colliding.
- */
+    /**
+     * The function checks the collision of an object dispite the character with it's surroundings.
+     * @param {*} movableObject - The colliding object like enemies or bottles in the world.
+     * @returns true if two different objects are colliding.
+     */
 
     objectIsColliding(movableObject) {
         return this.x + this.width > movableObject.x
@@ -156,14 +158,14 @@ class MovableObject extends DrawableObject {
 
 
     isCollidingEndboss(movableObject) {
-        
+
         if (this.world.keyboard.DODGE) {
             return this.x + 20 + this.width - 55 > movableObject.x + 40
                 && this.y + 190 + this.height - 200 > movableObject.y + 110
                 && this.x + 20 < movableObject.x + 40 + movableObject.width - 40
                 && this.y + 190 < movableObject.y + 110 + movableObject.height - 180
         }
-        else {           
+        else {
             return this.x + 20 + this.width - 55 > movableObject.x + 40
                 && this.y + 120 + this.height - 130 > movableObject.y + 110
                 && this.x + 20 < movableObject.x + 40 + movableObject.width - 40
@@ -186,11 +188,11 @@ class MovableObject extends DrawableObject {
             && this.y < movableObject.y - 400 + movableObject.height + 200
     }
 
-   /**
-     * The functon is used by enemies to determine wether the player is very close to an enemy or not.
-     * @param {Object} movableObject The player
-     * @returns true if the player is really close to the enemy.
-     */
+    /**
+      * The functon is used by enemies to determine wether the player is very close to an enemy or not.
+      * @param {Object} movableObject The player
+      * @returns true if the player is really close to the enemy.
+      */
 
 
     isClose(movableObject) {
@@ -218,27 +220,26 @@ class MovableObject extends DrawableObject {
         return this.energy == 0;
     }
 
-/**
- * The function uses a JSON in the following format:
- * CHICKEN_SOUND = {
-        'audios': [],
-        'soundIsPlayedOnce': false,
-        'timeoutId' : '', 
-        'randomSound' : '',
-    }    
- * The audios in the first Line will be played once and will be attached randomly to 
- * an object. If only one audio is in the array it will be played.   
- * @param {JSON} mp3JSON The name of the audio file.
- * @param {Number} mp3JSON.randomSound is the random sound number which will be played.
- * @param {Number} soundDuration is the length in seconds of the mp3 file.
- * @param {Number} timeoutId is the id of the timeout which can later be cleared. 
- *
-*/
+    /**
+     * The function uses a JSON in the following format:
+     * CHICKEN_SOUND = {
+            'audios': [],
+            'soundIsPlayedOnce': false,
+            'timeoutId' : '', 
+            'randomSound' : '',
+        }    
+     * The audios in the first Line will be played once and will be attached randomly to 
+     * an object. If only one audio is in the array it will be played.   
+     * @param {JSON} mp3JSON The name of the audio file.
+     * @param {Number} mp3JSON.randomSound is the random sound number which will be played.
+     * @param {Number} soundDuration is the length in seconds of the mp3 file.
+     * @param {Number} timeoutId is the id of the timeout which can later be cleared. 
+     *
+    */
 
-playAudioOnce(mp3JSON, soundVolume) {
+    playAudioOnce(mp3JSON, soundVolume) {
 
-    if (!mp3JSON.soundIsPlayedOnce && soundIsOn) {
-            console.log(soundIsOn)
+        if (!mp3JSON.soundIsPlayedOnce && soundIsOn) {
             mp3JSON.randomSound = (Math.floor(Math.random() * mp3JSON.audios.length));
             let randomSoundPosition = mp3JSON.randomSound
             let soundDuration = mp3JSON.audios[randomSoundPosition].duration;
@@ -250,6 +251,6 @@ playAudioOnce(mp3JSON, soundVolume) {
             }, 1000 * soundDuration);
             allTimeouts.push(timeoutId);
             mp3JSON['timeoutId'] = timeoutId;
+        }
     }
-}
 }

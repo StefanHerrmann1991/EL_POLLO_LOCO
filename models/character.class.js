@@ -1,5 +1,4 @@
 class Character extends MovableObject {
-
     y = 80;
     speed = 10;
     jump = false;
@@ -11,7 +10,7 @@ class Character extends MovableObject {
     audioJumping = false;
     changeCameraLeft = true;
     changeCameraRight = true;
-
+    lastJump = 0;
     /* constructor führt sobald der Charakter geladen wird, die Funktionen innerhalb des Constructors aus. */
     IMAGES_WALKING = [
         'img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-21.png',
@@ -28,7 +27,8 @@ class Character extends MovableObject {
         'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-36.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-37.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-38.png',
-        'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-39.png'
+        'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-39.png',
+
     ];
 
     IMAGES_DODGING = [
@@ -75,10 +75,7 @@ class Character extends MovableObject {
         'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-19.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/LONG_IDLE/I-20.png'
     ]
-
-
     world;
-
 
 
     constructor() {
@@ -105,14 +102,15 @@ class Character extends MovableObject {
     }
 
 
+
+
     playCharacterAnimation() {
         if (this.canDie()) this.isDying();
         if (this.isHurt()) this.playAnimation(this.IMAGES_HURTING);
-        if (this.isAboveGround()) this.playAnimation(this.IMAGES_JUMPING);
         if (this.canWalk()) this.playAnimation(this.IMAGES_WALKING);
         else if (this.canWait()) this.playAnimation(this.IMAGES_IDLE);
         if (this.canDodge()) this.isDodging();
-        if (!this.world.keyboard.DODGE) this.dodgeAnimation = 0;     
+        if (!this.world.keyboard.DODGE) this.dodgeAnimation = 0;
     }
 
     moveCharacter() {
@@ -122,11 +120,29 @@ class Character extends MovableObject {
         if (this.canJump()) this.isJumping();
     }
 
-
+    playJumpingAnimation() { if (this.isAboveGround()) this.playAnimation(this.IMAGES_JUMPING); }
     isJumping() {
-        this.speedY = 35;
-        this.playAudioOnKey(jumping_sound);
+        let timePassed = new Date().getTime() - this.lastJump;
+        if (timePassed > 800) {
+            this.loadImageInTime(this.IMAGES_JUMPING[0], 50)
+            this.loadImageInTime(this.IMAGES_JUMPING[1], 150)
+            this.loadImageInTime(this.IMAGES_JUMPING[2], 300)
+            /*  this.loadImageInTime(this.IMAGES_JUMPING[3], 350) */
+            this.loadImageInTime(this.IMAGES_JUMPING[4], 400)
+            this.loadImageInTime(this.IMAGES_JUMPING[5], 600)
+            this.loadImageInTime(this.IMAGES_JUMPING[6], 650)
+            this.speedY = 35;
+            this.playAudioOnKey(jumping_sound);
+            this.lastJump = new Date().getTime();
+        }
     }
+
+    loadImageInTime(imageNumber, time) {
+        setTimeout(() => {
+            this.loadImage(imageNumber)
+        }, time);
+    }
+
 
     isWalkingRight() {
         this.otherDirection = false;
@@ -134,11 +150,13 @@ class Character extends MovableObject {
         if (soundIsOn) walking_sound.play();
     }
 
+
     isWalkingLeft() {
         this.otherDirection = true;
         this.adjustCameraLeft();
         walking_sound.play();
     }
+
 
     isDying() {
         this.playAnimation(this.IMAGES_DYING);
@@ -148,6 +166,7 @@ class Character extends MovableObject {
         }, 400);
     }
 
+
     isDodging() {
         if (this.dodgeAnimation < 1) {
             this.playAnimation(this.IMAGES_DODGING);
@@ -156,20 +175,21 @@ class Character extends MovableObject {
         this.dodgeAnimation++;
     }
 
+
     standIdle() { return !this.isDead() && !this.isHurt() && !this.isAboveGround() }
     canJump() { return !this.isDead() && this.world.keyboard.SPACE && !this.isAboveGround() }
-    canWalk() { return !this.world.keyboard.SPACE && !this.world.keyboard.DODGE && !this.isDead() && (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) }
-    canWalkRight() { return !this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x }
-    canWalkLeft() { return !this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.LEFT && this.x > 0 }
+    canWalk() { return !this.world.keyboard.SPACE && !this.world.keyboard.DODGE && !this.isDead() && !this.isAboveGround() && (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) }
+    canWalkRight() { return !this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.RIGHT &&  this.x < this.world.level.level_end_x }
+    canWalkLeft() { return !this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.LEFT &&  this.x > 0 }
     canWait() { return !this.isDead() && !this.isHurt() && !this.isAboveGround() }
     canDodge() { return this.world.keyboard.DODGE && !this.isDead() && !this.isHurt() && !this.isAboveGround() }
     canDie() { return this.isDead() && !this.death }
+
 
     /**
      * The function uses a mp3 file to play a sound while a certain key is pressed and stops the sound, when the key isn't pressed anymore.
      * @param {object} mp3JSON - An object containing the path to the audio data.
      */
-
     playAudioOnKey(mp3JSON) {
 
         if (!this.audioJumping && soundIsOn) {
@@ -183,12 +203,12 @@ class Character extends MovableObject {
         }
     }
 
+
     /**The funcion adjusts the camera to the right side depending on the position of the camera, when the character moves right.
      * 
      * @param {Number} rightBorder - The right border of the canvas where the camera locks in position, until the character moves left.
      * 
      */
-
     adjustCameraRight() {
         let rightBorder = -this.x + 100;
 
@@ -207,13 +227,10 @@ class Character extends MovableObject {
         this.camera_position_storage = this.world.camera_x;
     }
 
+
     /**The funcion adjusts the camera to the left side depending on the position of the camera, when the character moves left.
-       * 
-       * @param {Number} leftBorder - The left border of the canvas where the camera locks in position, until the character moves right.
-       * 
-       */
-
-
+    * @param {Number} leftBorder - The left border of the canvas where the camera locks in position, until the character moves right.
+    */
     adjustCameraLeft() {
         let leftBorder = -this.x + 620 - this.width;
 

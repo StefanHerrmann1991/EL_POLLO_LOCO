@@ -125,16 +125,11 @@ function generateBottles(worldLength) {
 
 
 
-/* TODO: not doubled xPosition
-in interval to prevent coins from being to near to each other*/
-
 /**
  * 
  * @param {number} worldLength The parameter reflects the length of the world. 
  * @param {number} coinNumber The total number of coins in the world.
  */
-
-
 function generateLoot(worldLength) {
     let minX = 100;
     coins = 4 * worldLength;
@@ -148,6 +143,7 @@ function generateLoot(worldLength) {
     }
 }
 
+
 /**
  * The function generates a random number of coins in the world and checks if the maximum number of coins in the world is reached.
  * @param {number} randomXPosition Position where a cluster of coins will be generated.
@@ -155,7 +151,6 @@ function generateLoot(worldLength) {
  * @param {number} clusterMin Minimum number of coins in a cluster.
  * @param {number} clusterMax Maximum number of coins in a cluster.
  */
-
 function coinCluster(randomXPosition, clusterMin, clusterMax) {
 
     clusterNumber = Number(getRandomArbitrary(clusterMin, clusterMax).toFixed(0));
@@ -170,13 +165,12 @@ function coinCluster(randomXPosition, clusterMin, clusterMax) {
     }
 }
 
+
 /**
  * The function generate coin parables depending on the cluster number at a ramdom x position on the map.
  * @param {number} clusterNumber - The number of coins in a cluster.
  * @param {number} randomXPosition - Random position where a cluster will be generated.
  */
-
-
 function generateCoinParabel(clusterNumber, randomXPosition) {
 
     let randomYPosition = Number(getRandomArbitrary(5, 150).toFixed(0))
@@ -192,7 +186,6 @@ function generateCoinParabel(clusterNumber, randomXPosition) {
  * The function generates a certain amount of enemies in the world with an upper number of enemies in a certain area.
  * @param {number} worldLength 
  */
-
 function generateEnemies(worldLength) {
     endbossPosition = LEVEL_END - 700;
     ENEMIES.push(new Endboss(endbossPosition));
@@ -210,6 +203,7 @@ function generateEnemies(worldLength) {
     }
 }
 
+
 /**
  * The function generates a certain amount of enemies in a given level part at random positions.
  * @param {number} minX - storages the last position of the map where enemies were generated.
@@ -217,7 +211,6 @@ function generateEnemies(worldLength) {
  * @param {number} enemy - The enemy type to be generated.
  * @param {number} enemyAmount - the amount of enemies in the level part.
  */
-
 function generateEnemiesAtX(minX, levelPart, enemy, enemyAmount) {
 
     for (let i = 1; i < enemyAmount; i++) {
@@ -228,23 +221,23 @@ function generateEnemiesAtX(minX, levelPart, enemy, enemyAmount) {
     }
 }
 
+
 /**
  * The function generate a number in a certain interval.
  * @param {number} min The lower border of the interval.
  * @param {number} max The upper border of the interval.
  * @returns 
  */
-
-
 function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
 }
 
+
 /**
-    * 
-    * @param {number} num The parameter tests if a number is odd.
-    * @returns true when the number isOdd
-    */
+* 
+* @param {number} num The parameter tests if a number is odd.
+* @returns true when the number isOdd
+*/
 function isOdd(num) { return Math.abs(num % 2) }
 
 
