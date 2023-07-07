@@ -49,8 +49,6 @@ class Endboss extends MovableObject {
     ];
 
 
-
-
     constructor(x) {
         super().loadImage(this.IMAGES_PERCEIVING[0]);
         this.loadImages(this.IMAGES_WALKING);
@@ -64,7 +62,6 @@ class Endboss extends MovableObject {
     /**
      * The function plays the animations for the enboss chicken. 
      */
-
     animate() {
         this.applyGravity(0);
         setStoppableInterval(() => {
@@ -77,10 +74,8 @@ class Endboss extends MovableObject {
             if (this.canAttack())
                 this.attackEnemy();
 
-
             if (this.canBeHurt())
                 this.playAnimation(this.IMAGES_HURTING);
-
 
             else if (this.canWalk()) {
                 this.isWalking()
@@ -112,11 +107,10 @@ class Endboss extends MovableObject {
     noteCharacter() {
         this.playAnimation(this.IMAGES_PERCEIVING);
         this.i++;
-        if (this.i >= 9) {
-            this.hadFirstContact = false;
-        }
+        if (this.i >= 9) this.hadFirstContact = false;
+
     }
-  
+
     isWalking() { this.playAnimation(this.IMAGES_WALKING) }
 
 

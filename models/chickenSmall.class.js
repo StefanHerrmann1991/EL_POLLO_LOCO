@@ -7,7 +7,7 @@ class smallChicken extends MovableObject {
     width = 60;
     acceleration = 1.2
     defaultSpeed;
-
+    isStunned = false;
 
     IMAGES_WALKING = [
         'img/3.Secuencias_Enemy_básico/Versión_pollito/1.Paso_derecho.png',
@@ -17,6 +17,13 @@ class smallChicken extends MovableObject {
     IMAGES_DYING = [
         'img/3.Secuencias_Enemy_básico/Versión_pollito/4.Muerte.png'
     ];
+
+
+    IMAGES_STUNNED = [
+        'img/3.Secuencias_Enemy_básico/Versión_pollito/smallChickenStunned.png',
+        'img/3.Secuencias_Enemy_básico/Versión_pollito/smallChickenStunned2.png',
+        'img/3.Secuencias_Enemy_básico/Versión_pollito/smallChickenStunned3.png',
+    ]
 
     CHICKEN_SOUND = {
         'audios': [
@@ -43,6 +50,7 @@ class smallChicken extends MovableObject {
         super().loadImage('img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/1.Ga_paso_derecho.png');
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_DYING);
+        this.loadImages(this.IMAGES_STUNNED);
         this.x = x; // Zahl zwischen 0 und 500 Math ramdom generiert eine zufällige Zahl zwischen 0 und 1
         this.speed = 0.5 + Math.random() * 0.7;
         this.defaultSpeed = this.speed;
@@ -51,38 +59,51 @@ class smallChicken extends MovableObject {
 
 
     animate() {
-        this.applyGravity(0)
+        this.applyGravity(0)      
         setStoppableInterval(() => {
             if (this.isDead()) this.chickenIsDying()
             else this.chickenIsAttacking()
         }, 1000 / 60);
         setStoppableInterval(() => {
-            if (!this.isDead()) this.playAnimation(this.IMAGES_WALKING);
+            if (!this.isDead() && !this.isStunned) this.playAnimation(this.IMAGES_WALKING);
         }, 200);
     }
 
 
     chickenIsAttacking() {
-        this.moveLeft();
-        if (this.sawCharacter) {
-            this.playAudioOnce(this.CHICKEN_SOUND, this.volume)
-            if (!this.isAboveGround()) {
-                this.speedY = 15;                
-                this.speed = 14;
-                this.sawCharacter = false; 
-                setTimeout(() => {
-                    this.speed = this.defaultSpeed;   
-                }, 600);                          
+        if (!this.isStunned) {
+            this.moveLeft();
+            if (this.sawCharacter) {
+                this.playAudioOnce(this.CHICKEN_SOUND, this.volume)
+                if (!this.isAboveGround()) {
+                    this.speedY = 15;
+                    this.speed = 14;
+                    this.sawCharacter = false;
+                    setTimeout(() => {
+                        this.speed = this.defaultSpeed;
+                    }, 600);
+                }
             }
         }
+        else this.chickenIsStunned();
     }
+
+     chickenIsStunned() {
+        {
+            this.loadImage(this.IMAGES_STUNNED[0])
+            setTimeout(() => {
+                this.loadImage(this.IMAGES_STUNNED[1])
+            }, 100);
+            setTimeout(() => {
+                this.loadImage(this.IMAGES_STUNNED[2])
+            }, 200);
+        }
+    } 
 
     chickenIsDying() {
         this.playAnimation(this.IMAGES_DYING);
         this.playAudioOnce(this.CHICKEN_SOUND_DEATH, this.volume);
         stopTimeout(this.CHICKEN_SOUND);
     }
-
-   
 }
 

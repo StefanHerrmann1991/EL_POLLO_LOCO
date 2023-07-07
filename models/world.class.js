@@ -94,6 +94,7 @@ class World {
             if (this.character.isClose(enemy) && !(enemy instanceof Endboss)) { enemy.sawCharacter = true; }
             this.characterGotDamage(enemy, 5);
             this.jumpKill(enemy);
+            this.repellChicken(enemy);
             this.throwBottleOn(enemy);
             this.startEndbossFight(enemy);
         });
@@ -101,6 +102,15 @@ class World {
         this.pickUpCoin();
     }
 
+
+    repellChicken(enemy) {
+        if (this.character.isAboveGround() && enemy.isAboveGround() && enemy instanceof smallChicken) {
+            enemy.isStunned = true;
+            enemy.x = enemy.x + 10
+            enemy.speed = 0
+            enemy.defaultSpeed = 0
+        }
+    }
 
     startEndbossFight(enemy) {
         if (!enemy.isDead() && enemy instanceof Endboss) {
@@ -139,8 +149,8 @@ class World {
 
 
     jumpKill(enemy) {
-        if (this.isKillableByJumping(enemy)) {
-            this.removeAn(enemy);
+        if (this.isKillableByJumping(enemy) && !(enemy instanceof smallChicken && enemy.isAboveGround())) {
+            this.removeThis(enemy);
             this.character.speedY = 3;
         }
     }
@@ -158,7 +168,7 @@ class World {
                     this.statusbarEndboss.setPercentage(enemy.energy);
                 }
                 if (!(enemy instanceof Endboss) && enemy.isDead()) {
-                    this.removeAn(enemy)
+                    this.removeThis(enemy)
                 }
             }
         })
@@ -210,7 +220,7 @@ class World {
     }
 
 
-    removeAn(enemy) {
+    removeThis(enemy) {
         enemy.energy = 0;
         setTimeout(() => {
             let index = this.level.enemies.indexOf(enemy)
