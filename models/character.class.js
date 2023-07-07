@@ -126,8 +126,7 @@ class Character extends MovableObject {
         if (timePassed > 800) {
             this.loadImageInTime(this.IMAGES_JUMPING[0], 50)
             this.loadImageInTime(this.IMAGES_JUMPING[1], 150)
-            this.loadImageInTime(this.IMAGES_JUMPING[2], 300)
-            /*  this.loadImageInTime(this.IMAGES_JUMPING[3], 350) */
+            this.loadImageInTime(this.IMAGES_JUMPING[2], 300)          
             this.loadImageInTime(this.IMAGES_JUMPING[4], 400)
             this.loadImageInTime(this.IMAGES_JUMPING[5], 600)
             this.loadImageInTime(this.IMAGES_JUMPING[6], 650)
