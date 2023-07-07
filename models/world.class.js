@@ -93,8 +93,7 @@ class World {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isClose(enemy) && !(enemy instanceof Endboss)) { enemy.sawCharacter = true; }
             this.characterGotDamage(enemy, 5);
-            this.jumpKill(enemy);
-            this.repellChicken(enemy);
+            this.jumpKill(enemy);        
             this.throwBottleOn(enemy);
             this.startEndbossFight(enemy);
         });
@@ -103,14 +102,6 @@ class World {
     }
 
 
-    repellChicken(enemy) {
-        if (this.character.isAboveGround() && enemy.isAboveGround() && enemy instanceof smallChicken) {
-            enemy.isStunned = true;
-            enemy.x = enemy.x + 10
-            enemy.speed = 0
-            enemy.defaultSpeed = 0
-        }
-    }
 
     startEndbossFight(enemy) {
         if (!enemy.isDead() && enemy instanceof Endboss) {

@@ -7,7 +7,7 @@ class smallChicken extends MovableObject {
     width = 60;
     acceleration = 1.2
     defaultSpeed;
-    isStunned = false;
+    
 
     IMAGES_WALKING = [
         'img/3.Secuencias_Enemy_básico/Versión_pollito/1.Paso_derecho.png',
@@ -59,46 +59,31 @@ class smallChicken extends MovableObject {
 
 
     animate() {
-        this.applyGravity(0)      
+        this.applyGravity(0)
         setStoppableInterval(() => {
             if (this.isDead()) this.chickenIsDying()
             else this.chickenIsAttacking()
         }, 1000 / 60);
         setStoppableInterval(() => {
-            if (!this.isDead() && !this.isStunned) this.playAnimation(this.IMAGES_WALKING);
+            if (!this.isDead()) this.playAnimation(this.IMAGES_WALKING);
         }, 200);
     }
 
 
     chickenIsAttacking() {
-        if (!this.isStunned) {
-            this.moveLeft();
-            if (this.sawCharacter) {
-                this.playAudioOnce(this.CHICKEN_SOUND, this.volume)
-                if (!this.isAboveGround()) {
-                    this.speedY = 15;
-                    this.speed = 14;
-                    this.sawCharacter = false;
-                    setTimeout(() => {
-                        this.speed = this.defaultSpeed;
-                    }, 600);
-                }
+        this.moveLeft();
+        if (this.sawCharacter) {
+            this.playAudioOnce(this.CHICKEN_SOUND, this.volume)
+            if (!this.isAboveGround()) {
+                this.speedY = 15;
+                this.speed = 14;
+                this.sawCharacter = false;
+                setTimeout(() => {
+                    this.speed = this.defaultSpeed;
+                }, 600);
             }
-        }
-        else this.chickenIsStunned();
+        } 
     }
-
-     chickenIsStunned() {
-        {
-            this.loadImage(this.IMAGES_STUNNED[0])
-            setTimeout(() => {
-                this.loadImage(this.IMAGES_STUNNED[1])
-            }, 100);
-            setTimeout(() => {
-                this.loadImage(this.IMAGES_STUNNED[2])
-            }, 200);
-        }
-    } 
 
     chickenIsDying() {
         this.playAnimation(this.IMAGES_DYING);
