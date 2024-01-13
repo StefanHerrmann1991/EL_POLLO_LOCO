@@ -176,9 +176,8 @@ document.onkeyup = function (e) {
  * The function renders the control cross and the help button depending on the device and orientation. * 
  */
 function loadControlPanel() {
-
-    let crossPosition = document.getElementById('crossPosition');
-    let controlBtnPosition = document.getElementById('controlBtnPosition');
+    let crossPosition = document?.getElementById('crossPosition');
+    let controlBtnPosition = document?.getElementById('controlBtnPosition');
     crossPosition.innerHTML = '';
     controlBtnPosition.innerHTML = '';
     if (isMobile()) {
