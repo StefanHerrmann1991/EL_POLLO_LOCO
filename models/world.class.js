@@ -68,7 +68,7 @@ class World {
             this.endscreen.push(end);
             stopGame();
             stopAllTimeouts();
-        }, 5000);
+        }, 3000);
     }
 
 

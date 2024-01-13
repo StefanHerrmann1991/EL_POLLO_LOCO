@@ -18,13 +18,6 @@ class smallChicken extends MovableObject {
         'img/3.Secuencias_Enemy_básico/Versión_pollito/4.Muerte.png'
     ];
 
-
-    IMAGES_STUNNED = [
-        'img/3.Secuencias_Enemy_básico/Versión_pollito/smallChickenStunned.png',
-        'img/3.Secuencias_Enemy_básico/Versión_pollito/smallChickenStunned2.png',
-        'img/3.Secuencias_Enemy_básico/Versión_pollito/smallChickenStunned3.png',
-    ]
-
     CHICKEN_SOUND = {
         'audios': [
             new Audio('audio/chickenSound0.mp3'),
@@ -49,8 +42,7 @@ class smallChicken extends MovableObject {
     constructor(x) {
         super().loadImage('img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/1.Ga_paso_derecho.png');
         this.loadImages(this.IMAGES_WALKING);
-        this.loadImages(this.IMAGES_DYING);
-        this.loadImages(this.IMAGES_STUNNED);
+        this.loadImages(this.IMAGES_DYING);       
         this.x = x; // Zahl zwischen 0 und 500 Math ramdom generiert eine zufällige Zahl zwischen 0 und 1
         this.speed = 0.5 + Math.random() * 0.7;
         this.defaultSpeed = this.speed;

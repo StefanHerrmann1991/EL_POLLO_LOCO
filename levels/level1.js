@@ -108,21 +108,18 @@ function generateClouds(worldLength) {
 }
 
 
-
 /**
  * The function sets randomly bottles on the map.
  * @param {number} worldLength 
  */
 
 function generateBottles(worldLength) {
-    for (let i = 0; i < worldLength; i++) {
+    for (let i = 0; i < worldLength * 1.2; i++) {
         let xPosition = Number(getRandomArbitrary(LEVEL_START, LEVEL_END - 1200).toFixed(0));
         let yPostion = Number(getRandomArbitrary(100, 300).toFixed(0));
         BOTTLE.push(new LootableObject(xPosition, yPostion));
     }
 }
-
-
 
 
 /**

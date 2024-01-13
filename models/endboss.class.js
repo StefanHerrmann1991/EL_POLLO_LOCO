@@ -60,7 +60,7 @@ class Endboss extends MovableObject {
     }
 
     /**
-     * The function plays the animations for the enboss chicken. 
+     * The function plays the animations for the endboss chicken. 
      */
     animate() {
         this.applyGravity(0);

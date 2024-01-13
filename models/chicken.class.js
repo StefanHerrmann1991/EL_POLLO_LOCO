@@ -3,8 +3,6 @@ class Chicken extends MovableObject {
     volume = 0.4
     y = 375;
     sawCharacter = false;
-    /* 
-      y = 320; */
     height = 60;
     width = 60;
     IMAGES_WALKING = [

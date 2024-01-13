@@ -6,6 +6,8 @@ class DrawableObject {
     width = 150;
     imageCache = {};
 
+
+    
     /**
      * The function loads a picture depending on its path.
      * @param {string} path The folder where the image is located.
@@ -29,10 +31,10 @@ class DrawableObject {
         });
     }
 
-    /**
-     * The function draws a rectangle around the character at a  certain position and moves with the character.
-     * @param {*} ctx 
-     */
+/**
+* The function draws a rectangle around the character at a  certain position and moves with the character.
+* @param {*} ctx 
+*/
 
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);       
