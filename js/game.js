@@ -20,11 +20,10 @@ let soundIsOn = true;
 it returns boolean value*/
 const isMobile = () => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
+
 /**
  * The functio generates the Level before the game is started, to reduce the loading time.
  */
-
-
 function generateLevel1() {
     canvas = document.getElementById('canvas');
     initLevel1();
@@ -35,7 +34,6 @@ function generateLevel1() {
  * The function initiates the canvas and for the game relevant functions.
  * 
 */
-
 function initGame() {
     start = true;
     toggleStartBtn('restart');
@@ -192,14 +190,14 @@ function loadControlPanel() {
     }
 }
 
-
 function toggleMusic() {
     musicIsOn = !musicIsOn;
     if (musicIsOn) {
         backgroundMusic.volume = 0.2;
-        backgroundMusic.play();
+        backgroundMusic.play().catch(error => console.error("Error playing background music:", error));
+    } else {
+        backgroundMusic.pause();
     }
-    else backgroundMusic.pause();   
 }
 
 

@@ -119,7 +119,6 @@ class MovableObject extends DrawableObject {
      * @param {Object} movableObject - The colliding object like enemies or bottles in the world.
      * @returns true if a collision is detected.
      */
-
     isColliding(movableObject) {
         if (this.world.keyboard.DODGE) {
             return this.x + 20 + this.width - 55 > movableObject.x
@@ -136,12 +135,12 @@ class MovableObject extends DrawableObject {
 
     }
 
+
     /**
      * The function checks the collision of an object dispite the character with it's surroundings.
      * @param {*} movableObject - The colliding object like enemies or bottles in the world.
      * @returns true if two different objects are colliding.
      */
-
     objectIsColliding(movableObject) {
         return this.x + this.width > movableObject.x
             && this.y + this.height > movableObject.y
@@ -155,10 +154,7 @@ class MovableObject extends DrawableObject {
      * @param {object} movableObject - The colliding object like enemies or bottles in the world.
      * @returns true if a collision is detected.
      */
-
-
     isCollidingEndboss(movableObject) {
-
         if (this.world.keyboard.DODGE) {
             return this.x + 20 + this.width - 55 > movableObject.x + 40
                 && this.y + 190 + this.height - 200 > movableObject.y + 110
@@ -179,8 +175,6 @@ class MovableObject extends DrawableObject {
      * @param {Object} movableObject The player
      * @returns true if the player is in the area.
      */
-
-
     isInArea(movableObject) {
         return this.x + this.width > movableObject.x - 400
             && this.y + this.height > movableObject.y
@@ -188,19 +182,19 @@ class MovableObject extends DrawableObject {
             && this.y < movableObject.y - 400 + movableObject.height + 200
     }
 
+
     /**
       * The functon is used by enemies to determine wether the player is very close to an enemy or not.
       * @param {Object} movableObject The player
       * @returns true if the player is really close to the enemy.
       */
-
-
     isClose(movableObject) {
         return this.x + this.width + 70 > movableObject.x
             && this.y + this.height > movableObject.y
             && this.x < movableObject.x + movableObject.width
             && this.y < movableObject.y + movableObject.height
     }
+
 
     hit(energyLost) {
         this.energy -= energyLost;
@@ -210,15 +204,18 @@ class MovableObject extends DrawableObject {
         }
     }
 
+
     isHurt() {
         let timePassed = new Date().getTime() - this.lastHit; // difference in ms
         timePassed = timePassed / 1000; // difference in s
         return timePassed < 0.8;
     }
 
+
     isDead() {
         return this.energy == 0;
     }
+
 
     /**
      * The function uses a JSON in the following format:
@@ -234,23 +231,30 @@ class MovableObject extends DrawableObject {
      * @param {Number} mp3JSON.randomSound is the random sound number which will be played.
      * @param {Number} soundDuration is the length in seconds of the mp3 file.
      * @param {Number} timeoutId is the id of the timeout which can later be cleared. 
-     *
-    */
-
+     */
     playAudioOnce(mp3JSON, soundVolume) {
-
         if (!mp3JSON.soundIsPlayedOnce && soundIsOn) {
-            mp3JSON.randomSound = (Math.floor(Math.random() * mp3JSON.audios.length));
-            let randomSoundPosition = mp3JSON.randomSound
-            let soundDuration = mp3JSON.audios[randomSoundPosition].duration;
-            mp3JSON.soundIsPlayedOnce = true;
-            mp3JSON.audios[randomSoundPosition].volume = soundVolume;
-            mp3JSON.audios[randomSoundPosition].play();
-            let timeoutId = setTimeout(() => {
-                mp3JSON.audios[randomSoundPosition].pause();
-            }, 1000 * soundDuration);
-            allTimeouts.push(timeoutId);
-            mp3JSON['timeoutId'] = timeoutId;
+            mp3JSON.randomSound = Math.floor(Math.random() * mp3JSON.audios.length);
+            let randomSoundPosition = mp3JSON.randomSound;
+            let sound = mp3JSON.audios[randomSoundPosition];
+
+            // Set the volume and handle play promise
+            sound.volume = soundVolume;
+            sound.play().then(() => {
+                let soundDuration = sound.duration * 1000; // Convert duration to milliseconds
+                let timeoutId = setTimeout(() => {
+                    sound.pause();
+                    sound.currentTime = 0; // Optionally reset the sound to start
+                }, soundDuration);
+
+                allTimeouts.push(timeoutId);
+                mp3JSON['timeoutId'] = timeoutId;
+                mp3JSON.soundIsPlayedOnce = true;
+
+            }).catch(error => {
+                console.error("Error playing sound:", error);
+            });
         }
     }
+
 }
