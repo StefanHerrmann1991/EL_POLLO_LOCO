@@ -3,6 +3,7 @@ let world;
 let keyboard;
 let allIntervals = [];
 let allTimeouts = [];
+let allAudios = [];
 let start = false;
 let isInFullscreen = false;
 let touchScreen = false;
@@ -91,10 +92,33 @@ function toggleStartBtn(startCondition) {
 
 
 function restartGame() {
+    stopSingleAudios();
+    stopGeneralAudio();
     stopGame();
     stopAllTimeouts();
     initLevel1();
     initGame();
+}
+
+
+function stopSingleAudios() {
+    allAudios.forEach(audio => stopAndCleanupAudio(audio));
+}
+
+
+function stopGeneralAudio() {
+    stopAndCleanupAudio(menuSound);
+    stopAndCleanupAudio(walking_sound);
+    stopAndCleanupAudio(backgroundMusic);
+}
+
+
+function stopAndCleanupAudio(audioElement) {
+    if (audioElement) {
+        audioElement.pause();
+        audioElement.remove();
+
+    }
 }
 
 
@@ -290,7 +314,7 @@ function generateButtons() {
         </button>
         <div class="btn-help" id="helpBtn">Jump</div>
     </div>
-`;    
+`;
     return newButtons;
 }
 

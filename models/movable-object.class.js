@@ -16,12 +16,14 @@ class MovableObject extends DrawableObject {
     collisionWidth = this.width;
     collisionHeight = this.height;
     volume = 1;
+    allAudios = [];
     /**
      * The function enables the falling of obejects on the map like the character when it jumps or thrown bottles.
      * 
      */
 
     applyGravity(yPosition) {
+        console.log('applied')
         setStoppableInterval(() => {
             if (this.isAboveGround() || this.speedY > yPosition) {
                 this.y -= this.speedY;
@@ -102,16 +104,30 @@ class MovableObject extends DrawableObject {
     }
 
 
+    playAnimationJumping(images) {
+        let i = this.currentImage % images.length;
+        // let i = 0 % (Modu) 6; => 1, Rest 0 (Modu ist mathematischer Rest)
+        // 0 / 6 = 0 Rest 0; 1 / 6 = 0 Rest 1 (Rest, was übrig bleibt von der Zahl) 7 / 6 = 1 Rest 1 Modu hebt immer nur den Rest auf. Deswegen fängt er hier wieder bei 1 an
+        // Modu zählt 0 ,1 ,2 ,3 ,4 ,5 ,0 ....
+        let path = images[i];
+        this.img = this.imageCache[path];
+        this.currentImage++;
+    }
+
+
+    displaySingleImage(images) {
+        let path = images; 
+        this.img = this.imageCache[path];
+    }
+
 
 
     /**
    * @param {number} speedY represents the jumping height.
    */
-
     jump() {
         this.speedY = 30;
     }
-
 
 
     /**
@@ -237,24 +253,23 @@ class MovableObject extends DrawableObject {
             mp3JSON.randomSound = Math.floor(Math.random() * mp3JSON.audios.length);
             let randomSoundPosition = mp3JSON.randomSound;
             let sound = mp3JSON.audios[randomSoundPosition];
-
             // Set the volume and handle play promise
             sound.volume = soundVolume;
             sound.play().then(() => {
                 let soundDuration = sound.duration * 1000; // Convert duration to milliseconds
                 let timeoutId = setTimeout(() => {
                     sound.pause();
-                    sound.currentTime = 0; // Optionally reset the sound to start
+                    sound.currentTime = 0; // Optionally reset the sound to start                   
                 }, soundDuration);
-
+                allAudios.push(sound);
                 allTimeouts.push(timeoutId);
                 mp3JSON['timeoutId'] = timeoutId;
                 mp3JSON.soundIsPlayedOnce = true;
-
             }).catch(error => {
                 console.error("Error playing sound:", error);
             });
         }
     }
+
 
 }

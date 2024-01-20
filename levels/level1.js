@@ -30,7 +30,7 @@ function initLevel1() {
     BOTTLE = [];
     LOOT = [];
     ENEMIES = [];
-    generateLevel(16);
+    generateLevel(12);
 
     /**
      * These are the elements which presents the majority of the map.

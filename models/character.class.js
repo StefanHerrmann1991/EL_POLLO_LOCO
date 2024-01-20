@@ -11,6 +11,8 @@ class Character extends MovableObject {
     changeCameraLeft = true;
     changeCameraRight = true;
     lastJump = 0;
+    acceleration = 1.2
+    currentImage = 0;
     /* constructor führt sobald der Charakter geladen wird, die Funktionen innerhalb des Constructors aus. */
     IMAGES_WALKING = [
         'img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-21.png',
@@ -26,9 +28,7 @@ class Character extends MovableObject {
         'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-35.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-36.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-37.png',
-        'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-38.png',
-        'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-39.png',
-
+        'img/2.Secuencias_Personaje-Pepe-corrección/3.Secuencia_salto/J-38.png',      
     ];
 
     IMAGES_DODGING = [
@@ -63,7 +63,7 @@ class Character extends MovableObject {
         'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-9.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/1.IDLE/IDLE/I-10.png']
 
-   
+
     world;
 
 
@@ -99,27 +99,36 @@ class Character extends MovableObject {
         else if (this.canWait()) this.playAnimation(this.IMAGES_IDLE);
         if (this.canDodge()) this.isDodging();
         if (!this.world.keyboard.DODGE) this.dodgeAnimation = 0;
+        if (this.canJump()) setStoppableInterval(this.playJumpingAnimation(), 100)
     }
 
     moveCharacter() {
         walking_sound.pause();
         if (this.canWalkRight()) this.isWalkingRight();
         if (this.canWalkLeft()) this.isWalkingLeft();
-        if (this.canJump()) this.isJumping();
+
     }
 
-    playJumpingAnimation() { if (this.isAboveGround()) this.playAnimation(this.IMAGES_JUMPING); }
-    
+    playJumpingAnimation() {
+
+        this.isJumping();
+    }
+
+
+
+
     isJumping() {
         let timePassed = new Date().getTime() - this.lastJump;
         if (timePassed > 800) {
-            this.loadImageInTime(this.IMAGES_JUMPING[0], 50)
+            this.loadImageInTime(this.IMAGES_JUMPING[0], 0)
+            setTimeout(() => {
+                this.speedY = 26;
+            }, 100);
             this.loadImageInTime(this.IMAGES_JUMPING[1], 150)
-            this.loadImageInTime(this.IMAGES_JUMPING[2], 300)          
-            this.loadImageInTime(this.IMAGES_JUMPING[4], 400)
-            this.loadImageInTime(this.IMAGES_JUMPING[5], 600)
-            this.loadImageInTime(this.IMAGES_JUMPING[6], 650)
-            this.speedY = 35;
+            this.loadImageInTime(this.IMAGES_JUMPING[2], 300)
+            this.loadImageInTime(this.IMAGES_JUMPING[3], 650)
+            this.loadImageInTime(this.IMAGES_JUMPING[4], 850)
+            this.loadImageInTime(this.IMAGES_JUMPING[5], 900)          
             this.playAudioOnKey(jumping_sound);
             this.lastJump = new Date().getTime();
         }
@@ -127,7 +136,7 @@ class Character extends MovableObject {
 
     loadImageInTime(imageNumber, time) {
         setTimeout(() => {
-            this.loadImage(imageNumber)
+            this.displaySingleImage(imageNumber)
         }, time);
     }
 
@@ -159,7 +168,7 @@ class Character extends MovableObject {
         if (this.dodgeAnimation < 1) {
             this.playAnimation(this.IMAGES_DODGING);
         }
-        else { this.loadImage(this.IMAGES_DODGING[2]); }
+        else { this.displaySingleImage(this.IMAGES_DODGING[2]) }
         this.dodgeAnimation++;
     }
 
@@ -167,8 +176,8 @@ class Character extends MovableObject {
     standIdle() { return !this.isDead() && !this.isHurt() && !this.isAboveGround() }
     canJump() { return !this.isDead() && this.world.keyboard.SPACE && !this.isAboveGround() }
     canWalk() { return !this.world.keyboard.SPACE && !this.world.keyboard.DODGE && !this.isDead() && !this.isAboveGround() && (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) }
-    canWalkRight() { return !this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.RIGHT &&  this.x < this.world.level.level_end_x }
-    canWalkLeft() { return !this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.LEFT &&  this.x > 0 }
+    canWalkRight() { return !this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x }
+    canWalkLeft() { return !this.world.keyboard.DODGE && !this.isDead() && this.world.keyboard.LEFT && this.x > 0 }
     canWait() { return !this.isDead() && !this.isHurt() && !this.isAboveGround() }
     canDodge() { return this.world.keyboard.DODGE && !this.isDead() && !this.isHurt() && !this.isAboveGround() }
     canDie() { return this.isDead() && !this.death }
