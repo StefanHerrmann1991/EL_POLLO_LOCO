@@ -92,13 +92,13 @@
     </div>
 </body>
 <script>
-    /*   addEventListener('orientationchange', (event) => {
-          loadControlPanel();
-      }, { passive: true });
-  
-      addEventListener('resize', (event) => {
-          loadControlPanel();
-      }, { passive: true }); */
+    addEventListener('orientationchange', (event) => {
+        loadControlPanel();
+    }, { passive: true });
+
+    addEventListener('resize', (event) => {
+        loadControlPanel();
+    }, { passive: true });
 
     document.getElementById("crossPosition").addEventListener("contextmenu", function (e) { e.preventDefault(); });
 </script>

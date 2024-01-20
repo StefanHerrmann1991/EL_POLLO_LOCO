@@ -109,6 +109,7 @@ class Character extends MovableObject {
     }
 
     playJumpingAnimation() { if (this.isAboveGround()) this.playAnimation(this.IMAGES_JUMPING); }
+    
     isJumping() {
         let timePassed = new Date().getTime() - this.lastJump;
         if (timePassed > 800) {

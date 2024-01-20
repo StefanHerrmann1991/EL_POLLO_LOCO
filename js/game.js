@@ -69,7 +69,7 @@ function preventLongPressMenu(nodes) {
  */
 function toggleStartBtn(startCondition) {
     let start = getId('startButton');
-    let menu  = getId('menuOptions')
+    let menu = getId('menuOptions')
     if (startCondition == 'showStory') {
         start.innerHTML = `
         <div onclick="toggleStartBtn('firstStart')">Start</div>`;
@@ -201,16 +201,6 @@ function toggleMusic() {
 }
 
 
-function jumpBtn() {
-    if (start)
-        keyboard.SPACE = true;
-}
-
-
-function jumpBtnFalse() {
-    if (start)
-        keyboard.SPACE = false;
-}
 
 
 function showDesktopMode() {
@@ -227,7 +217,7 @@ function checkMobile() {
         changeOrientation('landscape');
         if (start) {
             insertCross();
-            insertButtons();           
+            insertButtons();
         }
     }
     if (window.matchMedia("(orientation: portrait)").matches) changeOrientation('portrait');
@@ -286,21 +276,41 @@ function insertButtons() {
     let buttonPosition = document.getElementById('controlBtnPosition');
     let text = generateButtons();
     buttonPosition.insertAdjacentHTML('afterbegin', text);
+    attachAButtonEventListeners();
 }
 
 
 function generateButtons() {
     let newButtons = `  
     <div class="A-btn  mgn-r mgn-t">
-    <button ontouchstart="jumpBtn()" ontouchend ="jumpBtnFalse()" class="pushable-btn" id="buttonA">
-        <span class="shadow-child"></span>
-        <span class="edge"></span>
-        <span class="front">A</span>
-    </button>
-    <div class="btn-help" id="helpBtn">Jump</div>
+        <button class="pushable-btn" id="buttonA">
+            <span class="shadow-child"></span>
+            <span class="edge"></span>
+            <span class="front">A</span>
+        </button>
+        <div class="btn-help" id="helpBtn">Jump</div>
     </div>
-`;
+`;    
     return newButtons;
+}
+
+function attachAButtonEventListeners() {
+    console.log('working')
+    const buttonA = document.getElementById('buttonA');
+    if (buttonA) {
+        buttonA.addEventListener('touchstart', jumpBtn, { passive: true });
+        buttonA.addEventListener('touchend', jumpBtnFalse, { passive: true });
+    }
+}
+
+
+function jumpBtn() {
+    if (start) keyboard.SPACE = true;
+}
+
+
+function jumpBtnFalse() {
+    if (start) keyboard.SPACE = false;
 }
 
 
@@ -328,7 +338,7 @@ function showHelp() {
     if (!touchScreen) {
         desktopHelp.classList.toggle('d-none')
     }
-   if (gameEnded && help) {
+    if (gameEnded && help) {
         smartHelp.classList.add('d-none');
         helpBtn.classList.add('d-none');
         desktopHelp.classList.add('d-none')
@@ -337,7 +347,7 @@ function showHelp() {
         smartHelp.classList.remove('d-none');
         helpBtn.classList.remove('d-none');
         desktopHelp.classList.remove('d-none')
-    } 
+    }
 }
 
 
@@ -386,7 +396,8 @@ function changeToFullscreen() {
     let fullscreen = document.getElementById('mainContainer');
     if (!isInFullscreen) {
         enterFullscreen(fullscreen);
-        isInFullscreen = true;}
+        isInFullscreen = true;
+    }
     else {
         exitFullscreen();
         isInFullscreen = false;
