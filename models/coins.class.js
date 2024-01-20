@@ -33,7 +33,6 @@ class Coin extends LootableObject {
     animate() {
         setStoppableInterval(() => {
             this.playAnimation(this.IMAGES_COIN);
-        }, 160);
+        }, 420);
     }
-
 }

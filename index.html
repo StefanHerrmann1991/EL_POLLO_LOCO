@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>El Pollo Loco</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="cross.css">
     <link rel="stylesheet" href="fonts.css">
     <script src="js/includeHTML.js"></script>
     <script src="models/drawable-object.class.js"></script>
@@ -28,6 +29,7 @@
     <script src="models/coins.class.js"></script>
     <script src="models/level.class.js"></script>
     <script src="levels/level1.js"></script>
+    <script src="js/cross.js"></script>
     <script src="js/game.js"></script>
     <link rel="icon" type="image/x-icon"
         href="img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/1.Alerta/G5.png">
@@ -90,13 +92,15 @@
     </div>
 </body>
 <script>
-    addEventListener('orientationchange', (event) => {
-        loadControlPanel();
-    });
-    addEventListener('resize', (event) => {
-        loadControlPanel();
-    });
+    /*   addEventListener('orientationchange', (event) => {
+          loadControlPanel();
+      }, { passive: true });
+  
+      addEventListener('resize', (event) => {
+          loadControlPanel();
+      }, { passive: true }); */
 
-    document.getElementById("crossPosition").addEventListener("contextmenu", function(e) {e.preventDefault();});
+    document.getElementById("crossPosition").addEventListener("contextmenu", function (e) { e.preventDefault(); });
 </script>
+
 </html>

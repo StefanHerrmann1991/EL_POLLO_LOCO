@@ -1,0 +1,146 @@
+.button-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.cross-parent {
+    background-color: transparent;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn {
+    position: absolute;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.btn1 {
+    width: 25%;
+    height: 37%;
+}
+
+.btn2 {
+    width: 37%;
+    height: 25%;
+}
+
+.up {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.down {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.left {
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.right {
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.middle {
+    width: 35%;
+    height: 35%;
+    background-color: black;
+}
+
+.cross-image.default {
+    background-image: url('/img/0.Own_Pictures/cross/cross.png');
+}
+
+.cross-image.right {
+    background-image: url('/img/0.Own_Pictures/cross/right.png');
+}
+
+.cross-image.left {
+    background-image: url('/img/0.Own_Pictures/cross/left.png');
+}
+
+.cross-image.up {
+    background-image: url('/img/0.Own_Pictures/cross/up.png');
+}
+
+.cross-image.down {
+    background-image: url('/img/0.Own_Pictures/cross/down.png');
+}
+
+
+.cross-position {
+    z-index: 100;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 5%;
+    padding-bottom: 2%;
+}
+
+.cross-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+}
+
+.relative {
+    position: relative;
+}
+
+.help {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+.help div {
+    font-size: 100%;
+}
+
+
+.throw-help {
+    position: absolute;
+    top: -15%;
+    left: 31.5%;
+}
+
+
+.right-help {
+    position: absolute;
+    top: 38.5%;
+    left: 104%;
+}
+
+.dodge-help {
+    position: absolute;
+    top: 95%;
+    left: 31.5%;
+}
+
+.left-help {
+
+    position: absolute;
+    top: 38.5%;
+    left: -29%;
+
+}

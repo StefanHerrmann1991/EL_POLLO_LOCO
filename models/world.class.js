@@ -89,6 +89,7 @@ class World {
         } else { setTimeout(() => { document.getElementById('coinCounter').innerHTML = ""; }, 2000); }
     }
 
+
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isClose(enemy) && !(enemy instanceof Endboss)) { enemy.sawCharacter = true; }
@@ -116,11 +117,13 @@ class World {
             this.showEndcreenWon();
     }
 
+    
     endbossIsWalking(enemy) {
         enemy.walking = true;
         enemy.attack = false;
         enemy.moveToPosition(this.character);
     }
+
 
     endbossIsAttacking(enemy) {
         if (this.character.isClose(enemy)) {
@@ -140,7 +143,7 @@ class World {
 
 
     jumpKill(enemy) {
-        if (this.isKillableByJumping(enemy) && !(enemy instanceof smallChicken && enemy.isAboveGround())) {
+        if (this.isKillableByJumping(enemy)) {
             this.removeThis(enemy);
             this.character.speedY = 3;
         }
@@ -172,13 +175,13 @@ class World {
         thrownObject.acceleration = 0;
     }
 
+
     characterGotDamage(enemy, damage) {
         if (this.characterGotHitBy(enemy, 5)) {
             this.character.hit(damage);
             this.statusbar.setPercentage(this.character.energy);
         }
     }
-
 
 
     charHitByEndboss(enemy, damage) {
@@ -197,6 +200,7 @@ class World {
             }
         });
     }
+
 
     pickUpCoin() {
         this.level.coins.forEach((coin, i) => {
@@ -219,6 +223,7 @@ class World {
         }, 1000);
     }
 
+
     throwObject() {
         if (this.canThrow()) {
             let timePassed = new Date().getTime() - this.lastThrow;
@@ -231,6 +236,7 @@ class World {
         }
     }
 
+    
     showEndcreenWon() {
         this.endscreenOn = true;
         this.endbossDeath = true;

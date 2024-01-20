@@ -50,8 +50,6 @@ function initLevel1() {
  * The function generates the whole Level depending on the worlds length. 
  * @param {number} worldLength The variable represents the map size. As higher the number as bigger the size of the map.
  */
-
-
 function generateLevel(worldLength) {
     generateBackground(worldLength);
     generateClouds(worldLength);
@@ -60,11 +58,10 @@ function generateLevel(worldLength) {
     generateBottles(worldLength);
 }
 
+
 /** The funciton generates the background with the BACKGROUND_CHANGING array.
 * @param {number} worldLength The variable represents the map size. As higher the number as bigger the size of the map.
 */
-
-
 function generateBackground(worldLength) {
 
     for (let i = -1; i < worldLength; i++) {
@@ -84,12 +81,11 @@ function generateBackground(worldLength) {
     LEVEL_END = worldLength * 719 - 630;
 }
 
+
 /**
  * The function generates clouds in the map depending on it's length.
  * @param {number} worldLength 
  */
-
-
 function generateClouds(worldLength) {
     for (let i = -1; i < worldLength; i++) {
         if (isOdd(i) == true) {
@@ -112,9 +108,8 @@ function generateClouds(worldLength) {
  * The function sets randomly bottles on the map.
  * @param {number} worldLength 
  */
-
 function generateBottles(worldLength) {
-    for (let i = 0; i < worldLength * 1.2; i++) {
+    for (let i = 0; i < worldLength; i++) {
         let xPosition = Number(getRandomArbitrary(LEVEL_START, LEVEL_END - 1200).toFixed(0));
         let yPostion = Number(getRandomArbitrary(100, 300).toFixed(0));
         BOTTLE.push(new LootableObject(xPosition, yPostion));

@@ -226,9 +226,8 @@ function checkMobile() {
     if (window.matchMedia("(orientation: landscape)").matches) {
         changeOrientation('landscape');
         if (start) {
-            insertCross('controlCross2');
-            insertButtons();
-            preventLongPressMenu(document.getElementsByClassName('cross-map'));
+            insertCross();
+            insertButtons();           
         }
     }
     if (window.matchMedia("(orientation: portrait)").matches) changeOrientation('portrait');
@@ -236,56 +235,15 @@ function checkMobile() {
 
 
 /**
- * The function enables the responsivness of the map cross element.
- * 
- */
-function insertCross(path) {
-    let crossPosition = document.getElementById('crossPosition');
-    let text = generateCross(path);
-    crossPosition.insertAdjacentHTML('afterbegin', text);
-}
-
-
-/**
-* This function generates a cross with an area function fitting the img of the cross element.
-* Depending of the side length, the scale of the cross element is determined.
-* @param {number} sideLength The side length of the cross element.
-* @returns {string} Returns the cross properties.
-*/
-function generateCross(path) {
-    let sideLength = document.getElementById('canvas').offsetWidth / 6;
-    let coord1 = sideLength * 3 / 8;
-    let coord2 = sideLength * 5 / 8;
-    let cross = `
-         <div class="relative prevent-longpress">
-           <img class='cross-map' id="crossMap" src="img/0.Own_Pictures/${path}/cross.png" usemap='#image-map' height="${sideLength}px" width="${sideLength}px">
-             <map name='image-map'>              
-                 <area target="" alt="up"    title="up"     id="up"    ontouchstart="touchCross('${path}','up')"  ontouchend="touchCrossEnd(event, '${path}','cross')"  coords="${coord1},0,${coord2},${coord1}" shape="rect">
-                 <area target="" alt="left"  title="left"   id="left"   ontouchstart="touchCross('${path}','left')" ontouchend="touchCrossEnd(event, '${path}','cross')" coords="0,${coord1},${coord1},${coord2}" shape="rect">
-                 <area target="" alt="down"  title="down"   id="down"   ontouchstart="touchCross('${path}','down')" ontouchend="touchCrossEnd(event, '${path}','cross')" coords="${coord2},${coord2},${coord1},${sideLength}" shape="rect">
-                 <area target="" alt="right" title="right"  id="right"  ontouchstart="touchCross('${path}','right')" ontouchend="touchCrossEnd(event, '${path}','cross')" coords="${sideLength},${coord1},${coord2},${coord2}" shape="rect">   
-             </map>   
-        <div class="help" id="help">
-             <div class="throw">Throw</div>
-             <div class="right">Right</div>
-             <div class="dodge">Dodge</div>
-             <div class="left">Left</div>
-        </div>                       
-        </div>`;
-    return cross;
-}
-
-/**
  * The function that is responsible for the pop up window, which occurs when the device is in portrait
  * @param {string} orientation Landscape or portrait change
  */
-
-
 function changeOrientation(orientation) {
     let chooseDevice = getId('deviceSetting');
     if (orientation == 'landscape') chooseDevice.classList.add('d-none');
     if (orientation == 'portrait') chooseDevice.classList.remove('d-none')
 }
+
 
 function renderDeviceBar() {
     if (start) {
@@ -370,53 +328,16 @@ function showHelp() {
     if (!touchScreen) {
         desktopHelp.classList.toggle('d-none')
     }
-    if (gameEnded) {
+   if (gameEnded && help) {
         smartHelp.classList.add('d-none');
         helpBtn.classList.add('d-none');
         desktopHelp.classList.add('d-none')
     }
-    if (!gameEnded) {
-        smartHelp.classList.add('d-none');
-        helpBtn.classList.add('d-none');
-        desktopHelp.classList.add('d-none')
-    }
-}
-
-
-/**
- * The function simulates pressing the control pad.
- * @param {string} position The parameter resembles the 
- */
-function touchCross(img, position) {
-    document.getElementById('crossMap').src = `img/0.Own_Pictures/${img}/${position}.png`;
-    if (start) {
-        switch (position) {
-            case 'up': keyboard.THROW = true;
-                break;
-            case 'left': keyboard.LEFT = true;
-                break;
-            case 'down': keyboard.DODGE = true;
-                break;
-            case 'right': keyboard.RIGHT = true;
-                break;
-        }
-    }
-}
-
-
-function touchCrossEnd(event, img, position) {
-    document.getElementById('crossMap').src = `img/0.Own_Pictures/${img}/${position}.png`;
-    if (start) {
-        switch (position) {
-            case 'cross':
-                keyboard.LEFT = false;
-                keyboard.THROW = false;
-                keyboard.DODGE = false;
-                keyboard.RIGHT = false;
-                event.preventDefault();
-                break;
-        }
-    }
+    if (!gameEnded && help) {
+        smartHelp.classList.remove('d-none');
+        helpBtn.classList.remove('d-none');
+        desktopHelp.classList.remove('d-none')
+    } 
 }
 
 
@@ -453,7 +374,6 @@ function toggleSounds() {
  * The function stops a single audio depending on the id of the audio.
  * @param {string} mp3JSON.timeoutId The id of the corresponing timeout.
 */
-
 function stopTimeout(mp3JSON) {
     if (mp3JSON.soundIsPlayedOnce) {
         mp3JSON.audios.forEach(audio => audio.pause());
@@ -466,9 +386,7 @@ function changeToFullscreen() {
     let fullscreen = document.getElementById('mainContainer');
     if (!isInFullscreen) {
         enterFullscreen(fullscreen);
-        isInFullscreen = true;
-    }
-
+        isInFullscreen = true;}
     else {
         exitFullscreen();
         isInFullscreen = false;
@@ -494,6 +412,5 @@ function exitFullscreen() {
         document.webkitExitFullscreen();
     }
 }
-
 
 
