@@ -6,7 +6,7 @@ class DrawableObject {
     width = 150;
     imageCache = {};
 
-    
+
     /**
      * The function loads a picture depending on its path.
      * @param {string} path The folder where the image is located.

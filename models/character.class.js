@@ -11,7 +11,7 @@ class Character extends MovableObject {
     changeCameraLeft = true;
     changeCameraRight = true;
     lastJump = 0;
-    acceleration = 1.2
+    acceleration = 1.8
     currentImage = 0;
     /* constructor führt sobald der Charakter geladen wird, die Funktionen innerhalb des Constructors aus. */
     IMAGES_WALKING = [
@@ -122,13 +122,13 @@ class Character extends MovableObject {
         if (timePassed > 800) {
             this.loadImageInTime(this.IMAGES_JUMPING[0], 0)
             setTimeout(() => {
-                this.speedY = 26;
-            }, 100);
-            this.loadImageInTime(this.IMAGES_JUMPING[1], 150)
+                this.speedY = 30;
+            }, 50);
+            this.loadImageInTime(this.IMAGES_JUMPING[1], 100)
             this.loadImageInTime(this.IMAGES_JUMPING[2], 300)
-            this.loadImageInTime(this.IMAGES_JUMPING[3], 650)
-            this.loadImageInTime(this.IMAGES_JUMPING[4], 850)
-            this.loadImageInTime(this.IMAGES_JUMPING[5], 900)          
+            this.loadImageInTime(this.IMAGES_JUMPING[3], 450)
+            this.loadImageInTime(this.IMAGES_JUMPING[4], 650)
+            this.loadImageInTime(this.IMAGES_JUMPING[5], 750)          
             this.playAudioOnKey(jumping_sound);
             this.lastJump = new Date().getTime();
         }

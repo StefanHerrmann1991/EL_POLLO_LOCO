@@ -22,8 +22,7 @@ class MovableObject extends DrawableObject {
      * 
      */
 
-    applyGravity(yPosition) {
-        console.log('applied')
+    applyGravity(yPosition) {       
         setStoppableInterval(() => {
             if (this.isAboveGround() || this.speedY > yPosition) {
                 this.y -= this.speedY;
@@ -43,13 +42,7 @@ class MovableObject extends DrawableObject {
         else return this.y < 180;
     }
 
-    /**loadImage('img/test.png')
-     * The function loads images from the img folder 
-     * @param path the relative path of the img
-     * img is only defined in JS not in HTML*/
-
-
-
+   
 
     moveRight() {
         this.x += this.speed;
@@ -116,7 +109,7 @@ class MovableObject extends DrawableObject {
 
 
     displaySingleImage(images) {
-        let path = images; 
+        let path = images;
         this.img = this.imageCache[path];
     }
 
