@@ -75,11 +75,11 @@ h1 a {
 
 
 legend {
-    padding: 2px;
+    padding: 6px;
     background: black;
     -webkit-text-stroke: 0.2px black;
     color: rgb(211, 172, 45);
-
+    border-radius: 10px;
 }
 
 .legend2 {
@@ -235,7 +235,6 @@ canvas {
 
 .checkbox input[type="checkbox"] {
     accent-color: black;
-
 }
 
 
@@ -269,6 +268,8 @@ canvas {
 }
 
 .checkbox {
+    display: flex;
+    gap: 8px;
     padding-top: 5px;
 }
 

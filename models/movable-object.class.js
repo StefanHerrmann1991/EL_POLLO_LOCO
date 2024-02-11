@@ -22,7 +22,7 @@ class MovableObject extends DrawableObject {
      * 
      */
 
-    applyGravity(yPosition) {       
+    applyGravity(yPosition) {
         setStoppableInterval(() => {
             if (this.isAboveGround() || this.speedY > yPosition) {
                 this.y -= this.speedY;
@@ -42,7 +42,7 @@ class MovableObject extends DrawableObject {
         else return this.y < 180;
     }
 
-   
+
 
     moveRight() {
         this.x += this.speed;
@@ -241,23 +241,19 @@ class MovableObject extends DrawableObject {
      * @param {Number} soundDuration is the length in seconds of the mp3 file.
      * @param {Number} timeoutId is the id of the timeout which can later be cleared. 
      */
-    playAudioOnce(mp3JSON, soundVolume) {
-        if (!mp3JSON.soundIsPlayedOnce && soundIsOn) {
-            mp3JSON.randomSound = Math.floor(Math.random() * mp3JSON.audios.length);
-            let randomSoundPosition = mp3JSON.randomSound;
-            let sound = mp3JSON.audios[randomSoundPosition];
-            // Set the volume and handle play promise
+    playAudioOnce(soundArray, soundVolume) {
+        if (!this.soundIsPlayedOnce && soundIsOn) {
+            this.randomSound = Math.floor(Math.random() * soundArray.length);
+            let sound = soundArray[this.randomSound];
             sound.volume = soundVolume;
             sound.play().then(() => {
-                let soundDuration = sound.duration * 1000; // Convert duration to milliseconds
-                let timeoutId = setTimeout(() => {
+                let soundDuration = sound.duration * 1000; // Convert to milliseconds
+                this.timeoutId = setTimeout(() => {
                     sound.pause();
-                    sound.currentTime = 0; // Optionally reset the sound to start                   
+                    sound.currentTime = 0;
                 }, soundDuration);
-                allAudios.push(sound);
-                allTimeouts.push(timeoutId);
-                mp3JSON['timeoutId'] = timeoutId;
-                mp3JSON.soundIsPlayedOnce = true;
+                allAudios.push(sound); // If you are tracking all audios
+                this.soundIsPlayedOnce = true;
             }).catch(error => {
                 console.error("Error playing sound:", error);
             });

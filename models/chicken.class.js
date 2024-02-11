@@ -14,26 +14,20 @@ class Chicken extends MovableObject {
         'img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/4.G_muerte.png'
     ];
 
-    CHICKEN_SOUND = {
-        'audios': [
-            new Audio('audio/chickenSound0.mp3'),
-            new Audio('audio/chickenSound1.mp3'),
-            new Audio('audio/chickenSound2.mp3'),
-            new Audio('audio/chickenSound3.mp3'),
-            new Audio('audio/chickenSound4.mp3')],
-        'soundIsPlayedOnce': false,
-        'timeoutId': '',
-        'randomSound': '',
-    }
+    static CHICKEN_SOUNDS = [
+        new Audio('audio/chickenSound0.mp3'),
+        new Audio('audio/chickenSound1.mp3'),
+        new Audio('audio/chickenSound2.mp3'),
+        new Audio('audio/chickenSound3.mp3'),
+        new Audio('audio/chickenSound4.mp3')
+    ];
 
+    static CHICKEN_SOUND_DEATH = [new Audio('audio/chickenDeath3.mp3')]
 
+    soundIsPlayedOnce = false;
+    timeoutId = '';
+    randomSound = '';
 
-    CHICKEN_SOUND_DEATH = {
-        'audios': [new Audio('audio/chickenDeath3.mp3')],
-        'soundIsPlayedOnce': false,
-        'timeoutId': '',
-        'randomSound': '',
-    }
 
     constructor(x) {
         super().loadImage('img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/1.Ga_paso_derecho.png');
@@ -56,17 +50,49 @@ class Chicken extends MovableObject {
     }
 
 
+    playAudioOnce(soundArray, soundVolume) {
+        if (!this.soundIsPlayedOnce && soundIsOn) {
+            this.randomSound = Math.floor(Math.random() * soundArray.length);
+            let sound = soundArray[this.randomSound];
+            sound.volume = soundVolume;
+            sound.play().then(() => {
+                let soundDuration = sound.duration * 1000; // Convert to milliseconds
+                this.timeoutId = setTimeout(() => {
+                    sound.pause();
+                    sound.currentTime = 0;
+                }, soundDuration);
+                allAudios.push(sound); // If you are tracking all audios
+                this.soundIsPlayedOnce = true;
+            }).catch(error => {
+                console.error("Error playing sound:", error);
+            });
+        }
+    }
+
+    stopSound() {
+        if (this.timeoutId) {
+            clearTimeout(this.timeoutId);
+        }
+        if (this.randomSound !== '') {
+            let sound = Chicken.CHICKEN_SOUNDS[this.randomSound];
+            sound.pause();
+            sound.currentTime = 0;
+            this.soundIsPlayedOnce = false;
+        }
+    }
+
+
+
     chickenIsAttacking() {
         this.moveLeft();
-        if (this.sawCharacter) {
-            this.playAudioOnce(this.CHICKEN_SOUND, this.volume)
+        if (this.sawCharacter) {            
+            this.playAudioOnce(Chicken.CHICKEN_SOUNDS, this.volume); 
         }
     }
 
     chickenIsDying() {
-        this.playAnimation(this.IMAGES_DYING);
-        this.playAudioOnce(this.CHICKEN_SOUND_DEATH, this.volume);
-        stopTimeout(this.CHICKEN_SOUND);
+        this.playAnimation(this.IMAGES_DYING);       
+        this.playAudioOnce(Chicken.CHICKEN_SOUND_DEATH, this.volume);
     }
 }
 

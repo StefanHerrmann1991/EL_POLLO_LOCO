@@ -49,6 +49,8 @@ class Endboss extends MovableObject {
     ];
 
 
+    static ENDBOSS_SOUND = [new Audio('audio/endboss.mp3')]
+
     constructor(x) {
         super().loadImage(this.IMAGES_PERCEIVING[0]);
         this.loadImages(this.IMAGES_WALKING);
@@ -106,9 +108,9 @@ class Endboss extends MovableObject {
     }
     noteCharacter() {
         this.playAnimation(this.IMAGES_PERCEIVING);
+        this.playAudioOnce(Endboss.ENDBOSS_SOUND, 0.6);
         this.i++;
         if (this.i >= 9) this.hadFirstContact = false;
-
     }
 
     isWalking() { this.playAnimation(this.IMAGES_WALKING) }

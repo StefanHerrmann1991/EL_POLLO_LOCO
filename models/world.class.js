@@ -43,6 +43,7 @@ class World {
         this.character.world = this;
     }
 
+
     checkWorld() {
         setStoppableInterval(() => {
             this.checkCollisions();
@@ -58,7 +59,9 @@ class World {
         if (this.gameWasLost()) this.showEndscreenLost();
     }
 
+
     gameWasLost() { return this.character.isDead() && !this.endscreenOn }
+
 
     showEndscreenLost() {
         this.endscreenOn = true;
@@ -81,6 +84,7 @@ class World {
         else setTimeout(() => { document.getElementById('bottleCounter').innerHTML = ""; }, 2000);
     }
 
+
     checkCoinCount() {
         if (!this.character.isDead() && !this.endbossDeath) {
             document.getElementById('coinCounter').innerHTML = `
@@ -94,7 +98,7 @@ class World {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isClose(enemy) && !(enemy instanceof Endboss)) { enemy.sawCharacter = true; }
             this.characterGotDamage(enemy, 5);
-            this.jumpKill(enemy);        
+            this.jumpKill(enemy);
             this.throwBottleOn(enemy);
             this.startEndbossFight(enemy);
         });
@@ -117,7 +121,7 @@ class World {
             this.showEndcreenWon();
     }
 
-    
+
     endbossIsWalking(enemy) {
         enemy.walking = true;
         enemy.attack = false;
@@ -168,6 +172,7 @@ class World {
         })
     }
 
+
     slowDown(thrownObject) {
         thrownObject.collision = true;
         thrownObject.speedX = 0;
@@ -205,11 +210,11 @@ class World {
     pickUpCoin() {
         this.level.coins.forEach((coin, i) => {
             if (this.canTake(coin)) {
-                coin.playAudioOnce(coin.COIN_SOUND, 0.5);
                 this.level.coins.splice(i, 1);
                 this.statusbar.percentage += 1;
                 this.character.energy += 1;
                 this.coinCount++;
+                Coin.playSound();
             }
         });
     }
@@ -236,7 +241,7 @@ class World {
         }
     }
 
-    
+
     showEndcreenWon() {
         this.endscreenOn = true;
         this.endbossDeath = true;

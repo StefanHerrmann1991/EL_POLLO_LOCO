@@ -38,6 +38,15 @@ class ThrowableObject extends MovableObject {
         'randomSound': '',
     }
 
+    static playAudioOnce(soundObj, volume) {
+        if (!soundObj.soundIsPlayedOnce) {
+            soundObj.audios[0].volume = volume;
+            soundObj.audios[0].play();
+            soundObj.soundIsPlayedOnce = true;
+        }
+    }
+
+
 
     constructor(x, y, otherDirection) {
 
@@ -58,22 +67,22 @@ class ThrowableObject extends MovableObject {
     }
 
 
+
     throw(otherDirection) {
         this.applyGravity();
         setStoppableInterval(() => {
-            if (!otherDirection)  this.x += this.speedX; 
-            else this.x -= this.speedX;            
+            if (!otherDirection) this.x += this.speedX;
+            else this.x -= this.speedX;
         }, 60);
-
 
         setStoppableInterval(() => {
             if (!this.collision) {
                 this.playAnimation(this.IMAGES_BOTTLE_THROWING);
-                this.playAudioOnce(this.THROWING_SOUND, this.volume);
+                ThrowableObject.playAudioOnce(this.THROWING_SOUND, this.volume);
             }
             else {
                 this.playAnimation(this.IMAGES_BOTTLE_EXPLODING);
-                this.playAudioOnce(this.HITTING_SOUND, this.volume);
+                ThrowableObject.playAudioOnce(this.HITTING_SOUND, this.volume);
             }
         }, 40);
     }

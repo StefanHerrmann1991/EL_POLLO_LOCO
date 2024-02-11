@@ -14,7 +14,8 @@ let BACKGROUND_CHANGING = [[
     'img/5.Fondo/Capas/2.Fondo2/1.png',
     'img/5.Fondo/Capas/1.suelo-fondo1/1.png'
 ],
-['img/5.Fondo/Capas/5.cielo_1920-1080px.png',
+[
+    'img/5.Fondo/Capas/5.cielo_1920-1080px.png',
     'img/5.Fondo/Capas/3.Fondo3/2.png',
     'img/5.Fondo/Capas/2.Fondo2/2.png',
     'img/5.Fondo/Capas/1.suelo-fondo1/2.png'
@@ -23,14 +24,14 @@ let CLOUDS_CHANGING = [
     'img/5.Fondo/Capas/4.nubes/1.png',
     'img/5.Fondo/Capas/4.nubes/2.png'];
 
-function initLevel1() {
+async function initLevel1() {
     generatedCoinCluster = 0;
     BACKGROUND = [];
     CLOUDS = [];
     BOTTLE = [];
     LOOT = [];
     ENEMIES = [];
-    generateLevel(12);
+    await generateLevel(12);
 
     /**
      * These are the elements which presents the majority of the map.
@@ -185,11 +186,11 @@ function generateEnemies(worldLength) {
         minX = 500;
         let enemyAmount = i / 2;
         let levelPart = 719 * i;
-        if (enemyAmount < 3) {
+        if (enemyAmount < 2.5) {
             generateEnemiesAtX(minX, levelPart, smallChicken, enemyAmount);
         }
         else {
-            enemyAmount >= 3;
+            enemyAmount >= 2.5;
             generateEnemiesAtX(minX, levelPart, Chicken, enemyAmount);
         }
     }

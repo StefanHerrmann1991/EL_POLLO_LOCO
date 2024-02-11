@@ -116,8 +116,8 @@ function stopGeneralAudio() {
 function stopAndCleanupAudio(audioElement) {
     if (audioElement) {
         audioElement.pause();
+        audioElement.currentTime = 0;
         audioElement.remove();
-
     }
 }
 
@@ -214,6 +214,7 @@ function loadControlPanel() {
     }
 }
 
+
 function toggleMusic() {
     musicIsOn = !musicIsOn;
     if (musicIsOn) {
@@ -223,8 +224,6 @@ function toggleMusic() {
         backgroundMusic.pause();
     }
 }
-
-
 
 
 function showDesktopMode() {
@@ -319,7 +318,6 @@ function generateButtons() {
 }
 
 function attachAButtonEventListeners() {
-    console.log('working')
     const buttonA = document.getElementById('buttonA');
     if (buttonA) {
         buttonA.addEventListener('touchstart', jumpBtn, { passive: true });
@@ -368,9 +366,9 @@ function showHelp() {
         desktopHelp.classList.add('d-none')
     }
     if (!gameEnded && help) {
-        smartHelp.classList.remove('d-none');
-        helpBtn.classList.remove('d-none');
-        desktopHelp.classList.remove('d-none')
+        smartHelp?.classList.remove('d-none');
+        helpBtn?.classList.remove('d-none');
+        desktopHelp?.classList.remove('d-none')
     }
 }
 

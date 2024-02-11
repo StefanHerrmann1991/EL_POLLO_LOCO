@@ -7,7 +7,7 @@ class smallChicken extends MovableObject {
     width = 60;
     acceleration = 1.2
     defaultSpeed;
-    
+
 
     IMAGES_WALKING = [
         'img/3.Secuencias_Enemy_básico/Versión_pollito/1.Paso_derecho.png',
@@ -18,31 +18,27 @@ class smallChicken extends MovableObject {
         'img/3.Secuencias_Enemy_básico/Versión_pollito/4.Muerte.png'
     ];
 
-    CHICKEN_SOUND = {
-        'audios': [
-            new Audio('audio/chickenSound0.mp3'),
-            new Audio('audio/chickenSound1.mp3'),
-            new Audio('audio/chickenSound2.mp3'),
-            new Audio('audio/chickenSound3.mp3'),
-            new Audio('audio/chickenSound4.mp3')],
-        'soundIsPlayedOnce': false,
-        'timeoutId': '',
-        'randomSound': '',
-    }
+    static CHICKEN_SOUND = [
+
+        new Audio('audio/chickenSound0.mp3'),
+        new Audio('audio/chickenSound1.mp3'),
+        new Audio('audio/chickenSound2.mp3'),
+        new Audio('audio/chickenSound3.mp3'),
+        new Audio('audio/chickenSound4.mp3')]
 
 
+    static CHICKEN_SOUND_DEATH =
+        [new Audio('audio/chickenDeath3.mp3')]
 
-    CHICKEN_SOUND_DEATH = {
-        'audios': [new Audio('audio/chickenDeath3.mp3')],
-        'soundIsPlayedOnce': false,
-        'timeoutId': '',
-        'randomSound': '',
-    }
+
+    soundIsPlayedOnce = false;
+    timeoutId = '';
+    randomSound = '';
 
     constructor(x) {
         super().loadImage('img/3.Secuencias_Enemy_básico/Versión_Gallinita (estas salen por orden de la gallina gigantona)/1.Ga_paso_derecho.png');
         this.loadImages(this.IMAGES_WALKING);
-        this.loadImages(this.IMAGES_DYING);       
+        this.loadImages(this.IMAGES_DYING);
         this.x = x; // Zahl zwischen 0 und 500 Math ramdom generiert eine zufällige Zahl zwischen 0 und 1
         this.speed = 0.5 + Math.random() * 0.7;
         this.defaultSpeed = this.speed;
@@ -65,7 +61,7 @@ class smallChicken extends MovableObject {
     chickenIsAttacking() {
         this.moveLeft();
         if (this.sawCharacter) {
-            this.playAudioOnce(this.CHICKEN_SOUND, this.volume)
+            this.playAudioOnce(smallChicken.CHICKEN_SOUND, this.volume)
             if (!this.isAboveGround()) {
                 this.speedY = 15;
                 this.speed = 14;
@@ -74,13 +70,13 @@ class smallChicken extends MovableObject {
                     this.speed = this.defaultSpeed;
                 }, 600);
             }
-        } 
+        }
     }
 
     chickenIsDying() {
-        this.playAnimation(this.IMAGES_DYING);
-        this.playAudioOnce(this.CHICKEN_SOUND_DEATH, this.volume);
-        stopTimeout(this.CHICKEN_SOUND);
+     
+        this.playAnimation(this.IMAGES_DYING);       
+        this.playAudioOnce(smallChicken.CHICKEN_SOUND_DEATH, this.volume);
     }
 }
 

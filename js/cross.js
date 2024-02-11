@@ -1,8 +1,5 @@
 function generateCross() {
     let sideLength = document.getElementById('canvas').offsetWidth / 6;
-    let coord1 = sideLength * 3 / 8;
-    let coord2 = sideLength * 5 / 8;
-    console.log(sideLength)
     let cross = `   
         <div class="relative">
             <div class="cross-parent" style="width: ${sideLength}px; height: ${sideLength}px">
@@ -18,7 +15,6 @@ function generateCross() {
                     <button class="btn right btn2 "></button>
                 </div>
             </div>
-
             <div class="help" id="help">
                 <div class="throw-help">Throw</div>
                 <div class="right-help">Right</div>
