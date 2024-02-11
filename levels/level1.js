@@ -187,7 +187,7 @@ function generateEnemies(worldLength) {
         let enemyAmount = i / 2;
         let levelPart = 719 * i;
         if (enemyAmount < 2.5) {
-            generateEnemiesAtX(minX, levelPart, smallChicken, enemyAmount);
+            generateEnemiesAtX(minX, levelPart, SmallChicken, enemyAmount);
         }
         else {
             enemyAmount >= 2.5;

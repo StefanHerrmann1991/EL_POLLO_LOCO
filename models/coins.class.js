@@ -7,7 +7,7 @@ class Coin extends LootableObject {
 
     static COIN_SOUND =
         [new Audio('audio/coinCollect.mp3')]
-  
+
 
     static playSound() {
         let sound = Coin.COIN_SOUND[0];
@@ -19,7 +19,6 @@ class Coin extends LootableObject {
     /**
      * The constructor for lootable objects in the map like coins and bottles.
      */
-
     constructor(x, y) {
         super().loadImage('img/8.Coin/Moneda1.png');
         this.loadImages(this.IMAGES_COIN);
@@ -31,9 +30,7 @@ class Coin extends LootableObject {
     }
 
 
-
-
-    animate() {
+   animate() {
         setStoppableInterval(() => {
             this.playAnimation(this.IMAGES_COIN);
         }, 420);

@@ -17,6 +17,7 @@ let backgroundMusic = new Audio('audio/backgroundMusic.mp3');
 let gameEnded = false;
 let soundIsOn = true;
 
+
 /* Using test() method to search regexp in details
 it returns boolean value*/
 const isMobile = () => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -32,17 +33,21 @@ function generateLevel1() {
     checkMobile();
 }
 
+
 /** 
  * The function initiates the canvas and for the game relevant functions.
  * 
 */
-function initGame() {
+async function initGame() {
+
     start = true;
+    await initLevel1();
     toggleStartBtn('restart');
     loadControlPanel();
     keyboard = new Keyboard();
     world = new World(canvas, keyboard);
 }
+
 
 function absorbEvent_(event) {
     var e = event || window.event;
@@ -52,6 +57,7 @@ function absorbEvent_(event) {
     e.returnValue = false;
     return false;
 }
+
 
 function preventLongPressMenu(nodes) {
     for (var i = 0; i < nodes.length; i++) {
@@ -71,11 +77,8 @@ function preventLongPressMenu(nodes) {
  */
 function toggleStartBtn(startCondition) {
     let start = getId('startButton');
-    let menu = getId('menuOptions')
-    if (startCondition == 'showStory') {
-        start.innerHTML = `
-        <div onclick="toggleStartBtn('firstStart')">Start</div>`;
-    }
+    let menu = getId('menuOptions');
+
     if (startCondition == 'firstStart') {
         startStory();
         menu.classList.add('continue')

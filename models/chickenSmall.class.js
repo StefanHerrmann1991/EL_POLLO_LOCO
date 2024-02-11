@@ -1,4 +1,4 @@
-class smallChicken extends MovableObject {
+class SmallChicken extends MovableObject {
     energy = 100;
     volume = 0.4
     y = 375;
@@ -61,7 +61,7 @@ class smallChicken extends MovableObject {
     chickenIsAttacking() {
         this.moveLeft();
         if (this.sawCharacter) {
-            this.playAudioOnce(smallChicken.CHICKEN_SOUND, this.volume)
+            this.playAudioOnce(SmallChicken.CHICKEN_SOUND, this.volume)
             if (!this.isAboveGround()) {
                 this.speedY = 15;
                 this.speed = 14;
@@ -76,7 +76,7 @@ class smallChicken extends MovableObject {
     chickenIsDying() {
      
         this.playAnimation(this.IMAGES_DYING);       
-        this.playAudioOnce(smallChicken.CHICKEN_SOUND_DEATH, this.volume);
+        this.playAudioOnce(SmallChicken.CHICKEN_SOUND_DEATH, this.volume);
     }
 }
 
