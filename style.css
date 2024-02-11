@@ -160,16 +160,31 @@ fieldset {
 
 }
 
-.device-menu {
-    background-image: url('img/0.Own_Pictures/optionBackground.JPG');
+.device-setting {    
     font-family: 'Rye', cursive;
     color: black;
     position: absolute;
-    width: 30%;
-    top: 30%;
-    left: 35%;
-    padding: 2%;
+    width: 100%;
+    height: 100%;   
     font-size: 20px;
+    top: 0;
+    background-image: url('img/0.Own_Pictures/storyBackgroundNew.png');
+    background-size: cover;   
+    background-position: center; 
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.device-menu {
+    margin: auto;
+    width: 80%;
+    text-align: center;
+}
+
+.device-menu span {
+   font-size: 40px;
 }
 
 .device-boxes div {
