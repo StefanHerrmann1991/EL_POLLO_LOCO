@@ -29,6 +29,7 @@ function generateLevel1() {
     canvas = document.getElementById('canvas');
     initLevel1();
     toggleStartBtn('showStory');
+    checkMobile();
 }
 
 /** 
