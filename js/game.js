@@ -39,7 +39,6 @@ function generateLevel1() {
  * 
 */
 async function initGame() {
-
     start = true;
     await initLevel1();
     toggleStartBtn('restart');
@@ -78,7 +77,7 @@ function preventLongPressMenu(nodes) {
 function toggleStartBtn(startCondition) {
     let start = getId('startButton');
     let menu = getId('menuOptions');
-
+   
     if (startCondition == 'firstStart') {
         startStory();
         menu.classList.add('continue')
@@ -104,6 +103,10 @@ function restartGame() {
     initGame();
 }
 
+function stopGame() {
+    allIntervals.forEach(clearInterval);
+    allIntervals = [];
+}
 
 function stopSingleAudios() {
     allAudios.forEach(audio => stopAndCleanupAudio(audio));
@@ -389,11 +392,9 @@ function setStoppableInterval(fn, frame) {
 }
 
 
-function stopGame() {
+function resumeGame() {
     allIntervals.forEach(clearInterval);
-    allIntervals = [];
 }
-
 
 function stopAllTimeouts() {
     allTimeouts.forEach(clearTimeout);

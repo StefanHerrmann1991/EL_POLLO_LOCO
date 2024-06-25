@@ -165,7 +165,6 @@ function coinCluster(randomXPosition, clusterMin, clusterMax) {
  * @param {number} randomXPosition - Random position where a cluster will be generated.
  */
 function generateCoinParabel(clusterNumber, randomXPosition) {
-
     let randomYPosition = Number(getRandomArbitrary(5, 150).toFixed(0))
     for (let j = (-clusterNumber + 1) / 2; j < clusterNumber / 2; j++) {
         let x = randomXPosition + j * 50;
@@ -182,17 +181,13 @@ function generateCoinParabel(clusterNumber, randomXPosition) {
 function generateEnemies(worldLength) {
     endbossPosition = LEVEL_END - 700;
     ENEMIES.push(new Endboss(endbossPosition));
-    for (let i = 0; i < worldLength - 1; i++) {
-        minX = 500;
-        let enemyAmount = i / 2;
+    for (let i = 0; i < worldLength; i++) {
+        minX = 800;
+        let enemyAmount = worldLength / 2;
         let levelPart = 719 * i;
-        if (enemyAmount < 2.5) {
-            generateEnemiesAtX(minX, levelPart, SmallChicken, enemyAmount);
-        }
-        else {
-            enemyAmount >= 2.5;
-            generateEnemiesAtX(minX, levelPart, Chicken, enemyAmount);
-        }
+        if (i > 5) generateEnemiesAtX(minX, levelPart, SmallChicken, enemyAmount);
+        if (i < 3) generateEnemiesAtX(minX, levelPart, Chicken, enemyAmount);
+        if (i > 7) generateEnemiesAtX(minX, levelPart, Chicken, enemyAmount);
     }
 }
 
@@ -205,7 +200,6 @@ function generateEnemies(worldLength) {
  * @param {number} enemyAmount - the amount of enemies in the level part.
  */
 function generateEnemiesAtX(minX, levelPart, enemy, enemyAmount) {
-
     for (let i = 1; i < enemyAmount; i++) {
         let xPosition = Number(getRandomArbitrary(minX, levelPart).toFixed(0));
         currentEnemy = new enemy(xPosition);
