@@ -278,13 +278,13 @@ class World {
         this.addObjectsToMap(this.throwableObject);
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusbar);
-        this.addToMap(this.statusbarEndboss);
+        this.addToMap(this.statusbarEndboss); 
         this.ctx.translate(this.camera_x, 0);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusbar);
-        this.addToMap(this.statusbarEndboss);
+       this.addToMap(this.statusbarEndboss);
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.endscreen);
         this.ctx.translate(-this.camera_x, 0);

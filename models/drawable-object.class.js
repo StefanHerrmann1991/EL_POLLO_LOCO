@@ -1,3 +1,5 @@
+const loadingManager = new LoadingManager();
+
 class DrawableObject {
     x = 120;
     y = 190;
@@ -17,25 +19,29 @@ class DrawableObject {
     }
 
 
-/**
- * The function loads images depending on its path.
- * @param {array} arr Array with the relative path of images.
- */
+    /**
+     * The function loads images depending on its path.
+     * @param {array} arr Array with the relative path of images.
+     */
 
-    loadImages(arr) {
+    async loadImages(arr) {
+        loadingManager.addImages(arr.length);
         arr.forEach((path) => {
             let img = new Image();
             img.src = path;
-            this.imageCache[path] = img;
+            img.onload = () => {
+                this.imageCache[path] = img;
+                loadingManager.imageLoaded();
+            };
         });
     }
 
 
-/**
-* The function draws a rectangle around the character at a  certain position and moves with the character.
-* @param {*} ctx 
-*/
+    /**
+    * The function draws a rectangle around the character at a  certain position and moves with the character.
+    * @param {*} ctx 
+    */
     draw(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);       
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
 }

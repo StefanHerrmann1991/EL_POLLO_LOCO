@@ -183,7 +183,7 @@ function generateEnemies(worldLength) {
     ENEMIES.push(new Endboss(endbossPosition));
     for (let i = 0; i < worldLength; i++) {
         minX = 800;
-        let enemyAmount = worldLength / 2;
+        let enemyAmount = worldLength / 3;
         let levelPart = 719 * i;
         if (i > 5) generateEnemiesAtX(minX, levelPart, SmallChicken, enemyAmount);
         if (i < 3) generateEnemiesAtX(minX, levelPart, Chicken, enemyAmount);

@@ -1,4 +1,4 @@
-class StatusbarEndboss extends DrawableObject {
+class StatusbarEndboss extends MovableObject {
 
     IMAGES_LIFEBAR_ENDBOSS = [
         'img/7.Marcadores/live_endboss/0_.png  ',
@@ -7,17 +7,17 @@ class StatusbarEndboss extends DrawableObject {
         'img/7.Marcadores/live_endboss/60_.png ',
         'img/7.Marcadores/live_endboss/80_.png ',
         'img/7.Marcadores/live_endboss/100_.png']
-        
+
     percentage = 500;
-        
+
     constructor() {
         super();
+        this.loadImage('img/7.Marcadores/live_endboss/100_.png');
         this.loadImages(this.IMAGES_LIFEBAR_ENDBOSS);
         this.x = 570;
         this.y = 55;
         this.height = 65;
         this.width = 150;
-        this.setPercentage(500);
     }
 
     setPercentage(percentage) {
@@ -27,7 +27,7 @@ class StatusbarEndboss extends DrawableObject {
     }
 
 
-    
+
     whichStatus() {
         if (this.percentage == 500) { return 5; }
         else if (this.percentage >= 400) { return 4; }
