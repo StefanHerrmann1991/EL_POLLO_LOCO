@@ -16,7 +16,7 @@ let jumping_sound = new Audio('audio/jumping.mp3');
 let backgroundMusic = new Audio('audio/backgroundMusic.mp3');
 let gameEnded = false;
 let soundIsOn = true;
-
+let gameLoaded = false;
 
 /* Using test() method to search regexp in details
 it returns boolean value*/
@@ -40,6 +40,7 @@ function generateLevel1() {
 */
 async function initGame() {
     start = true;
+    generateLevel1();
     await initLevel1();
     toggleStartBtn('restart');
     loadControlPanel();
@@ -79,7 +80,7 @@ function toggleStartBtn(startCondition) {
     let menu = getId('menuOptions');
    
     if (startCondition == 'firstStart') {
-        startStory();
+        startStory();     
         menu.classList.add('continue')
         start.innerHTML = `
         <div onclick="initGame()">Continue</div>`;
@@ -104,7 +105,7 @@ function restartGame() {
 }
 
 function stopGame() {
-    allIntervals.forEach(clearInterval);
+    allIntervals.forEach(clearInterval);  
     allIntervals = [];
 }
 
